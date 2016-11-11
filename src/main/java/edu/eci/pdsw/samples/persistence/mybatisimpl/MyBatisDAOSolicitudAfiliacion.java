@@ -17,9 +17,12 @@
 package edu.eci.pdsw.samples.persistence.mybatisimpl;
 
 
+import edu.eci.pdsw.samples.entities.Egresado;
 import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
 import edu.eci.pdsw.samples.persistence.DaoSolicitudAfiliacion;
 import edu.eci.pdsw.samples.persistence.PersistenceException;
+import edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.EgresadoMapper;
+import edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.EmpresaMapper;
 import edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.SolicitudAfMapper;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
@@ -52,10 +55,21 @@ import org.apache.ibatis.session.SqlSession;
     @Override
     public void save(SolicitudAfiliacion Sa) throws PersistenceException {
        SolicitudAfMapper pedmp=currentSession.getMapper(SolicitudAfMapper.class);
+       pedmp.insertarPersona(Sa.getE1().getDocumentoID(), Sa.getE1().getTipoDocumentoID(), Sa.getE1().getNombre(), Sa.getE1().getDireccion(), Sa.getE1().getCorreo(), Sa.getE1().getGenero(), Sa.getE1().getTelefono1(), Sa.getE1().getTelefono2());
+       Sa.getE1().getNombre();
        if(Sa.getE1()==null){
-        pedmp.insertarSolicitudAfiliacion(Sa.getE2().getDocumentoID(),Sa.getFechaSolicitud(),Sa.getEstadoSolicitud(),Sa.getComentario());
+           pedmp.insertarSolicitudAfiliacion(Sa.getE2().getDocumentoID(),Sa.getFechaSolicitud(),Sa.getEstadoSolicitud(),Sa.getComentario());
        }else{
-        pedmp.insertarSolicitudAfiliacion(Sa.getE1().getDocumentoID(),Sa.getFechaSolicitud(),Sa.getEstadoSolicitud(),Sa.getComentario());
+           Egresado e = Sa.getE1();
+           EgresadoMapper pedmp2=currentSession.getMapper(EgresadoMapper.class);
+           EmpresaMapper pedmp3=currentSession.getMapper(EmpresaMapper.class);
+           if(e.getEmp().getNombreempre()!=null ){
+                if( !pedmp3.getEmpresa(e.getEmp().getNombreempre()).getNombreempre().equals(e.getEmp().getNombreempre().toUpperCase())){
+                   pedmp3.insertarEmpresa(e.getEmp().getEmpresaid(), e.getEmp().getNombreempre(), e.getEmp().getDirempre(), e.getEmp().getTelempre());
+                }
+           }
+           pedmp2.insertarEgresado(e.getDocumentoID(),e.getSemestreGrado(),e.getCorreoPersonal(),e.getEmp().getEmpresaid(),e.getLabora(),e.getCargo());
+           pedmp.insertarSolicitudAfiliacion(e.getDocumentoID(),Sa.getFechaSolicitud(),Sa.getEstadoSolicitud(),Sa.getComentario());
        }
        
         

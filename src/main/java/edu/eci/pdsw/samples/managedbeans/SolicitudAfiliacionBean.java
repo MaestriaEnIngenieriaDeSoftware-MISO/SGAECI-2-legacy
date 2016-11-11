@@ -19,7 +19,7 @@ import javax.faces.bean.SessionScoped;
 
 /**
  *
- * @author Martin
+ * @author pdswgr2
  */
 
 
@@ -29,11 +29,12 @@ import javax.faces.bean.SessionScoped;
 public class SolicitudAfiliacionBean implements Serializable{
     ServiciosSAGECI SAGECI=ServiciosSAGECI.getInstance();
     private int solicitudID,documentoID,Telefono,telefono2,telefonoOficina,codigoEstudiante,semestrePonderado;
-    private Date fechaSolicitud,fechaGraduacion;
-    private String correo,labora="No",semestreGrado="",tipoDocumentoID,genero,tipoSolicitante,estadoSolicitud,comentario,Nombre,direccionVivienda,Empresa,direccionEmpresa,Cargo,correoPersonal,carrera="",cargo;
+    private Date fechaGraduacion;
+    private String correo,labora,semestreGrado,tipoDocumentoID,genero,tipoSolicitante,estadoSolicitud=" NO REVISADO ",comentario="Falta revision respectiva.",Nombre,direccionVivienda,Empresa,direccionEmpresa,Cargo,correoPersonal,carrera="",cargo;
     private boolean acepta; 
     private ArrayList<Integer> semestres;
     private ArrayList<String> carreras;
+    private boolean marca;
     private Egresado_Empresa egresadoEmpresa;
     
     public SolicitudAfiliacionBean() {
@@ -47,16 +48,22 @@ public class SolicitudAfiliacionBean implements Serializable{
         carreras.add("INGENIERÍA AMBIENTAL"); carreras.add("INGENIERÍA ELÉCTRICA");carreras.add("ECONOMÍA");carreras.add("INGENIERÍA BIOMÉDICA");carreras.add("INGENIERÍA DE SISTEMAS"); carreras.add("ADMINISTRACIÓN DE EMPRESAS");
 
     }
-    
-
-    
 
     public void agregarSolicitudAfiliacion() throws ExcepcionServiciosSAGECI{
-        Egresado e1 = new Egresado( documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre,  direccionVivienda,  correo,  genero,  cargo,  semestreGrado,  correoPersonal,  labora,egresadoEmpresa);
-        Estudiante e2 = new Estudiante( documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre,  direccionVivienda,  correo,  genero, codigoEstudiante, semestrePonderado,  carrera);
-        if(semestreGrado.equals("")){e1=null;}
-        else{e2=null;}
-        SolicitudAfiliacion temp = new SolicitudAfiliacion( solicitudID,  fechaSolicitud,  estadoSolicitud,  comentario,  e1,  e2);
+        if(marca){
+            labora="si";
+        }else{
+            labora="no";
+        }
+        Egresado e1 = new Egresado(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre,  direccionVivienda,  correo,  genero, semestreGrado,correoPersonal, cargo,  labora,egresadoEmpresa);
+        Estudiante e2 = new Estudiante(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre,  direccionVivienda,  correo,  genero, codigoEstudiante, semestrePonderado,  carrera);
+        
+        if(semestreGrado.equals("")){
+            e1=null;
+        }else{
+            e2=null;
+        }
+        SolicitudAfiliacion temp = new SolicitudAfiliacion( solicitudID, new Date(new java.util.Date().getTime()) ,  estadoSolicitud,  comentario,  e1,  e2);
         SAGECI.registrarNuevaSolicitud(temp);
     }
 
@@ -66,6 +73,14 @@ public class SolicitudAfiliacionBean implements Serializable{
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public boolean isMarca() {
+        return marca;
+    }
+
+    public void setMarca(boolean marca) {
+        this.marca = marca;
     }
 
     public ArrayList<String> getCarreras() {
@@ -184,14 +199,6 @@ public class SolicitudAfiliacionBean implements Serializable{
         this.semestrePonderado = semestrePonderado;
     }
 
-    public Date getFechaSolicitud() {
-        return fechaSolicitud;
-    }
-
-    public void setFechaSolicitud(Date fechaSolicitud) {
-        this.fechaSolicitud = fechaSolicitud;
-    }
-
     public Date getFechaGraduacion() {
         return fechaGraduacion;
     }
@@ -293,6 +300,10 @@ public class SolicitudAfiliacionBean implements Serializable{
 
     public void setLabora(String labora) {
         this.labora = labora;
+    }
+    
+    public void asigna(String labora){
+        this.labora=labora;
     }
     
     

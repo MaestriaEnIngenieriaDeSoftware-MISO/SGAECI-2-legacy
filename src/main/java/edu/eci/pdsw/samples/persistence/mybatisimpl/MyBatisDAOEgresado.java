@@ -36,16 +36,11 @@ public class MyBatisDAOEgresado implements DaoEgresado{
     public List<Egresado> loadAll() throws PersistenceException {
         return Egmap.getEgresados();
     }
-    /* @Override
-    public List<Persona> loadAll() throws PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
     
     @Override
     public void save(Egresado e) throws PersistenceException {
       if (Egmap.getEgresado(e.getDocumentoID())!= null)  throw new PersistenceException("El Egresado con Id : "+e.getDocumentoID()+" ya esta registrado");
-      Egmap.insertarEgresado(e);
-        //To change body of generated methods, choose Tools | Templates.
+      Egmap.insertarEgresado(e.getDocumentoID(), e.getSemestreGrado(), e.getCorreoPersonal(), e.getEmp().getEmpresaid(), e.getLabora(), e.getCargo());
     }
 
    

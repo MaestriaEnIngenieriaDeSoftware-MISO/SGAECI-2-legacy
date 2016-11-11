@@ -18,14 +18,7 @@
         <result property='semestrePonderado' column='Semestre_Ponderado'/> 
         <result property='carrera' column='Carrera'/> 
     </resultMap>
-    
-    
-    
-      
-    
-     <insert id='insertarEstudiante' parameterType='map'>
-        insert into ESTUDIANTE values (Persona)(#{persona})
-    </insert>
+
     
     <select id="getEstudiante" parameterType="map" >
          SELECT * FROM 
@@ -51,9 +44,7 @@
          Estudiante as est JOIN Persona as per
          
      </select>
-     <!--- 
-    
-     --> 
+
     
               	
 </mapper>

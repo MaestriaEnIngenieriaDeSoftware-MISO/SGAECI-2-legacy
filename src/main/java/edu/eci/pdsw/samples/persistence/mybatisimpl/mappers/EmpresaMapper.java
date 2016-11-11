@@ -17,6 +17,7 @@
 package edu.eci.pdsw.samples.persistence.mybatisimpl.mappers;
 
 import edu.eci.pdsw.samples.entities.Egresado;
+import edu.eci.pdsw.samples.entities.Egresado_Empresa;
 import edu.eci.pdsw.samples.entities.Estudiante;
 import edu.eci.pdsw.samples.entities.Persona;
 import java.util.List;
@@ -26,10 +27,9 @@ import org.apache.ibatis.annotations.Param;
  *
  * @author hcadavid
  */
-public interface EgresadoMapper {
+public interface EmpresaMapper {
     
-    public List<Egresado> getEgresados();
-    public void insertarEgresado( @Param("documentoID") int documentoID,@Param("semestreGraduacion") String semestreGraduacion,@Param("correoPersonal") String correoPersonal,@Param("empresaID") int empresaID,@Param("labora") String labora,@Param("cargo") String cargo);                                    
-    public Egresado getEgresado(@Param("idEgresado") int documentoID );
+    public void insertarEmpresa(@Param("empresaID") int empresaID, @Param("nombre") String nombre, @Param("direccion") String direccion, @Param("telefono") int telefono);
+    public Egresado_Empresa getEmpresa(@Param("nombre") String nombre);
     
 }

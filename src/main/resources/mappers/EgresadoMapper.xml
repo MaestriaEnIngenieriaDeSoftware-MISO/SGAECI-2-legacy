@@ -19,19 +19,9 @@
         <result property='labora' column='Labora'/> 
         <association property='emp' javaType='Egresado_Empresa' resultMap='EmpresaResult' columnPrefix='Egresado_Empre_'></association>
     </resultMap>
-
-    <resultMap type='Egresado_Empresa' id='EmpresaResult'>
-        <id property='empresaid' column='EmpresaID'/>
-        <result property='nombre' column='Nombre'/>  
-        <result property='direccion' column='Direccion'/>
-        <result property='telefono' column='Telefono'/> 
-    </resultMap>  
     
-        
-       <!---      -->    
-    
-     <insert id='insertarEgresado' parameterType='map'>
-        insert into EGRESADO values (Persona)(#{persona})
+     <insert id='insertarEgresado'>
+        INSERT INTO Egresado(DocumentoID,Semestre_Graduacion,Correo_Personal,EmpresaID,Labora,Cargo) values (#{documentoID},#{semestreGraduacion},#{correoPersonal},#{empresaID},#{labora},#{cargo})
     </insert>
     
      <select id="getEgresado" parameterType="map" >
@@ -58,8 +48,6 @@
          Egresado as egr JOIN Persona as per
          
      </select>
-     <!--- 
-    --> 
     
               	
 </mapper>

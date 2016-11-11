@@ -27,11 +27,9 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface SolicitudAfMapper {
     
+    public void insertarPersona(@Param("documentoID") int documentoID, @Param("tipoDocumentoID") String tipoDocumentoID,@Param("nombre") String nombre,@Param("direccion") String direccion,@Param("correo") String correo, @Param("genero") String genero, @Param("telefono1") int telefono1,@Param("telefono2") int telefono2);
     public List<SolicitudAfiliacion> getSolicitudesAfiliacion();
-    
-    public SolicitudAfiliacion getSolicitudAf(@Param("identificador") int id); 
-    
+    public SolicitudAfiliacion getSolicitudAf(@Param("identificador") int id);
     public void insertarSolicitudAfiliacion(@Param("documentoid")int documentoID , @Param("fecha")Date fechaSolicitud, @Param("estado")String estadoSolicitud,@Param("comentario")String coment);
-    
     
 }

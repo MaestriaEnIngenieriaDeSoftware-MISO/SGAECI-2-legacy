@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  
-<mapper namespace='edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.SolicitudAfMapper>
+<mapper namespace='edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.SolicitudAfMapper'>
     <resultMap type='SolicitudAfiliacion' id='SolicitudResult'>
         <id property='solicitudID' column='SolicitudID'/>
         <result property='fechaSolicitud' column='Fecha_Solicitud'/>
@@ -130,9 +130,12 @@
         
     </select>
     
+    <insert id='insertarPersona' >
+        INSERT INTO Persona(DocumentoID,TipoDocumentoID,Nombre,Direccion,Correo,Genero,Telefono1,Telefono2) values (#{documentoID},#{tipoDocumentoID},#{nombre},#{direccion},#{correo},#{genero},#{telefono1},#{telefono2})
+    </insert>
     
     <insert id='insertarSolicitudAfiliacion' parameterType='map' >
-        insert into SOLICITUD_AFILIACION  values(DocumentoID,Fecha_Solicitud,Estado_Solicitud,Comentario) (#{documentoid},#{fecha},#{estado},#{comentario})
+        insert into Solicitud_Afiliacion (DocumentoID,Fecha_Solicitud,Estado_Solicitud,Comentario) values(#{documentoid},#{fecha},#{estado},#{comentario})
     </insert>
     
     

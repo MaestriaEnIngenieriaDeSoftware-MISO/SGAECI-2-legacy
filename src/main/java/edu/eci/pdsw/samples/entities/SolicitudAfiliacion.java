@@ -32,7 +32,8 @@ public class SolicitudAfiliacion {
         }
     }
 
-    
+    public SolicitudAfiliacion(){
+    }
     
     public int getSolicitudID() {
         return solicitudID;

@@ -24,20 +24,23 @@
                     <p:outputLabel for="gen" value="Genero: " />
                     <p:inputText id="gen" value="#{SolicitudAfiliacion.genero}"/>
 
+                    <p:outputLabel for="correoPe" value="Correo personal: " />
+                    <p:inputText id="correoPe" value="#{SolicitudAfiliacion.correo}"/>
+                    
                     <p:outputLabel for="telcasa" value="Telefono Casa: " />
-                    <p:inputText id="telcasa" value="#{SolicitudAfiliacion.telefono2}"/>
+                    <p:inputText id="telcasa" value="#{SolicitudAfiliacion.telefono}"/>
 
-                    <p:outputLabel for="direccionVi" value="Direccion Vivienda " />
+                    <p:outputLabel for="direccionVi" value="Direccion Vivienda: " />
                     <p:inputText id="direccionVi" value="#{SolicitudAfiliacion.direccionVivienda}"/>
 
                     <p:outputLabel for="semestre" value="Semestre Grado: " />
                     <p:inputMask id="semestre" value="#{SolicitudAfiliacion.semestreGrado}" mask="2999-9"/>
 
                     <p:outputLabel for="date" value="Fecha Graduacion :" />
-                    <p:calendar id="date" value="#{SolicitudAfiliacion.fechaGraduacion}" locale="de" navigator="true" pattern="yyyy-MMM-dd" />
+                    <p:calendar id="date" value="#{SolicitudAfiliacion.fechaGraduacion}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
 
                     <p:outputLabel for="Trabaja" value="Trabaja Actualmente :" />
-                    <p:commandButton value="Si" onclick="PF('dlg').show();" type="button"  actionListener="#{SolicitudAfiliacion.setLabora(si)}" />
+                    <p:commandButton value="Si" onclick="PF('dlg').show();" type="button" actionListener="#{SolicitudAfiliacion.asigna(labora)}" />
 
                 </p:panelGrid>
 

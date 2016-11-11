@@ -30,6 +30,8 @@
         <mapper resource="mappers/SolicitudAfMapper.xml"></mapper>
         <mapper resource="mappers/EstudianteMapper.xml"></mapper>
         <mapper resource="mappers/EgresadoMapper.xml"></mapper>
+        <mapper resource="mappers/EmpresaMapper.xml"></mapper>
+
 
     </mappers> 
         
