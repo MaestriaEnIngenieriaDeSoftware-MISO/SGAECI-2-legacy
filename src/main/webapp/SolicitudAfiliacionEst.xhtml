@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Solicitud Afiliacion Estudiante</title>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <div align="center" draggable="false" >
+                <p:panelGrid columns="2">
+
+                    <p:outputLabel for="nombre" value="Nombre Completo: " />
+                    <p:inputText id="nombre" value="#{SolicitudAfiliacion.nombre}"/>
+
+                    <p:outputLabel for="tid" value="Tipo Documento Identidad: " />
+                    <p:inputText id="tid" value="#{SolicitudAfiliacion.tipoDocumentoID}"/>
+
+                    <p:outputLabel for="id" value="Documento Identidad: " />
+                    <p:inputText id="id" value="#{SolicitudAfiliacion.documentoID}"/>
+
+                    <p:outputLabel for="gen" value="Genero: " />
+                    <p:inputText id="gen" value="#{SolicitudAfiliacion.genero}"/>
+
+                    <p:outputLabel for="telcasa" value="Telefono Casa: " />
+                    <p:inputText id="telcasa" value="#{SolicitudAfiliacion.telefono2}"/>
+
+                    <p:outputLabel for="direccionVi" value="Direccion Vivienda " />
+                    <p:inputText id="direccionVi" value="#{SolicitudAfiliacion.direccionVivienda}"/>
+
+                    <h:outputLabel for="codigoEstu" value="Codigo estudiantil: " />
+                    <p:inputText id="codigoEstu" value="#{SolicitudAfiliacion.codigoEstudiante}" />
+
+                    <p:outputLabel for="correo" value="Correo Estudiantil: " />
+                    <p:inputText id="correo" value="#{SolicitudAfiliacion.correo}"/>
+
+                    <p:outputLabel for="carr" value="Carrera Estudiantil: " />
+                    <p:selectOneMenu id="carr" value="#{SolicitudAfiliacion.carrera}" style="width:125px">
+                        <p:ajax event="change" update=":form:eventsDT2" />
+                        <f:selectItem itemLabel="Selecione uno" itemValue="" />
+                        <f:selectItems value="#{SolicitudAfiliacion.carreras}" />
+                    </p:selectOneMenu>
+
+
+                    <p:outputLabel for="eventsDT2" value="Semestre Estudiantil: " />
+                    <p:selectOneMenu id="eventsDT2" value="#{SolicitudAfiliacion.semestrePonderado}" style="width:125px">
+                        <f:selectItem itemLabel="Selecione uno" itemValue="" />
+                        <f:selectItems value="#{SolicitudAfiliacion.semestres}" />
+                    </p:selectOneMenu>
+
+                </p:panelGrid>
+
+                <p:commandLink oncomplete="window.open('http://www.aeci.org.co/#!politicas-de-tratamiento-de-datos')">Acepta los Terminos y Condiciones </p:commandLink>
+                <p:selectBooleanCheckbox value="#{SolicitudAfiliacion.acepta}" />
+                <br></br>
+                <p:commandButton value="Enviar Solicitud De Afiliación" update="form" actionListener="#{SolicitudAfiliacion.agregarSolicitudAfiliacion()}"/>
+                <p:commandButton value="Volver" update="form" action="Registro"/> 
+            </div>
+
+        </h:form>
+    </h:body>
+</html>

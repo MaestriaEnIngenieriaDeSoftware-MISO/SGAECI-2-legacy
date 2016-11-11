@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.EgresadoMapper">
+    <resultMap type='Egresado' id='EgresadoResult'>
+        <id property='documentoID' column='DocumentoID'/>
+        <result property='telefono1' column='Telefono1'/>
+        <result property='telefono2' column='Telefono2'/>  
+        <result property='tipoDocumentoID' column='TipoDocumentoID'/> 
+        <result property='nombre' column='Nombre'/> 
+        <result property='direccion' column='Direccion'/> 
+        <result property='correo' column='Correo'/> 
+        <result property='genero' column='Genero'/> 
+        <result property='semestreGrado' column='Semestre_Graduacion'/> 
+        <result property='correoPersonal' column='Correo_Personal'/> 
+        <result property='cargo' column='Cargo'/> 
+        <result property='labora' column='Labora'/> 
+        <association property='emp' javaType='Egresado_Empresa' resultMap='EmpresaResult' columnPrefix='Egresado_Empre_'></association>
+    </resultMap>
+
+    <resultMap type='Egresado_Empresa' id='EmpresaResult'>
+        <id property='empresaid' column='EmpresaID'/>
+        <result property='nombre' column='Nombre'/>  
+        <result property='direccion' column='Direccion'/>
+        <result property='telefono' column='Telefono'/> 
+    </resultMap>  
+    
+        
+       <!---      -->    
+    
+     <insert id='insertarEgresado' parameterType='map'>
+        insert into EGRESADO values (Persona)(#{persona})
+    </insert>
+    
+     <select id="getEgresado" parameterType="map" >
+         SELECT * FROM 
+         Egresado JOIN Persona
+         WHERE Egresado.DocumentoID = #{idEgresado}
+     </select>
+     
+     <select id="getEgresados" parameterType="map" >
+         SELECT 
+         per.documentoID as DocumentoID,
+         per.telefono1 as Telefono1,
+         per.telefono2 as Telefono2,
+         per.tipoDocumentoID as TipoDocumentoID,
+         per.nombre as Nombre, 
+         per.direccion as Direccion,
+         per.correo as Correo,
+         per.genero as Genero,
+         egr.Codigo_Estudiante as Codigo_Estudiante,
+         egr.Semestre_Ponderado as Semestre_Ponderado,
+         egr.Carrera
+        
+        FROM 
+         Egresado as egr JOIN Persona as per
+         
+     </select>
+     <!--- 
+    --> 
+    
+              	
+</mapper>

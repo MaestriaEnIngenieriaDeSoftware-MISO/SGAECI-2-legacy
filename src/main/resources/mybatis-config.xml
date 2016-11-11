@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>        
+    </settings>
+    <typeAliases>
+        <typeAlias type='edu.eci.pdsw.samples.entities.Egresado' alias='Egresado'/>
+        <typeAlias type='edu.eci.pdsw.samples.entities.Egresado_Empresa' alias='Egresado_Empresa'/>
+        <typeAlias type='edu.eci.pdsw.samples.entities.Estudiante' alias='Estudiante'/>
+        <typeAlias type='edu.eci.pdsw.samples.entities.Persona' alias='Persona'/>
+        <typeAlias type='edu.eci.pdsw.samples.entities.SolicitudAfiliacion' alias='SolicitudAfiliacion'/>
+    </typeAliases>
+        
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://desarrollo.is.escuelaing.edu.co:3306/pdswgr2" />
+                <property name="username" value="pdswgr2" />
+                <property name="password" value="pdswg202" />
+            </dataSource>
+        </environment>
+    </environments>
+        
+    <mappers>
+        <mapper resource="mappers/SolicitudAfMapper.xml"></mapper>
+        <mapper resource="mappers/EstudianteMapper.xml"></mapper>
+        <mapper resource="mappers/EgresadoMapper.xml"></mapper>
+
+    </mappers> 
+        
+        
+</configuration>

@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Solicitud Afiliacion Egresado</title>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <div align="center" draggable="false" >
+                <p:panelGrid columns="2">
+
+                    <p:outputLabel for="nombre" value="Nombre Completo: " />
+                    <p:inputText id="nombre" value="#{SolicitudAfiliacion.nombre}"/>
+
+                    <p:outputLabel for="tid" value="Tipo Documento Identidad: " />
+                    <p:inputText id="tid" value="#{SolicitudAfiliacion.tipoDocumentoID}"/>
+
+                    <p:outputLabel for="id" value="Documento Identidad: " />
+                    <p:inputText id="id" value="#{SolicitudAfiliacion.documentoID}"/>
+
+                    <p:outputLabel for="gen" value="Genero: " />
+                    <p:inputText id="gen" value="#{SolicitudAfiliacion.genero}"/>
+
+                    <p:outputLabel for="telcasa" value="Telefono Casa: " />
+                    <p:inputText id="telcasa" value="#{SolicitudAfiliacion.telefono2}"/>
+
+                    <p:outputLabel for="direccionVi" value="Direccion Vivienda " />
+                    <p:inputText id="direccionVi" value="#{SolicitudAfiliacion.direccionVivienda}"/>
+
+                    <p:outputLabel for="semestre" value="Semestre Grado: " />
+                    <p:inputMask id="semestre" value="#{SolicitudAfiliacion.semestreGrado}" mask="2999-9"/>
+
+                    <p:outputLabel for="date" value="Fecha Graduacion :" />
+                    <p:calendar id="date" value="#{SolicitudAfiliacion.fechaGraduacion}" locale="de" navigator="true" pattern="yyyy-MMM-dd" />
+
+                    <p:outputLabel for="Trabaja" value="Trabaja Actualmente :" />
+                    <p:commandButton value="Si" onclick="PF('dlg').show();" type="button"  actionListener="#{SolicitudAfiliacion.setLabora(si)}" />
+
+                </p:panelGrid>
+
+                <p:dialog id="Trabaja" widgetVar="dlg" resizable="false" showEffect="clip" hideEffect="clip">
+                    <p:panelGrid id="Infoempresa" columns="2" >
+                        <p:outputLabel for="empresa" value="Empresa donde Labora: " />
+                        <p:inputText id="empresa" value="#{SolicitudAfiliacion.empresa}"/>
+
+                        <p:outputLabel for="dirempresa" value="Direccion Empresa: " />
+                        <p:inputText id="dirempresa" value="#{SolicitudAfiliacion.direccionEmpresa}"/>
+
+                        <p:outputLabel for="teleofi" value="Telefono Oficina:" />
+                        <p:inputMask id="teleofi" value="#{SolicitudAfiliacion.telefonoOficina}" mask="999-9999"/>
+
+                        <p:outputLabel for="cargo" value="Cargo en Empresa: " />
+                        <p:inputText id="cargo" value="#{SolicitudAfiliacion.cargo}"/>
+
+                        <p:outputLabel for="correoP" value="Correo Personal: " />
+                        <p:inputText id="correoP" value="#{SolicitudAfiliacion.correoPersonal}"/>
+                    </p:panelGrid>
+                </p:dialog> 
+
+                <p:commandLink oncomplete="window.open('http://www.aeci.org.co/#!politicas-de-tratamiento-de-datos')">Acepta los Terminos y Condiciones </p:commandLink>
+                <p:selectBooleanCheckbox value="#{SolicitudAfiliacion.acepta}" />
+                <br></br>
+                <p:commandButton value="Enviar Solicitud De Afiliación" update="form" actionListener="#{SolicitudAfiliacion.agregarSolicitudAfiliacion()}"/>
+                <p:commandButton value="Volver" update="form" action="Registro"/>
+
+            </div>
+
+        </h:form>
+    </h:body>
+</html>
