@@ -127,7 +127,7 @@
         Egresado_Empresa.Direccion as Egre_Epre_Direccion 
         
         FROM Persona as p1 INNER JOIN Solicitud_Afiliacion ON(p1.DocumentoID = Solicitud_Afiliacion.DocumentoID) LEFT JOIN Estudiante ON (Estudiante.DocumentoID = p1.DocumentoID) LEFT JOIN Egresado ON (Egresado.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (Egresado.EmpresaID = Egresado_Empresa.EmpresaID)
-        WHERE Solicitud_Afiliacion.DocumentoID=#{identificador}
+        WHERE Solicitud_Afiliacion.SolicitudID=#{identificador}
         
     </select>
      
