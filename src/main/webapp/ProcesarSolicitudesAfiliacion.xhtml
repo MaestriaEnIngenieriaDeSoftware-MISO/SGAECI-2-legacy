@@ -2,27 +2,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Solicitudes pendientes</title>
+        <link rel="stylesheet" type="text/css" href="sheet.css"> 
+        </link>
     </h:head>
     <h:body>
         <h:form id="form">
-            <p:dataTable id="ListaSolicitudes" var="Solicitud"  value="#{ProcesarSolicitudAfiliacion.solicitudes}" selectionMode="single" selection="#{ProcesarSolicitudAfiliacion.solicitudSelection}" rowKey="#{Solicitud}">
-                <f:facet name="header">
-                    Single with Row Click
-                </f:facet>
-                <p:column headerText="Fecha">
+            <img src="AECI.PNG" alt="AECI"></img>
+            <p:dataTable styleClass="sheet.css" id="ListaSolicitudes" var="Solicitud"  value="#{ProcesarSolicitudAfiliacion.solicitudes}" selectionMode="single" selection="#{ProcesarSolicitudAfiliacion.solicitudSelection}" rowKey="#{Solicitud}">
+                <p:column style="width: 2px" headerText="Fecha">
                     <h:outputText value="#{Solicitud.fechaSolicitud}" />
                 </p:column>
-                <p:column headerText="Tipo de solicitante">
+                <p:column style="width: 2px" headerText="Tipo de solicitante">
                     <h:outputText value="#{Solicitud.tipoSol}" />
                 </p:column>
-                
-
             </p:dataTable>
-
         </h:form>
     </h:body>
 </html>

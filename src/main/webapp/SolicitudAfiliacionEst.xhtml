@@ -6,41 +6,41 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Solicitud Afiliacion Estudiante</title>
-        <style>               
-            .Bimage{background-image:url(http://shumadf.ddns.net:8080/Shuma/images/fondos/GE-fondo8.jpg);}        
-        </style>
+        <link rel="stylesheet" type="text/css" href="sheet.css"> 
+        </link>
     </h:head>
     <h:body  styleClass="Bimage">
+        <img src="AECI.PNG" alt="AECI"></img>
         <h:form id="form">
             <div align="center" draggable="false" >
-                <p:panelGrid columns="2">
+                <p:panelGrid columnClasses="centered" columns="2">
 
                     <p:outputLabel for="nombre" value="Nombre Completo: " />
-                    <p:inputText id="nombre" value="#{SolicitudAfiliacion.nombre}"/>
+                    <p:inputText styleClass="cent" id="nombre" value="#{SolicitudAfiliacion.nombre}"/>
 
                     <p:outputLabel for="tid" value="Tipo Documento Identidad: " />
-                    <p:inputText id="tid" value="#{SolicitudAfiliacion.tipoDocumentoID}"/>
+                    <p:inputText styleClass="cent" id="tid" value="#{SolicitudAfiliacion.tipoDocumentoID}"/>
 
                     <p:outputLabel for="id" value="Documento Identidad: " />
-                    <p:inputText id="id" value="#{SolicitudAfiliacion.documentoID}"/>
+                    <p:inputText styleClass="cent" id="id" value="#{SolicitudAfiliacion.documentoID}"/>
 
                     <p:outputLabel for="gen" value="Genero: " />
-                    <p:inputText id="gen" value="#{SolicitudAfiliacion.genero}"/>
+                    <p:inputText styleClass="cent" id="gen" value="#{SolicitudAfiliacion.genero}"/>
 
                     <p:outputLabel for="telcasa" value="Telefono Casa: " />
-                    <p:inputText id="telcasa" value="#{SolicitudAfiliacion.telefono}"/>
+                    <p:inputText styleClass="cent" id="telcasa" value="#{SolicitudAfiliacion.telefono}"/>
 
                     <p:outputLabel for="direccionVi" value="Direccion Vivienda " />
-                    <p:inputText id="direccionVi" value="#{SolicitudAfiliacion.direccionVivienda}"/>
+                    <p:inputText styleClass="cent" id="direccionVi" value="#{SolicitudAfiliacion.direccionVivienda}"/>
 
                     <h:outputLabel for="codigoEstu" value="Codigo estudiantil: " />
-                    <p:inputText id="codigoEstu" value="#{SolicitudAfiliacion.codigoEstudiante}" />
+                    <p:inputText styleClass="cent" id="codigoEstu" value="#{SolicitudAfiliacion.codigoEstudiante}" />
 
                     <p:outputLabel for="correo" value="Correo Estudiantil: " />
-                    <p:inputText id="correo" value="#{SolicitudAfiliacion.correo}"/>
+                    <p:inputText styleClass="cent" id="correo" value="#{SolicitudAfiliacion.correo}"/>
 
                     <p:outputLabel for="carr" value="Carrera Estudiantil: " />
-                    <p:selectOneMenu id="carr" value="#{SolicitudAfiliacion.carrera}" style="width:125px">
+                    <p:selectOneMenu styleClass="cent" id="carr" value="#{SolicitudAfiliacion.carrera}" style="width:125px">
                         <p:ajax event="change" update=":form:eventsDT2" />
                         <f:selectItem itemLabel="Selecione uno" itemValue="" />
                         <f:selectItems value="#{SolicitudAfiliacion.carreras}" />
@@ -48,7 +48,7 @@
 
 
                     <p:outputLabel for="eventsDT2" value="Semestre Estudiantil: " />
-                    <p:selectOneMenu id="eventsDT2" value="#{SolicitudAfiliacion.semestrePonderado}" style="width:125px">
+                    <p:selectOneMenu styleClass="cent" id="eventsDT2" value="#{SolicitudAfiliacion.semestrePonderado}" style="width:125px">
                         <f:selectItem itemLabel="Selecione uno" itemValue="" />
                         <f:selectItems value="#{SolicitudAfiliacion.semestres}" />
                     </p:selectOneMenu>
@@ -56,7 +56,7 @@
                 </p:panelGrid>
 
                 <p:commandLink oncomplete="window.open('http://www.aeci.org.co/#!politicas-de-tratamiento-de-datos')">Acepta los Terminos y Condiciones </p:commandLink>
-                <p:selectBooleanCheckbox value="#{SolicitudAfiliacion.acepta}" />
+                <p:selectBooleanCheckbox styleClass="cent" value="#{SolicitudAfiliacion.acepta}" />
                 <br></br>
                 <p:commandButton value="Enviar Solicitud De Afiliación" update="form" actionListener="#{SolicitudAfiliacion.agregarSolicitudAfiliacion()}"/>
                 <p:commandButton value="Volver" update="form" action="Registro"/> 

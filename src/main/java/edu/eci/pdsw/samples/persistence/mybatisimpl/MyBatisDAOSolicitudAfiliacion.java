@@ -69,7 +69,11 @@ import org.apache.ibatis.session.SqlSession;
            EgresadoMapper pedmp2=currentSession.getMapper(EgresadoMapper.class);
            EmpresaMapper pedmp3=currentSession.getMapper(EmpresaMapper.class);
            if(e.getLabora().equals("si") ){
-                if(!pedmp3.getEmpresa(e.getEmp().getNombreempre()).getNombreempre().equals(e.getEmp().getNombreempre().toUpperCase())){
+                if(pedmp3.getEmpresa(e.getEmp().getNombreempre())==null){
+                    System.out.println(e.getEmp().getEmpresaid());
+                    System.out.println(e.getEmp().getNombreempre().toUpperCase());
+                    System.out.println(e.getEmp().getDirempre().toUpperCase());
+                    System.out.println(e.getEmp().getTelempre());
                    pedmp3.insertarEmpresa(e.getEmp().getEmpresaid(), e.getEmp().getNombreempre().toUpperCase(), e.getEmp().getDirempre().toUpperCase(), e.getEmp().getTelempre());
                 }
            }

@@ -6,72 +6,72 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Solicitud Afiliacion Egresado</title>
-        <style>               
-            .Bimage{background-image:url(http://shumadf.ddns.net:8080/Shuma/images/fondos/GE-fondo8.jpg);}        
-        </style>
+        <link rel="stylesheet" type="text/css" href="sheet.css"> 
+        </link>
     </h:head>
     <h:body styleClass="Bimage">
+        <img src="AECI.PNG" alt="AECI"></img>
         <h:form id="form">
             <div align="center" draggable="false" >
-                <p:panelGrid columns="2">
+                <p:panelGrid columnClasses="centered" columns="2" style="landscape">
 
-                    <p:outputLabel for="nombre" value="Nombre Completo: " />
-                    <p:inputText id="nombre" value="#{SolicitudAfiliacion.nombre}"/>
+                    <p:outputLabel style="align-content: center" for="nombre" value="Nombre Completo: " />
+                    <p:inputText styleClass="cent" required="true" id="nombre" value="#{SolicitudAfiliacion.nombre}"/>
 
                     <p:outputLabel for="tid" value="Tipo Documento Identidad: " />
-                    <p:inputText id="tid" value="#{SolicitudAfiliacion.tipoDocumentoID}"/>
+                    <p:inputText styleClass="cent" required="true" id="tid" value="#{SolicitudAfiliacion.tipoDocumentoID}"/>
 
                     <p:outputLabel for="id" value="Documento Identidad: " />
-                    <p:inputText id="id" value="#{SolicitudAfiliacion.documentoID}"/>
+                    <p:inputText styleClass="cent" required="true" id="id" value="#{SolicitudAfiliacion.documentoID}"/>
 
                     <p:outputLabel for="gen" value="Genero: " />
-                    <p:inputText id="gen" value="#{SolicitudAfiliacion.genero}"/>
+                    <p:inputText styleClass="cent" required="true" id="gen" value="#{SolicitudAfiliacion.genero}"/>
 
                     <p:outputLabel for="correoPe" value="Correo personal: " />
-                    <p:inputText id="correoPe" value="#{SolicitudAfiliacion.correo}"/>
+                    <p:inputText styleClass="cent" required="true" id="correoPe" value="#{SolicitudAfiliacion.correo}"/>
 
                     <p:outputLabel for="telcasa" value="Telefono Casa: " />
-                    <p:inputText id="telcasa" value="#{SolicitudAfiliacion.telefono}"/>
+                    <p:inputText styleClass="cent" required="true" id="telcasa" value="#{SolicitudAfiliacion.telefono}"/>
 
                     <p:outputLabel for="direccionVi" value="Direccion Vivienda: " />
-                    <p:inputText id="direccionVi" value="#{SolicitudAfiliacion.direccionVivienda}"/>
+                    <p:inputText styleClass="cent" required="true" id="direccionVi" value="#{SolicitudAfiliacion.direccionVivienda}"/>
 
                     <p:outputLabel for="semestre" value="Semestre Grado: " />
-                    <p:inputMask id="semestre" value="#{SolicitudAfiliacion.semestreGrado}" mask="2999-9"/>
+                    <p:inputMask styleClass="cent" required="true" id="semestre" value="#{SolicitudAfiliacion.semestreGrado}" mask="2099-9"/>
 
                     <p:outputLabel for="date" value="Fecha Graduacion :" />
-                    <p:calendar id="date" value="#{SolicitudAfiliacion.fechaGraduacion}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
+                    <p:calendar required="true" id="date" value="#{SolicitudAfiliacion.fechaGraduacion}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
 
-                    <p:outputLabel for="Trabaja" value="Trabaja Actualmente :" />
                     
-                    <p:panelGrid columns="2">
-                        <p:commandButton value="Si" onclick="PF('dlg').show();" type="button" actionListener="#{SolicitudAfiliacion.setMarca(true)}" />
-                        <p:commandButton value="No" type="button" actionListener="#{SolicitudAfiliacion.setMarca(false)}" />
-                    </p:panelGrid>
-
+                    
+                    
+                    <p:outputLabel for="Trabaja" value="Trabaja Actualmente :" />
+                    <p:selectBooleanCheckbox styleClass="cent" id="Trabaja" value="#{SolicitudAfiliacion.marca}" >
+                        <p:ajax event="change" update=":form:Empresa" />
+                    </p:selectBooleanCheckbox>
+                    
                 </p:panelGrid>
+                
+                <p:panelGrid columnClasses="centered" id="Empresa" columns="2" style="landscape" >
+                    <p:outputLabel for="empresa" value="                  Empresa donde Labora:            " />
+                    <p:inputText styleClass="cent" required="#{SolicitudAfiliacion.marca}" id="empresa" value="#{SolicitudAfiliacion.empresa}"/>
 
-                <p:dialog id="Trabaja" draggable="false" dynamic="true"  closable="#{!SolicitudAfiliacion.marca}" widgetVar="dlg" resizable="false" showEffect="clip" hideEffect="clip">
-                    <p:panelGrid id="Infoempresa" columns="2" >
-                        <p:outputLabel for="empresa" value="Empresa donde Labora: " />
-                        <p:inputText id="empresa" value="#{SolicitudAfiliacion.empresa}"/>
+                    <p:outputLabel for="dirempresa" value="Direccion Empresa: " />
+                    <p:inputText styleClass="cent" required="#{SolicitudAfiliacion.marca}" id="dirempresa" value="#{SolicitudAfiliacion.direccionEmpresa}"/>
 
-                        <p:outputLabel for="dirempresa" value="Direccion Empresa: " />
-                        <p:inputText id="dirempresa" value="#{SolicitudAfiliacion.direccionEmpresa}"/>
+                    <p:outputLabel for="teleofi" value="Telefono Oficina:" />
+                    <p:inputText styleClass="cent" required="#{SolicitudAfiliacion.marca}" id="teleofi" value="#{SolicitudAfiliacion.telefonoOficina}" />
 
-                        <p:outputLabel for="teleofi" value="Telefono Oficina:" />
-                        <p:inputMask id="teleofi" value="#{SolicitudAfiliacion.telefonoOficina}" mask="999-9999"/>
+                    <p:outputLabel for="cargo" value="Cargo en Empresa: " />
+                    <p:inputText styleClass="cent" required="#{SolicitudAfiliacion.marca}" id="cargo" value="#{SolicitudAfiliacion.cargo}"/>
 
-                        <p:outputLabel for="cargo" value="Cargo en Empresa: " />
-                        <p:inputText id="cargo" value="#{SolicitudAfiliacion.cargo}"/>
-
-                        <p:outputLabel for="correoP" value="Correo Personal: " />
-                        <p:inputText id="correoP" value="#{SolicitudAfiliacion.correoPersonal}"/>
-                    </p:panelGrid>
-                </p:dialog> 
-
+                    <p:outputLabel for="correoP" value="Correo Personal: " />
+                    <p:inputText styleClass="cent" required="#{SolicitudAfiliacion.marca}" id="correoP" value="#{SolicitudAfiliacion.correoPersonal}"/>
+    
+                </p:panelGrid>
+                
                 <p:commandLink oncomplete="window.open('http://www.aeci.org.co/#!politicas-de-tratamiento-de-datos')">Acepta los Terminos y Condiciones </p:commandLink>
-                <p:selectBooleanCheckbox value="#{SolicitudAfiliacion.acepta}" />
+                <p:selectBooleanCheckbox required="true" value="#{SolicitudAfiliacion.acepta}" />
                 <br></br>
                 <p:commandButton value="Enviar Solicitud De Afiliación" update="form" actionListener="#{SolicitudAfiliacion.agregarSolicitudAfiliacion()}"/>
                 <p:commandButton value="Volver" update="form" action="Registro"/>

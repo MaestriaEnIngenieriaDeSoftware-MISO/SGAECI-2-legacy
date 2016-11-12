@@ -53,7 +53,10 @@ public class SolicitudAfiliacionBean implements Serializable{
         if(marca){
             System.out.println("Marca cambio a True");
             labora="si";
-            
+            egresadoEmpresa.setEmpresaid(0);
+            egresadoEmpresa.setNombreempre(Empresa);
+            egresadoEmpresa.setDirempre(direccionEmpresa);
+            egresadoEmpresa.setTelempre(telefonoOficina);
         }else{
             System.out.println("Marca No cambio a True");
             labora="no";
@@ -67,9 +70,7 @@ public class SolicitudAfiliacionBean implements Serializable{
             e2=null;
         }
         SolicitudAfiliacion temp = new SolicitudAfiliacion( solicitudID, new Date(new java.util.Date().getTime()) ,  estadoSolicitud,  comentario,  e1,  e2);
-        try{
-            SAGECI.registrarNuevaSolicitud(temp);
-        }catch(Exception e){}
+        SAGECI.registrarNuevaSolicitud(temp);
     }
 
     public String getCorreo() {
@@ -80,7 +81,7 @@ public class SolicitudAfiliacionBean implements Serializable{
         this.correo = correo;
     }
 
-    public boolean isMarca() {
+    public boolean getMarca() {
         return marca;
     }
 

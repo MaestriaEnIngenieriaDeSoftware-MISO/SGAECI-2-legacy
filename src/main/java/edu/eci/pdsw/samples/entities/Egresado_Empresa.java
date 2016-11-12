@@ -14,7 +14,7 @@ public class Egresado_Empresa {
     private int empresaid,telempre;
     private String nombreempre,dirempre;
     
-    Egresado_Empresa(int empresaid, String nombreempre, String dirempre, int telempre) {
+    public Egresado_Empresa(int empresaid, String nombreempre, String dirempre, int telempre) {
         this.empresaid=empresaid;
         this.dirempre=dirempre;
         this.nombreempre=nombreempre;
