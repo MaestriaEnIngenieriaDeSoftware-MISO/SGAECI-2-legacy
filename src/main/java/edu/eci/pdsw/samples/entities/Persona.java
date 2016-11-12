@@ -28,8 +28,6 @@ public class Persona {
 
     public Persona() {
     }
-    
-    
 
     public int getDocumentoID() {
         return documentoID;
@@ -94,5 +92,9 @@ public class Persona {
     public void setGenero(String genero) {
         this.genero = genero;
     }
+    
+    
+
+    
     
 }

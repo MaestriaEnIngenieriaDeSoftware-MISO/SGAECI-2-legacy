@@ -36,7 +36,7 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class ProcesarSolicitudAfiliacionBean implements Serializable{
 
-    ServiciosSAGECI servicios = ServiciosSAGECI.getInstance();
+    ServiciosSAGECI SAGECI=ServiciosSAGECI.getInstance();
     SolicitudAfiliacion solicitudSelection;
 
     public ProcesarSolicitudAfiliacionBean() {
@@ -44,19 +44,19 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
     }
     
     public List<SolicitudAfiliacion> getSolicitudes() throws ExcepcionServiciosSAGECI{
-        return servicios.consultarSolicitudAfiliaciones();
+        return SAGECI.consultarSolicitudAfiliaciones();
     }
     
     public ServiciosSAGECI getServicios() {
-        return servicios;
+        return SAGECI;
     }
 
     public void setServicios(ServiciosSAGECI servicios) {
-        this.servicios = servicios;
+        this.SAGECI = servicios;
     }
 
     public SolicitudAfiliacion getSolicitudSelection() {
-        return solicitudSelection;
+        return this.solicitudSelection;
     }
 
     public void setSolicitudSelection(SolicitudAfiliacion solicitudSelection) {
@@ -66,7 +66,7 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
     
     public void prueba(){
         try {
-            System.out.println(servicios.consultarSolicitudAfiliaciones());
+            System.out.println(SAGECI.consultarSolicitudAfiliaciones());
         } catch (ExcepcionServiciosSAGECI ex) {
             Logger.getLogger(ProcesarSolicitudAfiliacionBean.class.getName()).log(Level.SEVERE, null, ex);
         }

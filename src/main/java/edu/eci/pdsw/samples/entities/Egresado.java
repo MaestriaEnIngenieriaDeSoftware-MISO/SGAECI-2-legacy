@@ -66,5 +66,7 @@ public class Egresado extends Persona{
     }
 
     
+
+    
     
 }

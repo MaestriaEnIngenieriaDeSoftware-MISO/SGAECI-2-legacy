@@ -24,19 +24,7 @@ public class Estudiante extends Persona{
     
     public Estudiante() {
     }
-    
 
-    
-
-    
-    public String getCarrera() {
-        return carrera;
-    }
-
-    public void setCarrera(String carrera) {
-        this.carrera = carrera;
-    }
-    
     public int getCodigoEstudiante() {
         return codigoEstudiante;
     }
@@ -52,5 +40,14 @@ public class Estudiante extends Persona{
     public void setSemestrePonderado(int semestrePonderado) {
         this.semestrePonderado = semestrePonderado;
     }
+
+    public String getCarrera() {
+        return carrera;
+    }
+
+    public void setCarrera(String carrera) {
+        this.carrera = carrera;
+    }
+    
     
 }

@@ -30,10 +30,6 @@ public class SolicitudAfiliacion {
     }
 
     public SolicitudAfiliacion(){
-        tipoSol = "Estudiante";
-        if(this.e1!=null){
-            tipoSol = "Egresado";
-        }
     }
     
     public int getSolicitudID() {
@@ -86,10 +82,12 @@ public class SolicitudAfiliacion {
     }
     
     public String getTipoSol() {
+        this.tipoSol = "Arreglar";
         return tipoSol;
     }
 
     public void setTipoSol(String tipoSol) {
         this.tipoSol = tipoSol;
     }
+
 }

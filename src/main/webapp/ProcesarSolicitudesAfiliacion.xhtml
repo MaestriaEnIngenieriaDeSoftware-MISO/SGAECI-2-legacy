@@ -11,7 +11,11 @@
     <h:body>
         <h:form id="form">
             <img src="AECI.PNG" alt="AECI"></img>
-            <p:dataTable styleClass="sheet.css" id="ListaSolicitudes" var="Solicitud"  value="#{ProcesarSolicitudAfiliacion.solicitudes}" selectionMode="single" selection="#{ProcesarSolicitudAfiliacion.solicitudSelection}" rowKey="#{Solicitud}">
+            <p:dataTable styleClass="sheet.css" id="ListaSolicitudes" var="Solicitud"  value="#{ProcesarSolicitudAfiliacion.solicitudes}" selectionMode="single" selection="#{ProcesarSolicitudAfiliacion.solicitudSelection}" rowKey="#{Solicitud.solicitudID}">
+                <p:ajax event="rowSelect" update=":form:Solipanel" />
+                <p:column style="width: 2px" headerText="Solicitud ID">
+                    <h:outputText value="#{Solicitud.solicitudID}" />
+                </p:column>
                 <p:column style="width: 2px" headerText="Fecha">
                     <h:outputText value="#{Solicitud.fechaSolicitud}" />
                 </p:column>
@@ -19,6 +23,26 @@
                     <h:outputText value="#{Solicitud.tipoSol}" />
                 </p:column>
             </p:dataTable>
+
+
+
+
+            <p:commandButton id="InfoSoli" value="Info" type="button" />
+            <p:overlayPanel id="Solipanel" for="InfoSoli" hideEffect="fade" dynamic="true" style="width:600px">
+                <p:panelGrid columns="1" id="test">
+                    <h:outputText value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.nombre}" />
+                    <h:outputText value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.documentoID}" />
+                    <h:outputText value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.telefono1}" />
+                    <h:outputText value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.telefono2}" />
+                    <h:outputText value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.tipoDocumentoID}" />
+                    <h:outputText value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.direccion}" />
+                    <h:outputText value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.correo}" />
+                    <h:outputText value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.genero}" />
+                </p:panelGrid>
+                <p:commandButton id="Ace" value="Aceptar" type="button" />
+                <p:commandButton id="Can" value="Rechazar" type="button" />
+            </p:overlayPanel>
+
         </h:form>
     </h:body>
 </html>

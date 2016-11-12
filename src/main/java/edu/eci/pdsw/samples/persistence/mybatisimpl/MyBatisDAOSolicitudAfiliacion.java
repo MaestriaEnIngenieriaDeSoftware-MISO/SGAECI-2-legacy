@@ -51,7 +51,12 @@ import org.apache.ibatis.session.SqlSession;
     @Override
     public List<SolicitudAfiliacion> loadAll() throws PersistenceException {
         SolicitudAfMapper pedmp=currentSession.getMapper(SolicitudAfMapper.class);
-        return pedmp.getSolicitudesAfiliacion();
+        List<SolicitudAfiliacion> temp;
+        temp=pedmp.getSolicitudesAfiliacion();
+        System.out.println(temp.get(0).getE1().getNombre());
+        System.out.println(temp.get(0).getE2().getNombre());
+        System.out.println("--------------------------------");
+        return temp;
     }
 
     @Override
@@ -70,10 +75,6 @@ import org.apache.ibatis.session.SqlSession;
            EmpresaMapper pedmp3=currentSession.getMapper(EmpresaMapper.class);
            if(e.getLabora().equals("si") ){
                 if(pedmp3.getEmpresa(e.getEmp().getNombreempre())==null){
-                    System.out.println(e.getEmp().getEmpresaid());
-                    System.out.println(e.getEmp().getNombreempre().toUpperCase());
-                    System.out.println(e.getEmp().getDirempre().toUpperCase());
-                    System.out.println(e.getEmp().getTelempre());
                    pedmp3.insertarEmpresa(e.getEmp().getEmpresaid(), e.getEmp().getNombreempre().toUpperCase(), e.getEmp().getDirempre().toUpperCase(), e.getEmp().getTelempre());
                 }
            }
