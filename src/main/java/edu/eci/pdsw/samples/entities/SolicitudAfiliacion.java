@@ -26,13 +26,14 @@ public class SolicitudAfiliacion {
         this.e1 = e1;
         this.e2 = e2;
         
+        
+    }
+
+    public SolicitudAfiliacion(){
         tipoSol = "Estudiante";
         if(this.e1!=null){
             tipoSol = "Egresado";
         }
-    }
-
-    public SolicitudAfiliacion(){
     }
     
     public int getSolicitudID() {

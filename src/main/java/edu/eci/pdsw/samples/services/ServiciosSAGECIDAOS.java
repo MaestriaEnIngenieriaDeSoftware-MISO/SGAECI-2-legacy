@@ -62,7 +62,11 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
             daof.commitTransaction();
             daof.endSession();
         } catch (PersistenceException ex) {
-            Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                daof.rollbackTransaction();
+            } catch (PersistenceException ex1) {
+                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         }
 
     }

@@ -30,7 +30,7 @@ public class SolicitudAfiliacionBean implements Serializable{
     ServiciosSAGECI SAGECI=ServiciosSAGECI.getInstance();
     private int solicitudID,documentoID,Telefono,telefono2,telefonoOficina,codigoEstudiante,semestrePonderado;
     private Date fechaGraduacion;
-    private String correo,labora,semestreGrado,tipoDocumentoID,genero,tipoSolicitante,estadoSolicitud=" NO REVISADO ",comentario="Falta revision respectiva.",Nombre,direccionVivienda,Empresa,direccionEmpresa,Cargo,correoPersonal,carrera="",cargo;
+    private String correo,labora,semestreGrado="",tipoDocumentoID,genero,tipoSolicitante,estadoSolicitud=" NO REVISADO ",comentario="Falta revision respectiva.",Nombre,direccionVivienda,Empresa,direccionEmpresa,Cargo,correoPersonal,carrera="",cargo;
     private boolean acepta; 
     private ArrayList<Integer> semestres;
     private ArrayList<String> carreras;
@@ -67,7 +67,9 @@ public class SolicitudAfiliacionBean implements Serializable{
             e2=null;
         }
         SolicitudAfiliacion temp = new SolicitudAfiliacion( solicitudID, new Date(new java.util.Date().getTime()) ,  estadoSolicitud,  comentario,  e1,  e2);
-        SAGECI.registrarNuevaSolicitud(temp);
+        try{
+            SAGECI.registrarNuevaSolicitud(temp);
+        }catch(Exception e){}
     }
 
     public String getCorreo() {

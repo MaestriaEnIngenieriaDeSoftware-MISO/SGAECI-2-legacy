@@ -22,6 +22,7 @@ import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosSAGECI;
 import edu.eci.pdsw.samples.services.ServiciosSAGECI;
 import java.io.Serializable;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
@@ -40,6 +41,10 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
 
     public ProcesarSolicitudAfiliacionBean() {
         
+    }
+    
+    public List<SolicitudAfiliacion> getSolicitudes() throws ExcepcionServiciosSAGECI{
+        return servicios.consultarSolicitudAfiliaciones();
     }
     
     public ServiciosSAGECI getServicios() {

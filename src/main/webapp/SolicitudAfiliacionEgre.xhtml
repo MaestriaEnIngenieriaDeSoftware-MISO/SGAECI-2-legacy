@@ -43,6 +43,7 @@
                     <p:calendar id="date" value="#{SolicitudAfiliacion.fechaGraduacion}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
 
                     <p:outputLabel for="Trabaja" value="Trabaja Actualmente :" />
+                    
                     <p:panelGrid columns="2">
                         <p:commandButton value="Si" onclick="PF('dlg').show();" type="button" actionListener="#{SolicitudAfiliacion.setMarca(true)}" />
                         <p:commandButton value="No" type="button" actionListener="#{SolicitudAfiliacion.setMarca(false)}" />
@@ -50,7 +51,7 @@
 
                 </p:panelGrid>
 
-                <p:dialog id="Trabaja" widgetVar="dlg" resizable="false" showEffect="clip" hideEffect="clip">
+                <p:dialog id="Trabaja" draggable="false" dynamic="true"  closable="#{!SolicitudAfiliacion.marca}" widgetVar="dlg" resizable="false" showEffect="clip" hideEffect="clip">
                     <p:panelGrid id="Infoempresa" columns="2" >
                         <p:outputLabel for="empresa" value="Empresa donde Labora: " />
                         <p:inputText id="empresa" value="#{SolicitudAfiliacion.empresa}"/>

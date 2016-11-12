@@ -31,5 +31,6 @@ public interface SolicitudAfMapper {
     public List<SolicitudAfiliacion> getSolicitudesAfiliacion();
     public SolicitudAfiliacion getSolicitudAf(@Param("identificador") int id);
     public void insertarSolicitudAfiliacion(@Param("documentoid")int documentoID , @Param("fecha")Date fechaSolicitud, @Param("estado")String estadoSolicitud,@Param("comentario")String coment);
-    
+    public void eliminarPersona(@Param("documentoID") int documentoID);
+    public void eliminarSolicitud(@Param("documentoID") int documentoID);
 }

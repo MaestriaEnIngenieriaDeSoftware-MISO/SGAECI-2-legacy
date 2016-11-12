@@ -88,7 +88,8 @@
         Estudiante.Semestre_Ponderado as Estu_Semestre_Ponderado, 
         Estudiante.Carrera as Estu_Carrera  
          
-        FROM Persona as p1 INNER JOIN Solicitud_Afiliacion as so ON(p1.DocumentoID = so.DocumentoID) LEFT JOIN Estudiante ON (Estudiante.DocumentoID = p1.DocumentoID) LEFT JOIN Egresado ON (Egresado.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (Egresado.EmpresaID = Egresado_Empresa.EmpresaID)
+        FROM Persona as p1 INNER JOIN Solicitud_Afiliacion as so ON(p1.DocumentoID = so.DocumentoID) LEFT JOIN Estudiante ON (Estudiante.DocumentoID = p1.DocumentoID) LEFT JOIN Egresado ON (Egresado.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (Egresado.EmpresaID = Egresado_Empresa.EmpresaID)   
+        
     </select>
     
     <select id='getSolicitudAf' parameterType='map' resultMap='SolicitudResult' >   
@@ -129,14 +130,21 @@
         WHERE Solicitud_Afiliacion.DocumentoID=#{identificador}
         
     </select>
-    
-    <insert id='insertarPersona' >
+     
+    <insert id='insertarPersona' parameterType="map" >
         INSERT INTO Persona(DocumentoID,TipoDocumentoID,Nombre,Direccion,Correo,Genero,Telefono1,Telefono2) values (#{documentoID},#{tipoDocumentoID},#{nombre},#{direccion},#{correo},#{genero},#{telefono1},#{telefono2})
     </insert>
     
+    <delete id="eliminarPersona" parameterType="map" >
+        DELETE FROM Persona WHERE(DocumentoID=#{documentoID})
+    </delete>
+    
     <insert id='insertarSolicitudAfiliacion' parameterType='map' >
-        insert into Solicitud_Afiliacion (DocumentoID,Fecha_Solicitud,Estado_Solicitud,Comentario) values(#{documentoid},#{fecha},#{estado},#{comentario})
+        INSERT INTO Solicitud_Afiliacion (DocumentoID,Fecha_Solicitud,Estado_Solicitud,Comentario) values(#{documentoid},#{fecha},#{estado},#{comentario})
     </insert>
     
+    <delete id="eliminarSolicitud" parameterType="map" >
+        DELETE FROM Solicitud_Afiliacion WHERE(DocumentoID=#{documentoID})
+    </delete>
     
 </mapper>

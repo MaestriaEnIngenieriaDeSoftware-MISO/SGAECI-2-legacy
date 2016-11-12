@@ -41,15 +41,7 @@ public class MyBatisDAOEstudiante implements DaoEstudiante{
     @Override
     
     public void update(Estudiante p) throws PersistenceException {
-        /*
-        if (p==null){
-            throw new PersistenceException("La Persona no puede ser nula");
-        }
-        Estudiante anterior=load(p.getDocumentoID());
-        if (!anterior.toString().equals(p.toString())){
-            Esmap.update(anterior,p);
-        }
-        */
+        
     }
 
     @Override
@@ -68,7 +60,7 @@ public class MyBatisDAOEstudiante implements DaoEstudiante{
     @Override
     public void save(Estudiante e) throws PersistenceException {
         if(Esmap.getEstudiante(e.getDocumentoID())!=null)throw new PersistenceException("El Estudiante  con Id : "+e.getDocumentoID()+" ya esta registrado");
-        Esmap.insertarEstudiante(e); //To change body of generated methods, choose Tools | Templates.
+        Esmap.insertarEstudiante(e.getCodigoEstudiante(), e.getDocumentoID(), e.getSemestrePonderado(),e.getCarrera().toUpperCase());
     }
     
     

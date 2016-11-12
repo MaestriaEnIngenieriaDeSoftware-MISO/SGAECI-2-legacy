@@ -17,9 +17,8 @@ import org.apache.ibatis.annotations.Param;
 public interface EstudianteMapper {
         
         public List<Estudiante> getEstudiantes();
-        public void insertarEstudiante(@Param("persona") Estudiante p);
+        public void insertarEstudiante(@Param("codigoEstudiante") int codigoEstudiante,@Param("documentoID") int documentoID,@Param("semestrePonderado") int semestrePonderado,@Param("carrera") String carrera);
         public Estudiante getEstudiante(@Param("idEstudiante") int documentoID );
-
         public void update(Persona anterior, Persona p);
     
 }
