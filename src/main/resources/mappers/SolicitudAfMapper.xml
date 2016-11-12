@@ -53,7 +53,8 @@
     </resultMap>
     
     <select parameterType='map' id='getSolicitudesAfiliacion' resultMap='SolicitudResult'  >   
-        SELECT so.SolicitudID,
+        SELECT
+        so.SolicitudID,
         so.Fecha_Solicitud, 
         so.Estado_Solicitud, 
         so.Comentario,
