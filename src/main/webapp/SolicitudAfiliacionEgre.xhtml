@@ -6,8 +6,11 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Solicitud Afiliacion Egresado</title>
+        <style>               
+            .Bimage{background-image:url(http://shumadf.ddns.net:8080/Shuma/images/fondos/GE-fondo8.jpg);}        
+        </style>
     </h:head>
-    <h:body>
+    <h:body styleClass="Bimage">
         <h:form id="form">
             <div align="center" draggable="false" >
                 <p:panelGrid columns="2">
@@ -26,7 +29,7 @@
 
                     <p:outputLabel for="correoPe" value="Correo personal: " />
                     <p:inputText id="correoPe" value="#{SolicitudAfiliacion.correo}"/>
-                    
+
                     <p:outputLabel for="telcasa" value="Telefono Casa: " />
                     <p:inputText id="telcasa" value="#{SolicitudAfiliacion.telefono}"/>
 
@@ -40,7 +43,10 @@
                     <p:calendar id="date" value="#{SolicitudAfiliacion.fechaGraduacion}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
 
                     <p:outputLabel for="Trabaja" value="Trabaja Actualmente :" />
-                    <p:commandButton value="Si" onclick="PF('dlg').show();" type="button" actionListener="#{SolicitudAfiliacion.asigna(labora)}" />
+                    <p:panelGrid columns="2">
+                        <p:commandButton value="Si" onclick="PF('dlg').show();" type="button" actionListener="#{SolicitudAfiliacion.setMarca(true)}" />
+                        <p:commandButton value="No" type="button" actionListener="#{SolicitudAfiliacion.setMarca(false)}" />
+                    </p:panelGrid>
 
                 </p:panelGrid>
 

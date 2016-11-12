@@ -5,19 +5,30 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Registro Solicitud</title>
+        <style>               
+            .Bimage{background-image:url(http://shumadf.ddns.net:8080/Shuma/images/fondos/GE-fondo8.jpg);}        
+        </style>
     </h:head>
-    <h:body>
+    <h:body styleClass="Bimage" >
         <h:form id="form">
-            <p:layout fullPage="true">  
+            <div align="middle" draggable="false" >
+                
+                <h:graphicImage value="/resources/images/AECI.png" />
+                
+                <p>SAGECI es una aplicacion que permite saber a los usuarios egresados o estudiantes de beneficios 
+                   con diferentes empresas........ bla bla bla parla para tramar bien pinche bueno !!!
+                </p>
 
-                <p:layoutUnit position="center" style="vertical-align:middle;">  
-                    <div align="middle" draggable="false" >
-                        <p:commandButton value="Egresado" update="form" action="SolicitudAfiliacionEgre" />
-                        <p:commandButton value="Estudiante" update="form" action="SolicitudAfiliacionEst"/>                     
-                    </div>
-                </p:layoutUnit>  
+                <p:panelGrid columns="2">
+                    <p:outputLabel for="nombre" value="Nombre Usuario: " />
+                    <p:inputText id="nombre" value=""/>
 
-            </p:layout>
+                    <p:outputLabel for="passw" value="Contraseña: " />
+                    <p:inputText id="passw" value=""/>
+                </p:panelGrid>
+                <p:commandButton value="Egresado" update="form" action="SolicitudAfiliacionEgre" />
+                <p:commandButton value="Estudiante" update="form" action="SolicitudAfiliacionEst"/>                     
+            </div>
         </h:form>
     </h:body>
 </html>

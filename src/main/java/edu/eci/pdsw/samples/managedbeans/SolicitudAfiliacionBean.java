@@ -34,7 +34,7 @@ public class SolicitudAfiliacionBean implements Serializable{
     private boolean acepta; 
     private ArrayList<Integer> semestres;
     private ArrayList<String> carreras;
-    private boolean marca;
+    private boolean marca=false;
     private Egresado_Empresa egresadoEmpresa;
     
     public SolicitudAfiliacionBean() {
@@ -51,8 +51,11 @@ public class SolicitudAfiliacionBean implements Serializable{
 
     public void agregarSolicitudAfiliacion() throws ExcepcionServiciosSAGECI{
         if(marca){
+            System.out.println("Marca cambio a True");
             labora="si";
+            
         }else{
+            System.out.println("Marca No cambio a True");
             labora="no";
         }
         Egresado e1 = new Egresado(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre,  direccionVivienda,  correo,  genero, semestreGrado,correoPersonal, cargo,  labora,egresadoEmpresa);
