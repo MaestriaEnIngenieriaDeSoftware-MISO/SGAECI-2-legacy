@@ -148,4 +148,8 @@
         DELETE FROM Solicitud_Afiliacion WHERE(DocumentoID=#{documentoID})
     </delete>
     
+    <update id="actualizarSolicitud" parameterType="map">
+        UPDATE Solicitud_Afiliacion SET Estado_Solicitud=#{estadoSolicitud},Comentario=#{comentario} WHERE SolicitudID=#{solicitudID};
+    </update>
+    
 </mapper>

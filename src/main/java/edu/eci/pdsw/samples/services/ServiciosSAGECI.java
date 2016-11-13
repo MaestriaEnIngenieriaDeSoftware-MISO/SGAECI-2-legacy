@@ -92,7 +92,14 @@ public abstract class ServiciosSAGECI {
      */
     public abstract Estudiante consultarEstudiante(int DocumentoID) throws ExcepcionServiciosSAGECI;
     
-    
+    /**
+     * Consulta una Persona registrada o afiliada
+     * @param DocumentoID el documento con el cual la persona se registro
+     * @return La persona registrada
+     * @throws ExcepcionServiciosSAGECI si no hay una persona asociados al documento
+     */
     public abstract Egresado consultarEgresado(int DocumentoID) throws ExcepcionServiciosSAGECI;
        
+    public abstract  void actualizarSolicitudAfliliacion(SolicitudAfiliacion s) throws ExcepcionServiciosSAGECI;
+    
 }

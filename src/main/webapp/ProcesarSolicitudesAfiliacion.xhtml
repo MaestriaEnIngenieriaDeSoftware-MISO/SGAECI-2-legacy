@@ -29,18 +29,27 @@
 
             <p:commandButton id="InfoSoli" value="Info" type="button" />
             <p:overlayPanel id="Solipanel" for="InfoSoli" hideEffect="fade" dynamic="true" style="width:600px">
-                <p:panelGrid columns="1" id="test">
-                    <h:outputText value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.nombre}" />
-                    <h:outputText value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.documentoID}" />
-                    <h:outputText value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.telefono1}" />
-                    <h:outputText value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.telefono2}" />
-                    <h:outputText value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.tipoDocumentoID}" />
-                    <h:outputText value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.direccion}" />
-                    <h:outputText value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.correo}" />
-                    <h:outputText value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.genero}" />
+                <h:outputText value="Datos principales del solicitante de afiliación." />
+                <p:panelGrid columns="2" id="test">
+                    <p:outputLabel  for="nombre" value="Nombre Completo: "/>
+                    <h:outputText id="nombre" value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.nombre}" />
+                    <p:outputLabel  for="Docu" value="Documento: "/>
+                    <h:outputText id="Docu" value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.documentoID}" />
+                    <p:outputLabel  for="tel1" value="Telefono Principal: "/>
+                    <h:outputText id="tel1" value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.telefono1}" />
+                    <p:outputLabel  for="tel2" value="Telefono Secundario: "/>
+                    <h:outputText id="tel2" value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.telefono2}" />
+                    <p:outputLabel  for="tid" value="Tipo Documento: "/>
+                    <h:outputText id="tid" value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.tipoDocumentoID}" />
+                    <p:outputLabel  for="dir" value="Dirección: "/>
+                    <h:outputText id="dir" value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.direccion}" />
+                    <p:outputLabel  for="cor" value="Correo electronico: "/>
+                    <h:outputText id="cor" value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.correo}" />
+                    <p:outputLabel  for="gen" value="Genero: "/>
+                    <h:outputText id="gen" value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.genero}" />
                 </p:panelGrid>
-                <p:commandButton id="Ace" value="Aceptar" type="button" />
-                <p:commandButton id="Can" value="Rechazar" type="button" />
+                <p:commandButton id="Ace" value="Aceptar" type="button" styleClass="sheet.css" actionListener="#{ProcesarSolicitudAfiliacion.aceptarSolicitudAfiliacion()}"/>
+                <p:commandButton id="Can" value="Rechazar" type="button" styleClass="sheet.css"/>
             </p:overlayPanel>
 
         </h:form>

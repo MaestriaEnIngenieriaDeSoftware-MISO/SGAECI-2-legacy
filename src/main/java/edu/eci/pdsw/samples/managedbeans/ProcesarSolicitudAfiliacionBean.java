@@ -18,6 +18,8 @@ package edu.eci.pdsw.samples.managedbeans;
 
 
 
+import edu.eci.pdsw.samples.entities.Egresado;
+import edu.eci.pdsw.samples.entities.Estudiante;
 import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosSAGECI;
 import edu.eci.pdsw.samples.services.ServiciosSAGECI;
@@ -64,15 +66,25 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
     }
 
     
-    public void prueba(){
-        try {
-            System.out.println(SAGECI.consultarSolicitudAfiliaciones());
-        } catch (ExcepcionServiciosSAGECI ex) {
-            Logger.getLogger(ProcesarSolicitudAfiliacionBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    public void aceptarSolicitudAfiliacion() throws ExcepcionServiciosSAGECI{
     
-
+        Egresado e1 = solicitudSelection.getE1();
+        Estudiante e2 =solicitudSelection.getE2();
+        System.out.println("entro al metodo aceptarSolicitudAfiliacion ");
+        if (e2==null){
+            System.out.println("entro por parte del estudiante");
+            /*
+            el estudiante si es aceptado siempre cumplira los requisitos para la afiliacion.
+            */
+            solicitudSelection.setEstadoSolicitud("ACEPTADA");
+            solicitudSelection.setComentario("Tradar de ingresar un cuadro de texto, "
+            + "para que el usuario ingrese, porque acepto la solicitud");
+            SAGECI.actualizarSolicitudAfliliacion(solicitudSelection);
+        }else{
+            System.out.println("entro por parte del egresado");
+        }
+        System.out.println(SAGECI.consultarSolicitudAfiliacion(solicitudSelection.getSolicitudID()).getEstadoSolicitud());
+    } 
     
 
 }

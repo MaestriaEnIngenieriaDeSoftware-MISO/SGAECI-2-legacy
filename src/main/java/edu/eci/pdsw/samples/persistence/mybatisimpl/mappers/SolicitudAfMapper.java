@@ -33,4 +33,5 @@ public interface SolicitudAfMapper {
     public void insertarSolicitudAfiliacion(@Param("documentoid")int documentoID , @Param("fecha")Date fechaSolicitud, @Param("estado")String estadoSolicitud,@Param("comentario")String coment);
     public void eliminarPersona(@Param("documentoID") int documentoID);
     public void eliminarSolicitud(@Param("documentoID") int documentoID);
+    public void actualizarSolicitud(@Param("estadoSolicitud") String estadoSolicitud, @Param("comentario")  String comentario, @Param("solicitudID") int solicitudID);
 }

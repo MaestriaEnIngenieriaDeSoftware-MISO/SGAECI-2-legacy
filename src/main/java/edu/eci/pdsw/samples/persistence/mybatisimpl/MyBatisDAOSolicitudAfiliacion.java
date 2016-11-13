@@ -53,9 +53,6 @@ import org.apache.ibatis.session.SqlSession;
         SolicitudAfMapper pedmp=currentSession.getMapper(SolicitudAfMapper.class);
         List<SolicitudAfiliacion> temp;
         temp=pedmp.getSolicitudesAfiliacion();
-        System.out.println(temp.get(0).getE1().getNombre());
-        System.out.println(temp.get(0).getE2().getNombre());
-        System.out.println("--------------------------------");
         return temp;
     }
 
@@ -87,7 +84,10 @@ import org.apache.ibatis.session.SqlSession;
 
     @Override
     public void update(SolicitudAfiliacion Sa) throws PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        SolicitudAfMapper pedmp=currentSession.getMapper(SolicitudAfMapper.class);
+        System.out.println(Sa.getEstadoSolicitud());
+        pedmp.actualizarSolicitud(Sa.getEstadoSolicitud(), Sa.getComentario(), Sa.getSolicitudID());
+        System.out.println(Sa.getEstadoSolicitud());
     }
 
      

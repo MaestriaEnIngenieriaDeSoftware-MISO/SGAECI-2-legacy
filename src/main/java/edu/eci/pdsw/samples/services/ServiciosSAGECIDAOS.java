@@ -145,6 +145,18 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
 
     }
 
+    @Override
+    public void actualizarSolicitudAfliliacion(SolicitudAfiliacion Sa) throws ExcepcionServiciosSAGECI {
+        try {
+            daof.beginSession();
+            daof.getDaoSolicitudAfiliacion().update(Sa);
+            daof.commitTransaction();
+            daof.endSession();
+        } catch (PersistenceException ex) {
+            Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
         
     }
 class PropertiesLoader {
