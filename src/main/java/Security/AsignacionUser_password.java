@@ -43,10 +43,13 @@ public class AsignacionUser_password {
     }*/
 
     public String getPassword() {
-        return password;
+        Persona user= new Persona();
+        Random s=new Random();
+        String passAsignado = Integer.toString(user.getDocumentoID())+ Integer.toString( s.nextInt(2));
+        return passAsignado;
     }
-
+/*
     public void setPassword(String password) {
         this.password = password;
-    }
+    }*/
 }
