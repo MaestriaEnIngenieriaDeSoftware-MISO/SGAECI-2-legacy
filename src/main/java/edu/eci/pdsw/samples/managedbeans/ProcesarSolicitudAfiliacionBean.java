@@ -45,16 +45,16 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
     ServiciosSAGECI SAGECI=ServiciosSAGECI.getInstance();
     SolicitudAfiliacion solicitudSelection;
     String Comentario;
-    AsignacionUser_password user;
-    String usuarioAs= user.getUsuario();
-    String passAs=user.getPassword();
+    //AsignacionUser_password user;
+    //String usuarioAs= user.getUsuario();
+    //String passAs=user.getPassword();
     EmailSender sender = new SimpleEmailSender(new EmailConfiguration());
     Email email = null;
     final String from = "5d8dd682c0-c92f3e@inbox.mailtrap.io";
     final String subjectAprobado = "Solicitud de Ingreso AECI: Aprobada";
     final String messageRechazado = "Su solicitud ha sido Rechazada por lo siguiente: "+Comentario;
-    final String usuarioasignado = "Su usuario de ingreso asignado es: "+usuarioAs;
-    final String passwordasignado = "Su contraseña de ingreso asignado es: "+passAs;
+    //final String usuarioasignado = "Su usuario de ingreso asignado es: "+usuarioAs;
+    //final String passwordasignado = "Su contraseña de ingreso asignado es: "+passAs;
     public ProcesarSolicitudAfiliacionBean() {
         
     }
@@ -97,9 +97,7 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
             }
             try {
                 sender.send(email);
-                System.out.println("Sent message successfully!");
             } catch (MessagingException e) {
-                System.err.println("Message not sent!");
                 e.printStackTrace();
             }
         }catch(Exception e){
