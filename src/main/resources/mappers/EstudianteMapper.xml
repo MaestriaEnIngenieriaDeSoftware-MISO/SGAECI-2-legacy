@@ -7,8 +7,8 @@
   
     <resultMap type='Estudiante' id='EstudianteResult'>
         <id property='documentoID' column='DocumentoID'/>
-        <result property='telefono1' column='Telefono1'/>
-        <result property='telefono2' column='Telefono2'/>  
+        <result property='telefono1' column='Telefono'/>
+        <result property='telefono2' column='Celular'/>  
         <result property='tipoDocumentoID' column='TipoDocumentoID'/> 
         <result property='nombre' column='Nombre'/> 
         <result property='direccion' column='Direccion'/> 
@@ -29,8 +29,8 @@
     <select id="getEstudiantes" parameterType="map" >
          SELECT 
          per.documentoID as DocumentoID,
-         per.telefono1 as Telefono1,
-         per.telefono2 as Telefono2,
+         per.telefono as Telefono,
+         per.celular as Celular,
          per.tipoDocumentoID as TipoDocumentoID,
          per.nombre as Nombre, 
          per.direccion as Direccion,

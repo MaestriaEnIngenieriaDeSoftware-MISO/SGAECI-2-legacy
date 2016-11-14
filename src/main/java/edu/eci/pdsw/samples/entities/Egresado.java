@@ -13,7 +13,7 @@ public class Egresado extends Persona{
     private String semestreGrado,correoPersonal,labora,cargo;
     private Egresado_Empresa emp;
     
-    public Egresado(int documentoID, int telefono1, int telefono2,String tipoDocumentoID, String nombre, String direccion, String correo, String genero, String semestreGrado, String correoPersonal, String cargo, String labora,Egresado_Empresa egresadoEmpresa) {
+    public Egresado(int documentoID, long telefono1, long telefono2,String tipoDocumentoID, String nombre, String direccion, String correo, String genero, String semestreGrado, String correoPersonal, String cargo, String labora,Egresado_Empresa egresadoEmpresa) {
         super(documentoID,telefono1,telefono2,tipoDocumentoID,nombre,direccion,correo,genero);
         this.semestreGrado = semestreGrado;
         this.correoPersonal = correoPersonal;

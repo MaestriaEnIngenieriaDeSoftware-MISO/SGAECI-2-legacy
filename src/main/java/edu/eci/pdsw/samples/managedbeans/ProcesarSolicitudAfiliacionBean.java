@@ -23,12 +23,15 @@ import edu.eci.pdsw.samples.entities.Estudiante;
 import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosSAGECI;
 import edu.eci.pdsw.samples.services.ServiciosSAGECI;
+import edu.eci.pdsw.samples.javamail.core.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ActionEvent;
+import javax.mail.MessagingException;
 
 /**
  *
@@ -40,6 +43,12 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
 
     ServiciosSAGECI SAGECI=ServiciosSAGECI.getInstance();
     SolicitudAfiliacion solicitudSelection;
+    String Comentario;
+    EmailSender sender = new SimpleEmailSender(new EmailConfiguration());
+    Email email = null;
+    final String from = "5d8dd682c0-c92f3e@inbox.mailtrap.io";
+    final String subjectAprobado = "Solicitud de Ingreso AECI: Aprobada";
+    final String messageRechazado = "Su solicitud ha sido Rechazada por lo siguiente: "+Comentario;
 
     public ProcesarSolicitudAfiliacionBean() {
         
@@ -64,27 +73,48 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
     public void setSolicitudSelection(SolicitudAfiliacion solicitudSelection) {
         this.solicitudSelection = solicitudSelection;
     }
+    
+    public void aceptarSolicitudAfiliacion(ActionEvent actionEvent) throws ExcepcionServiciosSAGECI{
+        
+        try{
+            Egresado e1 = solicitudSelection.getE1();
+            Estudiante e2 =solicitudSelection.getE2();
+            String messageAprobado = "Su solicitud ha sido Aprobada: "+Comentario;
+            String toEgresado = e1.getCorreoPersonal();
+            String toEstudiante = e2.getCorreo();
+            if (e1.getSemestreGrado()==null){
+                solicitudSelection.setEstadoSolicitud("ACEPTADA");
+                solicitudSelection.setComentario(Comentario);
+                SAGECI.actualizarSolicitudAfliliacion(solicitudSelection);
+                email = new SimpleEmail(from, toEstudiante, subjectAprobado, messageAprobado);
+            }else{
+                System.out.println("entro por parte del egresado");
+            }
+            try {
+                sender.send(email);
+                System.out.println("Sent message successfully!");
+            } catch (MessagingException e) {
+                System.err.println("Message not sent!");
+                e.printStackTrace();
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }      
+    }
+    
+    public void rechazarSolicitudAfiliacion(ActionEvent actionEvent) throws ExcepcionServiciosSAGECI{
+        String subjectRechazado = "Solicitud de Ingreso AECI: Rechazada";
+        solicitudSelection.setEstadoSolicitud("RECHAZADA");
+        solicitudSelection.setComentario(Comentario);
+        SAGECI.actualizarSolicitudAfliliacion(solicitudSelection);
+    }
+    
+    public String getComentario() {
+        return Comentario;
+    }
 
-    
-    public void aceptarSolicitudAfiliacion() throws ExcepcionServiciosSAGECI{
-    
-        Egresado e1 = solicitudSelection.getE1();
-        Estudiante e2 =solicitudSelection.getE2();
-        System.out.println("entro al metodo aceptarSolicitudAfiliacion ");
-        if (e2==null){
-            System.out.println("entro por parte del estudiante");
-            /*
-            el estudiante si es aceptado siempre cumplira los requisitos para la afiliacion.
-            */
-            solicitudSelection.setEstadoSolicitud("ACEPTADA");
-            solicitudSelection.setComentario("Tradar de ingresar un cuadro de texto, "
-            + "para que el usuario ingrese, porque acepto la solicitud");
-            SAGECI.actualizarSolicitudAfliliacion(solicitudSelection);
-        }else{
-            System.out.println("entro por parte del egresado");
-        }
-        System.out.println(SAGECI.consultarSolicitudAfiliacion(solicitudSelection.getSolicitudID()).getEstadoSolicitud());
-    } 
-    
+    public void setComentario(String Comentario) {
+        this.Comentario = Comentario;
+    }
 
 }

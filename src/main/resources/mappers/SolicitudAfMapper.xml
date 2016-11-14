@@ -16,8 +16,8 @@
    
     <resultMap type='Estudiante' id='EstudianteResult'>
         <id property='documentoID' column='DocumentoID'/>
-        <result property='telefono1' column='Telefono1'/>
-        <result property='telefono2' column='Telefono2'/>  
+        <result property='telefono1' column='Telefono'/>
+        <result property='telefono2' column='Celular'/>  
         <result property='tipoDocumentoID' column='TipoDocumentoID'/> 
         <result property='nombre' column='Nombre'/> 
         <result property='direccion' column='Direccion'/> 
@@ -30,8 +30,8 @@
     
     <resultMap type='Egresado' id='EgresadoResult'>
         <id property='documentoID' column='DocumentoID'/>
-        <result property='telefono1' column='Telefono1'/>
-        <result property='telefono2' column='Telefono2'/>  
+        <result property='telefono1' column='Telefono'/>
+        <result property='telefono2' column='Celular'/>  
         <result property='tipoDocumentoID' column='TipoDocumentoID'/> 
         <result property='nombre' column='Nombre'/> 
         <result property='direccion' column='Direccion'/> 
@@ -45,8 +45,7 @@
     </resultMap>
 
     <resultMap type='Egresado_Empresa' id='EmpresaResult'>
-        <id property='empresaid' column='EmpresaID'/>
-        <result property='nombreempre' column='Nombre'/>
+        <id property='nombreempre' column='Nombre'/>
         <result property='telempre' column='Telefono'/>   
         <result property='dirempre' column='Direccion'/>
         
@@ -60,8 +59,8 @@
         so.Comentario,
         
         p1.DocumentoID as Egre_DocumentoID,
-        p1.Telefono1 as Egre_Telefono1,
-        p1.Telefono2 as Egre_Telefono2,
+        p1.Telefono as Egre_Telefono,
+        p1.Celular as Egre_Celuar,
         p1.TipoDocumentoID as Egre_TipoDocumentoID,
         p1.Nombre as Egre_Nombre,
         p1.Direccion as Egre_Direccion,
@@ -72,14 +71,13 @@
         Egresado.Cargo as Egre_Cargo,
         Egresado.Labora as Egre_Labora, 
         
-        Egresado_Empresa.EmpresaID as Egre_Epre_EmpresaID, 
         Egresado_Empresa.Nombre as Egre_Epre_Nombre, 
         Egresado_Empresa.Telefono as Egre_Epre_Telefono, 
         Egresado_Empresa.Direccion as Egre_Epre_Direccion,
         
         p1.DocumentoID as Estu_DocumentoID,
-        p1.Telefono1 as Estu_Telefono1,
-        p1.Telefono2 as Estu_Telefono2,
+        p1.Telefono as Estu_Telefono,
+        p1.Celular as Estu_Celular,
         p1.TipoDocumentoID as Estu_TipoDocumentoID,
         p1.Nombre as Estu_Nombre,
         p1.Direccion as Estu_Direccion,
@@ -89,7 +87,7 @@
         Estudiante.Semestre_Ponderado as Estu_Semestre_Ponderado, 
         Estudiante.Carrera as Estu_Carrera  
          
-        FROM Persona as p1 INNER JOIN Solicitud_Afiliacion as so ON(p1.DocumentoID = so.DocumentoID) LEFT JOIN Estudiante ON (Estudiante.DocumentoID = p1.DocumentoID) LEFT JOIN Egresado ON (Egresado.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (Egresado.EmpresaID = Egresado_Empresa.EmpresaID)   
+        FROM Persona as p1 INNER JOIN Solicitud_Afiliacion as so ON(p1.DocumentoID = so.DocumentoID) LEFT JOIN Estudiante ON (Estudiante.DocumentoID = p1.DocumentoID) LEFT JOIN Egresado ON (Egresado.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (Egresado.Empresa = Egresado_Empresa.Nombre)   
         
     </select>
     
@@ -122,18 +120,17 @@
         Egresado.Labora as Egre_Labora, 
         Egresado.Cargo as Egre_Cargo,
         
-        Egresado_Empresa.EmpresaID as Egre_Epre_EmpresaID, 
         Egresado_Empresa.Nombre as Egre_Epre_Nombre, 
         Egresado_Empresa.Telefono as Egre_Epre_Telefono, 
         Egresado_Empresa.Direccion as Egre_Epre_Direccion 
         
-        FROM Persona as p1 INNER JOIN Solicitud_Afiliacion ON(p1.DocumentoID = Solicitud_Afiliacion.DocumentoID) LEFT JOIN Estudiante ON (Estudiante.DocumentoID = p1.DocumentoID) LEFT JOIN Egresado ON (Egresado.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (Egresado.EmpresaID = Egresado_Empresa.EmpresaID)
+        FROM Persona as p1 INNER JOIN Solicitud_Afiliacion ON(p1.DocumentoID = Solicitud_Afiliacion.DocumentoID) LEFT JOIN Estudiante ON (Estudiante.DocumentoID = p1.DocumentoID) LEFT JOIN Egresado ON (Egresado.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (Egresado.Empresa = Egresado_Empresa.Nombre)
         WHERE Solicitud_Afiliacion.SolicitudID=#{identificador}
         
     </select>
      
     <insert id='insertarPersona' parameterType="map" >
-        INSERT INTO Persona(DocumentoID,TipoDocumentoID,Nombre,Direccion,Correo,Genero,Telefono1,Telefono2) values (#{documentoID},#{tipoDocumentoID},#{nombre},#{direccion},#{correo},#{genero},#{telefono1},#{telefono2})
+        INSERT INTO Persona(DocumentoID,TipoDocumentoID,Nombre,Direccion,Correo,Genero,Telefono,Celular) values (#{documentoID},#{tipoDocumentoID},#{nombre},#{direccion},#{correo},#{genero},#{telefono1},#{telefono2})
     </insert>
     
     <delete id="eliminarPersona" parameterType="map" >

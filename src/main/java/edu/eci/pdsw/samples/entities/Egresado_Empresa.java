@@ -11,25 +11,16 @@ package edu.eci.pdsw.samples.entities;
  */
 public class Egresado_Empresa {
 
-    private int empresaid,telempre;
+    private int telempre;
     private String nombreempre,dirempre;
     
-    public Egresado_Empresa(int empresaid, String nombreempre, String dirempre, int telempre) {
-        this.empresaid=empresaid;
+    public Egresado_Empresa( String nombreempre, String dirempre, int telempre) {
         this.dirempre=dirempre;
         this.nombreempre=nombreempre;
         this.telempre=telempre;
     }
 
     public Egresado_Empresa() {
-    }
-    
-    public int getEmpresaid() {
-        return empresaid;
-    }
-
-    public void setEmpresaid(int empresaid) {
-        this.empresaid = empresaid;
     }
 
     public int getTelempre() {

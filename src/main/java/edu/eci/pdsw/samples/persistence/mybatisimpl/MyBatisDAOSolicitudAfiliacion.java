@@ -72,10 +72,10 @@ import org.apache.ibatis.session.SqlSession;
            EmpresaMapper pedmp3=currentSession.getMapper(EmpresaMapper.class);
            if(e.getLabora().equals("si") ){
                 if(pedmp3.getEmpresa(e.getEmp().getNombreempre())==null){
-                   pedmp3.insertarEmpresa(e.getEmp().getEmpresaid(), e.getEmp().getNombreempre().toUpperCase(), e.getEmp().getDirempre().toUpperCase(), e.getEmp().getTelempre());
+                   pedmp3.insertarEmpresa( e.getEmp().getNombreempre().toUpperCase(), e.getEmp().getDirempre().toUpperCase(), e.getEmp().getTelempre());
                 }
            }
-           pedmp2.insertarEgresado(e.getDocumentoID(),e.getSemestreGrado(),e.getCorreoPersonal(),e.getEmp().getEmpresaid(),e.getLabora(),e.getCargo());
+           pedmp2.insertarEgresado(e.getDocumentoID(),e.getSemestreGrado(),e.getCorreoPersonal(),e.getLabora(),e.getCargo(),e.getEmp().getNombreempre());
            pedmp.insertarSolicitudAfiliacion(e.getDocumentoID(),Sa.getFechaSolicitud(),Sa.getEstadoSolicitud(),Sa.getComentario().toUpperCase());
        }
        

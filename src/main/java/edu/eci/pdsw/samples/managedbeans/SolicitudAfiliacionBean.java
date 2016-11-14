@@ -30,7 +30,7 @@ public class SolicitudAfiliacionBean implements Serializable{
     ServiciosSAGECI SAGECI=ServiciosSAGECI.getInstance();
     private int solicitudID,documentoID,Telefono,telefono2,telefonoOficina,codigoEstudiante,semestrePonderado;
     private Date fechaGraduacion;
-    private String correo,labora,semestreGrado="",tipoDocumentoID,genero,tipoSolicitante,estadoSolicitud=" NO REVISADO ",comentario="Falta revision respectiva.",Nombre,direccionVivienda,Empresa,direccionEmpresa,Cargo,correoPersonal,carrera="",cargo;
+    private String correo,labora,semestreGrado="",tipoDocumentoID,genero,tipoSolicitante,estadoSolicitud=" NO REVISADO ",comentario="Falta revision respectiva.",Nombre,direccionVivienda,Empresa,direccionEmpresa,Cargo,correoPersonal,carrera="";
     private boolean acepta; 
     private ArrayList<Integer> semestres;
     private ArrayList<String> carreras;
@@ -53,15 +53,15 @@ public class SolicitudAfiliacionBean implements Serializable{
         if(marca){
             System.out.println("Marca cambio a True");
             labora="si";
-            egresadoEmpresa.setEmpresaid(0);
             egresadoEmpresa.setNombreempre(Empresa);
+            
             egresadoEmpresa.setDirempre(direccionEmpresa);
             egresadoEmpresa.setTelempre(telefonoOficina);
         }else{
             System.out.println("Marca No cambio a True");
             labora="no";
         }
-        Egresado e1 = new Egresado(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre,  direccionVivienda,  correo,  genero, semestreGrado,correoPersonal, cargo,  labora,egresadoEmpresa);
+        Egresado e1 = new Egresado(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre,  direccionVivienda,  correo,  genero, semestreGrado,correoPersonal, Cargo,  labora,egresadoEmpresa);
         Estudiante e2 = new Estudiante(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre,  direccionVivienda,  correo,  genero, codigoEstudiante, semestrePonderado,  carrera);
         
         if(semestreGrado.equals("")){
@@ -96,8 +96,6 @@ public class SolicitudAfiliacionBean implements Serializable{
     public void setCarreras(ArrayList<String> carreras) {
         this.carreras = carreras;
     }
-
-    
     
     public String getSemestreGrado() {
         return semestreGrado;
@@ -106,8 +104,6 @@ public class SolicitudAfiliacionBean implements Serializable{
     public void setSemestreGrado(String semestreGrado) {
         this.semestreGrado = semestreGrado;
     }
-    
-    
     
     public int getDocumentoID() {
         return documentoID;

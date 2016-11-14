@@ -7,23 +7,20 @@
     
     
     <resultMap type='Egresado_Empresa' id='EmpresaResult'>
-        <id property='empresaid' column="EmpresaID"></id>
-        <result property ='nombreempre' column ='Nombre'></result>
+        <id property ='nombreempre' column ='Nombre'></id>
         <result property ='dirempre' column ='Direccion'></result>
         <result property ='telempre' column ='Telefono'></result>
     </resultMap>
 
     
     <select id='getEmpresa' parameterType='map' resultMap="EmpresaResult">
-        SELECT EmpresaID, Nombre, Direccion, Telefono
+        SELECT Nombre, Direccion, Telefono
         FROM Egresado_Empresa
         WHERE Nombre = #{nombre}
     </select>
     
      <insert id='insertarEmpresa' >
-        INSERT INTO Egresado_Empresa(EmpresaID,Nombre,Direccion,Telefono) values (#{empresaID},#{nombre},#{direccion},#{telefono})
+        INSERT INTO Egresado_Empresa(Nombre,Direccion,Telefono) values (#{nombre},#{direccion},#{telefono})
     </insert>
-     
-    
-              	
+         	
 </mapper>

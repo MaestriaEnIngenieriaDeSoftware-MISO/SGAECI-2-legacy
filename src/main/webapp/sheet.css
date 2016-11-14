@@ -48,8 +48,16 @@ img {
     width: 50%;
 }
 
-
 .ui-panelgrid{
     margin: auto;
     width: 50%
+}
+
+.dateTimeField input {
+   vertical-align: middle;
+   margin-right: 1px;
+}
+
+.dateTimeField img {
+   vertical-align: middle;
 }

@@ -29,7 +29,7 @@ import org.apache.ibatis.annotations.Param;
 public interface EgresadoMapper {
     
     public List<Egresado> getEgresados();
-    public void insertarEgresado( @Param("documentoID") int documentoID,@Param("semestreGraduacion") String semestreGraduacion,@Param("correoPersonal") String correoPersonal,@Param("empresaID") int empresaID,@Param("labora") String labora,@Param("cargo") String cargo);                                    
+    public void insertarEgresado( @Param("documentoID") int documentoID,@Param("semestreGraduacion") String semestreGraduacion,@Param("correoPersonal") String correoPersonal,@Param("labora") String labora,@Param("cargo") String cargo,@Param("empresaID") String nombreempre);                                    
     public Egresado getEgresado(@Param("idEgresado") int documentoID );
     
 }

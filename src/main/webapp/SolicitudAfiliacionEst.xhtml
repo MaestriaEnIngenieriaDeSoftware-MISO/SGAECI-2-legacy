@@ -19,22 +19,25 @@
                     <p:inputText styleClass="cent" id="nombre" required="true" value="#{SolicitudAfiliacion.nombre}"/>
 
                     <p:outputLabel for="tid" value="Tipo Documento Identidad: " />
-                    <p:inputText styleClass="cent" id="tid" required="true" value="#{SolicitudAfiliacion.tipoDocumentoID}"/>
+                    <p:selectOneMenu styleClass="cent" id="tid" value="#{SolicitudAfiliacion.tipoDocumentoID}" style="width:175px">
+                        <f:selectItem itemLabel="CC" itemValue="CC" />
+                        <f:selectItem itemLabel="CE" itemValue="CE" />
+                    </p:selectOneMenu>
 
                     <p:outputLabel for="id" value="Documento Identidad: " />
                     <p:inputText styleClass="cent" id="id" required="true" value="#{SolicitudAfiliacion.documentoID}"/>
 
                     <p:outputLabel for="gen" value="Genero: " />
-                    <p:selectOneMenu styleClass="cent" id="gen" value="#{SolicitudAfiliacion.genero}" style="width:125px">
-                        <f:selectItem itemLabel="Selecione Genero: " itemValue="" />
-                        <f:selectItem itemLabel="M" itemValue="M" />
-                        <f:selectItem itemLabel="F" itemValue="F" />
+                    <p:selectOneMenu styleClass="cent" id="gen" value="#{SolicitudAfiliacion.genero}" style="width:175px">
+                        <f:selectItem itemLabel="MASCULINO" itemValue="MASCULINO" />
+                        <f:selectItem itemLabel="FEMENINO" itemValue="FEMENINO" />
                     </p:selectOneMenu>
                     
-                    
-
                     <p:outputLabel for="telcasa" value="Telefono Casa: " />
                     <p:inputText styleClass="cent" id="telcasa" required="true" value="#{SolicitudAfiliacion.telefono}"/>
+                    
+                    <p:outputLabel for="Celular" value="No. Celular: " />
+                    <p:inputText styleClass="cent" id="Celular" value="#{SolicitudAfiliacion.telefono2}"/>                
 
                     <p:outputLabel for="direccionVi" value="Direccion Vivienda " />
                     <p:inputText styleClass="cent" id="direccionVi" required="true" value="#{SolicitudAfiliacion.direccionVivienda}"/>
@@ -46,15 +49,14 @@
                     <p:inputText styleClass="cent" id="correo" required="true" value="#{SolicitudAfiliacion.correo}"/>
 
                     <p:outputLabel for="carr" value="Carrera Estudiantil: " />
-                    <p:selectOneMenu styleClass="cent" id="carr" value="#{SolicitudAfiliacion.carrera}" style="width:125px">
+                    <p:selectOneMenu styleClass="cent" id="carr" value="#{SolicitudAfiliacion.carrera}" style="width:259px">
                         <p:ajax event="change" update=":form:eventsDT2" />
                         <f:selectItem itemLabel="Selecione uno" itemValue="" />
                         <f:selectItems value="#{SolicitudAfiliacion.carreras}" />
                     </p:selectOneMenu>
 
-
                     <p:outputLabel for="eventsDT2" value="Semestre Estudiantil: " />
-                    <p:selectOneMenu styleClass="cent" id="eventsDT2" value="#{SolicitudAfiliacion.semestrePonderado}" style="width:125px">
+                    <p:selectOneMenu styleClass="cent" id="eventsDT2" value="#{SolicitudAfiliacion.semestrePonderado}" style="width:175px">
                         <f:selectItem itemLabel="Selecione uno" itemValue="" />
                         <f:selectItems value="#{SolicitudAfiliacion.semestres}" />
                     </p:selectOneMenu>

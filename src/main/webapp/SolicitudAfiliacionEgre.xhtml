@@ -19,19 +19,31 @@
                     <p:inputText styleClass="cent" required="true" id="nombre" value="#{SolicitudAfiliacion.nombre}"/>
 
                     <p:outputLabel for="tid" value="Tipo Documento Identidad: " />
-                    <p:inputText styleClass="cent" required="true" id="tid" value="#{SolicitudAfiliacion.tipoDocumentoID}"/>
+                    <p:selectOneMenu styleClass="cent" required="True" id="tid" value="#{SolicitudAfiliacion.tipoDocumentoID}" style="width:210px">
+                        <f:selectItem itemLabel="CC" itemValue="CC" />
+                        <f:selectItem itemLabel="CE" itemValue="CE" />
+                    </p:selectOneMenu>
 
                     <p:outputLabel for="id" value="Documento Identidad: " />
                     <p:inputText styleClass="cent" required="true" id="id" value="#{SolicitudAfiliacion.documentoID}"/>
 
                     <p:outputLabel for="gen" value="Genero: " />
-                    <p:inputText styleClass="cent" required="true" id="gen" value="#{SolicitudAfiliacion.genero}"/>
+                    <p:selectOneMenu styleClass="cent" required="True" id="gen" value="#{SolicitudAfiliacion.genero}" style="width:210px">
+                        <f:selectItem itemLabel="MASCULINO" itemValue="MASCULINO" />
+                        <f:selectItem itemLabel="FEMENINO" itemValue="FEMENINO" />
+                    </p:selectOneMenu>
 
-                    <p:outputLabel for="correoPe" value="Correo personal: " />
-                    <p:inputText styleClass="cent" required="true" id="correoPe" value="#{SolicitudAfiliacion.correo}"/>
+                    <p:outputLabel for="correoP" value="Correo Personal: " />
+                    <p:inputText styleClass="cent" required="true" id="correoP" value="#{SolicitudAfiliacion.correoPersonal}"/>
+                    
+                    <p:outputLabel for="correo" value="Correo Estudiantil: " />
+                    <p:inputText styleClass="cent" id="correo" value="#{SolicitudAfiliacion.correo}"/>
 
                     <p:outputLabel for="telcasa" value="Telefono Casa: " />
                     <p:inputText styleClass="cent" required="true" id="telcasa" value="#{SolicitudAfiliacion.telefono}"/>
+                    
+                    <p:outputLabel for="Celular" value="No. Celular: " />
+                    <p:inputText styleClass="cent" id="Celular" value="#{SolicitudAfiliacion.telefono2}"/>
 
                     <p:outputLabel for="direccionVi" value="Direccion Vivienda: " />
                     <p:inputText styleClass="cent" required="true" id="direccionVi" value="#{SolicitudAfiliacion.direccionVivienda}"/>
@@ -40,11 +52,8 @@
                     <p:inputMask styleClass="cent" required="true" id="semestre" value="#{SolicitudAfiliacion.semestreGrado}" mask="2099-9"/>
 
                     <p:outputLabel for="date" value="Fecha Graduacion :" />
-                    <p:calendar styleClass="cent" required="true" id="date" value="#{SolicitudAfiliacion.fechaGraduacion}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
+                    <p:calendar styleClass="sheet.css" required="true" id="date" value="#{SolicitudAfiliacion.fechaGraduacion}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
 
-                    
-                    
-                    
                     <p:outputLabel for="Trabaja" value="Trabaja Actualmente :" />
                     <p:selectBooleanCheckbox styleClass="cent" id="Trabaja" value="#{SolicitudAfiliacion.marca}" >
                         <p:ajax event="change" update=":form:Empresa" />
@@ -64,9 +73,8 @@
 
                     <p:outputLabel for="cargo" value="Cargo en Empresa: " />
                     <p:inputText styleClass="cent" required="#{SolicitudAfiliacion.marca}" id="cargo" value="#{SolicitudAfiliacion.cargo}"/>
-
-                    <p:outputLabel for="correoP" value="Correo Personal: " />
-                    <p:inputText styleClass="cent" required="#{SolicitudAfiliacion.marca}" id="correoP" value="#{SolicitudAfiliacion.correoPersonal}"/>
+                    
+                    
     
                 </p:panelGrid>
                 

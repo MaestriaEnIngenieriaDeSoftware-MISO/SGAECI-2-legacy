@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Solicitudes pendientes</title>
         <link rel="stylesheet" type="text/css" href="sheet.css"> 
@@ -11,8 +12,7 @@
     <h:body>
         <h:form id="form">
             <img src="AECI.PNG" alt="AECI"></img>
-            <p:dataTable styleClass="sheet.css" id="ListaSolicitudes" var="Solicitud"  value="#{ProcesarSolicitudAfiliacion.solicitudes}" selectionMode="single" selection="#{ProcesarSolicitudAfiliacion.solicitudSelection}" rowKey="#{Solicitud.solicitudID}">
-                <p:ajax event="rowSelect" update=":form:Solipanel" />
+            <p:dataTable rowIndexVar="row" id="ListaSolicitudes" var="Solicitud"  value="#{ProcesarSolicitudAfiliacion.solicitudes}" selectionMode="single" selection="#{ProcesarSolicitudAfiliacion.solicitudSelection}" rowKey="#{Solicitud.solicitudID}" style="margin-bottom:0">
                 <p:column style="width: 2px" headerText="Solicitud ID">
                     <h:outputText value="#{Solicitud.solicitudID}" />
                 </p:column>
@@ -22,14 +22,12 @@
                 <p:column style="width: 2px" headerText="Tipo de solicitante">
                     <h:outputText value="#{Solicitud.tipoSol}" />
                 </p:column>
+                <f:facet name="footer">
+                    <p:commandButton process="ListaSolicitudes" update=":form:SolicitudSeleccionada" icon="ui-icon-search" value="View" oncomplete="PF('dlg1').show()" />
+                </f:facet>
             </p:dataTable>
-
-
-
-
-            <p:commandButton id="InfoSoli" value="Info" type="button" />
-            <p:overlayPanel id="Solipanel" for="InfoSoli" hideEffect="fade" dynamic="true" style="width:600px">
-                <h:outputText value="Datos principales del solicitante de afiliación." />
+            
+            <p:dialog header="Datos principales del solicitante de afiliación." id="SolicitudSeleccionada" widgetVar="dlg1" height="575" draggable="false" resizable="false">
                 <p:panelGrid columns="2" id="test">
                     <p:outputLabel  for="nombre" value="Nombre Completo: "/>
                     <h:outputText id="nombre" value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.nombre}" />
@@ -48,10 +46,13 @@
                     <p:outputLabel  for="gen" value="Genero: "/>
                     <h:outputText id="gen" value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.genero}" />
                 </p:panelGrid>
-                <p:commandButton id="Ace" value="Aceptar" type="button" styleClass="sheet.css" actionListener="#{ProcesarSolicitudAfiliacion.aceptarSolicitudAfiliacion()}"/>
-                <p:commandButton id="Can" value="Rechazar" type="button" styleClass="sheet.css"/>
-            </p:overlayPanel>
-
+                <h3>Ingrese su Comentario de respuesta: </h3>
+                <p:inputTextarea rows="6" cols="45" required="true" value="#{ProcesarSolicitudAfiliacion.comentario}" />
+                <br/>
+                <p:commandButton value="Aceptar" id="Acept" actionListener="#{ProcesarSolicitudAfiliacion.aceptarSolicitudAfiliacion}" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
+                <p:commandButton value="Rechazar" id="Reject" actionListener="#{ProcesarSolicitudAfiliacion.rechazarSolicitudAfiliacion}" styleClass="ui-priority-primary" type="button" oncomplete="PF('dlg1').hide()"/>
+                <p:commandButton value="Cancelar" id="Cancel" styleClass="ui-priority-primary" type="button" oncomplete="PF('dlg1').hide()"/>
+            </p:dialog> 
         </h:form>
     </h:body>
 </html>

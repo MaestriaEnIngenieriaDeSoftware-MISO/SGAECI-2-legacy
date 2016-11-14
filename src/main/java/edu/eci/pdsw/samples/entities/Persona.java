@@ -12,10 +12,11 @@ import java.util.Set;
  * @author 2106796
  */
 public class Persona {
-    private int documentoID,telefono1,telefono2;
+    private int documentoID;
+    private long telefono1,telefono2;
     private String tipoDocumentoID,nombre,direccion,correo,genero;
     
-    public Persona(int documentoID,int telefono1,int telefono2,String tipoDocumentoID,String nombre,String direccion ,String correo,String genero){
+    public Persona(int documentoID,long telefono1,long telefono2,String tipoDocumentoID,String nombre,String direccion ,String correo,String genero){
         this.documentoID = documentoID;
         this.telefono1 = telefono1;
         this.telefono2 = telefono2;
@@ -37,19 +38,19 @@ public class Persona {
         this.documentoID = documentoID;
     }
 
-    public int getTelefono1() {
+    public long getTelefono1() {
         return telefono1;
     }
 
-    public void setTelefono1(int telefono1) {
+    public void setTelefono1(long telefono1) {
         this.telefono1 = telefono1;
     }
 
-    public int getTelefono2() {
+    public long getTelefono2() {
         return telefono2;
     }
 
-    public void setTelefono2(int telefono2) {
+    public void setTelefono2(long telefono2) {
         this.telefono2 = telefono2;
     }
 
@@ -91,10 +92,6 @@ public class Persona {
 
     public void setGenero(String genero) {
         this.genero = genero;
-    }
-    
-    
-
-    
+    }   
     
 }

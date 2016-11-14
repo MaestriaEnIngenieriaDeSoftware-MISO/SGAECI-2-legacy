@@ -7,8 +7,8 @@
    
     <resultMap type='Egresado' id='EgresadoResult'>
         <id property='documentoID' column='DocumentoID'/>
-        <result property='telefono1' column='Telefono1'/>
-        <result property='telefono2' column='Telefono2'/>  
+        <result property='telefono1' column='Telefono'/>
+        <result property='telefono2' column='Celular'/>  
         <result property='tipoDocumentoID' column='TipoDocumentoID'/> 
         <result property='nombre' column='Nombre'/> 
         <result property='direccion' column='Direccion'/> 
@@ -22,22 +22,21 @@
     </resultMap>
     
     <resultMap type='Egresado_Empresa' id='EmpresaResult'>
-        <id property='empresaid' column='EmpresaID'/>
-        <result property='nombreempre' column='Nombre'/>
+        <id property='nombreempre' column='Nombre'/>
         <result property='telempre' column='Telefono'/>   
         <result property='dirempre' column='Direccion'/>
     </resultMap>
   
     
      <insert id='insertarEgresado'>
-        INSERT INTO Egresado(DocumentoID,Semestre_Graduacion,Correo_Personal,EmpresaID,Labora,Cargo) values (#{documentoID},#{semestreGraduacion},#{correoPersonal},#{empresaID},#{labora},#{cargo})
+        INSERT INTO Egresado(DocumentoID,Semestre_Graduacion,Correo_Personal,Empresa,Labora,Cargo) values (#{documentoID},#{semestreGraduacion},#{correoPersonal},#{empresaID},#{labora},#{cargo})
     </insert>
     
      <select id="getEgresado" parameterType="map" >
          SELECT 
           p1.DocumentoID as Egre_DocumentoID,
-          p1.Telefono1 as Egre_Telefono1,
-          p1.Telefono2 as Egre_Telefono2,
+          p1.Telefono as Egre_Telefono,
+          p1.Celular as Egre_Celular,
           p1.TipoDocumentoID as Egre_TipoDocumentoID,
           p1.Nombre as Egre_Nombre,
           p1.Direccion as Egre_Direccion,
@@ -48,12 +47,11 @@
           egre.Cargo as Egre_Cargo,
           egre.Labora as Egre_Labora, 
         
-          Egresado_Empresa.EmpresaID as Egre_Epre_EmpresaID, 
           Egresado_Empresa.Nombre as Egre_Epre_Nombre, 
           Egresado_Empresa.Telefono as Egre_Epre_Telefono, 
           Egresado_Empresa.Direccion as Egre_Epre_Direccion,
       
-         FROM Egresado as egre JOIN Persona as p1 on (p1.DocumentoID=egre.DocumentoID) JOIN Egresado_Empresa ON (egre.EmpresaID = Egresado_Empresa.EmpresaID)
+         FROM Egresado as egre JOIN Persona as p1 on (p1.DocumentoID=egre.DocumentoID) JOIN Egresado_Empresa ON (egre.Empresa = Egresado_Empresa.Nombre)
          WHERE egre.DocumentoID = #{idEgresado}
      </select>
      
@@ -72,13 +70,12 @@
           egre.Correo_Personal as Egre_Correo_Personal, 
           egre.Cargo as Egre_Cargo,
           egre.Labora as Egre_Labora, 
-        
-          emp.EmpresaID as Egre_Epre_EmpresaID, 
+
           emp.Nombre as Egre_Epre_Nombre, 
           emp.Telefono as Egre_Epre_Telefono, 
           emp.Direccion as Egre_Epre_Direccion,
         
-         FROM Egresado as egre JOIN Persona as p1 on (p1.DocumentoID=egre.DocumentoID) JOIN Egresado_Empresa as emp ON (egre.EmpresaID = emp.EmpresaID)
+         FROM Egresado as egre JOIN Persona as p1 on (p1.DocumentoID=egre.DocumentoID) JOIN Egresado_Empresa as emp ON (egre.Empresa = emp.Nombre)
          
      </select>
     

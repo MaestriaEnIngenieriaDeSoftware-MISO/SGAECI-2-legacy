@@ -29,7 +29,7 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface EmpresaMapper {
     
-    public void insertarEmpresa(@Param("empresaID") int empresaID, @Param("nombre") String nombre, @Param("direccion") String direccion, @Param("telefono") int telefono);
+    public void insertarEmpresa( @Param("nombre") String nombre, @Param("direccion") String direccion, @Param("telefono") int telefono);
     public Egresado_Empresa getEmpresa(@Param("nombre") String nombre);
     
 }
