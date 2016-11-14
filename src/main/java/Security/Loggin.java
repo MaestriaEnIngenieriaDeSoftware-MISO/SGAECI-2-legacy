@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.eci.pdsw.samples.managedbeans;
+package Security;
 
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
