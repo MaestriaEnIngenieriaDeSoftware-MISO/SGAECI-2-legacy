@@ -22,7 +22,7 @@ public class AsignacionUser_password {
    String password;
 
     public Hashtable<String, String> getCorreocontraseña() {
-        return correocontraseña;
+        return correocontraseña; // se debe guardad tanto el usuario como la contraseña encriptada 
     }
 
     public void setCorreocontraseña(Hashtable<String, String> correocontraseña) {
