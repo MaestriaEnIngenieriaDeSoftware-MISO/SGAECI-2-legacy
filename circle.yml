@@ -6,7 +6,7 @@ deployment:
   staging:
     branch: master
     heroku: 
-      appname: sgaeci-2
+      appname: sgaeciteam2
 
 test:
   post:
