@@ -37,7 +37,7 @@ public class AsignacionUser_password {
         
         
     }
-
+// Asigna un usuario al afiliado
     public String getUsuario() {
         Persona usuario = new Persona();
         String nombre=usuario.getNombre();
@@ -50,7 +50,7 @@ public class AsignacionUser_password {
     /*public void setUsuario(String usuario) {
         this.usuario = usuario;
     }*/
-
+// Asigna una contraseña al afiliado
     public String getPassword() {
         Persona user= new Persona();
         Random s=new Random();

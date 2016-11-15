@@ -21,7 +21,7 @@ public class SHA1 {
     AsignacionUser_password user= new AsignacionUser_password(); 
     String passxencrip= user.getPassword();//  contraseña asignada
    
-
+// Encripta la contraseña asignada 
     public String getHash(String message) throws NoSuchAlgorithmException {
         buffer = message.getBytes();
         md = MessageDigest.getInstance("SHA1");
