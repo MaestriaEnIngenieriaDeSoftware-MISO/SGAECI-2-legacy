@@ -29,9 +29,9 @@ import javax.faces.bean.SessionScoped;
 public class SolicitudAfiliacionBean implements Serializable{
     ServiciosSAGECI SAGECI=ServiciosSAGECI.getInstance();
     private int solicitudID,documentoID,Telefono,telefono2,telefonoOficina,codigoEstudiante,semestrePonderado;
-    private Date fechaGraduacion;
-    private String correo,labora,semestreGrado="",tipoDocumentoID,genero,tipoSolicitante,estadoSolicitud=" NO REVISADO ",comentario="Falta revision respectiva.",Nombre,direccionVivienda,Empresa,direccionEmpresa,Cargo,correoPersonal,carrera="";
-    private boolean acepta; 
+    private Date fechaGraduacion=new Date(new java.util.Date().getTime());
+    private String correo="correo",labora="no",semestreGrado="9999-9",tipoDocumentoID="CC",genero="MASCULINO",tipoSolicitante="EGRESADO",estadoSolicitud=" NO REVISADO ",comentario="Falta revision respectiva.",Nombre="Nombre",direccionVivienda="Direccion",Empresa="Empresa",direccionEmpresa="Direccion",Cargo="Cargo",correoPersonal="Correo",carrera="Carrera";
+    private boolean acepta=false; 
     private ArrayList<Integer> semestres;
     private ArrayList<String> carreras;
     private boolean marca=false;
@@ -51,17 +51,15 @@ public class SolicitudAfiliacionBean implements Serializable{
 
     public void agregarSolicitudAfiliacion() throws ExcepcionServiciosSAGECI{
         if(marca){
-            System.out.println("Marca cambio a True");
             labora="si";
             egresadoEmpresa.setNombreempre(Empresa);
-            
             egresadoEmpresa.setDirempre(direccionEmpresa);
             egresadoEmpresa.setTelempre(telefonoOficina);
         }else{
-            System.out.println("Marca No cambio a True");
             labora="no";
         }
-        Egresado e1 = new Egresado(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre,  direccionVivienda,  correo,  genero, semestreGrado,correoPersonal, Cargo,  labora,egresadoEmpresa);
+        if(correo.equals("correo")) correo=null;
+        Egresado e1 = new Egresado(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre,  direccionVivienda,  correo,  genero, semestreGrado,correoPersonal, Cargo,  labora,egresadoEmpresa,fechaGraduacion);
         Estudiante e2 = new Estudiante(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre,  direccionVivienda,  correo,  genero, codigoEstudiante, semestrePonderado,  carrera);
         
         if(semestreGrado.equals("")){
