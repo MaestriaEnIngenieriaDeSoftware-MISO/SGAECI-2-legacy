@@ -28,8 +28,19 @@ import org.apache.ibatis.annotations.Param;
  * @author hcadavid
  */
 public interface EmpresaMapper {
-    
+    /**
+     * insertar una empresa a la que trabaja un egresado a la base de datos
+     * @param nombre
+     * @param direccion
+     * @param telefono 
+     */
     public void insertarEmpresa( @Param("nombre") String nombre, @Param("direccion") String direccion, @Param("telefono") int telefono);
+    
+    /**
+     * consulta una empresa con un nombre especifico
+     * @param nombre
+     * @return empresa con dicho nombre
+     */
     public Egresado_Empresa getEmpresa(@Param("nombre") String nombre);
     
 }

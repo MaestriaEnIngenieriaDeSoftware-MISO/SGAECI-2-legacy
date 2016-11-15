@@ -28,9 +28,29 @@ import org.apache.ibatis.annotations.Param;
  * @author hcadavid
  */
 public interface EgresadoMapper {
-    
+    /**
+     * consuta todos los egresados en la base de datos 
+     * @return lista con todos los egresados
+     */
     public List<Egresado> getEgresados();
+    
+    /**
+     * registrar un egresado en la base de datos 
+     * @param documentoID
+     * @param semestreGraduacion
+     * @param correoPersonal
+     * @param labora
+     * @param cargo
+     * @param nombreempre
+     * @param graduacion 
+     */
     public void insertarEgresado( @Param("documentoID") int documentoID,@Param("semestreGraduacion") String semestreGraduacion,@Param("correoPersonal") String correoPersonal,@Param("labora") String labora,@Param("cargo") String cargo,@Param("empresaID") String nombreempre,@Param("fechaGraduacion")Date graduacion);                                    
+    
+    /**
+     * obtener un egresado con un documento de identidad especifico
+     * @param documentoID
+     * @return egresado relacionado con dicho documento de identidad
+     */
     public Egresado getEgresado(@Param("idEgresado") int documentoID );
     
 }

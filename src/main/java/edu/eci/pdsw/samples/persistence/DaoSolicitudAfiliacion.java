@@ -25,13 +25,30 @@ import java.util.List;
  * @author hcadavid
  */
 public interface DaoSolicitudAfiliacion{
- 
+    /**
+     * consutla una solicitud de afiliacion con identificador especifico de la base de datos  
+     * @param id
+     * @return solicitud de afiliacion 
+     * @throws PersistenceException 
+     */
     public SolicitudAfiliacion load(int id) throws PersistenceException;
-    
+    /**
+     * consulta todas las solicitudes de afiliacion de la base de datos 
+     * @return lista con las solicitudes de afiliacion 
+     * @throws PersistenceException 
+     */
     public List<SolicitudAfiliacion> loadAll() throws PersistenceException;
-    
+    /**
+     * registrar una solicitud de afiliacion en la base de datos
+     * @param Sa
+     * @throws PersistenceException 
+     */
     public void save(SolicitudAfiliacion Sa) throws PersistenceException;
-    
+    /**
+     * actualiza una solicitud de afiliacion en la base de datos 
+     * @param Sa
+     * @throws PersistenceException 
+     */
     public void update(SolicitudAfiliacion Sa) throws PersistenceException;
     
 }

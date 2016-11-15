@@ -28,16 +28,33 @@ import java.util.List;
  */
 public interface DaoEstudiante {
 
-    
+    /**
+     * consulta un estudiante con un documento de identidad especifico de la base de datos
+     * @param DocumentoID
+     * @return estudiante relacionado con la base de datos 
+     * @throws PersistenceException 
+     */
     public Estudiante load(int DocumentoID) throws PersistenceException;
     
-    
+    /**
+     * registra un estudiante en la base de datos 
+     * @param e
+     * @throws PersistenceException 
+     */
     public void save(Estudiante e) throws PersistenceException;
     
-    
+    /**
+     * consulta todos los estudiantes registrados en la base de datos 
+     * @return lista con todos los estudiantes
+     * @throws PersistenceException 
+     */
     public List<Estudiante> loadAll() throws PersistenceException;
     
-    
+    /**
+     * actualizar un estudiante en la base de datos
+     * @param p
+     * @throws PersistenceException 
+     */
     public void update(Estudiante p) throws PersistenceException;
     
     

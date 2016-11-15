@@ -15,11 +15,24 @@ import java.util.List;
  */
 public interface DaoEgresado {
     
-    
+    /**
+     * carga un egresado de la base de datos con un documento de identidad especifico
+     * @param DocumentoID
+     * @return egresado relacionado con dicho documento de identidad
+     * @throws PersistenceException 
+     */
     public Egresado load(int DocumentoID) throws PersistenceException;
-    
+    /**
+     * registra un egresado en la base de datos
+     * @param e
+     * @throws PersistenceException 
+     */
     public void save(Egresado e) throws PersistenceException;
-
+    /**
+     * consulta todos los egresados en la base de datos 
+     * @return lista con todos los egresados
+     * @throws PersistenceException 
+     */
     public List<Egresado> loadAll() throws PersistenceException;
 
     

@@ -15,10 +15,33 @@ import org.apache.ibatis.annotations.Param;
  * @author ricardo
  */
 public interface EstudianteMapper {
-        
+        /**
+         * consulta todos los estudiantes registrados en la base de datos 
+         * @return lista con los estudiantes ingresados
+         */
         public List<Estudiante> getEstudiantes();
+        
+        /**
+         * inserta un estudiante a la base de datos
+         * @param codigoEstudiante
+         * @param documentoID
+         * @param semestrePonderado
+         * @param carrera 
+         */
         public void insertarEstudiante(@Param("codigoEstudiante") int codigoEstudiante,@Param("documentoID") int documentoID,@Param("semestrePonderado") int semestrePonderado,@Param("carrera") String carrera);
+        
+        /**
+         * consulta un estudiante con un documento de identidad especifico
+         * @param documentoID
+         * @return estudiante con documento de indentidad
+         */
         public Estudiante getEstudiante(@Param("idEstudiante") int documentoID );
+        
+        /**
+         * actualiza una persona en la base de  datos 
+         * @param anterior
+         * @param p 
+         */
         public void update(Persona anterior, Persona p);
     
 }

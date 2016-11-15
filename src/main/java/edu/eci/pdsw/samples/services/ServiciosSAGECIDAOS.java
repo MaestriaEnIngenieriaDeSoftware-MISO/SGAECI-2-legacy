@@ -55,7 +55,7 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
     }
 
     @Override
-    public void agregarEstudiante(int codigoEstudiante, int documentoID, String semestrePonderado, int telefono1,int telefono2, String tipoDocumentoID, String nombre,String direccion,String carrera,String correo,String genero){
+    public void agregarEstudiante(int codigoEstudiante, int documentoID, String semestrePonderado, int telefono1,int telefono2, String tipoDocumentoID, String nombre,String direccion,String carrera,String correo,String genero) throws ExcepcionServiciosSAGECI{
         try {
             Estudiante e = new Estudiante(documentoID, telefono1, telefono2, tipoDocumentoID, nombre, direccion, correo, genero, codigoEstudiante, telefono2, carrera);
             daof.beginSession();
@@ -63,13 +63,14 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
             daof.commitTransaction();
             daof.endSession();
         } catch (PersistenceException ex) {
-                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
         }
 
     }
     
     @Override
-    public void agregarEgresado(int documentoID, int telefono1, int telefono2,String tipoDocumentoID, String nombre, String direccion, String correo, String genero, String cargo, String semestreGrado, String correoPersonal, String labora,Egresado_Empresa egresadoEmpresa,Date fechaGraduacion) {     
+    public void agregarEgresado(int documentoID, int telefono1, int telefono2,String tipoDocumentoID, String nombre, String direccion, String correo, String genero, String cargo, String semestreGrado, String correoPersonal, String labora,Egresado_Empresa egresadoEmpresa,Date fechaGraduacion)throws ExcepcionServiciosSAGECI {     
         try {
             Egresado e = new Egresado( documentoID,  telefono1,  telefono2, tipoDocumentoID,  nombre,  direccion,  correo,  genero,  cargo,  semestreGrado,  correoPersonal,  labora, egresadoEmpresa,fechaGraduacion);
             daof.beginSession();
@@ -78,6 +79,7 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
             daof.endSession();
         } catch (PersistenceException ex) {
             Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
         }
     }
     
@@ -91,6 +93,7 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
             daof.endSession();
         } catch (PersistenceException ex) {
             Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
         }
         return solicitudesAfiliaciones;
     }
@@ -109,6 +112,7 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
             daof.endSession();
         } catch (PersistenceException ex) {
             Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
         }
     }        
 
@@ -127,6 +131,7 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
             daof.endSession();
         } catch (PersistenceException ex) {
             Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
         }
         return e;
     }
@@ -141,6 +146,7 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
             daof.endSession();
         } catch (PersistenceException ex) {
             Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
         }
         return e;
 
@@ -155,6 +161,7 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
             daof.endSession();
         } catch (PersistenceException ex) {
             Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
         }
     }
 

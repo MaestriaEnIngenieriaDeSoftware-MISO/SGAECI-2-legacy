@@ -45,10 +45,43 @@ public abstract class ServiciosSAGECI {
     public static ServiciosSAGECI getInstance() throws RuntimeException{        
         return instance;
     }
-
-    public abstract void agregarEstudiante(int codigoEstudiante, int documentoID, String semestrePonderado, int telefono1,int telefono2, String tipoDocumentoID, String nombre,String direccion,String carrera,String correo,String genero);
     
-    public abstract void agregarEgresado(int documentoID, int telefono1, int telefono2,String tipoDocumentoID, String nombre, String direccion, String correo, String genero, String cargo, String semestreGrado, String correoPersonal, String labora,Egresado_Empresa egresadoEmpresa,Date fechaGraduacion);
+    /**
+     * Registra un estudiante en la base de dates
+     * @param codigoEstudiante codigo estudiantil del estudiante
+     * @param documentoID   documento del estudiante
+     * @param semestrePonderado semestre ponderado del estudiante  
+     * @param telefono1 telefono de casa del estudiante
+     * @param telefono2 telefono celular del estudiante
+     * @param nombre nombre completo del estudiante
+     * @param correo correo estudiantil del estudiante
+     * @param carrera carrera Universitaria del estudiante
+     * @param tipoDocumentoID tipo de doclumento del estudiante
+     * @param direccion direccion de vivienda del estudiante
+     * @param genero genero del estudiante
+     * @throws ExcepcionServiciosSAGECI si se presento un error de persistencia
+     */
+    public abstract void agregarEstudiante(int codigoEstudiante, int documentoID, String semestrePonderado, int telefono1,int telefono2, String tipoDocumentoID, String nombre,String direccion,String carrera,String correo,String genero) throws ExcepcionServiciosSAGECI;
+    
+    /**
+     * Registra un egresado en la base de datos 
+     * @param documentoID documento de identidad del egresado 
+     * @param telefono1 telefono fijo del egresado 
+     * @param telefono2 telefono celular del egresado
+     * @param tipoDocumentoID tipo de documento del egresado
+     * @param nombre nombre completo del egresado 
+     * @param direccion direccion de vivienda del egresado
+     * @param correo correo estudiantil del egresado
+     * @param genero genero del egresado
+     * @param cargo cargo empresarial de la empresa donde labora 
+     * @param semestreGrado semestre de graduacion del egresado
+     * @param correoPersonal correo personal del egresado
+     * @param labora verificador si el egresado trabaja (si) o (no)
+     * @param egresadoEmpresa empresa donde tabaja el egresado
+     * @param fechaGraduacion fecha de graduacion del egresado
+     * @throws ExcepcionServiciosSAGECI 
+     */
+    public abstract void agregarEgresado(int documentoID, int telefono1, int telefono2,String tipoDocumentoID, String nombre, String direccion, String correo, String genero, String cargo, String semestreGrado, String correoPersonal, String labora,Egresado_Empresa egresadoEmpresa,Date fechaGraduacion) throws ExcepcionServiciosSAGECI;
 
     
     /**
@@ -100,7 +133,12 @@ public abstract class ServiciosSAGECI {
      * @throws ExcepcionServiciosSAGECI si no hay una persona asociados al documento
      */
     public abstract Egresado consultarEgresado(int DocumentoID) throws ExcepcionServiciosSAGECI;
-       
+    
+    /**
+     * actualizar una solicitud de Afiliacion en la base de datos 
+     * @param s solicitud de afiliacion para actualizar 
+     * @throws ExcepcionServiciosSAGECI 
+     */
     public abstract  void actualizarSolicitudAfliliacion(SolicitudAfiliacion s) throws ExcepcionServiciosSAGECI;
     
 }
