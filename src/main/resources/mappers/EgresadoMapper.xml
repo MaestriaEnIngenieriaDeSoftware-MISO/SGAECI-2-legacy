@@ -29,7 +29,7 @@
   
     
      <insert id='insertarEgresado'>
-        INSERT INTO Egresado(DocumentoID,Semestre_Graduacion,Correo_Personal,Empresa,Labora,Cargo) values (#{documentoID},#{semestreGraduacion},#{correoPersonal},#{empresaID},#{labora},#{cargo})
+        INSERT INTO Egresado(DocumentoID,Semestre_Graduacion,Correo_Personal,Empresa,Labora,Cargo,Fecha_Graduacion) values (#{documentoID},#{semestreGraduacion},#{correoPersonal},#{empresaID},#{labora},#{cargo},#{fechaGraduacion})
     </insert>
     
      <select id="getEgresado" parameterType="map" >
