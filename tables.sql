@@ -102,7 +102,7 @@ CREATE TABLE Solicitud_Afiliacion (
 -- foreign keys
 -- Reference: Egresado_Persona (table: Egresado)
 ALTER TABLE Egresado ADD CONSTRAINT Egresado_Persona FOREIGN KEY (DocumentoID)
-    REFERENCES Persona (DocumentoID);
+    REFERENCES Persona (DocumentoID) ON DELETE CASCADE;
 
 -- Reference: Empresa_Egresado (table: Egresado)
 ALTER TABLE Egresado ADD CONSTRAINT Empresa_Egresado FOREIGN KEY (Empresa)
@@ -114,7 +114,7 @@ ALTER TABLE Estado_afiliacion ADD CONSTRAINT Estado_afiliacion_Persona FOREIGN K
 
 -- Reference: Estudiante_Persona (table: Estudiante)
 ALTER TABLE Estudiante ADD CONSTRAINT Estudiante_Persona FOREIGN KEY (DocumentoID)
-    REFERENCES Persona (DocumentoID);
+    REFERENCES Persona (DocumentoID) ON DELETE CASCADE;
 
 -- Reference: Pago_Cuota_Egresado (table: Pago_Cuota)
 ALTER TABLE Pago_Cuota ADD CONSTRAINT Pago_Cuota_Egresado FOREIGN KEY (DocumentoID)

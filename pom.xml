@@ -113,7 +113,11 @@
             <artifactId>h2</artifactId>
             <version>1.4.191</version>
         </dependency>
-        
+        <dependency>
+            <groupId>org.primefaces.themes</groupId>
+            <artifactId>glass-x</artifactId>
+            <version>1.0.6</version>
+	</dependency>
         <!--security-->
         <dependency>
             <groupId>org.apache.shiro</groupId>
@@ -296,5 +300,10 @@
             <layout>default</layout>
             <name>Repository for library PrimeFaces-maven-lib</name>
         </repository>
+        <repository>
+		<id>prime-repo</id>
+		<name>Prime Repo</name>
+		<url>http://repository.primefaces.org</url>
+	</repository>
     </repositories>
 </project>

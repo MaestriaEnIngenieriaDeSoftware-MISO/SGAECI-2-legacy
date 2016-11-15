@@ -4,12 +4,14 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <h:head>
         <title>Solicitudes pendientes</title>
-        <link rel="stylesheet" type="text/css" href="sheet.css"> 
-        </link>
+        <link rel="stylesheet" type="text/css" href="sheet.css"/> 
+
     </h:head>
-    <h:body>
+
+    <h:body style="stylesheet">
         <h:form id="form">
             <img src="AECI.PNG" alt="AECI"></img>
             <p:dataTable rowIndexVar="row" id="ListaSolicitudes" var="Solicitud"  value="#{ProcesarSolicitudAfiliacion.solicitudes}" selectionMode="single" selection="#{ProcesarSolicitudAfiliacion.solicitudSelection}" rowKey="#{Solicitud.solicitudID}" style="margin-bottom:0">
@@ -26,7 +28,7 @@
                     <p:commandButton process="ListaSolicitudes" update=":form:SolicitudSeleccionada" icon="ui-icon-search" value="View" oncomplete="PF('dlg1').show()" />
                 </f:facet>
             </p:dataTable>
-            
+
             <p:dialog header="Datos principales del solicitante de afiliación." id="SolicitudSeleccionada" widgetVar="dlg1" height="575" draggable="false" resizable="false">
                 <p:panelGrid columns="2" id="test">
                     <p:outputLabel  for="nombre" value="Nombre Completo: "/>
