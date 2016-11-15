@@ -12,24 +12,50 @@
         <h:form id="form">
             <div align="middle" draggable="false" >
                 <img src="AECI.PNG" alt="AECI"></img>
-                
+
                 <p style="color:black;font-family:Georgia;">
                     SAGECI es una aplicacion que permite ingresar a los servicios de
                     AECI una asociación sin ánimo de lucro, conformada por Egresados de Programas de Pregrado y Posgrado de la Escuela Colombiana de Ingeniería Julio Garavito
                 </p>
                 <p:panelGrid columnClasses="centered" columns="2">
-                    <p:outputLabel  for="nombre" value="Nombre Usuario: " />
-                    <p:inputText styleClass="cent" id="nombre" />
+                    <p:outputLabel  for="nombre" value="Usuario: " />
+                                    <p:inputText styleClass="cent" id="nombre" required="true" value="#{Loggin.username}"/>
 
-                    <p:outputLabel for="passw" value="Contraseña: " />
-                    <p:password styleClass="cent" id="passw" />
-                    
+                        <p:outputLabel for="passw" value="Contraseña: " />
+                        <p:password styleClass="cent" id="passw" required="true" value="#{Loggin.password}"/>
+
                 </p:panelGrid>
-                 <p:commandButton value="Ingresar"  update="form" />
+                <p:commandButton value="Ingresar"  update="form" action="BeneficioAfiliado"/>
                 <p style="color:black;font-family:Georgia;">¿No te encuentras registrado?</p>
                 <p style="color:black;font-family:Georgia;">Envianos una solicitud para unirte y recibir todos nuestros beneficios.</p>
                 <p:commandButton value="Egresado" update="form" action="SolicitudAfiliacionEgre" />
-                <p:commandButton value="Estudiante" update="form" action="SolicitudAfiliacionEst"/>                     
+                <p:commandButton value="Estudiante" update="form" action="SolicitudAfiliacionEst"/>  
+
+
+
+
+
+
+                <p:notificationBar position="down" effect="slide" styleClass="top" widgetVar="bar">
+                    <p></p>
+                    <h:outputText value="Contactanos" style="font-size:24px;font-family:fantasy;" />
+                    <p></p>
+                    <h:outputText value="Direccion:  AK.45 No.205-59 (Autopista Norte  K.13)  Bloque A -2° Piso " />
+                    <p></p>
+                    <h:outputText value="Director:     Juan Carlos Romero Ordóñez" />    
+                    <p></p>
+                    <h:outputText value="PBX:            +57(1) 668 3600 Ext.1232       " />   
+                    <p></p>
+                    <h:outputText value="Móvil:           312 457 0612    " />
+                    <p></p>
+                    <h:outputText value="Correo electrónico:    aeci@escuelaing.edu.co"  />
+                                  
+                                       
+                </p:notificationBar>
+
+                <p:commandButton value="Contactenos" onclick="PF('bar').show()" type="button" icon="ui-icon-arrow-1-s"/>
+                <p:commandButton value="Hide" onclick="PF('bar').hide()" type="button" icon="ui-icon-arrow-1-n"/>
+              
             </div>
         </h:form>
     </h:body>

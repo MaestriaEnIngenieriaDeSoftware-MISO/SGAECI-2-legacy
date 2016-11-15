@@ -6,9 +6,11 @@
 package edu.eci.pdsw.samples.managedbeans;
 
 import Security.AsignacionUser_password;
+import Security.SHA1;
 import edu.eci.pdsw.samples.entities.Persona;
 import edu.eci.pdsw.samples.services.ServiciosSAGECI;
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 import java.util.Hashtable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -18,7 +20,7 @@ import javax.faces.bean.SessionScoped;
  * @author 2090683
  */
 
-@ManagedBean (name= "LogginBean")
+@ManagedBean (name= "Loggin")
 @SessionScoped
 public class LogginBean implements Serializable{
    private String password;
@@ -48,14 +50,19 @@ public class LogginBean implements Serializable{
     
     
 
-    public boolean isAutenticacion() {
+    public boolean isAutenticacion() throws NoSuchAlgorithmException {
         AsignacionUser_password as =new AsignacionUser_password();
         Hashtable<String, String> contenedor= as.getCorreocontraseña();
+        SHA1 s = new SHA1();
         Persona usuario = new Persona();
+        boolean valido=false;
         String correo=usuario.getCorreo();
-        autenticacion=contenedor.get(username).equals(contenedor.get(as.getUsuario())); //compara el username ingresado en la xhtml  con el user asignado guardado en la hashtable 
-          
-        return autenticacion;
+         autenticacion=contenedor.containsKey(username); //valida que se encuentre la llave
+        if (autenticacion==true){ // si la llave existe, busca el valor 
+            valido = contenedor.containsValue(s.getHash(password));
+        }          
+        
+        return valido;
     }
 
     public void setAutenticacion(boolean autenticacion) {
