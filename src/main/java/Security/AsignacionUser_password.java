@@ -7,6 +7,7 @@ package Security;
 
 import edu.eci.pdsw.samples.entities.Persona;
 import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
+import java.security.NoSuchAlgorithmException;
 import java.util.Hashtable;
 import java.util.Random;
 import java.util.StringTokenizer;
@@ -17,16 +18,24 @@ import java.util.StringTokenizer;
  */
 public class AsignacionUser_password {
     
-    Hashtable<String,String> correocontraseña=new Hashtable<String,String>();
+   final Hashtable<String,String> correocontraseña=new Hashtable<String,String>();
    String usuario;
    String password;
+   
 
-    public Hashtable<String, String> getCorreocontraseña() {
-        return correocontraseña; // se debe guardad tanto el usuario como la contraseña encriptada 
+    public Hashtable<String, String> getCorreocontraseña() {// Llave:usuario Contenido: contraseña encrptada 
+        
+        return correocontraseña; // 
     }
-
-    public void setCorreocontraseña(Hashtable<String, String> correocontraseña) {
-        this.correocontraseña = correocontraseña;
+// mete en una hashtable el usuario asignado como llave y lo relaciona a la contraseña encriptada
+    public void setCorreocontraseña(Hashtable<String, String> correocontraseña) throws NoSuchAlgorithmException {
+        AsignacionUser_password as= new AsignacionUser_password();
+         SHA1 s = new SHA1();
+        
+        correocontraseña.put(as.getUsuario(),s.getHash(as.getPassword())); // Llave:usuarioasignado 
+                                                                            //Contenido:passwordencriptada
+        
+        
     }
 
     public String getUsuario() {

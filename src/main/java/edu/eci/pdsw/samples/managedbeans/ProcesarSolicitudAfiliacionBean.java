@@ -53,8 +53,13 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
     final String from = "5d8dd682c0-c92f3e@inbox.mailtrap.io";
     final String subjectAprobado = "Solicitud de Ingreso AECI: Aprobada";
     final String messageRechazado = "Su solicitud ha sido Rechazada por lo siguiente: "+Comentario;
+
     //final String usuarioasignado = "Su usuario de ingreso asignado es: "+usuarioAs;
     //final String passwordasignado = "Su contraseña de ingreso asignado es: "+passAs;
+
+   // final String usuarioasignado = "Su usuario de ingreso asignado es: "+usuarioAs;// se debe pasar el hash
+    //final String passwordasignado = "Su contraseña de ingreso asignado es: "+passAs;//viene del hash
+
     public ProcesarSolicitudAfiliacionBean() {
         
     }
