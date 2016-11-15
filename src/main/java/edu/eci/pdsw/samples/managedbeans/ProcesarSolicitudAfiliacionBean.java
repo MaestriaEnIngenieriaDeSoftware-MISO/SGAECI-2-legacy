@@ -60,7 +60,15 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
     }
     
     public List<SolicitudAfiliacion> getSolicitudes() throws ExcepcionServiciosSAGECI{
-        return SAGECI.consultarSolicitudAfiliaciones();
+        List<SolicitudAfiliacion> temp =SAGECI.consultarSolicitudAfiliaciones();
+        for(SolicitudAfiliacion s :temp){
+            if(s.getE1().getSemestreGrado()==null){
+                s.setTipoSol("Estudiante");
+            }else{
+                s.setTipoSol("Egresado");
+            }
+        }
+        return temp;
     }
     
     public ServiciosSAGECI getServicios() {
@@ -106,10 +114,29 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
     }
     
     public void rechazarSolicitudAfiliacion(ActionEvent actionEvent) throws ExcepcionServiciosSAGECI{
-        String subjectRechazado = "Solicitud de Ingreso AECI: Rechazada";
-        solicitudSelection.setEstadoSolicitud("RECHAZADA");
-        solicitudSelection.setComentario(Comentario);
-        SAGECI.actualizarSolicitudAfliliacion(solicitudSelection);
+        try{
+            Egresado e1 = solicitudSelection.getE1();
+            Estudiante e2 =solicitudSelection.getE2();
+            String messageAprobado = "Su solicitud ha sido Aprobada: "+Comentario;
+            String toEgresado = e1.getCorreoPersonal();
+            String toEstudiante = e2.getCorreo();
+            String subjectRechazado = "Solicitud de Ingreso AECI: Rechazada";
+            solicitudSelection.setEstadoSolicitud("RECHAZADA");
+            solicitudSelection.setComentario(Comentario);
+            SAGECI.actualizarSolicitudAfliliacion(solicitudSelection);
+            if (e1.getSemestreGrado()==null){
+                email = new SimpleEmail(from, toEstudiante, subjectRechazado, messageAprobado);
+            }else{
+                email = new SimpleEmail(from, toEgresado, subjectRechazado, messageAprobado);
+            }
+            try {
+                sender.send(email);
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
     
     public String getComentario() {

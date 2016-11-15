@@ -82,7 +82,6 @@ public class SolicitudAfiliacion {
     }
     
     public String getTipoSol() {
-        this.tipoSol = "Arreglar";
         return tipoSol;
     }
 

@@ -60,16 +60,17 @@ public class SolicitudAfiliacionBean implements Serializable{
             Cargo=null;
         }
         if(correo.equals("correo")) correo=null;
-        Egresado e1 = new Egresado(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre,  direccionVivienda,  correo,  genero, semestreGrado,correoPersonal, Cargo,  labora,egresadoEmpresa,fechaGraduacion);
-        Estudiante e2 = new Estudiante(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre,  direccionVivienda,  correo,  genero, codigoEstudiante, semestrePonderado,  carrera);
-        
-        if(semestreGrado.equals("9999-9")){
-            e1=null;
-        }else{
-            e2=null;
-        }
-        SolicitudAfiliacion temp = new SolicitudAfiliacion( solicitudID, new Date(new java.util.Date().getTime()) ,  estadoSolicitud,  comentario,  e1,  e2);
-        SAGECI.registrarNuevaSolicitud(temp);
+        if(!Nombre.equals("Nombre")){
+            Egresado e1 = new Egresado(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre,  direccionVivienda,  correo,  genero, semestreGrado,correoPersonal, Cargo,  labora,egresadoEmpresa,fechaGraduacion);
+            Estudiante e2 = new Estudiante(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre,  direccionVivienda,  correo,  genero, codigoEstudiante, semestrePonderado,  carrera);
+            if(semestreGrado.equals("9999-9")){
+                e1=null;
+            }else{
+                e2=null;
+            }
+            SolicitudAfiliacion temp = new SolicitudAfiliacion( solicitudID, new Date(new java.util.Date().getTime()) ,  estadoSolicitud,  comentario,  e1,  e2);
+            SAGECI.registrarNuevaSolicitud(temp);
+        }           
     }
 
     public String getCorreo() {
