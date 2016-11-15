@@ -23,6 +23,7 @@ import edu.eci.pdsw.samples.entities.Persona;
 import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -47,7 +48,7 @@ public abstract class ServiciosSAGECI {
 
     public abstract void agregarEstudiante(int codigoEstudiante, int documentoID, String semestrePonderado, int telefono1,int telefono2, String tipoDocumentoID, String nombre,String direccion,String carrera,String correo,String genero);
     
-    public abstract void agregarEgresado(int documentoID, int telefono1, int telefono2,String tipoDocumentoID, String nombre, String direccion, String correo, String genero, String cargo, String semestreGrado, String correoPersonal, String labora,Egresado_Empresa egresadoEmpresa);
+    public abstract void agregarEgresado(int documentoID, int telefono1, int telefono2,String tipoDocumentoID, String nombre, String direccion, String correo, String genero, String cargo, String semestreGrado, String correoPersonal, String labora,Egresado_Empresa egresadoEmpresa,Date fechaGraduacion);
 
     
     /**

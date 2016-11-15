@@ -35,6 +35,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import edu.eci.pdsw.samples.persistence.DaoEstudiante;
+import java.util.Date;
 
 /**
  *
@@ -68,9 +69,9 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
     }
     
     @Override
-    public void agregarEgresado(int documentoID, int telefono1, int telefono2,String tipoDocumentoID, String nombre, String direccion, String correo, String genero, String cargo, String semestreGrado, String correoPersonal, String labora,Egresado_Empresa egresadoEmpresa) {     
+    public void agregarEgresado(int documentoID, int telefono1, int telefono2,String tipoDocumentoID, String nombre, String direccion, String correo, String genero, String cargo, String semestreGrado, String correoPersonal, String labora,Egresado_Empresa egresadoEmpresa,Date fechaGraduacion) {     
         try {
-            Egresado e = new Egresado( documentoID,  telefono1,  telefono2, tipoDocumentoID,  nombre,  direccion,  correo,  genero,  cargo,  semestreGrado,  correoPersonal,  labora, egresadoEmpresa);
+            Egresado e = new Egresado( documentoID,  telefono1,  telefono2, tipoDocumentoID,  nombre,  direccion,  correo,  genero,  cargo,  semestreGrado,  correoPersonal,  labora, egresadoEmpresa,fechaGraduacion);
             daof.beginSession();
             daof.getDaoEgresado().save(e);
             daof.commitTransaction();

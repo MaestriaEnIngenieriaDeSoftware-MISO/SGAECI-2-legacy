@@ -75,7 +75,7 @@ import org.apache.ibatis.session.SqlSession;
                    pedmp3.insertarEmpresa( e.getEmp().getNombreempre().toUpperCase(), e.getEmp().getDirempre().toUpperCase(), e.getEmp().getTelempre());
                 }
            }
-           pedmp2.insertarEgresado(e.getDocumentoID(),e.getSemestreGrado(),e.getCorreoPersonal(),e.getLabora(),e.getCargo(),e.getEmp().getNombreempre());
+           pedmp2.insertarEgresado(e.getDocumentoID(),e.getSemestreGrado(),e.getCorreoPersonal(),e.getLabora(),e.getCargo(),e.getEmp().getNombreempre(),e.getFechaGraduacion());
            pedmp.insertarSolicitudAfiliacion(e.getDocumentoID(),Sa.getFechaSolicitud(),Sa.getEstadoSolicitud(),Sa.getComentario().toUpperCase());
        }
        
