@@ -10,6 +10,7 @@ CREATE TABLE Egresado (
     Empresa varchar(100) NULL,
     Labora varchar(2) NULL,
     Cargo varchar(20) NULL,
+    Fecha_Graduacion date NULL,
     CONSTRAINT Egresado_pk PRIMARY KEY (DocumentoID)
 );
 
@@ -36,7 +37,7 @@ CREATE TABLE Estado_afiliacion (
     DocumentoID int NOT NULL,
     Fecha_Inicio date NULL,
     Fecha_Fin date NOT NULL,
-    Estado varchar(30) NOT NULL CHECK (Estado in ('AFILIADO INACTIVO','AFILIADO INACTIVO - PENDIENTE PAGO CUOTA AFILIACIÓN','AFILIADO ACTIVO')),
+    Estado varchar(40) NOT NULL CHECK (Estado in ('AFILIADO INACTIVO','AFILIADO INACTIVO - PENDIENTE PAGO CUOTA AFILIACIÓN','AFILIADO ACTIVO')),
     CONSTRAINT Estado_afiliacion_pk PRIMARY KEY (DocumentoID)
 );
 
@@ -63,7 +64,7 @@ CREATE TABLE Pago_Cuota (
 CREATE TABLE Persona (
     DocumentoID int NOT NULL,
     TipoDocumentoID varchar(2) NULL CHECK (TipoDocumentoID in ('CC','CE')),
-    Nombre varchar(30) NULL,
+    Nombre varchar(100) NULL,
     Direccion varchar(30) NULL,
     Correo varchar(100) NULL,
     Genero varchar(30) NOT NULL,
@@ -134,4 +135,3 @@ ALTER TABLE Solicitud_Afiliacion ADD CONSTRAINT Persona_Solicitud_Afiliacion FOR
 -- Reference: Servicio_Empresa_Convenio (table: Servicio)
 ALTER TABLE Servicio ADD CONSTRAINT Servicio_Empresa_Convenio FOREIGN KEY (ConvenioID)
     REFERENCES Empresa_Convenio (ConvenioID);
-
