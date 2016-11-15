@@ -19,6 +19,7 @@ package edu.eci.pdsw.samples.persistence.mybatisimpl.mappers;
 import edu.eci.pdsw.samples.entities.Egresado;
 import edu.eci.pdsw.samples.entities.Estudiante;
 import edu.eci.pdsw.samples.entities.Persona;
+import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -29,7 +30,7 @@ import org.apache.ibatis.annotations.Param;
 public interface EgresadoMapper {
     
     public List<Egresado> getEgresados();
-    public void insertarEgresado( @Param("documentoID") int documentoID,@Param("semestreGraduacion") String semestreGraduacion,@Param("correoPersonal") String correoPersonal,@Param("labora") String labora,@Param("cargo") String cargo,@Param("empresaID") String nombreempre);                                    
+    public void insertarEgresado( @Param("documentoID") int documentoID,@Param("semestreGraduacion") String semestreGraduacion,@Param("correoPersonal") String correoPersonal,@Param("labora") String labora,@Param("cargo") String cargo,@Param("empresaID") String nombreempre,@Param("fechaGraduacion")Date graduacion);                                    
     public Egresado getEgresado(@Param("idEgresado") int documentoID );
     
 }
