@@ -37,28 +37,21 @@ public class AsignacionUser_password {
         
         
     }
-// Asigna un usuario al afiliado
+// Asigna un usuario al afiliado,toma el correo como usuario 
     public String getUsuario() {
         Persona usuario = new Persona();
-        String nombre=usuario.getNombre();
-        StringTokenizer st = new StringTokenizer(nombre, " ");
-        Random s=new Random();
-        String usuarioAsignado=st.nextToken()+s.nextInt(3);
+        String correo=usuario.getCorreo();
+        String usuarioAsignado=correo;
         return usuarioAsignado;
     }
 
-    /*public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }*/
-// Asigna una contraseña al afiliado
+   
+// Asigna una contraseña al afiliado, toma el valores random + id 
     public String getPassword() {
         Persona user= new Persona();
         Random s=new Random();
-        String passAsignado = Integer.toString(user.getDocumentoID())+ Integer.toString( s.nextInt(2));
+        String passAsignado =Integer.toString( s.nextInt(3))+ Integer.toString(user.getDocumentoID());
         return passAsignado;
     }
-/*
-    public void setPassword(String password) {
-        this.password = password;
-    }*/
+
 }

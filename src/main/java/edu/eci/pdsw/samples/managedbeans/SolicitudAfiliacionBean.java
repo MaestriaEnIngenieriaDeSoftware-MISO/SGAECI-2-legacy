@@ -41,7 +41,7 @@ public class SolicitudAfiliacionBean implements Serializable{
         this.semestres  = new ArrayList<>();
         this.carreras = new ArrayList<>();
         egresadoEmpresa=new Egresado_Empresa();
-        for (int i=8; i<=10; i++){
+        for (int i=7; i<=10; i++){
             this.semestres.add(i); 
         }
         carreras.add("INGENIERÍA CIVIL");carreras.add("INGENIERÍA INDUSTRIAL");carreras.add("INGENIERÍA MECÁNICA");carreras.add("INGENIERÍA ELECTRÓNICA");carreras.add("MATEMÁTICAS");
@@ -100,7 +100,8 @@ public class SolicitudAfiliacionBean implements Serializable{
         return semestreGrado;
     }
 
-    public void setSemestreGrado(String semestreGrado) {
+    public void setSemestreGrado(String semestreGrado) {   
+   
         this.semestreGrado = semestreGrado;
     }
     
