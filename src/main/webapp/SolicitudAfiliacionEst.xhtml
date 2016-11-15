@@ -66,7 +66,7 @@
                 <p:commandLink oncomplete="window.open('http://www.aeci.org.co/#!politicas-de-tratamiento-de-datos')">Acepta los Terminos y Condiciones </p:commandLink>
                 <p:selectBooleanCheckbox styleClass="cent" value="#{SolicitudAfiliacion.acepta}" />
                 <br></br>
-                <p:commandButton value="Enviar Solicitud De Afiliación" update="form" actionListener="#{SolicitudAfiliacion.agregarSolicitudAfiliacion()}"/>
+                <p:commandButton action="Registro" value="Enviar Solicitud De Afiliación" update="form" actionListener="#{SolicitudAfiliacion.agregarSolicitudAfiliacion()}"/>
                 <p:commandButton value="Volver" update="form" action="Registro"/> 
             </div>
 

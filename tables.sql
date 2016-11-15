@@ -64,7 +64,7 @@ CREATE TABLE Pago_Cuota (
 CREATE TABLE Persona (
     DocumentoID int NOT NULL,
     TipoDocumentoID varchar(2) NULL CHECK (TipoDocumentoID in ('CC','CE')),
-    Nombre varchar(100) NULL,
+    Nombre varchar(110) NULL,
     Direccion varchar(30) NULL,
     Correo varchar(100) NULL,
     Genero varchar(30) NOT NULL,

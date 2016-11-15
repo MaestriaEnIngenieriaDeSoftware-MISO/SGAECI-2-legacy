@@ -85,9 +85,7 @@ import org.apache.ibatis.session.SqlSession;
     @Override
     public void update(SolicitudAfiliacion Sa) throws PersistenceException {
         SolicitudAfMapper pedmp=currentSession.getMapper(SolicitudAfMapper.class);
-        System.out.println(Sa.getEstadoSolicitud());
         pedmp.actualizarSolicitud(Sa.getEstadoSolicitud(), Sa.getComentario(), Sa.getSolicitudID());
-        System.out.println(Sa.getEstadoSolicitud());
     }
 
      

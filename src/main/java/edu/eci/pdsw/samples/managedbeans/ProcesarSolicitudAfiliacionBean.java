@@ -87,13 +87,13 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
             String messageAprobado = "Su solicitud ha sido Aprobada: "+Comentario;
             String toEgresado = e1.getCorreoPersonal();
             String toEstudiante = e2.getCorreo();
+            solicitudSelection.setEstadoSolicitud("ACEPTADA");
+            solicitudSelection.setComentario(Comentario);
+            SAGECI.actualizarSolicitudAfliliacion(solicitudSelection);
             if (e1.getSemestreGrado()==null){
-                solicitudSelection.setEstadoSolicitud("ACEPTADA");
-                solicitudSelection.setComentario(Comentario);
-                SAGECI.actualizarSolicitudAfliliacion(solicitudSelection);
                 email = new SimpleEmail(from, toEstudiante, subjectAprobado, messageAprobado);
             }else{
-                System.out.println("entro por parte del egresado");
+                email = new SimpleEmail(from, toEgresado, subjectAprobado, messageAprobado);
             }
             try {
                 sender.send(email);
