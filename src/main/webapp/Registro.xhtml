@@ -19,17 +19,29 @@
                 </p>
                 <p:panelGrid columnClasses="centered" columns="2">
                     <p:outputLabel  for="nombre" value="Usuario: " />
-                                    <p:inputText styleClass="cent" id="nombre" value="#{Loggin.username}"/>
+                    <p:inputText styleClass="cent" required="true" id="nombre" value="#{Loggin.username}"/>
 
-                        <p:outputLabel for="passw" value="Contraseña: " />
-                        <p:password styleClass="cent" id="passw" value="#{Loggin.password}"/>
+
+                    <p:outputLabel for="passw" value="Contraseña: " />
+                    <p:inputText styleClass="cent" required="true" id="passw" value="#{Loggin.password}"/>
+
 
                 </p:panelGrid>
+
                 <p:commandButton value="Ingresar"  update="form" action="BeneficioAfiliado"/>
                 <p style="color:black;font-family:Georgia;">¿No te encuentras registrado?</p>
                 <p style="color:black;font-family:Georgia;">Envianos una solicitud para unirte y recibir todos nuestros beneficios.</p>
-                <p:commandButton value="Egresado" update="form" action="SolicitudAfiliacionEgre" />
-                <p:commandButton value="Estudiante" update="form" action="SolicitudAfiliacionEst"/>  
+
+
+
+            </div>
+        </h:form>
+
+        <h:form id="form1">  
+            <div align="middle" draggable="false" >
+                <p:commandButton value="Egresado" update="form1" action="SolicitudAfiliacionEgre" />
+                <p:commandButton value="Estudiante" update="form1" action="SolicitudAfiliacionEst"/>  
+
 
 
 
@@ -44,18 +56,16 @@
                     <p></p>
                     <h:outputText value="Director:     Juan Carlos Romero Ordóñez" />    
                     <p></p>
-                    <h:outputText value="PBX:            +57(1) 668 3600 Ext.1232       " />   
+                    <h:outputText value="PBX: +57(1) 668 3600 Ext.1232       " />   
                     <p></p>
                     <h:outputText value="Móvil:           312 457 0612    " />
                     <p></p>
                     <h:outputText value="Correo electrónico:    aeci@escuelaing.edu.co"  />
-                                  
-                                       
-                </p:notificationBar>
 
-                <p:commandButton value="Contactenos" onclick="PF('bar').show()" type="button" icon="ui-icon-arrow-1-s"/>
+
+                </p:notificationBar>
+                <p:commandButton value="Contactenos" onclick="PF('bar').show()." type="button" icon="ui-icon-arrow-1-s"/>
                 <p:commandButton value="Hide" onclick="PF('bar').hide()" type="button" icon="ui-icon-arrow-1-n"/>
-              
             </div>
         </h:form>
     </h:body>
