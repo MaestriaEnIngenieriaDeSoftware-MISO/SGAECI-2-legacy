@@ -30,7 +30,7 @@ public class SolicitudAfiliacionBean implements Serializable{
     ServiciosSAGECI SAGECI=ServiciosSAGECI.getInstance();
     private int solicitudID,documentoID,Telefono,telefono2,telefonoOficina,codigoEstudiante,semestrePonderado;
     private Date fechaGraduacion=new Date(new java.util.Date().getTime());
-    private String correo="correo",labora="no",semestreGrado="9999-9",tipoDocumentoID="CC",genero="MASCULINO",tipoSolicitante="EGRESADO",estadoSolicitud="NO REVISADO",comentario="Falta revision respectiva.",Nombre="Nombre",direccionVivienda="Direccion",Empresa="Empresa",direccionEmpresa="Direccion",Cargo="Cargo",correoPersonal="Correo",carrera="Carrera";
+    private String correo="correo",labora="no",semestreGrado="9999-9",tipoDocumentoID="CC",genero="MASCULINO",tipoSolicitante="EGRESADO",estadoSolicitud="NO REVISADO",comentario="Falta revision respectiva.",Nombre="Nombre",Apellido="Apellido",direccionVivienda="Direccion",Empresa="Empresa",direccionEmpresa="Direccion",Cargo="Cargo",correoPersonal="Correo",carrera="Carrera";
     private boolean acepta=false; 
     private ArrayList<Integer> semestres;
     private ArrayList<String> carreras;
@@ -61,8 +61,8 @@ public class SolicitudAfiliacionBean implements Serializable{
         }
         if(correo.equals("correo")) correo=null;
         if(!Nombre.equals("Nombre")){
-            Egresado e1 = new Egresado(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre,  direccionVivienda,  correo,  genero, semestreGrado,correoPersonal, Cargo,  labora,egresadoEmpresa,fechaGraduacion);
-            Estudiante e2 = new Estudiante(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre,  direccionVivienda,  correo,  genero, codigoEstudiante, semestrePonderado,  carrera);
+            Egresado e1 = new Egresado(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre, Apellido, direccionVivienda,  correo,  genero, semestreGrado,correoPersonal, Cargo,  labora,egresadoEmpresa,fechaGraduacion);
+            Estudiante e2 = new Estudiante(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre, Apellido, direccionVivienda,  correo,  genero, codigoEstudiante, semestrePonderado,  carrera);
             if(semestreGrado.equals("9999-9")){
                 e1=null;
             }else{
@@ -89,6 +89,16 @@ public class SolicitudAfiliacionBean implements Serializable{
         this.marca = marca;
     }
 
+    public String getApellido() {
+        return Apellido;
+    }
+
+    public void setApellido(String Apellido) {
+        this.Apellido = Apellido;
+    }
+
+    
+    
     public ArrayList<String> getCarreras() {
         return carreras;
     }

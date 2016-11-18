@@ -1,14 +1,14 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2016-11-14 03:30:37.046
+-- Last modification date: 2016-11-17 17:50:36.264
 
 -- tables
 -- Table: Egresado
 CREATE TABLE Egresado (
     DocumentoID int NOT NULL,
-    Semestre_Graduacion varchar(6) NULL,
-    Correo_Personal varchar(30) NOT NULL,
+    Semestre_Graduacion varchar(6) NOT NULL,
+    Correo_Estudiantil varchar(30) NOT NULL,
     Empresa varchar(100) NULL,
-    Labora varchar(2) NULL,
+    Labora varchar(20) NULL,
     Cargo varchar(20) NULL,
     Fecha_Graduacion date NULL,
     CONSTRAINT Egresado_pk PRIMARY KEY (DocumentoID)
@@ -47,6 +47,7 @@ CREATE TABLE Estudiante (
     DocumentoID int NOT NULL,
     Semestre_Ponderado int NULL,
     Carrera varchar(50) NOT NULL,
+    Foto_Carnet blob NOT NULL,
     CONSTRAINT Estudiante_pk PRIMARY KEY (Codigo_Estudiante)
 );
 
@@ -65,11 +66,12 @@ CREATE TABLE Persona (
     DocumentoID int NOT NULL,
     TipoDocumentoID varchar(2) NULL CHECK (TipoDocumentoID in ('CC','CE')),
     Nombre varchar(110) NULL,
+    Apellido varchar(100) NOT NULL,
     Direccion varchar(30) NULL,
-    Correo varchar(100) NULL,
+    Correo_Personal varchar(100) NULL,
     Genero varchar(30) NOT NULL,
-    Telefono bigint NOT NULL CHECK (Telefono>1000000 AND Telefono<=9999999),
-    Celular bigint NULL CHECK (Celular>1000000 AND Celular<=9999999),
+    Telefono bigint NULL CHECK (Telefono>1000000 AND Telefono<=9999999),
+    Celular bigint NOT NULL CHECK (Celular>1000000 AND Celular<=9999999),
     CONSTRAINT Persona_pk PRIMARY KEY (DocumentoID)
 );
 
@@ -78,6 +80,23 @@ CREATE TABLE Persona_Servicios (
     Persona_DocumentoID int NOT NULL,
     Servicio_ServicioID int NOT NULL,
     CONSTRAINT Persona_Servicios_pk PRIMARY KEY (Persona_DocumentoID,Servicio_ServicioID)
+);
+
+-- Table: Rol_Persona
+CREATE TABLE Rol_Persona (
+    DocumentoID int NOT NULL,
+    Roles_rol int NOT NULL,
+    Clave varchar(100) NOT NULL,
+    Salt varchar(100) NOT NULL,
+    CONSTRAINT Rol_Persona_pk PRIMARY KEY (DocumentoID,Roles_rol)
+) COMMENT '
+';
+
+-- Table: Roles
+CREATE TABLE Roles (
+    RolID int NOT NULL AUTO_INCREMENT,
+    Nombre varchar(50) NOT NULL,
+    CONSTRAINT Roles_pk PRIMARY KEY (RolID)
 );
 
 -- Table: Servicio
@@ -101,37 +120,47 @@ CREATE TABLE Solicitud_Afiliacion (
 
 -- foreign keys
 -- Reference: Egresado_Persona (table: Egresado)
-ALTER TABLE Egresado ADD CONSTRAINT Egresado_Persona FOREIGN KEY (DocumentoID)
-    REFERENCES Persona (DocumentoID) ON DELETE CASCADE;
+ALTER TABLE Egresado ADD CONSTRAINT Egresado_Persona FOREIGN KEY Egresado_Persona (DocumentoID)
+    REFERENCES Persona (DocumentoID);
 
 -- Reference: Empresa_Egresado (table: Egresado)
-ALTER TABLE Egresado ADD CONSTRAINT Empresa_Egresado FOREIGN KEY (Empresa)
+ALTER TABLE Egresado ADD CONSTRAINT Empresa_Egresado FOREIGN KEY Empresa_Egresado (Empresa)
     REFERENCES Egresado_Empresa (Nombre);
 
 -- Reference: Estado_afiliacion_Persona (table: Estado_afiliacion)
-ALTER TABLE Estado_afiliacion ADD CONSTRAINT Estado_afiliacion_Persona FOREIGN KEY (DocumentoID)
+ALTER TABLE Estado_afiliacion ADD CONSTRAINT Estado_afiliacion_Persona FOREIGN KEY Estado_afiliacion_Persona (DocumentoID)
     REFERENCES Persona (DocumentoID);
 
 -- Reference: Estudiante_Persona (table: Estudiante)
-ALTER TABLE Estudiante ADD CONSTRAINT Estudiante_Persona FOREIGN KEY (DocumentoID)
-    REFERENCES Persona (DocumentoID) ON DELETE CASCADE;
+ALTER TABLE Estudiante ADD CONSTRAINT Estudiante_Persona FOREIGN KEY Estudiante_Persona (DocumentoID)
+    REFERENCES Persona (DocumentoID);
 
 -- Reference: Pago_Cuota_Egresado (table: Pago_Cuota)
-ALTER TABLE Pago_Cuota ADD CONSTRAINT Pago_Cuota_Egresado FOREIGN KEY (DocumentoID)
+ALTER TABLE Pago_Cuota ADD CONSTRAINT Pago_Cuota_Egresado FOREIGN KEY Pago_Cuota_Egresado (DocumentoID)
     REFERENCES Egresado (DocumentoID);
 
 -- Reference: Persona_Servicios_Persona (table: Persona_Servicios)
-ALTER TABLE Persona_Servicios ADD CONSTRAINT Persona_Servicios_Persona FOREIGN KEY (Persona_DocumentoID)
+ALTER TABLE Persona_Servicios ADD CONSTRAINT Persona_Servicios_Persona FOREIGN KEY Persona_Servicios_Persona (Persona_DocumentoID)
     REFERENCES Persona (DocumentoID);
 
 -- Reference: Persona_Servicios_Servicio (table: Persona_Servicios)
-ALTER TABLE Persona_Servicios ADD CONSTRAINT Persona_Servicios_Servicio FOREIGN KEY (Servicio_ServicioID)
+ALTER TABLE Persona_Servicios ADD CONSTRAINT Persona_Servicios_Servicio FOREIGN KEY Persona_Servicios_Servicio (Servicio_ServicioID)
     REFERENCES Servicio (ServicioID);
 
 -- Reference: Persona_Solicitud_Afiliacion (table: Solicitud_Afiliacion)
-ALTER TABLE Solicitud_Afiliacion ADD CONSTRAINT Persona_Solicitud_Afiliacion FOREIGN KEY (DocumentoID)
+ALTER TABLE Solicitud_Afiliacion ADD CONSTRAINT Persona_Solicitud_Afiliacion FOREIGN KEY Persona_Solicitud_Afiliacion (DocumentoID)
     REFERENCES Persona (DocumentoID);
 
+-- Reference: Rol_Persona_Persona (table: Rol_Persona)
+ALTER TABLE Rol_Persona ADD CONSTRAINT Rol_Persona_Persona FOREIGN KEY Rol_Persona_Persona (DocumentoID)
+    REFERENCES Persona (DocumentoID);
+
+-- Reference: Rol_Persona_Roles (table: Rol_Persona)
+ALTER TABLE Rol_Persona ADD CONSTRAINT Rol_Persona_Roles FOREIGN KEY Rol_Persona_Roles (Roles_rol)
+    REFERENCES Roles (RolID);
+
 -- Reference: Servicio_Empresa_Convenio (table: Servicio)
-ALTER TABLE Servicio ADD CONSTRAINT Servicio_Empresa_Convenio FOREIGN KEY (ConvenioID)
+ALTER TABLE Servicio ADD CONSTRAINT Servicio_Empresa_Convenio FOREIGN KEY Servicio_Empresa_Convenio (ConvenioID)
     REFERENCES Empresa_Convenio (ConvenioID);
+
+-- End of file.

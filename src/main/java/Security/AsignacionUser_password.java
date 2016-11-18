@@ -40,7 +40,7 @@ public class AsignacionUser_password {
 // Asigna un usuario al afiliado,toma el correo como usuario 
     public String getUsuario() {
         Persona usuario = new Persona();
-        String correo=usuario.getCorreo();
+        String correo=usuario.getCorreo_Personal();
         String usuarioAsignado=correo;
         return usuarioAsignado;
     }

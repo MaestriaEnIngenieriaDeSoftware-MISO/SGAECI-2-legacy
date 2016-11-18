@@ -17,6 +17,9 @@
 
                     <p:outputLabel for="nombre" value="Nombre Completo: " />
                     <p:inputText styleClass="cent" id="nombre" required="true" value="#{SolicitudAfiliacion.nombre}"/>
+                    
+                    <p:outputLabel style="align-content: center" for="apellido" value="Apellido Completo: " />
+                    <p:inputText styleClass="cent" required="true" id="apellido" value="#{SolicitudAfiliacion.apellido}"/>
 
                     <p:outputLabel for="tid" value="Tipo Documento Identidad: " />
                     <p:selectOneMenu styleClass="cent" id="tid" value="#{SolicitudAfiliacion.tipoDocumentoID}" style="width:175px">

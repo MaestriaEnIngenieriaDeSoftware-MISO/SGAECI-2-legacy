@@ -26,20 +26,7 @@ import org.apache.ibatis.annotations.Param;
  * @author hcadavid
  */
 public interface SolicitudAfMapper {
-    /**
-     * inserta persona en la base de datos
-     * @param documentoID
-     * @param tipoDocumentoID
-     * @param nombre
-     * @param direccion
-     * @param correo
-     * @param genero
-     * @param telefono1
-     * @param telefono2 
-     */
-    public void insertarPersona(@Param("documentoID") int documentoID, @Param("tipoDocumentoID") String tipoDocumentoID,@Param("nombre") String nombre,@Param("direccion") String direccion,@Param("correo") String correo, @Param("genero") String genero, @Param("telefono1") long telefono1,@Param("telefono2") long telefono2);
-    
-    /**
+        /**
      * Consulta todas las Solicitudes de afiliacion que estan registradas en la base de
      * datos
      * @return lista de las solicitudes de afiliacion 
@@ -62,11 +49,6 @@ public interface SolicitudAfMapper {
      */
     public void insertarSolicitudAfiliacion(@Param("documentoid")int documentoID , @Param("fecha")Date fechaSolicitud, @Param("estado")String estadoSolicitud,@Param("comentario")String coment);
     
-    /**
-     * elimina de la base de datos una persona con un documento de identidad especifico
-     * @param documentoID 
-     */
-    public void eliminarPersona(@Param("documentoID") int documentoID);
     
     /**
      * elimina la solicitud de afiliacion realizada pon un usuario especifico

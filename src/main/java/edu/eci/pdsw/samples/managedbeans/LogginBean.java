@@ -56,7 +56,7 @@ public class LogginBean implements Serializable{
         SHA1 s = new SHA1();
         Persona usuario = new Persona();
         boolean valido=false;
-        String correo=usuario.getCorreo();
+        String correo=usuario.getCorreo_Personal();
          autenticacion=contenedor.containsKey(username); //valida que se encuentre la llave
         if (autenticacion==true){ // si la llave existe, busca el valor 
             valido = contenedor.containsValue(s.getHash(password));

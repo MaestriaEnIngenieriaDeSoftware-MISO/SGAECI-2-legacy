@@ -12,14 +12,14 @@ import java.util.Date;
  * @author 2106796
  */
 public class Egresado extends Persona{
-    private String semestreGrado,correoPersonal,labora,cargo;
+    private String semestreGrado,correoEstudiantil,labora,cargo;
     private Egresado_Empresa emp;
     private Date fechaGraduacion;
     
-    public Egresado(int documentoID, long telefono1, long telefono2,String tipoDocumentoID, String nombre, String direccion, String correo, String genero, String semestreGrado, String correoPersonal, String cargo, String labora,Egresado_Empresa egresadoEmpresa, Date graduacion) {
-        super(documentoID,telefono1,telefono2,tipoDocumentoID,nombre,direccion,correo,genero);
+    public Egresado(int documentoID, long telefono1, long telefono2,String tipoDocumentoID, String nombre,String apellido, String direccion, String correo, String genero, String semestreGrado, String correoPersonal, String cargo, String labora,Egresado_Empresa egresadoEmpresa, Date graduacion) {
+        super(documentoID,telefono1,telefono2,tipoDocumentoID,nombre, apellido, direccion,correoPersonal,genero);
         this.semestreGrado = semestreGrado;
-        this.correoPersonal = correoPersonal;
+        this.correoEstudiantil = correo;
         this.cargo=cargo;
         this.emp=egresadoEmpresa;
         this.labora=labora;
@@ -37,14 +37,15 @@ public class Egresado extends Persona{
         this.semestreGrado = semestreGrado;
     }
 
-    public String getCorreoPersonal() {
-        return correoPersonal;
+    public String getCorreoEstudiantil() {
+        return correoEstudiantil;
     }
 
-    public void setCorreoPersonal(String correoPersonal) {
-        this.correoPersonal = correoPersonal;
+    public void setCorreoEstudiantil(String correoEstudiantil) {
+        this.correoEstudiantil = correoEstudiantil;
     }
 
+   
     public String getLabora() {
         return labora;
     }

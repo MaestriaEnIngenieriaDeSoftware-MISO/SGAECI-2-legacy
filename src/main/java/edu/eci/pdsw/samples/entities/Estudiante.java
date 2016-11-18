@@ -14,11 +14,12 @@ public class Estudiante extends Persona{
     private int codigoEstudiante,semestrePonderado;
     private String carrera;
     
-    public Estudiante(int documentoID, long telefono1, long telefono2, String tipoDocumentoID, String nombre, String direccion, String correo, String genero,int codigoEstudiante,int semestrePonderado, String carrera) {
-        super(documentoID,telefono1,telefono2,tipoDocumentoID,nombre,direccion,correo,genero);
+    public Estudiante(int documentoID, long telefono1, long telefono2, String tipoDocumentoID, String nombre, String apellido,String direccion, String correo, String genero,int codigoEstudiante,int semestrePonderado, String carrera) {
+        super(documentoID,telefono1,telefono2,tipoDocumentoID,nombre,apellido,direccion,correo,genero);
         this.codigoEstudiante = codigoEstudiante;
         this.semestrePonderado = semestrePonderado;
         this.carrera=carrera;
+        
     }
 
     

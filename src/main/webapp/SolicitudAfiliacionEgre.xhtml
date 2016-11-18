@@ -17,7 +17,10 @@
 
                     <p:outputLabel style="align-content: center" for="nombre" value="Nombre Completo: " />
                     <p:inputText styleClass="cent" required="true" id="nombre" value="#{SolicitudAfiliacion.nombre}"/>
-
+                    
+                    <p:outputLabel style="align-content: center" for="apellido" value="Apellido Completo: " />
+                    <p:inputText styleClass="cent" required="true" id="apellido" value="#{SolicitudAfiliacion.apellido}"/>
+                    
                     <p:outputLabel for="tid" value="Tipo Documento Identidad: " />
                     <p:selectOneMenu styleClass="cent" required="True" id="tid" value="#{SolicitudAfiliacion.tipoDocumentoID}" style="width:210px">
                         <f:selectItem itemLabel="CC" itemValue="CC" />
@@ -34,10 +37,10 @@
                     </p:selectOneMenu>
 
                     <p:outputLabel for="correoP" value="Correo Personal: " />
-                    <p:inputText styleClass="cent" required="true" id="correoP" value="#{SolicitudAfiliacion.correoPersonal}"/>
+                    <p:inputText styleClass="cent" required="true" id="correoP" value="#{SolicitudAfiliacion.correo}"/>
                     
                     <p:outputLabel for="correo" value="Correo Estudiantil: " />
-                    <p:inputText styleClass="cent" id="correo" value="#{SolicitudAfiliacion.correo}"/>
+                    <p:inputText styleClass="cent" id="correo" value="#{SolicitudAfiliacion.correoPersonal}"/>
 
                     <p:outputLabel for="telcasa" value="Telefono Casa: " />
                     <p:inputText styleClass="cent" required="true" id="telcasa" value="#{SolicitudAfiliacion.telefono}"/>

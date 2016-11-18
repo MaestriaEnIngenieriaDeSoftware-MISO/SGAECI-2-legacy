@@ -25,6 +25,7 @@ import edu.eci.pdsw.samples.persistence.PersistenceException;
 import edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.EgresadoMapper;
 import edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.EmpresaMapper;
 import edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.EstudianteMapper;
+import edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.PersonaMapper;
 import edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.SolicitudAfMapper;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
@@ -59,14 +60,15 @@ import org.apache.ibatis.session.SqlSession;
     @Override
     public void save(SolicitudAfiliacion Sa) throws PersistenceException {
        SolicitudAfMapper pedmp=currentSession.getMapper(SolicitudAfMapper.class);
+       PersonaMapper pedmp4 = currentSession.getMapper(PersonaMapper.class);
        if(Sa.getE1()==null){
-           pedmp.insertarPersona(Sa.getE2().getDocumentoID(), Sa.getE2().getTipoDocumentoID(), Sa.getE2().getNombre(), Sa.getE2().getDireccion(), Sa.getE2().getCorreo(), Sa.getE2().getGenero(), Sa.getE2().getTelefono1(), Sa.getE2().getTelefono2());
+           pedmp4.insertarPersona(Sa.getE2().getDocumentoID(), Sa.getE2().getTipoDocumentoID(), Sa.getE2().getNombre(), Sa.getE2().getApellido(),Sa.getE2().getDireccion(), Sa.getE2().getCorreo_Personal(), Sa.getE2().getGenero(), Sa.getE2().getTelefono1(), Sa.getE2().getTelefono2());
            Estudiante e = Sa.getE2();
            EstudianteMapper pedmp2=currentSession.getMapper(EstudianteMapper.class);
            pedmp2.insertarEstudiante(e.getCodigoEstudiante(), e.getDocumentoID(), e.getSemestrePonderado(),e.getCarrera().toUpperCase());
            pedmp.insertarSolicitudAfiliacion(Sa.getE2().getDocumentoID(),Sa.getFechaSolicitud(),Sa.getEstadoSolicitud(),Sa.getComentario().toUpperCase());
        }else{       
-           pedmp.insertarPersona(Sa.getE1().getDocumentoID(), Sa.getE1().getTipoDocumentoID(), Sa.getE1().getNombre(), Sa.getE1().getDireccion(), Sa.getE1().getCorreo(), Sa.getE1().getGenero(), Sa.getE1().getTelefono1(), Sa.getE1().getTelefono2());
+           pedmp4.insertarPersona(Sa.getE1().getDocumentoID(), Sa.getE1().getTipoDocumentoID(), Sa.getE1().getNombre(), Sa.getE1().getApellido(),Sa.getE1().getDireccion(), Sa.getE1().getCorreo_Personal(), Sa.getE1().getGenero(), Sa.getE1().getTelefono1(), Sa.getE1().getTelefono2());
            Egresado e = Sa.getE1();
            EgresadoMapper pedmp2=currentSession.getMapper(EgresadoMapper.class);
            EmpresaMapper pedmp3=currentSession.getMapper(EmpresaMapper.class);
@@ -75,7 +77,7 @@ import org.apache.ibatis.session.SqlSession;
                    pedmp3.insertarEmpresa( e.getEmp().getNombreempre().toUpperCase(), e.getEmp().getDirempre().toUpperCase(), e.getEmp().getTelempre());
                 }
            }
-           pedmp2.insertarEgresado(e.getDocumentoID(),e.getSemestreGrado(),e.getCorreoPersonal(),e.getLabora(),e.getCargo(),e.getEmp().getNombreempre(),e.getFechaGraduacion());
+           pedmp2.insertarEgresado(e.getDocumentoID(),e.getSemestreGrado(),e.getCorreoEstudiantil(),e.getLabora(),e.getCargo(),e.getEmp().getNombreempre(),e.getFechaGraduacion());
            pedmp.insertarSolicitudAfiliacion(e.getDocumentoID(),Sa.getFechaSolicitud(),Sa.getEstadoSolicitud(),Sa.getComentario().toUpperCase());
        }
        
