@@ -16,7 +16,7 @@ public class Persona {
     private int documentoID;
     private long telefono1,telefono2;
     private String tipoDocumentoID,nombre,apellido,direccion,correo_Personal,genero;
-    List<Rol> roles;
+    Rol rol;
     
     
     
@@ -35,7 +35,7 @@ public class Persona {
      * @param rol
      */
     
-    public Persona(int documentoID,long telefono1,long telefono2,String tipoDocumentoID,String nombre,String apellido ,String direccion ,String correo,String genero,List<Rol> rol){
+    public Persona(int documentoID,long telefono1,long telefono2,String tipoDocumentoID,String nombre,String apellido ,String direccion ,String correo,String genero,Rol rol){
         this.documentoID = documentoID;
         this.telefono1 = telefono1;
         this.telefono2 = telefono2;
@@ -45,7 +45,9 @@ public class Persona {
         this.direccion = direccion;
         this.correo_Personal = correo;
         this.genero = genero;
-        this.roles = rol;
+        this.rol=rol;
+        
+        
     }
 
     public Persona() {
@@ -53,6 +55,14 @@ public class Persona {
 
     public int getDocumentoID() {
         return documentoID;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
     public void setDocumentoID(int documentoID) {
@@ -127,22 +137,13 @@ public class Persona {
         this.genero = genero;
     }   
 
-    public List<Rol> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Rol> roles) {
-        this.roles = roles;
-    }
+    
+    
      public String toString() {
         String res;
-        res= "Persona:[" +documentoID+" "+telefono1+" "+ telefono2+" "+tipoDocumentoID+" "+nombre+" "+apellido+" "+direccion+" "+ correo_Personal +" "+ genero+ "] \n";
+        res= "Persona:[" +documentoID+" "+telefono1+" "+ telefono2+" "+tipoDocumentoID+" "+nombre+" "+apellido+" "+direccion+" "+ correo_Personal +" "+ genero+" "+ rol+ "] \n";
        
-        if (roles != null) {
-            for (Rol e : roles) {
-                res += e.toString();
-            }
-        }
+      
         return res;
     }
 }

@@ -38,7 +38,7 @@ public class SolicitudAfiliacionBean implements Serializable{
     private ArrayList<String> carreras;
     private boolean marca=false;
     private Egresado_Empresa egresadoEmpresa;
-    private List<Rol> rol;
+    private Rol rol;
     
     public SolicitudAfiliacionBean() {
         this.semestres  = new ArrayList<>();
