@@ -22,7 +22,7 @@ public class Rol {
     public static String Afiliado = "Afiliado", Administrador = "Administrador ";
     
     
-    public Rol() {     
+    public Rol() { 
     }
     
       /**

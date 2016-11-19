@@ -90,9 +90,4 @@ import org.apache.ibatis.session.SqlSession;
         pedmp.actualizarSolicitud(Sa.getEstadoSolicitud(), Sa.getComentario(), Sa.getSolicitudID());
     }
 
-     
-
-    
-    
-    
 }

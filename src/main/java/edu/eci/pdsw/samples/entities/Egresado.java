@@ -5,6 +5,7 @@
  */
 package edu.eci.pdsw.samples.entities;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class Egresado extends Persona{
     private Egresado_Empresa emp;
     private Date fechaGraduacion;
     
-    public Egresado(int documentoID, long telefono1, long telefono2,String tipoDocumentoID, String nombre,String apellido, String direccion, String correo, String genero,Rol rol, String semestreGrado, String correoPersonal, String cargo, String labora,Egresado_Empresa egresadoEmpresa, Date graduacion) {
+    public Egresado(int documentoID, long telefono1, BigInteger telefono2,String tipoDocumentoID, String nombre,String apellido, String direccion, String correo, String genero,Rol rol, String semestreGrado, String correoPersonal, String cargo, String labora,Egresado_Empresa egresadoEmpresa, Date graduacion) {
         super(documentoID,telefono1,telefono2,tipoDocumentoID,nombre, apellido, direccion,correoPersonal,genero,rol);
         this.semestreGrado = semestreGrado;
         this.correoEstudiantil = correo;
@@ -78,9 +79,4 @@ public class Egresado extends Persona{
     public void setFechaGraduacion(Date fechaGraduacion) {
         this.fechaGraduacion = fechaGraduacion;
     }
-
-    
-
-    
-    
 }

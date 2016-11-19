@@ -24,6 +24,7 @@ import edu.eci.pdsw.samples.entities.Rol;
 import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
 import java.io.IOException;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -62,7 +63,7 @@ public abstract class ServiciosSAGECI {
      * @param genero genero del estudiante
      * @throws ExcepcionServiciosSAGECI si se presento un error de persistencia
      */
-    public abstract void agregarEstudiante(int codigoEstudiante, int documentoID, String semestrePonderado, int telefono1,int telefono2, String tipoDocumentoID, String nombre, String apellido, String direccion,String carrera,String correo,String genero,List<Rol> rol) throws ExcepcionServiciosSAGECI;
+    public abstract void agregarEstudiante(int codigoEstudiante, int documentoID, int semestrePonderado, int telefono1,BigInteger telefono2, String tipoDocumentoID, String nombre, String apellido, String direccion,String carrera,String correo,String genero,Rol rol) throws ExcepcionServiciosSAGECI;
     
     /**
      * Registra un egresado en la base de datos 
@@ -82,7 +83,7 @@ public abstract class ServiciosSAGECI {
      * @param fechaGraduacion fecha de graduacion del egresado
      * @throws ExcepcionServiciosSAGECI 
      */
-    public abstract void agregarEgresado(int documentoID, int telefono1, int telefono2,String tipoDocumentoID, String nombre, String apellido, String direccion, String correo, String genero,List<Rol> rol, String cargo, String semestreGrado, String correoPersonal, String labora,Egresado_Empresa egresadoEmpresa,Date fechaGraduacion) throws ExcepcionServiciosSAGECI;
+    public abstract void agregarEgresado(int documentoID, int telefono1, BigInteger telefono2,String tipoDocumentoID, String nombre, String apellido, String direccion, String correo, String genero, Rol rol,String semestreGrado, String correoPersonal,String cargo , String labora,Egresado_Empresa egresadoEmpresa,Date fechaGraduacion) throws ExcepcionServiciosSAGECI;
 
     
     /**

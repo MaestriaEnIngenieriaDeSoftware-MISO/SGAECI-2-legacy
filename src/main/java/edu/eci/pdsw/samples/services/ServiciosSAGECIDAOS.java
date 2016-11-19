@@ -36,6 +36,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import edu.eci.pdsw.samples.persistence.DaoEstudiante;
+import java.math.BigInteger;
 import java.util.Date;
 
 /**
@@ -57,9 +58,10 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
     }
 
    
-    public void agregarEstudiante(int codigoEstudiante, int documentoID, String semestrePonderado, int telefono1,int telefono2, String tipoDocumentoID, String nombre, String apellido, String direccion,String carrera,String correo,String genero,Rol rol) throws ExcepcionServiciosSAGECI{
+
+    public void agregarEstudiante(int codigoEstudiante, int documentoID, int semestrePonderado, int telefono1,BigInteger telefono2, String tipoDocumentoID, String nombre, String apellido, String direccion,String carrera,String correo,String genero,Rol rol) throws ExcepcionServiciosSAGECI{
         try {
-            Estudiante e = new Estudiante(documentoID, telefono1, telefono2, tipoDocumentoID, nombre, apellido, direccion, correo, genero,rol, codigoEstudiante, telefono2, carrera);
+            Estudiante e = new Estudiante(documentoID, telefono1, telefono2, tipoDocumentoID, nombre, apellido, direccion, correo, genero,rol, codigoEstudiante,semestrePonderado, carrera);
             daof.beginSession();
             daof.getDaoEstudiante().save(e);
             daof.commitTransaction();
@@ -71,8 +73,7 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
 
     }
     
- 
-    public void agregarEgresado(int documentoID, int telefono1, int telefono2,String tipoDocumentoID, String nombre, String apellido, String direccion, String correo, String genero, Rol rol, String cargo, String semestreGrado, String correoPersonal, String labora,Egresado_Empresa egresadoEmpresa,Date fechaGraduacion)throws ExcepcionServiciosSAGECI {     
+    public void agregarEgresado(int documentoID, int telefono1, BigInteger telefono2,String tipoDocumentoID, String nombre, String apellido, String direccion, String correo, String genero, Rol rol,String semestreGrado, String correoPersonal,String cargo , String labora,Egresado_Empresa egresadoEmpresa,Date fechaGraduacion)throws ExcepcionServiciosSAGECI {     
         try {
             Egresado e = new Egresado( documentoID,  telefono1,  telefono2, tipoDocumentoID,  nombre,  apellido, direccion,  correo,  genero,rol,  cargo,  semestreGrado,  correoPersonal,  labora, egresadoEmpresa,fechaGraduacion);
             daof.beginSession();

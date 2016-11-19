@@ -5,6 +5,7 @@
  */
 package edu.eci.pdsw.samples.entities;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Set;
 
@@ -14,9 +15,11 @@ import java.util.Set;
  */
 public class Persona {
     private int documentoID;
-    private long telefono1,telefono2;
+    private long telefono1;
+    private BigInteger telefono2;
     private String tipoDocumentoID,nombre,apellido,direccion,correo_Personal,genero;
     Rol rol;
+
     
     
     
@@ -35,7 +38,8 @@ public class Persona {
      * @param rol
      */
     
-    public Persona(int documentoID,long telefono1,long telefono2,String tipoDocumentoID,String nombre,String apellido ,String direccion ,String correo,String genero,Rol rol){
+
+    public Persona(int documentoID,long telefono1,BigInteger telefono2,String tipoDocumentoID,String nombre,String apellido ,String direccion ,String correo,String genero,Rol rol){
         this.documentoID = documentoID;
         this.telefono1 = telefono1;
         this.telefono2 = telefono2;
@@ -85,11 +89,11 @@ public class Persona {
         this.telefono1 = telefono1;
     }
 
-    public long getTelefono2() {
+    public BigInteger getTelefono2() {
         return telefono2;
     }
 
-    public void setTelefono2(long telefono2) {
+    public void setTelefono2(BigInteger telefono2) {
         this.telefono2 = telefono2;
     }
 
@@ -108,8 +112,6 @@ public class Persona {
     public void setCorreo_Personal(String correo_Personal) {
         this.correo_Personal = correo_Personal;
     }
-
-    
     
     public String getNombre() {
         return nombre;
@@ -127,8 +129,6 @@ public class Persona {
         this.direccion = direccion;
     }
 
-   
-
     public String getGenero() {
         return genero;
     }
@@ -136,14 +136,10 @@ public class Persona {
     public void setGenero(String genero) {
         this.genero = genero;
     }   
-
     
-    
-     public String toString() {
+    public String toString() {
         String res;
         res= "Persona:[" +documentoID+" "+telefono1+" "+ telefono2+" "+tipoDocumentoID+" "+nombre+" "+apellido+" "+direccion+" "+ correo_Personal +" "+ genero+" "+ rol+ "] \n";
-       
-      
         return res;
     }
 }

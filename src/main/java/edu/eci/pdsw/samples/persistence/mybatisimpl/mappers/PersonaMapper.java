@@ -18,6 +18,7 @@ package edu.eci.pdsw.samples.persistence.mybatisimpl.mappers;
 
 import edu.eci.pdsw.samples.entities.Persona;
 import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -43,7 +44,7 @@ public interface PersonaMapper {
      * @param telefono1
      * @param telefono2 
      */
-    public void insertarPersona(@Param("documentoID") int documentoID, @Param("tipoDocumentoID") String tipoDocumentoID,@Param("nombre") String nombre, @Param("apellido") String apellido, @Param("direccion") String direccion,@Param("correo") String correo, @Param("genero") String genero, @Param("telefono1") long telefono1,@Param("telefono2") long telefono2);
+    public void insertarPersona(@Param("documentoID") int documentoID, @Param("tipoDocumentoID") String tipoDocumentoID,@Param("nombre") String nombre, @Param("apellido") String apellido, @Param("direccion") String direccion,@Param("correo") String correo, @Param("genero") String genero, @Param("telefono1") long telefono1,@Param("telefono2") BigInteger telefono2);
     
     
     /**

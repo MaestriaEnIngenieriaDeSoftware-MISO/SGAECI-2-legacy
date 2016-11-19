@@ -13,6 +13,7 @@ import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosSAGECI;
 import edu.eci.pdsw.samples.services.ServiciosSAGECI;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,13 +31,15 @@ import javax.faces.bean.SessionScoped;
 
 public class SolicitudAfiliacionBean implements Serializable{
     ServiciosSAGECI SAGECI=ServiciosSAGECI.getInstance();
-    private int solicitudID,documentoID,Telefono,telefono2,telefonoOficina,codigoEstudiante,semestrePonderado;
+    private int solicitudID;
+    private static int documentoID,Telefono,telefonoOficina,codigoEstudiante,semestrePonderado;
+    private static BigInteger telefono2;
     private Date fechaGraduacion=new Date(new java.util.Date().getTime());
-    private String correo="correo",labora="no",semestreGrado="9999-9",tipoDocumentoID="CC",genero="MASCULINO",tipoSolicitante="EGRESADO",estadoSolicitud="NO REVISADO",comentario="Falta revision respectiva.",Nombre="Nombre",Apellido="Apellido",direccionVivienda="Direccion",Empresa="Empresa",direccionEmpresa="Direccion",Cargo="Cargo",correoPersonal="Correo",carrera="Carrera";
-    private boolean acepta=false; 
+    private static String correo="correo",labora="no",semestreGrado="9999-9",tipoDocumentoID="CC",genero="MASCULINO",tipoSolicitante="EGRESADO",estadoSolicitud="NO REVISADO",comentario="Falta revision respectiva.",Nombre="Nombre",Apellido="Apellido",direccionVivienda="Direccion",Empresa="Empresa",direccionEmpresa="Direccion",Cargo="Cargo",correoPersonal="Correo",carrera="Carrera";
+    private boolean acepta = false; 
     private ArrayList<Integer> semestres;
     private ArrayList<String> carreras;
-    private boolean marca=false;
+    private boolean marca = false;
     private Egresado_Empresa egresadoEmpresa;
     private Rol rol;
     
@@ -44,7 +47,7 @@ public class SolicitudAfiliacionBean implements Serializable{
         this.semestres  = new ArrayList<>();
         this.carreras = new ArrayList<>();
         egresadoEmpresa=new Egresado_Empresa();
-        for (int i=7; i<=10; i++){
+        for (int i=8; i<=10; i++){
             this.semestres.add(i); 
         }
         carreras.add("INGENIERÍA CIVIL");carreras.add("INGENIERÍA INDUSTRIAL");carreras.add("INGENIERÍA MECÁNICA");carreras.add("INGENIERÍA ELECTRÓNICA");carreras.add("MATEMÁTICAS");
@@ -73,7 +76,13 @@ public class SolicitudAfiliacionBean implements Serializable{
             }
             SolicitudAfiliacion temp = new SolicitudAfiliacion( solicitudID, new Date(new java.util.Date().getTime()) ,  estadoSolicitud,  comentario,  e1,  e2);
             SAGECI.registrarNuevaSolicitud(temp);
-        }           
+        }
+        resetearValores();
+    }
+    
+    public static void resetearValores(){
+        telefono2 = new BigInteger("0");documentoID = 0;Telefono = 0;telefonoOficina = 0;codigoEstudiante = 0;semestrePonderado = 0;
+        correo="correo";labora="no";semestreGrado="9999-9";tipoDocumentoID="CC";genero="MASCULINO";tipoSolicitante="EGRESADO";comentario="Falta revision respectiva.";Nombre="Nombre";Apellido="Apellido";direccionVivienda="Direccion";Empresa="Empresa";direccionEmpresa="Direccion";Cargo="Cargo";correoPersonal="Correo";carrera="Carrera";
     }
 
     public String getCorreo() {
@@ -99,8 +108,6 @@ public class SolicitudAfiliacionBean implements Serializable{
     public void setApellido(String Apellido) {
         this.Apellido = Apellido;
     }
-
-    
     
     public ArrayList<String> getCarreras() {
         return carreras;
@@ -183,11 +190,11 @@ public class SolicitudAfiliacionBean implements Serializable{
         this.Telefono = Telefono;
     }
 
-    public int getTelefono2() {
+    public BigInteger getTelefono2() {
         return telefono2;
     }
 
-    public void setTelefono2(int telefono2) {
+    public void setTelefono2(BigInteger telefono2) {
         this.telefono2 = telefono2;
     }
 
@@ -246,8 +253,6 @@ public class SolicitudAfiliacionBean implements Serializable{
     public void setNombre(String Nombre) {
         this.Nombre = Nombre;
     }
-
-   
 
     public String getEmpresa() {
         return Empresa;
@@ -321,9 +326,4 @@ public class SolicitudAfiliacionBean implements Serializable{
     public void asigna(String labora){
         this.labora=labora;
     }
-    
-    
-    
-    
-    
 }
