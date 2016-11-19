@@ -5,6 +5,7 @@
  */
 package edu.eci.pdsw.samples.entities;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -15,8 +16,26 @@ public class Persona {
     private int documentoID;
     private long telefono1,telefono2;
     private String tipoDocumentoID,nombre,apellido,direccion,correo_Personal,genero;
+    List<Rol> roles;
     
-    public Persona(int documentoID,long telefono1,long telefono2,String tipoDocumentoID,String nombre,String apellido ,String direccion ,String correo,String genero){
+    
+    
+     /**
+     * Constructor de persona
+     *
+     * @param DocumentoID
+     * @param telefono1
+     * @param telefono2
+     * @param TipoID
+     * @param nombre
+     * @param apellido
+     * @param direccion
+     * @param correo
+     * @param genero
+     * @param rol
+     */
+    
+    public Persona(int documentoID,long telefono1,long telefono2,String tipoDocumentoID,String nombre,String apellido ,String direccion ,String correo,String genero,List<Rol> rol){
         this.documentoID = documentoID;
         this.telefono1 = telefono1;
         this.telefono2 = telefono2;
@@ -26,6 +45,7 @@ public class Persona {
         this.direccion = direccion;
         this.correo_Personal = correo;
         this.genero = genero;
+        this.roles = rol;
     }
 
     public Persona() {
@@ -106,5 +126,23 @@ public class Persona {
     public void setGenero(String genero) {
         this.genero = genero;
     }   
-    
+
+    public List<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
+    }
+     public String toString() {
+        String res;
+        res= "Persona:[" +documentoID+" "+telefono1+" "+ telefono2+" "+tipoDocumentoID+" "+nombre+" "+apellido+" "+direccion+" "+ correo_Personal +" "+ genero+ "] \n";
+       
+        if (roles != null) {
+            for (Rol e : roles) {
+                res += e.toString();
+            }
+        }
+        return res;
+    }
 }

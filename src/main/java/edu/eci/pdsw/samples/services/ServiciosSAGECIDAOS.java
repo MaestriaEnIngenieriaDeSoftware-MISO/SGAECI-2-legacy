@@ -19,6 +19,7 @@ package edu.eci.pdsw.samples.services;
 import edu.eci.pdsw.samples.entities.Egresado;
 import edu.eci.pdsw.samples.entities.Egresado_Empresa;
 import edu.eci.pdsw.samples.entities.Estudiante;
+import edu.eci.pdsw.samples.entities.Rol;
 import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
 import edu.eci.pdsw.samples.persistence.DaoFactory;
 import edu.eci.pdsw.samples.persistence.PersistenceException;
@@ -48,16 +49,17 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
 
     private final DaoFactory daof;
     private final Properties properties;
+    
 
     public ServiciosSAGECIDAOS() {
         this.properties = new PropertiesLoader().readProperties("applicationconfig.properties");
         this.daof=DaoFactory.getInstance(properties);
     }
 
-    @Override
-    public void agregarEstudiante(int codigoEstudiante, int documentoID, String semestrePonderado, int telefono1,int telefono2, String tipoDocumentoID, String nombre, String apellido, String direccion,String carrera,String correo,String genero) throws ExcepcionServiciosSAGECI{
+   
+    public void agregarEstudiante(int codigoEstudiante, int documentoID, String semestrePonderado, int telefono1,int telefono2, String tipoDocumentoID, String nombre, String apellido, String direccion,String carrera,String correo,String genero,List<Rol> rol) throws ExcepcionServiciosSAGECI{
         try {
-            Estudiante e = new Estudiante(documentoID, telefono1, telefono2, tipoDocumentoID, nombre, apellido, direccion, correo, genero, codigoEstudiante, telefono2, carrera);
+            Estudiante e = new Estudiante(documentoID, telefono1, telefono2, tipoDocumentoID, nombre, apellido, direccion, correo, genero,rol, codigoEstudiante, telefono2, carrera);
             daof.beginSession();
             daof.getDaoEstudiante().save(e);
             daof.commitTransaction();
@@ -69,10 +71,10 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
 
     }
     
-    @Override
-    public void agregarEgresado(int documentoID, int telefono1, int telefono2,String tipoDocumentoID, String nombre, String apellido, String direccion, String correo, String genero, String cargo, String semestreGrado, String correoPersonal, String labora,Egresado_Empresa egresadoEmpresa,Date fechaGraduacion)throws ExcepcionServiciosSAGECI {     
+ 
+    public void agregarEgresado(int documentoID, int telefono1, int telefono2,String tipoDocumentoID, String nombre, String apellido, String direccion, String correo, String genero, List<Rol> rol, String cargo, String semestreGrado, String correoPersonal, String labora,Egresado_Empresa egresadoEmpresa,Date fechaGraduacion)throws ExcepcionServiciosSAGECI {     
         try {
-            Egresado e = new Egresado( documentoID,  telefono1,  telefono2, tipoDocumentoID,  nombre,  apellido, direccion,  correo,  genero,  cargo,  semestreGrado,  correoPersonal,  labora, egresadoEmpresa,fechaGraduacion);
+            Egresado e = new Egresado( documentoID,  telefono1,  telefono2, tipoDocumentoID,  nombre,  apellido, direccion,  correo,  genero,rol,  cargo,  semestreGrado,  correoPersonal,  labora, egresadoEmpresa,fechaGraduacion);
             daof.beginSession();
             daof.getDaoEgresado().save(e);
             daof.commitTransaction();

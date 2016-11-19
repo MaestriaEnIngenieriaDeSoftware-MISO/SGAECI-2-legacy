@@ -16,10 +16,10 @@ import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
 public class Rol {
     private String rol;
     private String password;
-    private String sal;
+    private String user;
     private Map acceso;
   
-    public static String usuario = "Afiliado", Admin = "Administrador ";
+    public static String Afiliado = "Afiliado", Administrador = "Administrador ";
     
     
     public Rol() {     
@@ -35,12 +35,8 @@ public class Rol {
     public Rol(String r, String cont, String s) {
         this.rol = r;
         this.password = cont;
-        this.sal = s;
-        acceso=new HashMap<>();
-        if (r.equalsIgnoreCase(usuario)){
-            acceso.put(SolicitudAfiliacion., SolicitudAfilicion);
-        }
-       
+        this.user = s;
+        //acceso=new HashMap<>();
     }
     /**
      * @return the rol
@@ -58,7 +54,7 @@ public class Rol {
      */
     public String getPassword() {
         AsignacionUser_password asi=new AsignacionUser_password ();
-        asi.getPassword();
+        password =asi.getPassword();
         return password;
     }
 
@@ -67,27 +63,29 @@ public class Rol {
     }
 
     public String getSal() {
-        return sal;
+        AsignacionUser_password asi=new AsignacionUser_password ();
+        user=asi.getUsuario();
+        return user;
     }
 
     public void setSal(String sal) {
-        this.sal = sal;
+        this.user = sal;
     }
 
-    public static String getUsuario() {
-        return usuario;
+    public static String getAfiliado() {
+        return Afiliado;
     }
 
-    public static void setUsuario(String usuario) {
-        Rol.usuario = usuario;
+    public static void setAfiliado (String usuario) {
+        Rol.Afiliado = usuario;
     }
 
-    public static String getAdmin() {
-        return Admin;
+    public static String getAdmininistrador() {
+        return Administrador;
     }
 
-    public static void setAdmin(String Admin) {
-        Rol.Admin = Admin;
+    public static void setAdministrador(String Admin) {
+        Rol.Administrador  = Admin;
     }
 
 }

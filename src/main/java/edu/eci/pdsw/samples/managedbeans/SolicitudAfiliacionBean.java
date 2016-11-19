@@ -8,12 +8,14 @@ package edu.eci.pdsw.samples.managedbeans;
 import edu.eci.pdsw.samples.entities.Egresado;
 import edu.eci.pdsw.samples.entities.Egresado_Empresa;
 import edu.eci.pdsw.samples.entities.Estudiante;
+import edu.eci.pdsw.samples.entities.Rol;
 import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosSAGECI;
 import edu.eci.pdsw.samples.services.ServiciosSAGECI;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -36,6 +38,7 @@ public class SolicitudAfiliacionBean implements Serializable{
     private ArrayList<String> carreras;
     private boolean marca=false;
     private Egresado_Empresa egresadoEmpresa;
+    private List<Rol> rol;
     
     public SolicitudAfiliacionBean() {
         this.semestres  = new ArrayList<>();
@@ -61,8 +64,8 @@ public class SolicitudAfiliacionBean implements Serializable{
         }
         if(correo.equals("correo")) correo=null;
         if(!Nombre.equals("Nombre")){
-            Egresado e1 = new Egresado(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre, Apellido, direccionVivienda,  correo,  genero, semestreGrado,correoPersonal, Cargo,  labora,egresadoEmpresa,fechaGraduacion);
-            Estudiante e2 = new Estudiante(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre, Apellido, direccionVivienda,  correo,  genero, codigoEstudiante, semestrePonderado,  carrera);
+            Egresado e1 = new Egresado(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre, Apellido, direccionVivienda,  correo,  genero,rol, semestreGrado,correoPersonal, Cargo,  labora,egresadoEmpresa,fechaGraduacion);
+            Estudiante e2 = new Estudiante(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre, Apellido, direccionVivienda,  correo,  genero,rol, codigoEstudiante, semestrePonderado,  carrera);
             if(semestreGrado.equals("9999-9")){
                 e1=null;
             }else{

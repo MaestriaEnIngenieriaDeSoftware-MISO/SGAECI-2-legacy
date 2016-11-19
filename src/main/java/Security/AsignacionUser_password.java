@@ -23,7 +23,7 @@ public class AsignacionUser_password {
    String password;
    
 
-    public Hashtable<String, String> getCorreocontraseña() {// Llave:usuario Contenido: contraseña encrptada 
+    public Hashtable<String, String> getCorreocontraseña(int id) {// Llave:usuario Contenido: contraseña encrptada 
         
         return correocontraseña; // 
     }

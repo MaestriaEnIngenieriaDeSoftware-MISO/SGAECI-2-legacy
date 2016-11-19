@@ -5,69 +5,111 @@
  */
 package edu.eci.pdsw.samples.managedbeans;
 
-import Security.AsignacionUser_password;
-import Security.SHA1;
-import edu.eci.pdsw.samples.entities.Persona;
-import edu.eci.pdsw.samples.services.ServiciosSAGECI;
+
+import java.io.File;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.*;
+import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import java.io.IOException;
 import java.io.Serializable;
-import java.security.NoSuchAlgorithmException;
-import java.util.Hashtable;
+import java.util.logging.Level;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import org.apache.shiro.authc.credential.DefaultPasswordService;
+import org.apache.shiro.crypto.hash.DefaultHashService;
+import org.apache.shiro.crypto.hash.Sha256Hash;
+import org.apache.shiro.util.SimpleByteSource;
+
 
 /**
  *
  * @author 2090683
  */
-
-@ManagedBean (name= "Loggin")
+@ManagedBean(name = "Loggin")
 @SessionScoped
-public class LogginBean implements Serializable{
-   private String password;
-   public  String username;
-   private boolean autenticacion;
-   
-   
-   
-  
+public class LogginBean implements Serializable {
 
-    public String getPassword() {
-        return password;
+    private static final Logger log = LoggerFactory.getLogger(LogginBean.class);
+
+    private String password;
+    public String username;
+    private boolean autenticacion;
+
+    public LogginBean() {
+
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public Subject getSubject() {
+        return SecurityUtils.getSubject();
+    }
+
+    public void doLogin() {
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(getUsername(), getPassword(), getAutenticacion());
+        try {
+            subject.login(token);
+            if (subject.hasRole("Administrador")) {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("ProcesarSolicitudesAfiliacion.xhtml");
+            } else if (subject.hasRole("Afiliado")) {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("Registro.xhtml");
+            } else {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("Registro.xhtml");
+            }
+        }
+    
+    catch (UnknownAccountException ex){
+        facesError("El usuario no se encuentra registrado. Por favor, verifique los datos");
+        //Registro.anotar(ex);
+
+    }
+    catch (IncorrectCredentialsException ex) {
+            facesError("Datos erróneos. Por favor, inténtelo otra vez.");
+        //Registro.anotar(ex);
+    }
+    catch (AuthenticationException | IOException ex) {
+            facesError("Error inesperado: " + ex.getMessage());
+            //Registro.anotar(ex);
+        }
+    finally {
+        token.clear();
+        }
+    }
+    
+    private void facesError(String message) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String login) {
+        this.username = login;
     }
 
-    
-    
+    public String getPassword() {
+        return password;
+    }
 
-    public boolean isAutenticacion() throws NoSuchAlgorithmException {
-        AsignacionUser_password as =new AsignacionUser_password();
-        Hashtable<String, String> contenedor= as.getCorreocontraseña();
-        SHA1 s = new SHA1();
-        Persona usuario = new Persona();
-        boolean valido=false;
-        String correo=usuario.getCorreo_Personal();
-         autenticacion=contenedor.containsKey(username); //valida que se encuentre la llave
-        if (autenticacion==true){ // si la llave existe, busca el valor 
-            valido = contenedor.containsValue(s.getHash(password));
-        }          
-        
-        return valido;
+    public void setPassword(String senha) {
+        this.password = senha;
+    }
+
+    public boolean getAutenticacion() {
+        return autenticacion;
     }
 
     public void setAutenticacion(boolean autenticacion) {
         this.autenticacion = autenticacion;
     }
-   
+
+  
+
 
 }
