@@ -1,8 +1,3 @@
--- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2016-11-19 21:34:37.336
-
--- tables
--- Table: Egresado
 CREATE TABLE Egresado (
     DocumentoID int NOT NULL,
     Semestre_Graduacion varchar(6) NOT NULL,
@@ -11,6 +6,7 @@ CREATE TABLE Egresado (
     Labora varchar(20) NULL,
     Cargo varchar(20) NULL,
     Fecha_Graduacion date NULL,
+    UNIQUE INDEX Correo_Estudiantil (Correo_Estudiantil),
     CONSTRAINT Egresado_pk PRIMARY KEY (DocumentoID)
 );
 
@@ -71,8 +67,10 @@ CREATE TABLE Persona (
     Genero varchar(30) NOT NULL,
     Telefono bigint NULL CHECK (Telefono>1000000 AND Telefono<=9999999),
     Celular bigint NOT NULL CHECK (Celular>1000000 AND Celular<=9999999999),
+    UNIQUE INDEX Celular (Celular),
+    UNIQUE INDEX Correo_Personal (Correo_Personal),
     CONSTRAINT Persona_pk PRIMARY KEY (DocumentoID)
-);
+)ENGINE=InnoDB;
 
 -- Table: Persona_Servicios
 CREATE TABLE Persona_Servicios (
@@ -88,7 +86,7 @@ CREATE TABLE Rol_Persona (
     Clave varchar(100) NOT NULL,
     Salt varchar(100) NOT NULL,
     CONSTRAINT Rol_Persona_pk PRIMARY KEY (DocumentoID,Roles_rol)
-) ;
+);
 
 -- Table: Roles
 CREATE TABLE Roles (

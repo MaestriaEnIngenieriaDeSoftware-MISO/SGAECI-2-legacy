@@ -63,8 +63,8 @@
                     </p:selectBooleanCheckbox>
                     
                 </p:panelGrid>
-                
-                <p:panelGrid columnClasses="centered" id="Empresa" columns="2" style="landscape" >
+              
+                    <p:panelGrid columnClasses="centered" id="Empresa" columns="2" style="landscape" >
                     <p:outputLabel for="empresa" value="                  Empresa donde Labora:            " />
                     <p:inputText styleClass="cent" required="#{SolicitudAfiliacion.marca}" id="empresa" value="#{SolicitudAfiliacion.empresa}"/>
 
@@ -76,10 +76,7 @@
 
                     <p:outputLabel for="cargo" value="Cargo en Empresa: " />
                     <p:inputText styleClass="cent" required="#{SolicitudAfiliacion.marca}" id="cargo" value="#{SolicitudAfiliacion.cargo}"/>
-                    
-                    
-    
-                </p:panelGrid>
+                </p:panelGrid>              
                 
                 <p:commandLink oncomplete="window.open('http://www.aeci.org.co/#!politicas-de-tratamiento-de-datos')">Acepta los Terminos y Condiciones </p:commandLink>
                 <p:selectBooleanCheckbox required="true" value="#{SolicitudAfiliacion.acepta}" />

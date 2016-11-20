@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package edu.eci.pdsw.samples.managedbeans;
-
+import com.mysql.jdbc.exceptions.*;
 import edu.eci.pdsw.samples.entities.Egresado;
 import edu.eci.pdsw.samples.entities.Egresado_Empresa;
 import edu.eci.pdsw.samples.entities.Estudiante;
@@ -16,9 +16,11 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import org.primefaces.context.RequestContext;
+
 
 /**
  *
@@ -75,9 +77,18 @@ public class SolicitudAfiliacionBean implements Serializable{
                 e2=null;
             }
             SolicitudAfiliacion temp = new SolicitudAfiliacion( solicitudID, new Date(new java.util.Date().getTime()) ,  estadoSolicitud,  comentario,  e1,  e2);
-            SAGECI.registrarNuevaSolicitud(temp);
+            try{
+                SAGECI.registrarNuevaSolicitud(temp);
+            }catch(MySQLIntegrityConstraintViolationException e){
+                showMessage();
+            }
         }
         resetearValores();
+    }
+    
+    public void showMessage() {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Su solicitud fue rechazada", "Datos previamente registrados!!");
+        RequestContext.getCurrentInstance().showMessageInDialog(message);
     }
     
     public static void resetearValores(){

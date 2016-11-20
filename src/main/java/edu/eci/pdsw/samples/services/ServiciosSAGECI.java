@@ -16,6 +16,7 @@
  */
 package edu.eci.pdsw.samples.services;
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import edu.eci.pdsw.samples.entities.Egresado;
 import edu.eci.pdsw.samples.entities.Egresado_Empresa;
 import edu.eci.pdsw.samples.entities.Estudiante;
@@ -108,7 +109,7 @@ public abstract class ServiciosSAGECI {
      * @param s la nueva solicitud de afiliacion
      * @throws ExcepcionServiciosSAGECI si se presento un error de persistencia
      */
-    public abstract void registrarNuevaSolicitud(SolicitudAfiliacion s) throws ExcepcionServiciosSAGECI;
+    public abstract void registrarNuevaSolicitud(SolicitudAfiliacion s) throws ExcepcionServiciosSAGECI,MySQLIntegrityConstraintViolationException;
     
 
     /**
@@ -142,5 +143,6 @@ public abstract class ServiciosSAGECI {
      * @throws ExcepcionServiciosSAGECI 
      */
     public abstract  void actualizarSolicitudAfliliacion(SolicitudAfiliacion s) throws ExcepcionServiciosSAGECI;
+    
     
 }

@@ -51,7 +51,6 @@
         <id property='nombreempre' column='Nombre'/>
         <result property='telempre' column='Telefono'/>   
         <result property='dirempre' column='Direccion'/>
-        
     </resultMap>
     
     <select parameterType='map' id='getSolicitudesAfiliacion' resultMap='SolicitudResult'  >   
@@ -93,7 +92,7 @@
         Estudiante.Carrera as Estu_Carrera  
          
         FROM Persona as p1 INNER JOIN Solicitud_Afiliacion as so ON(p1.DocumentoID = so.DocumentoID) LEFT JOIN Estudiante ON (Estudiante.DocumentoID = p1.DocumentoID) LEFT JOIN Egresado ON (Egresado.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (Egresado.Empresa = Egresado_Empresa.Nombre)
-        WHERE   so.Estado_Solicitud="NO REVISADO" 
+        WHERE so.Estado_Solicitud="NO REVISADO" 
         
     </select>
     
@@ -136,7 +135,6 @@
         WHERE Solicitud_Afiliacion.SolicitudID=#{identificador}
         
     </select>
-     
         
     <insert id='insertarSolicitudAfiliacion' parameterType='map' >
         INSERT INTO Solicitud_Afiliacion (DocumentoID,Fecha_Solicitud,Estado_Solicitud,Comentario) values(#{documentoid},#{fecha},#{estado},#{comentario})

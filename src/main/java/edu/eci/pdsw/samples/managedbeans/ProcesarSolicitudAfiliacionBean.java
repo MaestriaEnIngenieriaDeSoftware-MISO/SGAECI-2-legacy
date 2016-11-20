@@ -42,7 +42,7 @@ import javax.mail.MessagingException;
 @SessionScoped
 public class ProcesarSolicitudAfiliacionBean implements Serializable{
 
-    ServiciosSAGECI SAGECI=ServiciosSAGECI.getInstance();
+    ServiciosSAGECI SAGECI = ServiciosSAGECI.getInstance();
     SolicitudAfiliacion solicitudSelection;
     String Comentario;
     //AsignacionUser_password user;

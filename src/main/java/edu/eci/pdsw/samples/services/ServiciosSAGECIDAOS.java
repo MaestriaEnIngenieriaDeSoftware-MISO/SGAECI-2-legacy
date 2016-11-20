@@ -16,6 +16,7 @@
  */
 package edu.eci.pdsw.samples.services;
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import edu.eci.pdsw.samples.entities.Egresado;
 import edu.eci.pdsw.samples.entities.Egresado_Empresa;
 import edu.eci.pdsw.samples.entities.Estudiante;
@@ -107,13 +108,13 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
     }
 
     @Override
-    public void registrarNuevaSolicitud(SolicitudAfiliacion s) throws ExcepcionServiciosSAGECI {
+    public void registrarNuevaSolicitud(SolicitudAfiliacion s) throws ExcepcionServiciosSAGECI{
         try {
             daof.beginSession();
             daof.getDaoSolicitudAfiliacion().save(s);
             daof.commitTransaction();
             daof.endSession();
-        } catch (PersistenceException ex) {
+        }catch (PersistenceException ex) {
             Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
             throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
         }
