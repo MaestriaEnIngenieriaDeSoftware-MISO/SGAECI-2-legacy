@@ -5,6 +5,8 @@
  */
 package edu.eci.pdsw.samples.entities;
 
+import java.math.BigInteger;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,19 +15,43 @@ import java.util.Set;
  */
 public class Persona {
     private int documentoID;
-    private long telefono1,telefono2;
-    private String tipoDocumentoID,nombre,apellido,direccion,correo,genero;
+    private long telefono1;
+    private BigInteger telefono2;
+    private String tipoDocumentoID,nombre,apellido,direccion,correo_Personal,genero;
+    Rol rol;
+
     
-    public Persona(int documentoID,long telefono1,long telefono2,String tipoDocumentoID,String nombre,String direccion ,String correo,String genero,String apellido){
+    
+    
+     /**
+     * Constructor de persona
+     *
+     * @param DocumentoID
+     * @param telefono1
+     * @param telefono2
+     * @param TipoID
+     * @param nombre
+     * @param apellido
+     * @param direccion
+     * @param correo
+     * @param genero
+     * @param rol
+     */
+    public Persona(int documentoID,long telefono1,BigInteger telefono2,String tipoDocumentoID,String nombre,String apellido ,String direccion ,String correo,String genero,Rol rol){
         this.documentoID = documentoID;
         this.telefono1 = telefono1;
         this.telefono2 = telefono2;
         this.tipoDocumentoID = tipoDocumentoID;
         this.nombre = nombre;
+        this.apellido=apellido;
         this.direccion = direccion;
-        this.correo = correo;
+        this.correo_Personal = correo;
         this.genero = genero;
         this.apellido=apellido;
+        this.rol=rol;
+        
+        
+
     }
 
     public Persona() {
@@ -45,6 +71,14 @@ public class Persona {
         return documentoID;
     }
 
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
     public void setDocumentoID(int documentoID) {
         this.documentoID = documentoID;
     }
@@ -57,11 +91,11 @@ public class Persona {
         this.telefono1 = telefono1;
     }
 
-    public long getTelefono2() {
+    public BigInteger getTelefono2() {
         return telefono2;
     }
 
-    public void setTelefono2(long telefono2) {
+    public void setTelefono2(BigInteger telefono2) {
         this.telefono2 = telefono2;
     }
 
@@ -73,6 +107,14 @@ public class Persona {
         this.tipoDocumentoID = tipoDocumentoID;
     }
 
+    public String getCorreo_Personal() {
+        return correo_Personal;
+    }
+
+    public void setCorreo_Personal(String correo_Personal) {
+        this.correo_Personal = correo_Personal;
+    }
+    
     public String getNombre() {
         return nombre;
     }
@@ -89,14 +131,6 @@ public class Persona {
         this.direccion = direccion;
     }
 
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
     public String getGenero() {
         return genero;
     }
@@ -105,4 +139,9 @@ public class Persona {
         this.genero = genero;
     }   
     
+    public String toString() {
+        String res;
+        res= "Persona:[" +documentoID+" "+telefono1+" "+ telefono2+" "+tipoDocumentoID+" "+nombre+" "+apellido+" "+direccion+" "+ correo_Personal +" "+ genero+" "+ rol+ "] \n";
+        return res;
+    }
 }

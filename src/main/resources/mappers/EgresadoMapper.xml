@@ -11,11 +11,12 @@
         <result property='telefono2' column='Celular'/>  
         <result property='tipoDocumentoID' column='TipoDocumentoID'/> 
         <result property='nombre' column='Nombre'/> 
+        <result property='apellido' column='Apellido'/> 
         <result property='direccion' column='Direccion'/> 
-        <result property='correo' column='Correo'/> 
+        <result property='correo' column='Correo_Personal'/> 
         <result property='genero' column='Genero'/> 
         <result property='semestreGrado' column='Semestre_Graduacion'/> 
-        <result property='correoPersonal' column='Correo_Personal'/> 
+        <result property='correoEstudiantil' column='Correo_Estudiantil'/> 
         <result property='cargo' column='Cargo'/> 
         <result property='labora' column='Labora'/> 
         <association property='emp' javaType='Egresado_Empresa' resultMap='EmpresaResult' columnPrefix='Epre_'></association>
@@ -29,10 +30,10 @@
   
     
      <insert id='insertarEgresado'>
-        INSERT INTO Egresado(DocumentoID,Semestre_Graduacion,Correo_Personal,Empresa,Labora,Cargo,Fecha_Graduacion) values (#{documentoID},#{semestreGraduacion},#{correoPersonal},#{empresaID},#{labora},#{cargo},#{fechaGraduacion})
+        INSERT INTO Egresado(DocumentoID,Semestre_Graduacion,Correo_Estudiantil,Empresa,Labora,Cargo,Fecha_Graduacion) values (#{documentoID},#{semestreGraduacion},#{correoPersonal},#{empresaID},#{labora},#{cargo},#{fechaGraduacion})
     </insert>
     
-     <select id="getEgresado" parameterType="map" >
+     <select id="getEgresado" parameterType="map" resultMap="EgresadoResult">
          SELECT 
           p1.DocumentoID as Egre_DocumentoID,
           p1.Telefono as Egre_Telefono,
@@ -40,10 +41,10 @@
           p1.TipoDocumentoID as Egre_TipoDocumentoID,
           p1.Nombre as Egre_Nombre,
           p1.Direccion as Egre_Direccion,
-          p1.Correo as Egre_Correo,
+          p1.Correo_Personal as Egre_Correo_Personal,
           p1.Genero as Egre_Genero,
           egre.Semestre_Graduacion as Egre_Semestre_Graduacion, 
-          egre.Correo_Personal as Egre_Correo_Personal, 
+          egre.Correo_Estudiantil as Egre_Correo_Estudiantil, 
           egre.Cargo as Egre_Cargo,
           egre.Labora as Egre_Labora, 
         
@@ -55,7 +56,7 @@
          WHERE egre.DocumentoID = #{idEgresado}
      </select>
      
-     <select id="getEgresados" parameterType="map" >
+     <select id="getEgresados" parameterType="map" resultMap="EgresadoResult">
          SELECT 
        
           p1.DocumentoID as Egre_DocumentoID,

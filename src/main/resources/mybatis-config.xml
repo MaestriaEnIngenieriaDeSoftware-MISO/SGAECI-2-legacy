@@ -31,9 +31,9 @@
         <mapper resource="mappers/EstudianteMapper.xml"></mapper>
         <mapper resource="mappers/EgresadoMapper.xml"></mapper>
         <mapper resource="mappers/EmpresaMapper.xml"></mapper>
+        <mapper resource="mappers/PersonaMapper.xml"></mapper>
 
 
     </mappers> 
-        
-        
+
 </configuration>

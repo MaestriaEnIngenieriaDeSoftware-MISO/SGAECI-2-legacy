@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ 
+<mapper namespace='edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.PersonaMapper'>
+    
+    <resultMap type='Persona' id='PersonaVencidaResult'>
+        <id property='documentoID' column='DocumentoID'/>
+        <result property='tipoDocumentoID' column='TipoDocumentoID'/> 
+        <result property='nombre' column='Nombre'/> 
+        <result property='apellido' column='Apellido'/> 
+        <result property='direccion' column='Direccion'/> 
+        <result property='correo_Personal' column='Correo_Personal'/> 
+        <result property='genero' column='Genero'/> 
+    </resultMap>
+     
+    <!--- 
+    <select id='getAfiliacionesVencerse' parameterType="map" resultMap="PersonaVencidaResult" >   
+        SELECT 
+            per.Nombre as Nombre,
+            per.Apellido as Apellido, 
+            per.DocumentoID as DocumentoID, 
+            per.Direccion as Direccion, 
+            per.Correo_Personal as Correo_Personal, 
+            per.Genero as Genero
+        FROM Persona as per JOIN Estado_afiliacion as esta ON(per.DocumentoID = esta.DocumentoID)
+        WHERE DATEDIFF(esta.Fecha_Fin,SysDate())<=30
+    </select>
+     -->
+     
+    <insert id='insertarPersona' parameterType="map" >
+        INSERT INTO Persona(DocumentoID,TipoDocumentoID,Nombre,Apellido,Direccion,Correo_Personal,Genero,Telefono,Celular) values (#{documentoID},#{tipoDocumentoID},#{nombre},#{apellido},#{direccion},#{correo},#{genero},#{telefono1},#{telefono2})
+    </insert>
+    
+    <delete id="eliminarPersona" parameterType="map" >
+        DELETE FROM Persona WHERE(DocumentoID=#{documentoID})
+    </delete>
+    
+    
+</mapper>

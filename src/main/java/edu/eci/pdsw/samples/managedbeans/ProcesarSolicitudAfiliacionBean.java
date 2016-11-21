@@ -42,7 +42,7 @@ import javax.mail.MessagingException;
 @SessionScoped
 public class ProcesarSolicitudAfiliacionBean implements Serializable{
 
-    ServiciosSAGECI SAGECI=ServiciosSAGECI.getInstance();
+    ServiciosSAGECI SAGECI = ServiciosSAGECI.getInstance();
     SolicitudAfiliacion solicitudSelection;
     String Comentario;
     //AsignacionUser_password user;
@@ -93,8 +93,8 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
             Egresado e1 = solicitudSelection.getE1();
             Estudiante e2 =solicitudSelection.getE2();
             String messageAprobado = "Su solicitud ha sido Aprobada: "+Comentario;
-            String toEgresado = e1.getCorreoPersonal();
-            String toEstudiante = e2.getCorreo();
+            String toEgresado = e1.getCorreo_Personal();
+            String toEstudiante = e2.getCorreo_Personal();
             solicitudSelection.setEstadoSolicitud("ACEPTADA");
             solicitudSelection.setComentario(Comentario);
             SAGECI.actualizarSolicitudAfliliacion(solicitudSelection);
@@ -118,8 +118,8 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
             Egresado e1 = solicitudSelection.getE1();
             Estudiante e2 =solicitudSelection.getE2();
             String messageAprobado = "Su solicitud ha sido Aprobada: "+Comentario;
-            String toEgresado = e1.getCorreoPersonal();
-            String toEstudiante = e2.getCorreo();
+            String toEgresado = e1.getCorreo_Personal();
+            String toEstudiante = e2.getCorreo_Personal();
             String subjectRechazado = "Solicitud de Ingreso AECI: Rechazada";
             solicitudSelection.setEstadoSolicitud("RECHAZADA");
             solicitudSelection.setComentario(Comentario);

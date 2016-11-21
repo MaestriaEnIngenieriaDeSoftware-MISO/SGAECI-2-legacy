@@ -23,7 +23,7 @@ public class AsignacionUser_password {
    String password;
    
 
-    public Hashtable<String, String> getCorreocontraseña() {// Llave:usuario Contenido: contraseña encrptada 
+    public Hashtable<String, String> getCorreocontraseña(int id) {// Llave:usuario Contenido: contraseña encrptada 
         
         return correocontraseña; // 
     }
@@ -40,7 +40,7 @@ public class AsignacionUser_password {
 // Asigna un usuario al afiliado,toma el correo como usuario 
     public String getUsuario() {
         Persona usuario = new Persona();
-        String correo=usuario.getCorreo();
+        String correo=usuario.getCorreo_Personal();
         String usuarioAsignado=correo;
         return usuarioAsignado;
     }

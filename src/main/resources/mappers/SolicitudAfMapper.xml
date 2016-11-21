@@ -5,6 +5,7 @@
   
  
 <mapper namespace='edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.SolicitudAfMapper'>
+    
     <resultMap type='SolicitudAfiliacion' id='SolicitudResult'>
         <id property='solicitudID' column='SolicitudID'/>
         <result property='fechaSolicitud' column='Fecha_Solicitud'/>
@@ -20,8 +21,9 @@
         <result property='telefono2' column='Celular'/>  
         <result property='tipoDocumentoID' column='TipoDocumentoID'/> 
         <result property='nombre' column='Nombre'/> 
+        <result property='apellido' column='Apellido'/> 
         <result property='direccion' column='Direccion'/> 
-        <result property='correo' column='Correo'/> 
+        <result property='correo_Personal' column='Correo_Personal'/> 
         <result property='genero' column='Genero'/> 
         <result property='codigoEstudiante' column='Codigo_Estudiante'/> 
         <result property='semestrePonderado' column='Semestre_Ponderado'/> 
@@ -34,11 +36,12 @@
         <result property='telefono2' column='Celular'/>  
         <result property='tipoDocumentoID' column='TipoDocumentoID'/> 
         <result property='nombre' column='Nombre'/> 
+        <result property='apellido' column='Apellido'/> 
         <result property='direccion' column='Direccion'/> 
-        <result property='correo' column='Correo'/> 
+        <result property='correo_Personal' column='Correo_Personal'/> 
         <result property='genero' column='Genero'/> 
         <result property='semestreGrado' column='Semestre_Graduacion'/> 
-        <result property='correoPersonal' column='Correo_Personal'/> 
+        <result property='correoEstudiantil' column='Correo_Estudiantil'/> 
         <result property='cargo' column='Cargo'/> 
         <result property='labora' column='Labora'/> 
         <association property='emp' javaType='Egresado_Empresa' resultMap='EmpresaResult' columnPrefix='Epre_'></association>
@@ -48,7 +51,6 @@
         <id property='nombreempre' column='Nombre'/>
         <result property='telempre' column='Telefono'/>   
         <result property='dirempre' column='Direccion'/>
-        
     </resultMap>
     
     <select parameterType='map' id='getSolicitudesAfiliacion' resultMap='SolicitudResult'  >   
@@ -63,11 +65,12 @@
         p1.Celular as Egre_Celuar,
         p1.TipoDocumentoID as Egre_TipoDocumentoID,
         p1.Nombre as Egre_Nombre,
+        p1.Apellido as Egre_Apellido,
         p1.Direccion as Egre_Direccion,
-        p1.Correo as Egre_Correo,
+        p1.Correo_Personal as Egre_Correo_Personal,
         p1.Genero as Egre_Genero,
         Egresado.Semestre_Graduacion as Egre_Semestre_Graduacion, 
-        Egresado.Correo_Personal as Egre_Correo_Personal, 
+        Egresado.Correo_Estudiantil as Egre_Correo_Estudiantil, 
         Egresado.Cargo as Egre_Cargo,
         Egresado.Labora as Egre_Labora, 
         
@@ -80,15 +83,16 @@
         p1.Celular as Estu_Celular,
         p1.TipoDocumentoID as Estu_TipoDocumentoID,
         p1.Nombre as Estu_Nombre,
+        p1.Apellido as Estu_Apellido,
         p1.Direccion as Estu_Direccion,
-        p1.Correo as Estu_Correo,
+        p1.Correo_Personal as Estu_Correo_Personal,
         p1.Genero as Estu_Genero, 
         Estudiante.Codigo_Estudiante as Estu_Codigo_Estudiante,
         Estudiante.Semestre_Ponderado as Estu_Semestre_Ponderado, 
         Estudiante.Carrera as Estu_Carrera  
          
         FROM Persona as p1 INNER JOIN Solicitud_Afiliacion as so ON(p1.DocumentoID = so.DocumentoID) LEFT JOIN Estudiante ON (Estudiante.DocumentoID = p1.DocumentoID) LEFT JOIN Egresado ON (Egresado.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (Egresado.Empresa = Egresado_Empresa.Nombre)
-        WHERE   so.Estado_Solicitud="NO REVISADO" 
+        WHERE so.Estado_Solicitud="NO REVISADO" 
         
     </select>
     
@@ -102,8 +106,9 @@
         p1.Telefono2 as Estu_Telefono2,
         p1.TipoDocumentoID as Estu_TipoDocumentoID,
         p1.Nombre as Estu_Nombre,
+        p1.Apellido as Estu_Apellido,
         p1.Direccion as Estu_Direccion,
-        p1.Correo as Estu_Correo,
+        p1.Correo_Personal as Estu_Correo_Personal,
         p1.Genero as Estu_Genero, 
         Estudiante.Carrera as Estu_Carrera, 
         Estudiante.Semestre_Ponderado as Estu_Semestre_Ponderado, 
@@ -114,10 +119,11 @@
         p1.Telefono2 as Egre_Telefono2,
         p1.TipoDocumentoID as Egre_TipoDocumentoID,
         p1.Nombre as Egre_Nombre,
+        p1.Apellido as Egre_Apellido,
         p1.Direccion as Egre_Direccion,p1.Correo as Egre_Correo,
         p1.Genero as Egre_Genero,
         Egresado.Semestre_Graduacion as Egre_Semestre_Graduacion, 
-        Egresado.Correo_Personal as Egre_Correo_Personal, 
+        Egresado.Correo_Estudiantil as Egre_Correo_Estudiantil, 
         Egresado.Labora as Egre_Labora, 
         Egresado.Cargo as Egre_Cargo,
         
@@ -129,15 +135,7 @@
         WHERE Solicitud_Afiliacion.SolicitudID=#{identificador}
         
     </select>
-     
-    <insert id='insertarPersona' parameterType="map" >
-        INSERT INTO Persona(DocumentoID,TipoDocumentoID,Nombre,Direccion,Correo,Genero,Telefono,Celular) values (#{documentoID},#{tipoDocumentoID},#{nombre},#{direccion},#{correo},#{genero},#{telefono1},#{telefono2})
-    </insert>
-    
-    <delete id="eliminarPersona" parameterType="map" >
-        DELETE FROM Persona WHERE(DocumentoID=#{documentoID})
-    </delete>
-    
+        
     <insert id='insertarSolicitudAfiliacion' parameterType='map' >
         INSERT INTO Solicitud_Afiliacion (DocumentoID,Fecha_Solicitud,Estado_Solicitud,Comentario) values(#{documentoid},#{fecha},#{estado},#{comentario})
     </insert>

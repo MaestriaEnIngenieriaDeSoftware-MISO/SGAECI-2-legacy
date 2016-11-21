@@ -11,8 +11,9 @@
         <result property='telefono2' column='Celular'/>  
         <result property='tipoDocumentoID' column='TipoDocumentoID'/> 
         <result property='nombre' column='Nombre'/> 
+        <result property='apellido' column='Apellido'/> 
         <result property='direccion' column='Direccion'/> 
-        <result property='correo' column='Correo'/> 
+        <result property='correo_Personal' column='Correo_Personal'/> 
         <result property='genero' column='Genero'/> 
         <result property='codigoEstudiante' column='Codigo_Estudiante'/> 
         <result property='semestrePonderado' column='Semestre_Ponderado'/> 
@@ -20,29 +21,29 @@
     </resultMap>
 
     
-    <select id="getEstudiante" parameterType="map" >
+    <select id="getEstudiante" parameterType="map" resultMap="EstudianteResult">
          SELECT * FROM 
          Estudiante JOIN Persona 
          WHERE Estudiante.DocumentoID = #{idEstudiante}
      </select>
     
-    <select id="getEstudiantes" parameterType="map" >
+    <select id="getEstudiantes" parameterType="map" resultMap="EstudianteResult">
          SELECT 
-         per.documentoID as DocumentoID,
-         per.telefono as Telefono,
-         per.celular as Celular,
-         per.tipoDocumentoID as TipoDocumentoID,
-         per.nombre as Nombre, 
-         per.direccion as Direccion,
-         per.correo as Correo,
-         per.genero as Genero,
+         per.DocumentoID as DocumentoID,
+         per.Telefono as Telefono,
+         per.Celular as Celular,
+         per.TipoDocumentoID as TipoDocumentoID,
+         per.Nombre as Nombre, 
+         per.Apellido as Apellido, 
+         per.Direccion as Direccion,
+         per.Correo_Personal as Correo_Personal,
+         per.Genero as Genero,
          est.Codigo_Estudiante as Codigo_Estudiante,
          est.Semestre_Ponderado as Semestre_Ponderado,
          est.Carrera
         
         FROM 
          Estudiante as est JOIN Persona as per
-         
      </select>
 
      <insert id='insertarEstudiante'>

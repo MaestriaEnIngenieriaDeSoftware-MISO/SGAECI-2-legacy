@@ -6,6 +6,10 @@
 package edu.eci.pdsw.samples.entities;
 
 
+import java.math.BigInteger;
+import java.util.List;
+
+
 /**
  *
  * @author 2106796
@@ -15,15 +19,14 @@ public class Estudiante extends Persona{
     private int codigoEstudiante,semestrePonderado;
     private String carrera;
   
-    
-    public Estudiante(int documentoID, long telefono1, long telefono2, String tipoDocumentoID, String nombre, String direccion, String correo, String genero,int codigoEstudiante,int semestrePonderado, String carrera,String apellido){
-        super(documentoID,telefono1,telefono2,tipoDocumentoID,nombre,direccion,correo,genero,apellido);
+       
+
+    public Estudiante(int documentoID, long telefono1, BigInteger telefono2, String tipoDocumentoID, String nombre, String apellido,String direccion, String correo, String genero,Rol rol,int codigoEstudiante,int semestrePonderado, String carrera) {
+        super(documentoID,telefono1,telefono2,tipoDocumentoID,nombre,apellido,direccion,correo,genero,rol);
         this.codigoEstudiante = codigoEstudiante;
         this.semestrePonderado = semestrePonderado;
-        this.carrera=carrera;
-       
+        this.carrera=carrera;   
     }
-
     
     public Estudiante() {
     }

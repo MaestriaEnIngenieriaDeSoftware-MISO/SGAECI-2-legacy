@@ -17,10 +17,10 @@
 
                     <p:outputLabel style="align-content: center" for="nombre" value="Nombres : " />
                     <p:inputText styleClass="cent" required="true" id="nombre" value="#{SolicitudAfiliacion.nombre}"/>
-                    
+
                     <p:outputLabel style="align-content: center" for="apellido" value="Apellidos: " />
                     <p:inputText styleClass="cent" required="true" id="apellido" value="#{SolicitudAfiliacion.apellido}"/>
-                    
+
                     <p:outputLabel for="tid" value="Tipo Documento Identidad: " />
                     <p:selectOneMenu styleClass="cent" required="True" id="tid" value="#{SolicitudAfiliacion.tipoDocumentoID}" style="width:210px">
                         <f:selectItem itemLabel="CC" itemValue="CC" />
@@ -38,13 +38,13 @@
 
                     <p:outputLabel for="correoP" value="Correo Personal: " />
                     <p:inputText styleClass="cent" required="true" id="correoP" value="#{SolicitudAfiliacion.correoPersonal}"/>
-                    
+
                     <p:outputLabel for="correo" value="Correo Institucional: " />
                     <p:inputText styleClass="cent" id="correo" value="#{SolicitudAfiliacion.correo}"/>
 
                     <p:outputLabel for="telcasa" value="Telefono Casa: " />
                     <p:inputText styleClass="cent"  id="telcasa" value="#{SolicitudAfiliacion.telefono}"/>
-                    
+
                     <p:outputLabel for="Celular" value="No. Celular: " />
                     <p:inputText styleClass="cent" required="true" id="Celular" value="#{SolicitudAfiliacion.telefono2}"/>
 
@@ -56,16 +56,18 @@
 
                     <p:outputLabel for="date" value="Fecha Graduacion :" />
                     <p:calendar styleClass="sheet.css"  id="date" value="#{SolicitudAfiliacion.fechaGraduacion}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
-
-                </p:panelGrid>
-                
-                <p:outputLabel for="gen" value="Estado Laboral:" />
-                <p:selectOneMenu styleClass="cent" required="True" id="gen" value="#{SolicitudAfiliacion.tipotra}" style="width:210px">
+                    
+                    <p:outputLabel for="elab" value="Estado Laboral:" />
+                    <p:selectOneMenu styleClass="cent" required="True" id="elab" value="#{SolicitudAfiliacion.tipotra}" style="width:210px">
                         <f:selectItem itemLabel="Independiente" itemValue="Independiente" />
                         <f:selectItem itemLabel="Empresa" itemValue="Empresa" />
                         <f:selectItem itemLabel="Desempleado" itemValue="Desempleado" />
-                </p:selectOneMenu>
-                
+                    </p:selectOneMenu>
+                    
+                </p:panelGrid>
+
+
+
                 <p:panelGrid columnClasses="centered" id="Empresa" columns="2" style="landscape" >
                     <p:outputLabel for="empresa" value="Empresa donde Labora:" />
                     <p:inputText styleClass="cent" required="#{SolicitudAfiliacion.marca}" id="empresa" value="#{SolicitudAfiliacion.empresa}"/>
@@ -80,7 +82,7 @@
                     <p:inputText styleClass="cent"  id="cargo" value="#{SolicitudAfiliacion.cargo}"/>
 
                 </p:panelGrid>
-                
+
                 <p:commandLink oncomplete="window.open('http://www.aeci.org.co/#!politicas-de-tratamiento-de-datos')">Acepta los Terminos y Condiciones </p:commandLink>
                 <p:selectBooleanCheckbox required="true" value="#{SolicitudAfiliacion.acepta}" />
                 <br></br>
