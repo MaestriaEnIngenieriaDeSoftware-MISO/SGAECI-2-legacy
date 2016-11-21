@@ -15,8 +15,11 @@
             <div align="center" draggable="false" >
                 <p:panelGrid columnClasses="centered" columns="2">
 
-                    <p:outputLabel for="nombre" value="Nombre Completo: " />
+                    <p:outputLabel for="nombre" value="Nombres " />
                     <p:inputText styleClass="cent" id="nombre" required="true" value="#{SolicitudAfiliacion.nombre}"/>
+                    
+                    <p:outputLabel for="apellido" value="Apellidos" />
+                    <p:inputText styleClass="cent" id="apellido" required="true" value="#{SolicitudAfiliacion.apellido}"/>
 
                     <p:outputLabel for="tid" value="Tipo Documento Identidad: " />
                     <p:selectOneMenu styleClass="cent" id="tid" value="#{SolicitudAfiliacion.tipoDocumentoID}" style="width:175px">
@@ -34,28 +37,29 @@
                     </p:selectOneMenu>
                     
                     <p:outputLabel for="telcasa" value="Telefono Casa: " />
-                    <p:inputText styleClass="cent" id="telcasa" required="true" value="#{SolicitudAfiliacion.telefono}"/>
+                    <p:inputText styleClass="cent" id="telcasa"  value="#{SolicitudAfiliacion.telefono}"/>
                     
                     <p:outputLabel for="Celular" value="No. Celular: " />
-                    <p:inputText styleClass="cent" id="Celular" value="#{SolicitudAfiliacion.telefono2}"/>                
+                    <p:inputText styleClass="cent" required="true" id="Celular" value="#{SolicitudAfiliacion.telefono2}"/>                
 
                     <p:outputLabel for="direccionVi" value="Direccion Vivienda " />
-                    <p:inputText styleClass="cent" id="direccionVi" required="true" value="#{SolicitudAfiliacion.direccionVivienda}"/>
+                    <p:inputText styleClass="cent" id="direccionVi"  value="#{SolicitudAfiliacion.direccionVivienda}"/>
 
                     <h:outputLabel for="codigoEstu" value="Codigo estudiantil: " />
                     <p:inputText styleClass="cent" id="codigoEstu" required="true" value="#{SolicitudAfiliacion.codigoEstudiante}" />
-
-                    <p:outputLabel for="correo" value="Correo Estudiantil: " />
+                    
+                    
+                    <p:outputLabel for="correo" value="Correo Institucional: " />
                     <p:inputText styleClass="cent" id="correo" required="true" value="#{SolicitudAfiliacion.correo}"/>
 
-                    <p:outputLabel for="carr" value="Carrera Estudiantil: " />
+                    <p:outputLabel for="carr" value="Programa: " />
                     <p:selectOneMenu styleClass="cent" id="carr" value="#{SolicitudAfiliacion.carrera}" style="width:259px">
                         <p:ajax event="change" update=":form:eventsDT2" />
                         <f:selectItem itemLabel="Selecione uno" itemValue="" />
                         <f:selectItems value="#{SolicitudAfiliacion.carreras}" />
                     </p:selectOneMenu>
 
-                    <p:outputLabel for="eventsDT2" value="Semestre Estudiantil: " />
+                    <p:outputLabel for="eventsDT2" value="Semestre: " />
                     <p:selectOneMenu styleClass="cent" id="eventsDT2" value="#{SolicitudAfiliacion.semestrePonderado}" style="width:175px">
                         <f:selectItem itemLabel="Selecione uno" itemValue="" />
                         <f:selectItems value="#{SolicitudAfiliacion.semestres}" />

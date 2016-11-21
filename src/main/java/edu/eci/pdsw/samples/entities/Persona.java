@@ -14,9 +14,9 @@ import java.util.Set;
 public class Persona {
     private int documentoID;
     private long telefono1,telefono2;
-    private String tipoDocumentoID,nombre,direccion,correo,genero;
+    private String tipoDocumentoID,nombre,apellido,direccion,correo,genero;
     
-    public Persona(int documentoID,long telefono1,long telefono2,String tipoDocumentoID,String nombre,String direccion ,String correo,String genero){
+    public Persona(int documentoID,long telefono1,long telefono2,String tipoDocumentoID,String nombre,String direccion ,String correo,String genero,String apellido){
         this.documentoID = documentoID;
         this.telefono1 = telefono1;
         this.telefono2 = telefono2;
@@ -25,10 +25,21 @@ public class Persona {
         this.direccion = direccion;
         this.correo = correo;
         this.genero = genero;
+        this.apellido=apellido;
     }
 
     public Persona() {
     }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+    
+    
 
     public int getDocumentoID() {
         return documentoID;

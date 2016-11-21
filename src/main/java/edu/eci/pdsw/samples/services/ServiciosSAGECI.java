@@ -61,7 +61,7 @@ public abstract class ServiciosSAGECI {
      * @param genero genero del estudiante
      * @throws ExcepcionServiciosSAGECI si se presento un error de persistencia
      */
-    public abstract void agregarEstudiante(int codigoEstudiante, int documentoID, String semestrePonderado, int telefono1,int telefono2, String tipoDocumentoID, String nombre,String direccion,String carrera,String correo,String genero) throws ExcepcionServiciosSAGECI;
+    public abstract void agregarEstudiante(int codigoEstudiante, int documentoID, String semestrePonderado, int telefono1,int telefono2, String tipoDocumentoID, String nombre,String direccion,String carrera,String correo,String genero,String apellido) throws ExcepcionServiciosSAGECI;
     
     /**
      * Registra un egresado en la base de datos 
@@ -81,7 +81,7 @@ public abstract class ServiciosSAGECI {
      * @param fechaGraduacion fecha de graduacion del egresado
      * @throws ExcepcionServiciosSAGECI 
      */
-    public abstract void agregarEgresado(int documentoID, int telefono1, int telefono2,String tipoDocumentoID, String nombre, String direccion, String correo, String genero, String cargo, String semestreGrado, String correoPersonal, String labora,Egresado_Empresa egresadoEmpresa,Date fechaGraduacion) throws ExcepcionServiciosSAGECI;
+    public abstract void agregarEgresado(int documentoID, int telefono1, int telefono2,String tipoDocumentoID, String nombre, String direccion, String correo, String genero, String cargo, String semestreGrado, String correoPersonal, String labora,Egresado_Empresa egresadoEmpresa,Date fechaGraduacion,String apellido) throws ExcepcionServiciosSAGECI;
 
     
     /**

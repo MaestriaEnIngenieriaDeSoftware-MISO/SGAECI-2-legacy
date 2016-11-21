@@ -16,8 +16,8 @@ public class Egresado extends Persona{
     private Egresado_Empresa emp;
     private Date fechaGraduacion;
     
-    public Egresado(int documentoID, long telefono1, long telefono2,String tipoDocumentoID, String nombre, String direccion, String correo, String genero, String semestreGrado, String correoPersonal, String cargo, String labora,Egresado_Empresa egresadoEmpresa, Date graduacion) {
-        super(documentoID,telefono1,telefono2,tipoDocumentoID,nombre,direccion,correo,genero);
+    public Egresado(int documentoID, long telefono1, long telefono2,String tipoDocumentoID, String nombre, String direccion, String correo, String genero, String semestreGrado, String correoPersonal, String cargo, String labora,Egresado_Empresa egresadoEmpresa, Date graduacion,String apellido) {
+        super(documentoID,telefono1,telefono2,tipoDocumentoID,nombre,direccion,correo,genero,apellido);
         this.semestreGrado = semestreGrado;
         this.correoPersonal = correoPersonal;
         this.cargo=cargo;

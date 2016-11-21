@@ -17,6 +17,16 @@ import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+ 
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import org.primefaces.context.RequestContext;
+
 /**
  *
  * @author pdswgr2
@@ -30,12 +40,13 @@ public class SolicitudAfiliacionBean implements Serializable{
     ServiciosSAGECI SAGECI=ServiciosSAGECI.getInstance();
     private int solicitudID,documentoID,Telefono,telefono2,telefonoOficina,codigoEstudiante,semestrePonderado;
     private Date fechaGraduacion=new Date(new java.util.Date().getTime());
-    private String correo="correo",labora="no",semestreGrado="9999-9",tipoDocumentoID="CC",genero="MASCULINO",tipoSolicitante="EGRESADO",estadoSolicitud="NO REVISADO",comentario="Falta revision respectiva.",Nombre="Nombre",direccionVivienda="Direccion",Empresa="Empresa",direccionEmpresa="Direccion",Cargo="Cargo",correoPersonal="Correo",carrera="Carrera";
+    private String correo="correo",labora="no",semestreGrado="9999-9",tipoDocumentoID="CC",genero="MASCULINO",tipoSolicitante="EGRESADO",estadoSolicitud="NO REVISADO",comentario="Falta revision respectiva.",Nombre="Nombre",apellido="Apellidos",direccionVivienda="Direccion",Empresa="Empresa",direccionEmpresa="Direccion",Cargo="Cargo",correoPersonal="Correo",carrera="Carrera";
     private boolean acepta=false; 
     private ArrayList<Integer> semestres;
     private ArrayList<String> carreras;
     private boolean marca=false;
     private Egresado_Empresa egresadoEmpresa;
+    private String tipotra;
     
     public SolicitudAfiliacionBean() {
         this.semestres  = new ArrayList<>();
@@ -48,30 +59,71 @@ public class SolicitudAfiliacionBean implements Serializable{
         carreras.add("INGENIERÍA AMBIENTAL"); carreras.add("INGENIERÍA ELÉCTRICA");carreras.add("ECONOMÍA");carreras.add("INGENIERÍA BIOMÉDICA");carreras.add("INGENIERÍA DE SISTEMAS"); carreras.add("ADMINISTRACIÓN DE EMPRESAS");
 
     }
-
+    
+    public void showMessage(boolean m) {
+        FacesMessage message;
+        if(m){message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Su Solicitud fue enviada correctamente.");}
+        else{message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Incorrecto", "El Documento de identidad ya esta registrado o la informacion dada esta en un formato no valido");}
+        RequestContext.getCurrentInstance().showMessageInDialog(message);
+    }
+    
     public void agregarSolicitudAfiliacion() throws ExcepcionServiciosSAGECI{
-        if(marca){
-            labora="si";
+        if(labora.equals("Empresa")){
             egresadoEmpresa.setNombreempre(Empresa);
             egresadoEmpresa.setDirempre(direccionEmpresa);
             egresadoEmpresa.setTelempre(telefonoOficina);
         }else{
-            labora="no";
             Cargo=null;
         }
         if(correo.equals("correo")) correo=null;
         if(!Nombre.equals("Nombre")){
-            Egresado e1 = new Egresado(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre,  direccionVivienda,  correo,  genero, semestreGrado,correoPersonal, Cargo,  labora,egresadoEmpresa,fechaGraduacion);
-            Estudiante e2 = new Estudiante(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre,  direccionVivienda,  correo,  genero, codigoEstudiante, semestrePonderado,  carrera);
+            Egresado e1 = new Egresado(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre,  direccionVivienda,  correo,  genero, semestreGrado,correoPersonal, Cargo,  labora,egresadoEmpresa,fechaGraduacion,apellido);
+            Estudiante e2 = new Estudiante( documentoID,  Telefono,  telefono2,  tipoDocumentoID,  Nombre,  direccionVivienda,  correo,  genero, codigoEstudiante, semestrePonderado,  carrera, apellido);
             if(semestreGrado.equals("9999-9")){
                 e1=null;
             }else{
                 e2=null;
             }
             SolicitudAfiliacion temp = new SolicitudAfiliacion( solicitudID, new Date(new java.util.Date().getTime()) ,  estadoSolicitud,  comentario,  e1,  e2);
-            SAGECI.registrarNuevaSolicitud(temp);
+            try{
+                SAGECI.registrarNuevaSolicitud(temp);
+                showMessage(true);
+            }catch(ExcepcionServiciosSAGECI e){
+                showMessage(false);
+            }
         }           
     }
+
+    public String getTipotra() {
+        return tipotra;
+    }
+
+    public void setTipotra(String tipotra) {
+        this.tipotra = tipotra;
+        if(tipotra.equals("Independiente")){this.marca=false;}
+        else if(tipotra.equals("Desempleado")){this.marca=false;}
+        else{this.marca=false;}
+    }
+
+
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public Egresado_Empresa getEgresadoEmpresa() {
+        return egresadoEmpresa;
+    }
+
+    public void setEgresadoEmpresa(Egresado_Empresa egresadoEmpresa) {
+        this.egresadoEmpresa = egresadoEmpresa;
+    }
+    
+    
 
     public String getCorreo() {
         return correo;
