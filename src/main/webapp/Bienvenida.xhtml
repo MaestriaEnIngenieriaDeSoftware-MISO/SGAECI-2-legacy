@@ -5,17 +5,27 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Registro Solicitud</title>
-        <link rel="stylesheet" type="text/css" href="sheet.css"> 
-        </link>
+        <style type="text/css"> 
+            body{
+                background-image: url (bienvenida.png);
+                background-repeat: no-repeat;
+                background-position: 50% 50% ;
+                
+                    
+            }
+            
+            
+        </style>
     </h:head>
-    <h:body background="bienvenida.PNG" >
+    <h:body  >
         <h:form id="form">
             <div align="middle" draggable="false" >
                 
 
                 <p style="color:black;font-family:Georgia;">
-                    SAGECI es una aplicacion que permite ingresar a los servicios de
-                    AECI una asociación sin ánimo de lucro, conformada por Egresados de Programas de Pregrado y Posgrado de la Escuela Colombiana de Ingeniería Julio Garavito
+                    SAGECI es una aplicacion 
+                    
+                    
                 </p>
                 
                 <p:commandButton value="Bienvenido"  update="form" action="Registro"/>

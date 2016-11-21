@@ -6,6 +6,7 @@
 package edu.eci.pdsw.samples.managedbeans;
 
 
+import Security.Registro;
 import java.io.File;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -65,16 +66,16 @@ public class LogginBean implements Serializable {
     
     catch (UnknownAccountException ex){
         facesError("El usuario no se encuentra registrado. Por favor, verifique los datos");
-        //Registro.anotar(ex);
+        Registro.anotar(ex);
 
     }
     catch (IncorrectCredentialsException ex) {
             facesError("Datos erróneos. Por favor, inténtelo otra vez.");
-        //Registro.anotar(ex);
+        Registro.anotar(ex);
     }
     catch (AuthenticationException | IOException ex) {
             facesError("Error inesperado: " + ex.getMessage());
-            //Registro.anotar(ex);
+            Registro.anotar(ex);
         }
     finally {
         token.clear();

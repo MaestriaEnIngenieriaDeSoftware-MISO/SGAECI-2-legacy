@@ -22,12 +22,14 @@ public class AsignacionUser_password {
    String usuario;
    String password;
    
-
+/*
     public Hashtable<String, String> getCorreocontraseña(int id) {// Llave:usuario Contenido: contraseña encrptada 
         
         return correocontraseña; // 
     }
-// mete en una hashtable el usuario asignado como llave y lo relaciona a la contraseña encriptada
+    
+    
+// instroduce en una hashtable el usuario asignado como llave y lo relaciona a la contraseña encriptada
     public void setCorreocontraseña(Hashtable<String, String> correocontraseña) throws NoSuchAlgorithmException {
         AsignacionUser_password as= new AsignacionUser_password();
          SHA1 s = new SHA1();
@@ -37,6 +39,13 @@ public class AsignacionUser_password {
         
         
     }
+    */
+   /**
+     * Asigna al usuario un user de registro
+     * @param DocumentoID
+     * @return egresado relacionado con dicho documento de identidad
+     * 
+     */
 // Asigna un usuario al afiliado,toma el correo como usuario 
     public String getUsuario() {
         Persona usuario = new Persona();
@@ -45,7 +54,12 @@ public class AsignacionUser_password {
         return usuarioAsignado;
     }
 
-   
+    /**
+     * Asigna al usuario una contraseña de registro
+     * @param DocumentoID
+     * @return egresado relacionado con dicho documento de identidad
+     * 
+     */
 // Asigna una contraseña al afiliado, toma el valores random + id 
     public String getPassword() {
         Persona user= new Persona();
