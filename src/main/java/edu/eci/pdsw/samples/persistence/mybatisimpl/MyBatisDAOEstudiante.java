@@ -46,7 +46,7 @@ public class MyBatisDAOEstudiante implements DaoEstudiante{
 
     @Override
     public Estudiante load(int DocumentoID) throws PersistenceException {
-        if (Esmap.getEstudiante(DocumentoID)==null)throw new PersistenceException ("El Estudiante con  " + DocumentoID + "de identificacion no existe");
+       
         return Esmap.getEstudiante(DocumentoID);
             }
 
@@ -59,7 +59,7 @@ public class MyBatisDAOEstudiante implements DaoEstudiante{
     
     @Override
     public void save(Estudiante e) throws PersistenceException {
-        if(Esmap.getEstudiante(e.getDocumentoID())!=null)throw new PersistenceException("El Estudiante  con Id : "+e.getDocumentoID()+" ya esta registrado");
+        
         Esmap.insertarEstudiante(e.getCodigoEstudiante(), e.getDocumentoID(), e.getSemestrePonderado(),e.getCarrera().toUpperCase());
     }
     

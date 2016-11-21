@@ -28,7 +28,7 @@ public class MyBatisDAOEgresado implements DaoEgresado{
     
      @Override
     public Egresado load(int DocumentoID) throws PersistenceException {
-        if (Egmap.getEgresado(DocumentoID)==null)throw new PersistenceException ("El Egresado con  " + DocumentoID + "de identificacion no existe");
+       
         return Egmap.getEgresado(DocumentoID);
     }
 
@@ -39,7 +39,7 @@ public class MyBatisDAOEgresado implements DaoEgresado{
     
     @Override
     public void save(Egresado e) throws PersistenceException {
-      if (Egmap.getEgresado(e.getDocumentoID())!= null)  throw new PersistenceException("El Egresado con Id : "+e.getDocumentoID()+" ya esta registrado");
+      
       Egmap.insertarEgresado(e.getDocumentoID(), e.getSemestreGrado(), e.getCorreo_Personal().toLowerCase(), e.getLabora(), e.getCargo().toUpperCase(),e.getEmp().getNombreempre(),e.getFechaGraduacion());
     }
 }
