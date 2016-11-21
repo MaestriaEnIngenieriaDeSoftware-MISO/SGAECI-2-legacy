@@ -59,7 +59,7 @@ public class LogginBean implements Serializable {
             } else if (subject.hasRole("Afiliado")) {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("Registro.xhtml");
             } else {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("Registro.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("Bienvenida.xhtml");
             }
         }
     
