@@ -47,11 +47,10 @@ public class SolicitudAfiliacionBean implements Serializable{
     private static int documentoID,Telefono,telefonoOficina,codigoEstudiante,semestrePonderado;
     private static BigInteger telefono2;
     private Date fechaGraduacion=new Date(new java.util.Date().getTime());
-    private String Apellido="Apellido",correo="correo",labora="no",semestreGrado="9999-9",tipoDocumentoID="CC",genero="MASCULINO",tipoSolicitante="EGRESADO",estadoSolicitud="NO REVISADO",comentario="Falta revision respectiva.",Nombre="Nombre",direccionVivienda="Direccion",Empresa="Empresa",direccionEmpresa="Direccion",Cargo="Cargo",correoPersonal="Correo",carrera="Carrera";
-    private boolean acepta=false; 
+    private String Apellido,correo,labora="no",semestreGrado,tipoDocumentoID,genero,tipoSolicitante,estadoSolicitud="NO REVISADO",comentario="Falta revision respectiva.",Nombre,direccionVivienda,Empresa,direccionEmpresa,Cargo,correoPersonal,carrera;
+    private boolean acepta=false,marca=false; 
     private ArrayList<Integer> semestres;
     private ArrayList<String> carreras;
-    private boolean marca = false;
     private Egresado_Empresa egresadoEmpresa;
     private String tipotra;
     private Rol rol;
@@ -77,19 +76,13 @@ public class SolicitudAfiliacionBean implements Serializable{
     }
     
     public void agregarSolicitudAfiliacion() throws ExcepcionServiciosSAGECI{
-        if(labora.equals("Empresa")){
-            egresadoEmpresa.setNombreempre(Empresa);
-            egresadoEmpresa.setDirempre(direccionEmpresa);
-            egresadoEmpresa.setTelempre(telefonoOficina);
-        }else{
-            Cargo=null;
+        if(tipotra.equals("Independiente")){
+            Cargo="Independiente";
         }
-        if(correo.equals("correo")) correo=null;
-        if(!Nombre.equals("Nombre")){
-
+        if(Nombre!=null){
             Egresado e1 = new Egresado(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre, Apellido, direccionVivienda,  correo,  genero,rol, semestreGrado,correoPersonal, Cargo,  labora,egresadoEmpresa,fechaGraduacion);
             Estudiante e2 = new Estudiante(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre, Apellido, direccionVivienda,  correo,  genero,rol, codigoEstudiante, semestrePonderado,  carrera);
-            if(semestreGrado.equals("9999-9")){
+            if(semestreGrado==null){
                 e1=null;
             }else{
                 e2=null;
@@ -105,7 +98,25 @@ public class SolicitudAfiliacionBean implements Serializable{
         resetearValores();
     }
         
-    
+    public void asigna(){
+        if( tipotra.equals("Desempleado")){
+            labora="no";
+            Cargo=null;
+            marca=false;
+        }
+        else if(tipotra.equals("Independiente")){
+            labora="si";
+            Cargo ="Independiente";
+            marca=false;
+        }
+        else{
+            labora="si";
+            marca=true;
+            egresadoEmpresa.setNombreempre(Empresa);
+            egresadoEmpresa.setDirempre(direccionEmpresa);
+            egresadoEmpresa.setTelempre(telefonoOficina);
+        }
+    }
     
     public void showMessage() {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Su solicitud fue rechazada", "Datos previamente registrados!!");
@@ -113,11 +124,11 @@ public class SolicitudAfiliacionBean implements Serializable{
     }
     
     public  void resetearValores(){
-        telefono2 = new BigInteger("0");documentoID = 0;Telefono = 0;telefonoOficina = 0;codigoEstudiante = 0;semestrePonderado = 0;
-        correo="correo";labora="no";semestreGrado="9999-9";tipoDocumentoID="CC";genero="MASCULINO";
-        tipoSolicitante="EGRESADO";comentario="Falta revision respectiva.";
-        Nombre="Nombre";Apellido="Apellido";direccionVivienda="Direccion";Empresa="Empresa";
-        direccionEmpresa="Direccion";Cargo="Cargo";correoPersonal="Correo";carrera="Carrera";
+        telefono2 =null;documentoID = 0;Telefono = 0;telefonoOficina = 0;codigoEstudiante = 0;semestrePonderado = 0;
+        correo=null;labora=null;semestreGrado=null;tipoDocumentoID=null;genero=null;
+        tipoSolicitante=null;comentario="Falta revision respectiva.";
+        Nombre=null;Apellido=null;direccionVivienda=null;Empresa=null;
+        direccionEmpresa=null;Cargo=null;correoPersonal=null;carrera=null;
     }
 
     public String getTipotra() {
@@ -126,9 +137,6 @@ public class SolicitudAfiliacionBean implements Serializable{
 
     public void setTipotra(String tipotra) {
         this.tipotra = tipotra;
-        if(tipotra.equals("Independiente")){this.marca=false;}
-        else if(tipotra.equals("Desempleado")){this.marca=false;}
-        else{this.marca=false;}
     }
 
 

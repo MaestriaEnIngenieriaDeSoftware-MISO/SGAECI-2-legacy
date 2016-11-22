@@ -38,7 +38,7 @@
                     </p:selectOneMenu>
                     
 
-                    <p:outputLabel for="telcasa" value="Telefono Casa: " />
+                    <p:outputLabel for="telcasa" value="Teléfono Casa: " />
                     <p:inputText styleClass="cent" id="telcasa"  value="#{SolicitudAfiliacion.telefono}"/>
 
                     
@@ -46,12 +46,12 @@
                     <p:inputText styleClass="cent" required="true" id="Celular" value="#{SolicitudAfiliacion.telefono2}"/>                
 
 
-                    <p:outputLabel for="direccionVi" value="Direccion Vivienda " />
+                    <p:outputLabel for="direccionVi" value="Dirección Vivienda " />
                     <p:inputText styleClass="cent" id="direccionVi"  value="#{SolicitudAfiliacion.direccionVivienda}"/>
 
        
 
-                    <h:outputLabel for="codigoEstu" value="Carnet No.: " />
+                    <h:outputLabel for="codigoEstu" value="Carné No.: " />
                     <p:inputText styleClass="cent" id="codigoEstu" required="true" value="#{SolicitudAfiliacion.codigoEstudiante}" />
 
                     
@@ -74,13 +74,16 @@
 
                 </p:panelGrid>
 
-                <p:commandLink oncomplete="window.open('http://www.aeci.org.co/#!politicas-de-tratamiento-de-datos')">Acepta los Terminos y Condiciones </p:commandLink>
+                <p:commandLink oncomplete="window.open('http://www.aeci.org.co/#!politicas-de-tratamiento-de-datos')">Acepto los Términos y Condiciones </p:commandLink>
                 <p:selectBooleanCheckbox styleClass="cent" value="#{SolicitudAfiliacion.acepta}" />
                 <br></br>
                 <p:commandButton action="Registro" value="Enviar Solicitud De Afiliación" update="form" actionListener="#{SolicitudAfiliacion.agregarSolicitudAfiliacion()}"/>
+            </div>
+        </h:form>
+        <h:form>
+            <div align="center" draggable="false" >
                 <p:commandButton value="Volver" update="form" action="Registro"/> 
             </div>
-
         </h:form>
     </h:body>
 </html>

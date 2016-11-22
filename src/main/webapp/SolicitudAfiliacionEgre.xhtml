@@ -59,6 +59,7 @@
                     
                     <p:outputLabel for="elab" value="Estado Laboral:" />
                     <p:selectOneMenu styleClass="cent" required="True" id="elab" value="#{SolicitudAfiliacion.tipotra}" style="width:210px">
+                        <p:ajax event="change" listener="#{SolicitudAfiliacion.asigna()}" update=":form:Empresa"/>
                         <f:selectItem itemLabel="Independiente" itemValue="Independiente" />
                         <f:selectItem itemLabel="Empresa" itemValue="Empresa" />
                         <f:selectItem itemLabel="Desempleado" itemValue="Desempleado" />
@@ -73,7 +74,7 @@
                     <p:inputText styleClass="cent" required="#{SolicitudAfiliacion.marca}" id="empresa" value="#{SolicitudAfiliacion.empresa}"/>
 
                     <p:outputLabel for="dirempresa" value="Direccion Empresa: " />
-                    <p:inputText styleClass="cent"  id="dirempresa" value="#{SolicitudAfiliacion.direccionEmpresa}"/>
+                    <p:inputText styleClass="cent"  id="dirempresa" value="#{SolicitudAfiliacion.direccionEmpresa}" />
 
                     <p:outputLabel for="teleofi" value="Telefono Oficina:" />
                     <p:inputText styleClass="cent"  id="teleofi" value="#{SolicitudAfiliacion.telefonoOficina}" />
@@ -87,10 +88,12 @@
                 <p:selectBooleanCheckbox required="true" value="#{SolicitudAfiliacion.acepta}" />
                 <br></br>
                 <p:commandButton action="Registro" value="Enviar Solicitud De Afiliación" update="form" actionListener="#{SolicitudAfiliacion.agregarSolicitudAfiliacion()}"/>
-                <p:commandButton value="Volver" update="form" action="Registro"/>
-
             </div>
-
+        </h:form>
+        <h:form>
+            <div align="center" draggable="false" >
+                <p:commandButton value="Volver" update="form" action="Registro"/> 
+            </div>
         </h:form>
     </h:body>
 </html>
