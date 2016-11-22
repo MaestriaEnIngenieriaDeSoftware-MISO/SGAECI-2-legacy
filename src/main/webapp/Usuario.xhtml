@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Interfaz Usuario</title>
+        <link rel="stylesheet" type="text/css" href="sheet.css"> 
+        </link>
+    </h:head>
+    <h:body >
+        <h:form id="form">
+            <p:commandButton value="Generar Certificado" onclick="PF('dlg1').show()">
+            </p:commandButton> 
+            <p:dialog header="Certificado de  Afiliación." id="Certificado" widgetVar="dlg1" height="630" width="650" styleClass="sheet.css" resizable="false" draggable="false">
+                <p:media value="#{Usuario.streamedContent}" player="pdf" height="600" width="600" styleClass="sheet.css" />
+                <p:commandButton value="Cerrar" onclick="PF('dlg').hide()"/>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>
+
+

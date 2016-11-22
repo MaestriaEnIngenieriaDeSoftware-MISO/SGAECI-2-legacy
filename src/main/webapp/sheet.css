@@ -61,3 +61,4 @@ img {
 .dateTimeField img {
    vertical-align: middle;
 }
+.ui-dialog{z-index:1005 !important;}  
