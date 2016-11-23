@@ -28,7 +28,8 @@ import org.primefaces.model.StreamedContent;
 
 /**
  *
- * @author alfa
+ * @author Ricardo 
+ * @author Cristian
  */
 @ManagedBean (name= "Usuario")
 @RequestScoped
