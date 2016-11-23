@@ -23,6 +23,7 @@ import edu.eci.pdsw.samples.entities.Estudiante;
 import edu.eci.pdsw.samples.entities.Persona;
 import edu.eci.pdsw.samples.entities.Rol;
 import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
+import edu.eci.pdsw.samples.entities.estadoAfiliacion;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -153,4 +154,6 @@ public abstract class ServiciosSAGECI {
      * @throws ExcepcionServiciosSAGECI 
      */
     public abstract List<Persona> consultarSolicitudAfiliacionesVencidas() throws ExcepcionServiciosSAGECI;
+    
+    public abstract estadoAfiliacion consultarEstadoAfiliacion(int DocumentoID) throws ExcepcionServiciosSAGECI;
 }

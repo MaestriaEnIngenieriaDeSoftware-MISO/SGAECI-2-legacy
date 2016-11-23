@@ -23,6 +23,7 @@ import edu.eci.pdsw.samples.entities.Estudiante;
 import edu.eci.pdsw.samples.entities.Persona;
 import edu.eci.pdsw.samples.entities.Rol;
 import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
+import edu.eci.pdsw.samples.entities.estadoAfiliacion;
 import edu.eci.pdsw.samples.persistence.DaoFactory;
 import edu.eci.pdsw.samples.persistence.PersistenceException;
 import java.io.IOException;
@@ -199,6 +200,21 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
             throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
         }
         return solicitudesVencidas;
+    }
+
+    @Override
+    public estadoAfiliacion consultarEstadoAfiliacion(int DocumentoID) throws ExcepcionServiciosSAGECI {
+        estadoAfiliacion estadoAfiliacion= null;
+        try {
+            daof.beginSession();
+            estadoAfiliacion = daof.getDaoEstadoAfiliacion().load(DocumentoID);
+            daof.commitTransaction();
+            daof.endSession();
+        } catch (PersistenceException ex) {
+            Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
+        }
+        return estadoAfiliacion;
     }
 
         

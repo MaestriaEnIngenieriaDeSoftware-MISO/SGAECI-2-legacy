@@ -19,6 +19,7 @@ package edu.eci.pdsw.samples.persistence.mybatisimpl;
 
 
 import edu.eci.pdsw.samples.persistence.DaoEgresado;
+import edu.eci.pdsw.samples.persistence.DaoEstadoAfiliacion;
 import edu.eci.pdsw.samples.persistence.DaoFactory;
 import edu.eci.pdsw.samples.persistence.DaoSolicitudAfiliacion;
 import edu.eci.pdsw.samples.persistence.PersistenceException;
@@ -123,6 +124,11 @@ public class MyBatisDaoFactory extends DaoFactory {
     @Override  
     public DaoPersona getDaoPersona() {
         return new MyBatisDAOPersona(currentSession);
+    }
+
+    @Override
+    public DaoEstadoAfiliacion getDaoEstadoAfiliacion() {
+        return new MyBatisDAOEstadoAfiliacion(currentSession);
     }
 
 }

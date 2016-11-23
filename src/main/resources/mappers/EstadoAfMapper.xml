@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.EstadoAfMapper">
+    
+    <resultMap type='EstadoAfiliacion' id='EstadoResult'>
+        <id property='documentoID' column='DocumentoID'/>
+        <result property='fechainicio' column='Fecha_Inicio'/>
+        <result property='fechafin' column='Fecha_Fin'/>
+        <result property='estado' column='Estado'/>
+        <association property='e1' javaType='Egresado' resultMap='EgresadoResult' columnPrefix='Egre_'></association>
+        <association property='e2' javaType='Estudiante' resultMap='EstudianteResult' columnPrefix='Estu_'></association>  
+    </resultMap>
+   
+    <resultMap type='Estudiante' id='EstudianteResult'>
+        <id property='documentoID' column='DocumentoID'/>
+        <result property='telefono1' column='Telefono'/>
+        <result property='telefono2' column='Celular'/>  
+        <result property='tipoDocumentoID' column='TipoDocumentoID'/> 
+        <result property='nombre' column='Nombre'/> 
+        <result property='apellido' column='Apellido'/> 
+        <result property='direccion' column='Direccion'/> 
+        <result property='correo_Personal' column='Correo_Personal'/> 
+        <result property='genero' column='Genero'/> 
+        <result property='codigoEstudiante' column='Codigo_Estudiante'/> 
+        <result property='semestrePonderado' column='Semestre_Ponderado'/> 
+        <result property='carrera' column='Carrera'/> 
+    </resultMap>
+    
+    <resultMap type='Egresado' id='EgresadoResult'>
+        <id property='documentoID' column='DocumentoID'/>
+        <result property='telefono1' column='Telefono'/>
+        <result property='telefono2' column='Celular'/>  
+        <result property='tipoDocumentoID' column='TipoDocumentoID'/> 
+        <result property='nombre' column='Nombre'/> 
+        <result property='apellido' column='Apellido'/> 
+        <result property='direccion' column='Direccion'/> 
+        <result property='correo_Personal' column='Correo_Personal'/> 
+        <result property='genero' column='Genero'/> 
+        <result property='semestreGrado' column='Semestre_Graduacion'/> 
+        <result property='correoEstudiantil' column='Correo_Estudiantil'/> 
+        <result property='cargo' column='Cargo'/> 
+        <result property='labora' column='Labora'/> 
+        <association property='emp' javaType='Egresado_Empresa' resultMap='EmpresaResult' columnPrefix='Epre_'></association>
+    </resultMap>
+
+    <resultMap type='Egresado_Empresa' id='EmpresaResult'>
+        <id property='nombreempre' column='Nombre'/>
+        <result property='telempre' column='Telefono'/>   
+        <result property='dirempre' column='Direccion'/>
+    </resultMap>
+    
+    <select id = "getEstadoAf" parameterType="map" >
+        SELECT
+        DocumentoID,
+        Fecha_Inicio,
+        Fecha_Fin,
+        Estado
+        FROM Estado_afiliacion
+        WHERE DocumentoID=#{identificador}
+        
+    </select>>
+        
+    
+</mapper>

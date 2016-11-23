@@ -10,11 +10,10 @@
     </h:head>
     <h:body >
         <h:form id="form">
-            <h:outputLink value="/logout">logout</h:outputLink>
             <p:commandButton value="Generar Certificado" onclick="PF('dlg1').show()">
             </p:commandButton> 
-            <p:dialog header="Certificado de  Afiliación." id="Certificado" widgetVar="dlg1" height="630" width="650" styleClass="sheet.css" resizable="false" draggable="false">
-                <p:media value="#{Usuario.streamedContent}" player="pdf" height="600" width="600" styleClass="sheet.css" />
+            <p:dialog header="Certificado de  Afiliación." id="Certificado" widgetVar="dlg1" height="850" width="1000" styleClass="sheet.css" resizable="false" draggable="false">
+                <p:media value="#{Usuario.streamedContent}" player="pdf" height="800" width="900" styleClass="sheet.css" />
                 <p:commandButton value="Cerrar" onclick="PF('dlg').hide()"/>
             </p:dialog>
         </h:form>
