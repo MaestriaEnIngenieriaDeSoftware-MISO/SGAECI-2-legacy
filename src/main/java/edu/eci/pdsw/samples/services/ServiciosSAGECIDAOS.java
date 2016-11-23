@@ -172,6 +172,19 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
         }
     }
 
+    @Override
+    public void agregarContra(int documentoID, String contra,int tipo) throws ExcepcionServiciosSAGECI {
+        try {
+            daof.beginSession();
+            daof.getDaoRol().save(documentoID, contra,tipo);
+            daof.commitTransaction();
+            daof.endSession();
+        } catch (PersistenceException ex) {
+            Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
+        }
+    }
+
         
     }
 class PropertiesLoader {

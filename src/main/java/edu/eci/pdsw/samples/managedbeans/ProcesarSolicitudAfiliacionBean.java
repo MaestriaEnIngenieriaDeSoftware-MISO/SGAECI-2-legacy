@@ -100,10 +100,12 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
             String shacontrasena;
             if (e1.getSemestreGrado()==null){
                 shacontrasena = sh.getHash(Integer.toString(e2.getDocumentoID()));
-                email = new SimpleEmail(from, toEstudiante, subjectAprobado, messageAprobado);
+                email = new SimpleEmail(from, toEstudiante, subjectAprobado+", Su Usuario es su correo, y la contraseña es su Documento de identidad" , messageAprobado);
+                SAGECI.agregarContra(e2.getDocumentoID(),shacontrasena,3);
             }else{
                 shacontrasena = sh.getHash(Integer.toString(e1.getDocumentoID()));
-                email = new SimpleEmail(from, toEgresado, subjectAprobado, messageAprobado);
+                email = new SimpleEmail(from, toEgresado, subjectAprobado+", Su Usuario es su correo, y la contraseña es su Documento de identidad" , messageAprobado);
+                SAGECI.agregarContra(e1.getDocumentoID(),shacontrasena,2);
             }
             
             try {
