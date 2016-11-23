@@ -47,7 +47,7 @@ public class SolicitudAfiliacionBean implements Serializable{
     private static int documentoID,Telefono,telefonoOficina,codigoEstudiante,semestrePonderado;
     private static BigInteger telefono2;
     private Date fechaGraduacion=new Date(new java.util.Date().getTime());
-    private String Apellido,correo,labora="no",semestreGrado,tipoDocumentoID,genero,tipoSolicitante,estadoSolicitud="NO REVISADO",comentario="Falta revision respectiva.",Nombre,direccionVivienda,Empresa,direccionEmpresa,Cargo,correoPersonal,carrera;
+    private String Apellido,correo,labora="no",semestreGrado,tipoDocumentoID,genero,tipoSolicitante,estadoSolicitud="NO REVISADO",comentario="Falta revision respectiva.",Nombre,direccionVivienda,Empresa,direccionEmpresa,Cargo,correoPersonal,carrera="INGENIERÍA DE SISTEMAS";
     private boolean acepta=false,marca=false; 
     private ArrayList<Integer> semestres;
     private ArrayList<String> carreras;
@@ -371,7 +371,7 @@ public class SolicitudAfiliacionBean implements Serializable{
     }
 
     public  ArrayList<Integer> getSemestres() {
-        ArrayList<Integer> temp=new ArrayList<Integer>();
+        ArrayList<Integer> temp=new ArrayList<>();
         if(carrera.equals("ADMINISTRACIÓN DE EMPRESAS")||carrera.equals("MATEMÁTICAS")||carrera.equals("ECONOMÍA")){
             for (int j=7;j<10;j++){temp.add(j);}
             return temp;

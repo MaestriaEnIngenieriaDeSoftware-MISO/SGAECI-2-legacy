@@ -1,6 +1,4 @@
---TRIGGERS
-DELIMITER \\
-CREATE OR REPLACE TRIGGER nuevo_estado_afiliacion
+CREATE TRIGGER nuevo_estado_afiliacion
 AFTER UPDATE
    ON Solicitud_Afiliacion FOR EACH ROW
 BEGIN
@@ -27,5 +25,4 @@ BEGIN
             VALUES
             (NEW.DocumentoID,SYSDATE(),DATE_ADD(SYSDATE(),INTERVAL 180 DAY),"ACTIVO");
         END IF;
-END//
-DELIMITER;
+END;

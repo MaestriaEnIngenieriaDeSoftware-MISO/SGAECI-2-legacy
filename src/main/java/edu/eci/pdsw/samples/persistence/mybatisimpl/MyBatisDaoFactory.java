@@ -31,6 +31,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import edu.eci.pdsw.samples.persistence.DaoEstudiante;
 import edu.eci.pdsw.samples.persistence.DaoRol;
+import edu.eci.pdsw.samples.persistence.DaoPersona;
 
 /**
  *
@@ -117,6 +118,11 @@ public class MyBatisDaoFactory extends DaoFactory {
     @Override
     public DaoRol getDaoRol() {
         return new MyBatisDAORol(currentSession);
+    }
+    
+    @Override  
+    public DaoPersona getDaoPersona() {
+        return new MyBatisDAOPersona(currentSession);
     }
 
 }

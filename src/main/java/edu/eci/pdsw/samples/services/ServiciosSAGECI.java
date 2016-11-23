@@ -146,7 +146,11 @@ public abstract class ServiciosSAGECI {
      * @param s solicitud de afiliacion para actualizar 
      * @throws ExcepcionServiciosSAGECI 
      */
-    public abstract  void actualizarSolicitudAfliliacion(SolicitudAfiliacion s) throws ExcepcionServiciosSAGECI;
-    
-    
+    public abstract void actualizarSolicitudAfliliacion(SolicitudAfiliacion s) throws ExcepcionServiciosSAGECI;
+    /**
+     * Consulta las solicitudes de afiliacion a vencerce
+     * @return
+     * @throws ExcepcionServiciosSAGECI 
+     */
+    public abstract List<Persona> consultarSolicitudAfiliacionesVencidas() throws ExcepcionServiciosSAGECI;
 }

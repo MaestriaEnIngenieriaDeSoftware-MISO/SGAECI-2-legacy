@@ -20,6 +20,7 @@ import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import edu.eci.pdsw.samples.entities.Egresado;
 import edu.eci.pdsw.samples.entities.Egresado_Empresa;
 import edu.eci.pdsw.samples.entities.Estudiante;
+import edu.eci.pdsw.samples.entities.Persona;
 import edu.eci.pdsw.samples.entities.Rol;
 import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
 import edu.eci.pdsw.samples.persistence.DaoFactory;
@@ -183,6 +184,21 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
             Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
             throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
         }
+    }
+    
+    @Override
+    public List<Persona> consultarSolicitudAfiliacionesVencidas() throws ExcepcionServiciosSAGECI {
+        List<Persona> solicitudesVencidas= null;
+        try {
+            daof.beginSession();
+            solicitudesVencidas = daof.getDaoPersona().loadLosing();
+            daof.commitTransaction();
+            daof.endSession();
+        } catch (PersistenceException ex) {
+            Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
+        }
+        return solicitudesVencidas;
     }
 
         
