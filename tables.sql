@@ -90,8 +90,8 @@ CREATE TABLE Rol_Persona (
     Roles_rol int NOT NULL,
     Clave varchar(100) NOT NULL,
     CONSTRAINT Rol_Persona_pk PRIMARY KEY (DocumentoID,Roles_rol)
-) COMMENT '
-';
+) 
+;
 
 -- Table: Roles
 CREATE TABLE Roles (
@@ -121,47 +121,47 @@ CREATE TABLE Solicitud_Afiliacion (
 
 -- foreign keys
 -- Reference: Egresado_Persona (table: Egresado)
-ALTER TABLE Egresado ADD CONSTRAINT Egresado_Persona FOREIGN KEY Egresado_Persona (DocumentoID)
+ALTER TABLE Egresado ADD CONSTRAINT Egresado_Persona FOREIGN KEY  (DocumentoID)
     REFERENCES Persona (DocumentoID);
 
 -- Reference: Empresa_Egresado (table: Egresado)
-ALTER TABLE Egresado ADD CONSTRAINT Empresa_Egresado FOREIGN KEY Empresa_Egresado (Empresa)
+ALTER TABLE Egresado ADD CONSTRAINT Empresa_Egresado FOREIGN KEY  (Empresa)
     REFERENCES Egresado_Empresa (Nombre);
 
 -- Reference: Estado_afiliacion_Persona (table: Estado_afiliacion)
-ALTER TABLE Estado_afiliacion ADD CONSTRAINT Estado_afiliacion_Persona FOREIGN KEY Estado_afiliacion_Persona (DocumentoID)
+ALTER TABLE Estado_afiliacion ADD CONSTRAINT Estado_afiliacion_Persona FOREIGN KEY  (DocumentoID)
     REFERENCES Persona (DocumentoID);
 
 -- Reference: Estudiante_Persona (table: Estudiante)
-ALTER TABLE Estudiante ADD CONSTRAINT Estudiante_Persona FOREIGN KEY Estudiante_Persona (DocumentoID)
+ALTER TABLE Estudiante ADD CONSTRAINT Estudiante_Persona FOREIGN KEY  (DocumentoID)
     REFERENCES Persona (DocumentoID);
 
 -- Reference: Pago_Cuota_Egresado (table: Pago_Cuota)
-ALTER TABLE Pago_Cuota ADD CONSTRAINT Pago_Cuota_Egresado FOREIGN KEY Pago_Cuota_Egresado (DocumentoID)
+ALTER TABLE Pago_Cuota ADD CONSTRAINT Pago_Cuota_Egresado FOREIGN KEY  (DocumentoID)
     REFERENCES Egresado (DocumentoID);
 
 -- Reference: Persona_Servicios_Persona (table: Persona_Servicios)
-ALTER TABLE Persona_Servicios ADD CONSTRAINT Persona_Servicios_Persona FOREIGN KEY Persona_Servicios_Persona (Persona_DocumentoID)
+ALTER TABLE Persona_Servicios ADD CONSTRAINT Persona_Servicios_Persona FOREIGN KEY  (Persona_DocumentoID)
     REFERENCES Persona (DocumentoID);
 
 -- Reference: Persona_Servicios_Servicio (table: Persona_Servicios)
-ALTER TABLE Persona_Servicios ADD CONSTRAINT Persona_Servicios_Servicio FOREIGN KEY Persona_Servicios_Servicio (Servicio_ServicioID)
+ALTER TABLE Persona_Servicios ADD CONSTRAINT Persona_Servicios_Servicio FOREIGN KEY  (Servicio_ServicioID)
     REFERENCES Servicio (ServicioID);
 
 -- Reference: Persona_Solicitud_Afiliacion (table: Solicitud_Afiliacion)
-ALTER TABLE Solicitud_Afiliacion ADD CONSTRAINT Persona_Solicitud_Afiliacion FOREIGN KEY Persona_Solicitud_Afiliacion (DocumentoID)
+ALTER TABLE Solicitud_Afiliacion ADD CONSTRAINT Persona_Solicitud_Afiliacion FOREIGN KEY  (DocumentoID)
     REFERENCES Persona (DocumentoID);
 
 -- Reference: Rol_Persona_Persona (table: Rol_Persona)
-ALTER TABLE Rol_Persona ADD CONSTRAINT Rol_Persona_Persona FOREIGN KEY Rol_Persona_Persona (DocumentoID)
+ALTER TABLE Rol_Persona ADD CONSTRAINT Rol_Persona_Persona FOREIGN KEY  (DocumentoID)
     REFERENCES Persona (DocumentoID);
 
 -- Reference: Rol_Persona_Roles (table: Rol_Persona)
-ALTER TABLE Rol_Persona ADD CONSTRAINT Rol_Persona_Roles FOREIGN KEY Rol_Persona_Roles (Roles_rol)
+ALTER TABLE Rol_Persona ADD CONSTRAINT Rol_Persona_Roles FOREIGN KEY (Roles_rol)
     REFERENCES Roles (RolID);
 
 -- Reference: Servicio_Empresa_Convenio (table: Servicio)
-ALTER TABLE Servicio ADD CONSTRAINT Servicio_Empresa_Convenio FOREIGN KEY Servicio_Empresa_Convenio (ConvenioID)
+ALTER TABLE Servicio ADD CONSTRAINT Servicio_Empresa_Convenio FOREIGN KEY (ConvenioID)
     REFERENCES Empresa_Convenio (ConvenioID);
 
 -- End of file.

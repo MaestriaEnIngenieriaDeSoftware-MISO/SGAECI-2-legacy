@@ -60,9 +60,9 @@ public class LogginBean implements Serializable {
             if (subject.hasRole("Administrador")) {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("Admin/ProcesarSolicitudesAfiliacion.xhtml");
             }else if (subject.hasRole("Egresado")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("EgrUsuario.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("Egresado/EgrUsuario.xhtml");
             }else if (subject.hasRole("Estudiante")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("EstUsuario.xhtml"); 
+                FacesContext.getCurrentInstance().getExternalContext().redirect("Estudiante/EstUsuario.xhtml"); 
             } else {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("Registro.xhtml");
             }

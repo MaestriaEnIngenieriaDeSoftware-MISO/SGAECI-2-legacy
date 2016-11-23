@@ -13,6 +13,7 @@
 
     <h:body style="stylesheet">
         <h:form id="form">
+            <h:outputLink value="/logout">logout</h:outputLink>
             <img src="AECI.PNG" alt="AECI"></img>
             <p:dataTable rowIndexVar="row" id="ListaSolicitudes" var="Solicitud"  value="#{ProcesarSolicitudAfiliacion.solicitudes}" selectionMode="single" selection="#{ProcesarSolicitudAfiliacion.solicitudSelection}" rowKey="#{Solicitud.solicitudID}" style="margin-bottom:0">
                 <p:column style="width: 2px" headerText="Solicitud ID">
