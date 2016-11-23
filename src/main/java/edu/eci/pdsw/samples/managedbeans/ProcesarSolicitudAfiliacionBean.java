@@ -17,8 +17,7 @@
 package edu.eci.pdsw.samples.managedbeans;
 
 
-
-import Security.AsignacionUser_password;
+import Security.SHA1;
 import edu.eci.pdsw.samples.entities.Egresado;
 import edu.eci.pdsw.samples.entities.Estudiante;
 import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
@@ -45,16 +44,13 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
     ServiciosSAGECI SAGECI = ServiciosSAGECI.getInstance();
     SolicitudAfiliacion solicitudSelection;
     String Comentario;
-    AsignacionUser_password user;
-    String usuarioAs= user.getUsuario();
-    String passAs=user.getPassword();
     EmailSender sender = new SimpleEmailSender(new EmailConfiguration());
     Email email = null;
+    private SHA1 sh;
     final String from = "5d8dd682c0-c92f3e@inbox.mailtrap.io";
     final String subjectAprobado = "Solicitud de Ingreso AECI: Aprobada";
     final String messageRechazado = "Su solicitud ha sido Rechazada por lo siguiente: "+Comentario;
-    final String usuarioasignado = "Su usuario de ingreso asignado es: "+usuarioAs;
-    final String passwordasignado = "Su contraseña de ingreso asignado es: "+passAs;
+
     public ProcesarSolicitudAfiliacionBean() {
         
     }
@@ -97,18 +93,19 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
             Estudiante e2 =solicitudSelection.getE2();
             String messageAprobado = "Su solicitud ha sido Aprobada: "+Comentario;
             String toEgresado = e1.getCorreo_Personal();
-            int idEgresado=e1.getDocumentoID();
-            String toEstudiante = e2.getCorreo_Personal();
-            int idEstudiante=e2.getDocumentoID();
-            
+            String toEstudiante = e2.getCorreo_Personal();            
             solicitudSelection.setEstadoSolicitud("ACEPTADA");
             solicitudSelection.setComentario(Comentario);
             SAGECI.actualizarSolicitudAfliliacion(solicitudSelection);
+            String shacontrasena;
             if (e1.getSemestreGrado()==null){
-                email = new SimpleEmail(from, toEstudiante, subjectAprobado, messageAprobado+usuarioasignado+passwordasignado);
+                shacontrasena = sh.getHash(Integer.toString(e2.getDocumentoID()));
+                email = new SimpleEmail(from, toEstudiante, subjectAprobado, messageAprobado);
             }else{
-                email = new SimpleEmail(from, toEgresado, subjectAprobado, messageAprobado+usuarioasignado+passwordasignado);
+                shacontrasena = sh.getHash(Integer.toString(e1.getDocumentoID()));
+                email = new SimpleEmail(from, toEgresado, subjectAprobado, messageAprobado);
             }
+            
             try {
                 sender.send(email);
             } catch (MessagingException e) {

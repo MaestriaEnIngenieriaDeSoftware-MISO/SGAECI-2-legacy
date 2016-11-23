@@ -5,7 +5,6 @@
  */
 package edu.eci.pdsw.samples.entities;
 
-import Security.AsignacionUser_password;
 import java.util.HashMap;
 import java.util.Map;
 import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
@@ -53,8 +52,6 @@ public class Rol {
      * @return the contraseña
      */
     public String getPassword() {
-        AsignacionUser_password asi=new AsignacionUser_password ();
-        password =asi.getPassword();
         return password;
     }
 
@@ -63,8 +60,6 @@ public class Rol {
     }
 
     public String getSal() {
-        AsignacionUser_password asi=new AsignacionUser_password ();
-        user=asi.getUsuario();
         return user;
     }
 

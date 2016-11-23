@@ -7,6 +7,7 @@ package edu.eci.pdsw.samples.managedbeans;
 
 
 import Security.Registro;
+import edu.eci.pdsw.samples.services.ServiciosSAGECI;
 import java.io.File;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -41,6 +42,7 @@ public class LogginBean implements Serializable {
     private String password;
     public String username;
     private boolean autenticacion;
+    ServiciosSAGECI SAGECI = ServiciosSAGECI.getInstance();
 
     public LogginBean() {
 
@@ -56,7 +58,7 @@ public class LogginBean implements Serializable {
         try {
             subject.login(token);
             if (subject.hasRole("Administrador")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("ProcesarSolicitudesAfiliacion.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("Admin/ProcesarSolicitudesAfiliacion.xhtml");
             } else if (subject.hasRole("Afiliado")) {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("Registro.xhtml");
             } else {

@@ -12,14 +12,13 @@ package Security;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 
 public class SHA1 {
 
     private MessageDigest md;
     private byte[] buffer, digest;
     private String hash = "";
-    AsignacionUser_password user= new AsignacionUser_password(); 
-    String passxencrip= user.getPassword();//  contraseña asignada
    
 // Encripta la contraseña asignada 
     public String getHash(String message) throws NoSuchAlgorithmException {
@@ -39,4 +38,6 @@ public class SHA1 {
     }
     
     
-}
+    }
+    
+
