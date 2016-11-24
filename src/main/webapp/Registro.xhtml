@@ -8,66 +8,39 @@
         <link rel="stylesheet" type="text/css" href="sheet.css"> 
         </link>
     </h:head>
-    <h:body styleClass="Bimage" >
-        <h:form >
-            <p:layout >
-                <p:layoutUnit position="north" size="270" >
-                    <img src="aecimagen.png" align="left" height="250" width="250"></img>
-                    <h:form id="form">
-                        <div align="right" draggable="false" >
+    <h:body >
+        <p:layout class="contenedor">
+            
+            <p:layoutUnit position="north" id="cabecera" >
+                <img src="aecimagen.png" align="left" height="250" width="250"></img>
+                <div align="right" draggable="false" >
+                    <h:panelGrid  columns="2" class="center" style="max-height: 10px" >
+                        <p:outputLabel style="size: A4" for="nombre" value="Usuario: " styleClass="sheet.css" />
+                        <p:inputText styleClass="cent" required="true" id="nombre" value="#{Loggin.username}"/>
+                        <p:outputLabel for="passw" value="Contraseña: " />
+                        <p:inputText styleClass="cent" required="true" id="passw" value="#{Loggin.password}"/>
+                    </h:panelGrid>
+                    <h:panelGrid  columns="1" styleClass="sheet.css">
+                        <p:commandButton value="Ingresar"  action="#{Loggin.doLogin()}" />
+                    </h:panelGrid>
+                </div>
+            </p:layoutUnit>
+            
+            <p:layoutUnit position="center" id="contenido" class="westUnit">
+                <p style="color: black">SAGECI es una aplicación que permite ingresar a los servicios deAECI que es una asociación sin ánimo de lucro, conformada por Egresados de Programas de Pregrado y Posgrado de la Escuela Colombiana de Ingeniería Julio Garavito"
+                ¿No te encuentras registrado?"
+                Envianos una solicitud para unirte y recibir todos nuestros beneficios."
+                </p>
+                <h:form id="formu">
+                    <div align="center" draggable="false" style="border-width: 10px">
+                        <p:commandButton  value="Egresado"  action="SolicitudAfiliacionEgre"/>
+                        <p:commandButton value="Estudiante" action="SolicitudAfiliacionEst"/>  
+                    </div>
+                </h:form>
+            </p:layoutUnit>
 
-                            <h:panelGrid  columns="2" styleClass="sheet.css">
-                                <p:outputLabel  for="nombre" value="Usuario: " styleClass="sheet.css" />
-                                <p:inputText styleClass="cent" required="true" id="nombre" value="#{Loggin.username}"/>
-                                <p:outputLabel for="passw" value="Contraseña: " />
-                                <p:inputText styleClass="cent" required="true" id="passw" value="#{Loggin.password}"/>
-                            </h:panelGrid>
-                            <h:panelGrid  columns="1" styleClass="sheet.css">
-                                <p:commandButton value="Ingresar"  action="#{Loggin.doLogin()}" />
-                            </h:panelGrid>
-                            
+        </p:layout>
 
-                        </div>
-                        
-                    </h:form>
-                </p:layoutUnit>
-
-                <p:layoutUnit position="center" header="Center" >
-                    <p style="color:black;font-family:Georgia;">
-                        SAGECI es una aplicación que permite ingresar a los servicios de
-                        AECI que es una asociación sin ánimo de lucro, conformada por Egresados de Programas de Pregrado y Posgrado de la Escuela Colombiana de Ingeniería Julio Garavito
-                    </p>
-                    <p style="color:black;font-family:Georgia;">¿No te encuentras registrado?</p>
-                    <p style="color:black;font-family:Georgia;">Envianos una solicitud para unirte y recibir todos nuestros beneficios.</p>
-
-
-                    <h:form id="form1">
-                        <div align="middle" draggable="false" >
-                            <p:commandButton value="Egresado" update="form1" action="SolicitudAfiliacionEgre" />
-                            <p:commandButton value="Estudiante" update="form1" action="SolicitudAfiliacionEst"/>  
-                        </div>
-                    </h:form>
-                    <p:notificationBar position="down" effect="slide" styleClass="top" widgetVar="bar">
-                        <p></p>
-                        <h:outputText value="Contáctanos" style="font-size:24px;font-family:fantasy;" />
-                        <p></p>
-                        <h:outputText value="Dirección:  AK.45 No.205-59 (Autopista Norte  K.13)  Bloque A -2° Piso " />
-                        <p></p>
-                        <h:outputText value="Director:     Juan Carlos Romero Ordóñez" />    
-                        <p></p>
-                        <h:outputText value="PBX: +57(1) 668 3600 Ext.1232       " />   
-                        <p></p>
-                        <h:outputText value="Móvil:           312 457 0612    " />
-                        <p></p>
-                        <h:outputText value="Correo electrónico:    aeci@escuelaing.edu.co"  />
-
-                    </p:notificationBar>
-                    <p:commandButton value="Contáctenos" onclick="PF('bar').show()." type="button" icon="ui-icon-arrow-1-s"/>
-                    <p:commandButton value="Hide" onclick="PF('bar').hide()" type="button" icon="ui-icon-arrow-1-n"/>
-                </p:layoutUnit>
-
-            </p:layout>
-        </h:form>
     </h:body>
 </html>
 

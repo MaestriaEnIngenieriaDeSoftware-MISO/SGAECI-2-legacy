@@ -22,8 +22,34 @@ p{color: white;
   justify-content: space-around;
 }
 
+
+
+.norte{
+    align-self: center;
+    display: block;
+    margin: auto;
+    max-width:70%;
+}
+
+.ui-widget,.ui-widget .ui-widget {
+    font-size: 100% !important;
+}
+
+.westUnit {
+    align-self: center;
+    display: block;
+    margin: auto;
+    max-width:100% ;
+    border-style: solid;
+    border-width: 90px;
+    border-color: white;
+}
+
 body {
-    background-color: skyblue;
+    background-image: url("escuela.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .left{
@@ -34,20 +60,18 @@ body {
     text-align: center;
 }
 
-
 .asd{
+    align-self: center;
     display: block;
     margin: auto;
-    width: 10%;
-    vertical-align: middle
-    
+
 }
 
 .cent{
     align-self: center;
     display: block;
     margin: auto;
-    
+
 }
 
 img {
@@ -68,7 +92,7 @@ img {
     display: block;
     margin: auto;
     width: 85%;
-    
+
 }
 
 .ui-panelgrid{
@@ -85,11 +109,40 @@ img {
 
 
 .dateTimeField input {
-   vertical-align: auto;
-   margin-right: auto;
+    vertical-align: auto;
+    margin-right: auto;
 }
 
 .dateTimeField img {
-   vertical-align: middle;
+    vertical-align: middle;
 }
 .ui-dialog{z-index:1005 !important;}  
+
+
+.center {
+    padding: 70px 0;
+}
+
+
+.contenedor {
+    position: fixed;
+    /* center the element */
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    /* give it dimensions */
+    
+    width: 70%;
+}
+#cabecera {
+}
+#menu {
+    float: left;
+    width: 150px;
+}
+#contenido {
+}
+#pie {
+    clear: both;
+}

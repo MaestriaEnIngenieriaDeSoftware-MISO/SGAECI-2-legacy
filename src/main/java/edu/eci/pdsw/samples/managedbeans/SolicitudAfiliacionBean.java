@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package edu.eci.pdsw.samples.managedbeans;
+
 import com.mysql.jdbc.exceptions.*;
 import edu.eci.pdsw.samples.entities.Egresado;
 import edu.eci.pdsw.samples.entities.Egresado_Empresa;
@@ -21,10 +22,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import org.primefaces.context.RequestContext;
 
-
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
- 
+
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -36,99 +36,126 @@ import org.primefaces.context.RequestContext;
  *
  * @author pdswgr2
  */
-
-
-@ManagedBean (name= "SolicitudAfiliacion")
+@ManagedBean(name = "SolicitudAfiliacion")
 @SessionScoped
 
-public class SolicitudAfiliacionBean implements Serializable{
-    ServiciosSAGECI SAGECI=ServiciosSAGECI.getInstance();
-    private int solicitudID;
-    private static int documentoID,Telefono,telefonoOficina,codigoEstudiante,semestrePonderado;
+public class SolicitudAfiliacionBean implements Serializable {
+
+    ServiciosSAGECI SAGECI = ServiciosSAGECI.getInstance();
+    private int solicitudID = 0;
+    private static int documentoID, Telefono, telefonoOficina, codigoEstudiante, semestrePonderado;
     private static BigInteger telefono2;
-    private Date fechaGraduacion=new Date(new java.util.Date().getTime());
-    private String Apellido,correo,labora="no",semestreGrado,tipoDocumentoID,genero,tipoSolicitante,estadoSolicitud="NO REVISADO",comentario="Falta revision respectiva.",Nombre,direccionVivienda,Empresa,direccionEmpresa,Cargo,correoPersonal,carrera="INGENIERÍA DE SISTEMAS";
-    private boolean acepta=false,marca=false; 
+    private Date fechaGraduacion = new Date(new java.util.Date().getTime());
+    private String Apellido, correo, labora = "no", semestreGrado, tipoDocumentoID, genero, tipoSolicitante, estadoSolicitud = "NO REVISADO", comentario = "Falta revision respectiva.", Nombre, direccionVivienda, Empresa, direccionEmpresa, Cargo, correoPersonal, carrera = "INGENIERÍA DE SISTEMAS";
+    private boolean acepta = false, marca = false;
     private ArrayList<Integer> semestres;
     private ArrayList<String> carreras;
     private Egresado_Empresa egresadoEmpresa;
     private String tipotra;
     private Rol rol;
 
-    
     public SolicitudAfiliacionBean() {
-        this.semestres  = new ArrayList<>();
+        this.semestres = new ArrayList<>();
         this.carreras = new ArrayList<>();
-        egresadoEmpresa=new Egresado_Empresa();
-        for (int i=8; i<=10; i++){
-            this.semestres.add(i); 
+        egresadoEmpresa = new Egresado_Empresa();
+        for (int i = 8; i <= 10; i++) {
+            this.semestres.add(i);
         }
-        carreras.add("INGENIERÍA CIVIL");carreras.add("INGENIERÍA INDUSTRIAL");carreras.add("INGENIERÍA MECÁNICA");carreras.add("INGENIERÍA ELECTRÓNICA");carreras.add("MATEMÁTICAS");
-        carreras.add("INGENIERÍA AMBIENTAL"); carreras.add("INGENIERÍA ELÉCTRICA");carreras.add("ECONOMÍA");carreras.add("INGENIERÍA BIOMÉDICA");carreras.add("INGENIERÍA DE SISTEMAS"); carreras.add("ADMINISTRACIÓN DE EMPRESAS");
+        carreras.add("INGENIERÍA CIVIL");
+        carreras.add("INGENIERÍA INDUSTRIAL");
+        carreras.add("INGENIERÍA MECÁNICA");
+        carreras.add("INGENIERÍA ELECTRÓNICA");
+        carreras.add("MATEMÁTICAS");
+        carreras.add("INGENIERÍA AMBIENTAL");
+        carreras.add("INGENIERÍA ELÉCTRICA");
+        carreras.add("ECONOMÍA");
+        carreras.add("INGENIERÍA BIOMÉDICA");
+        carreras.add("INGENIERÍA DE SISTEMAS");
+        carreras.add("ADMINISTRACIÓN DE EMPRESAS");
 
     }
-    
+
     public void showMessage(boolean m) {
         FacesMessage message;
-        if(m){message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Su Solicitud fue enviada correctamente.");}
-        else{message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Incorrecto", "El Documento de identidad ya esta registrado o la informacion dada esta en un formato no valido");}
+        if (m) {
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Su Solicitud fue enviada correctamente.");
+        } else {
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Incorrecto", "El Documento de identidad ya esta registrado o la informacion dada esta en un formato no valido");
+        }
         RequestContext.getCurrentInstance().showMessageInDialog(message);
     }
-    
-    public void agregarSolicitudAfiliacion() throws ExcepcionServiciosSAGECI{
-        if(tipotra.equals("Independiente")){
-            Cargo="Independiente";
-        }
-        if(Nombre!=null){
-            Egresado e1 = new Egresado(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre, Apellido, direccionVivienda,  correo,  genero,rol, semestreGrado,correoPersonal, Cargo,  labora,egresadoEmpresa,fechaGraduacion);
-            Estudiante e2 = new Estudiante(documentoID,  Telefono,  telefono2, tipoDocumentoID,  Nombre, Apellido, direccionVivienda,  correo,  genero,rol, codigoEstudiante, semestrePonderado,  carrera);
-            if(semestreGrado==null){
-                e1=null;
-            }else{
-                e2=null;
+
+    public void agregarSolicitudAfiliacion() throws ExcepcionServiciosSAGECI {
+
+        if (Nombre != null) {
+            Egresado e1 = new Egresado(documentoID, Telefono, telefono2, tipoDocumentoID, Nombre, Apellido, direccionVivienda, correo, genero, rol, semestreGrado, correoPersonal, Cargo, labora, egresadoEmpresa, fechaGraduacion);
+            Estudiante e2 = new Estudiante(documentoID, Telefono, telefono2, tipoDocumentoID, Nombre, Apellido, direccionVivienda, correo, genero, rol, codigoEstudiante, semestrePonderado, carrera);
+
+            if (semestreGrado == null) {
+                e1 = null;
+            } else {
+                if (tipotra.equals("Independiente")) {
+                    Cargo = "Independiente";
+                }        
+                e2 = null;
             }
-            SolicitudAfiliacion temp = new SolicitudAfiliacion( solicitudID, new Date(new java.util.Date().getTime()) ,  estadoSolicitud,  comentario,  e1,  e2);
-            try{
+
+            SolicitudAfiliacion temp = new SolicitudAfiliacion(solicitudID += 1, new Date(new java.util.Date().getTime()), estadoSolicitud, comentario, e1, e2);
+            try {
                 SAGECI.registrarNuevaSolicitud(temp);
                 showMessage(true);
-            }catch(ExcepcionServiciosSAGECI e){
+            } catch (ExcepcionServiciosSAGECI e) {
                 showMessage(false);
             }
-        }   
+        }
         resetearValores();
     }
-        
-    public void asigna(){
-        if( tipotra.equals("Desempleado")){
-            labora="no";
-            Cargo=null;
-            marca=false;
-        }
-        else if(tipotra.equals("Independiente")){
-            labora="si";
-            Cargo ="Independiente";
-            marca=false;
-        }
-        else{
-            labora="si";
-            marca=true;
+
+    public void asigna() {
+        if (tipotra.equals("Desempleado")) {
+            labora = "no";
+            Cargo = null;
+            marca = false;
+        } else if (tipotra.equals("Independiente")) {
+            labora = "si";
+            Cargo = "Independiente";
+            marca = false;
+        } else {
+            labora = "si";
+            marca = true;
             egresadoEmpresa.setNombreempre(Empresa);
             egresadoEmpresa.setDirempre(direccionEmpresa);
             egresadoEmpresa.setTelempre(telefonoOficina);
         }
     }
-    
+
     public void showMessage() {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Su solicitud fue rechazada", "Datos previamente registrados!!");
         RequestContext.getCurrentInstance().showMessageInDialog(message);
     }
-    
-    public  void resetearValores(){
-        telefono2 =null;documentoID = 0;Telefono = 0;telefonoOficina = 0;codigoEstudiante = 0;semestrePonderado = 0;
-        correo=null;labora=null;semestreGrado=null;tipoDocumentoID=null;genero=null;
-        tipoSolicitante=null;comentario="Falta revision respectiva.";
-        Nombre=null;Apellido=null;direccionVivienda=null;Empresa=null;
-        direccionEmpresa=null;Cargo=null;correoPersonal=null;carrera=null;
+
+    public void resetearValores() {
+        telefono2 = null;
+        documentoID = 0;
+        Telefono = 0;
+        telefonoOficina = 0;
+        codigoEstudiante = 0;
+        semestrePonderado = 0;
+        correo = null;
+        labora = null;
+        semestreGrado = null;
+        tipoDocumentoID = null;
+        genero = null;
+        tipoSolicitante = null;
+        comentario = "Falta revision respectiva.";
+        Nombre = null;
+        Apellido = null;
+        direccionVivienda = null;
+        Empresa = null;
+        direccionEmpresa = null;
+        Cargo = null;
+        correoPersonal = null;
+        carrera = null;
     }
 
     public String getTipotra() {
@@ -138,8 +165,6 @@ public class SolicitudAfiliacionBean implements Serializable{
     public void setTipotra(String tipotra) {
         this.tipotra = tipotra;
     }
-
-
 
     public String getApellido() {
         return Apellido;
@@ -156,8 +181,6 @@ public class SolicitudAfiliacionBean implements Serializable{
     public void setEgresadoEmpresa(Egresado_Empresa egresadoEmpresa) {
         this.egresadoEmpresa = egresadoEmpresa;
     }
-    
-    
 
     public String getCorreo() {
         return correo;
@@ -183,8 +206,6 @@ public class SolicitudAfiliacionBean implements Serializable{
         this.rol = rol;
     }
 
-   
-    
     public ArrayList<String> getCarreras() {
         return carreras;
     }
@@ -192,16 +213,16 @@ public class SolicitudAfiliacionBean implements Serializable{
     public void setCarreras(ArrayList<String> carreras) {
         this.carreras = carreras;
     }
-    
+
     public String getSemestreGrado() {
         return semestreGrado;
     }
 
-    public void setSemestreGrado(String semestreGrado) {   
-   
+    public void setSemestreGrado(String semestreGrado) {
+
         this.semestreGrado = semestreGrado;
     }
-    
+
     public int getDocumentoID() {
         return documentoID;
     }
@@ -370,13 +391,16 @@ public class SolicitudAfiliacionBean implements Serializable{
         this.carrera = carrera;
     }
 
-    public  ArrayList<Integer> getSemestres() {
-        ArrayList<Integer> temp=new ArrayList<>();
-        if(carrera.equals("ADMINISTRACIÓN DE EMPRESAS")||carrera.equals("MATEMÁTICAS")||carrera.equals("ECONOMÍA")){
-            for (int j=7;j<10;j++){temp.add(j);}
+    public ArrayList<Integer> getSemestres() {
+        ArrayList<Integer> temp = new ArrayList<>();
+        if (carrera.equals("ADMINISTRACIÓN DE EMPRESAS") || carrera.equals("MATEMÁTICAS") || carrera.equals("ECONOMÍA")) {
+            for (int j = 7; j < 10; j++) {
+                temp.add(j);
+            }
             return temp;
+        } else {
+            return semestres;
         }
-        else{return semestres;}
     }
 
     public void setSemestres(ArrayList<Integer> semestres) {
@@ -398,8 +422,8 @@ public class SolicitudAfiliacionBean implements Serializable{
     public void setLabora(String labora) {
         this.labora = labora;
     }
-    
-    public void asigna(String labora){
-        this.labora=labora;
+
+    public void asigna(String labora) {
+        this.labora = labora;
     }
 }
