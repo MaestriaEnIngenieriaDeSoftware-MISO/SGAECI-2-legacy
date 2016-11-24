@@ -13,7 +13,7 @@
 
     <h:body style="stylesheet">
         <h:form id="form">
-            <img src="AECI.PNG" alt="AECI"></img>
+            <img src="aecimagen.png" alt="AECI" height="500" width="500"></img>
             <p:dataTable rowIndexVar="row" id="ListaSolicitudes" var="Solicitud"  value="#{ProcesarSolicitudAfiliacion.solicitudes}" selectionMode="single" selection="#{ProcesarSolicitudAfiliacion.solicitudSelection}" rowKey="#{Solicitud.solicitudID}" style="margin-bottom:0">
                 <p:column style="width: 2px" headerText="Solicitud ID">
                     <h:outputText value="#{Solicitud.solicitudID}" />
@@ -30,7 +30,7 @@
             </p:dataTable>
 
             <p:dialog header="Datos principales del solicitante de afiliación." id="SolicitudSeleccionada" widgetVar="dlg1" height="575" draggable="false" resizable="false">
-                <p:panelGrid columns="2" id="test">
+                <h:panelGrid columns="2" id="test">
                     <p:outputLabel  for="nombre" value="Nombre Completo: "/>
                     <h:outputText id="nombre" value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.nombre}" />
                     <p:outputLabel  for="Docu" value="Documento: "/>
@@ -47,7 +47,7 @@
                     <h:outputText id="cor" value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.correo}" />
                     <p:outputLabel  for="gen" value="Genero: "/>
                     <h:outputText id="gen" value="#{ProcesarSolicitudAfiliacion.solicitudSelection.e1.genero}" />
-                </p:panelGrid>
+                </h:panelGrid>
                 <h3>Ingrese su Comentario de respuesta: </h3>
                 <p:inputTextarea rows="6" cols="45" required="true" value="#{ProcesarSolicitudAfiliacion.comentario}" />
                 <br/>

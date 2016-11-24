@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 
-div {
+.div {
     align-items: center;
     width: 100%;
     -webkit-align-content: center;
@@ -22,8 +22,25 @@ p{color: white;
   justify-content: space-around;
 }
 
+body {
+    background-color: skyblue;
+}
+
+.left{
+    text-align: left;
+}
+
 .centered {
     text-align: center;
+}
+
+
+.asd{
+    display: block;
+    margin: auto;
+    width: 10%;
+    vertical-align: middle
+    
 }
 
 .cent{
@@ -36,7 +53,6 @@ p{color: white;
 img {
     display: block;
     margin: auto;
-    width: 50%;
 }
 
 .ui-button{
@@ -48,14 +64,29 @@ img {
     width: 80%;
 }
 
-.ui-panelgrid{
+.ui-selectOneMenu{
+    display: block;
     margin: auto;
-    width: 50%
+    width: 85%;
+    
 }
 
+.ui-panelgrid{
+    margin: auto;
+    width: 50%;
+    color: skyblue;
+}
+
+.calen{
+    display: block;
+    margin: auto;
+    width: 100%;
+}
+
+
 .dateTimeField input {
-   vertical-align: middle;
-   margin-right: 1px;
+   vertical-align: auto;
+   margin-right: auto;
 }
 
 .dateTimeField img {

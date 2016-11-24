@@ -10,12 +10,24 @@
     </h:head>
     <h:body >
         <h:form id="form">
-            <p:commandButton value="Generar Certificado" onclick="PF('dlg1').show()">
-            </p:commandButton> 
-            <p:dialog header="Certificado de  Afiliación." id="Certificado" widgetVar="dlg1" height="850" width="1000" styleClass="sheet.css" resizable="false" draggable="false">
-                <p:media value="#{Usuario.streamedContent}" player="pdf" height="800" width="900" styleClass="sheet.css" />
-                <p:commandButton value="Cerrar" onclick="PF('dlg').hide()"/>
-            </p:dialog>
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north" size="250"   >
+                    <h:outputText value="Top unit content." />
+                </p:layoutUnit>
+                <p:layoutUnit position="center" header="Center" >
+                    <h:outputText value="Center Content" />
+                </p:layoutUnit>
+                <p:layoutUnit position="west" size="200" header="Left">
+                        <p:commandButton value="Generar Certificado"  onclick="PF('dlg1').show()">
+                        </p:commandButton> 
+                        <p:dialog header="Certificado de  Afiliación." id="Certificado" widgetVar="dlg1" height="850" width="1000" styleClass="sheet.css" resizable="false" >
+                            <p:media cache="false" value="#{Usuario.streamedContent}" player="pdf" height="800" width="900" styleClass="sheet.css" />
+                            <p:commandButton value="Cerrar" onclick="PF('dlg').hide()"/>
+                        </p:dialog>
+                </p:layoutUnit>
+                
+
+            </p:layout>
         </h:form>
     </h:body>
 </html>

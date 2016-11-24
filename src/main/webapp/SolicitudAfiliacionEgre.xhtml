@@ -9,29 +9,29 @@
         <link rel="stylesheet" type="text/css" href="sheet.css"> 
         </link>
     </h:head>
-    <h:body styleClass="Bimage">
-        <img src="AECI.PNG" alt="AECI"></img>
+    <h:body>
+        <img src="aecimagen.png" alt="AECI" height="300" width="300"></img>
         <h:form id="form">
-            <div align="center" draggable="false" >
-                <p:panelGrid columnClasses="centered" columns="2" style="landscape">
+            <div align="center" draggable="false" class="div" >
+                <h:panelGrid  id="Todo"  columns="2" style="landscape">
 
-                    <p:outputLabel style="align-content: center" for="nombre" value="Nombres : " />
+                    <p:outputLabel  for="nombre" value="Nombres : " />
                     <p:inputText styleClass="cent" required="true" id="nombre" value="#{SolicitudAfiliacion.nombre}"/>
 
-                    <p:outputLabel style="align-content: center" for="apellido" value="Apellidos: " />
+                    <p:outputLabel  for="apellido" value="Apellidos: " />
                     <p:inputText styleClass="cent" required="true" id="apellido" value="#{SolicitudAfiliacion.apellido}"/>
 
                     <p:outputLabel for="tid" value="Tipo Documento Identidad: " />
-                    <p:selectOneMenu styleClass="cent" required="True" id="tid" value="#{SolicitudAfiliacion.tipoDocumentoID}" style="width:210px">
-                        <f:selectItem itemLabel="CC" itemValue="CC" />
+                    <p:selectOneMenu class="ui-selectOneMenu" required="True" id="tid" value="#{SolicitudAfiliacion.tipoDocumentoID}" >
+                        <f:selectItem  itemLabel="CC" itemValue="CC" />
                         <f:selectItem itemLabel="CE" itemValue="CE" />
                     </p:selectOneMenu>
 
                     <p:outputLabel for="id" value="Documento Identidad: " />
                     <p:inputText styleClass="cent" required="true" id="id" value="#{SolicitudAfiliacion.documentoID}"/>
 
-                    <p:outputLabel for="gen" value="Genero: " />
-                    <p:selectOneMenu styleClass="cent" required="True" id="gen" value="#{SolicitudAfiliacion.genero}" style="width:210px">
+                    <p:outputLabel for="gen"  value="Genero: " />
+                    <p:selectOneMenu class="ui-selectOneMenu"  required="True" id="gen" value="#{SolicitudAfiliacion.genero}" >
                         <f:selectItem itemLabel="MASCULINO" itemValue="MASCULINO" />
                         <f:selectItem itemLabel="FEMENINO" itemValue="FEMENINO" />
                     </p:selectOneMenu>
@@ -55,21 +55,16 @@
                     <p:inputMask styleClass="cent" required="true" id="semestre" value="#{SolicitudAfiliacion.semestreGrado}" mask="2099-9"/>
 
                     <p:outputLabel for="date" value="Fecha Graduacion :" />
-                    <p:calendar styleClass="sheet.css"  id="date" value="#{SolicitudAfiliacion.fechaGraduacion}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
+                    <p:calendar class="calen" id="date" value="#{SolicitudAfiliacion.fechaGraduacion}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
                     
                     <p:outputLabel for="elab" value="Estado Laboral:" />
-                    <p:selectOneMenu styleClass="cent" required="True" id="elab" value="#{SolicitudAfiliacion.tipotra}" style="width:210px">
-                        <p:ajax event="change" listener="#{SolicitudAfiliacion.asigna()}" update=":form:Empresa"/>
-                        <f:selectItem itemLabel="Independiente" itemValue="Independiente" />
-                        <f:selectItem itemLabel="Empresa" itemValue="Empresa" />
-                        <f:selectItem itemLabel="Desempleado" itemValue="Desempleado" />
+                    <p:selectOneMenu class="ui-selectOneMenu" required="True" id="elab" value="#{SolicitudAfiliacion.tipotra}">
+                        <p:ajax event="change" listener="#{SolicitudAfiliacion.asigna()}" update=":form:Todo"/>
+                        <f:selectItem class="asd" itemLabel="Independiente" itemValue="Independiente" />
+                        <f:selectItem class="asd" itemLabel="Empresa" itemValue="Empresa" />
+                        <f:selectItem class="asd" itemLabel="Desempleado" itemValue="Desempleado" />
                     </p:selectOneMenu>
                     
-                </p:panelGrid>
-
-
-
-                <p:panelGrid columnClasses="centered" id="Empresa" columns="2" style="landscape" >
                     <p:outputLabel for="empresa" value="Empresa donde Labora:" />
                     <p:inputText styleClass="cent" required="#{SolicitudAfiliacion.marca}" id="empresa" value="#{SolicitudAfiliacion.empresa}"/>
 
@@ -81,8 +76,12 @@
 
                     <p:outputLabel for="cargo" value="Cargo en Empresa: " />
                     <p:inputText styleClass="cent"  id="cargo" value="#{SolicitudAfiliacion.cargo}"/>
+                    
+                </h:panelGrid>
 
-                </p:panelGrid>
+
+
+
 
                 <p:commandLink oncomplete="window.open('http://www.aeci.org.co/#!politicas-de-tratamiento-de-datos')">Acepta los Terminos y Condiciones </p:commandLink>
                 <p:selectBooleanCheckbox required="true" value="#{SolicitudAfiliacion.acepta}" />

@@ -67,7 +67,7 @@ public class UsuarioBean {
           //  LogginBean bean = (LogginBean) getManagedBean("Loggin");
            // documentoID=Integer.parseInt(bean.getUsername());
             // Falta anexar el codigo del documento
-            doc.add(new Paragraph("Bogotá DC"));
+            doc.add(new Paragraph("Bog7ytvrsgtdotá DC"));
             doc.addCreationDate();
            // Image imagen = Image.getInstance("aecimagen.png");
           //  imagen.setAbsolutePosition(450f, 10f);

@@ -10,10 +10,10 @@
         </link>
     </h:head>
     <h:body  styleClass="Bimage">
-        <img src="AECI.PNG" alt="AECI"></img>
-        <h:form id="form">
+            <img src="aecimagen.png" alt="AECI" height="500" width="500"></img>        
+            <h:form id="form">
             <div align="center" draggable="false" >
-                <p:panelGrid columnClasses="centered" columns="2">
+                <h:panelGrid  columns="2">
 
                     <p:outputLabel for="nombre" value="Nombres " />
                     <p:inputText styleClass="cent" id="nombre" required="true" value="#{SolicitudAfiliacion.nombre}"/>
@@ -23,7 +23,7 @@
 
 
                     <p:outputLabel for="tid" value="Tipo Documento Identidad: " />
-                    <p:selectOneMenu styleClass="cent" id="tid" value="#{SolicitudAfiliacion.tipoDocumentoID}" style="width:175px">
+                    <p:selectOneMenu class="ui-selectOneMenu" id="tid" value="#{SolicitudAfiliacion.tipoDocumentoID}" style="width:175px">
                         <f:selectItem itemLabel="CC" itemValue="CC" />
                         <f:selectItem itemLabel="CE" itemValue="CE" />
                     </p:selectOneMenu>
@@ -32,7 +32,7 @@
                     <p:inputText styleClass="cent" id="id" required="true" value="#{SolicitudAfiliacion.documentoID}"/>
 
                     <p:outputLabel for="gen" value="Género: " />
-                    <p:selectOneMenu styleClass="cent" id="gen" value="#{SolicitudAfiliacion.genero}" style="width:175px">
+                    <p:selectOneMenu class="ui-selectOneMenu" id="gen" value="#{SolicitudAfiliacion.genero}" style="width:175px">
                         <f:selectItem itemLabel="MASCULINO" itemValue="MASCULINO" />
                         <f:selectItem itemLabel="FEMENINO" itemValue="FEMENINO"  />
                     </p:selectOneMenu>
@@ -60,19 +60,19 @@
                     <p:inputText styleClass="cent" id="correo" required="true" value="#{SolicitudAfiliacion.correo}"/>
 
                     <p:outputLabel for="carr" value="Programa: " />
-                    <p:selectOneMenu styleClass="cent" id="carr" value="#{SolicitudAfiliacion.carrera}" style="width:259px">
+                    <p:selectOneMenu class="ui-selectOneMenu" id="carr" value="#{SolicitudAfiliacion.carrera}" style="width:259px">
                         <p:ajax event="change" update=":form:eventsDT2" />
                         <f:selectItem itemLabel="Selecione uno" itemValue="" />
                         <f:selectItems value="#{SolicitudAfiliacion.carreras}" />
                     </p:selectOneMenu>
 
                     <p:outputLabel for="eventsDT2" value="Semestre: " />
-                    <p:selectOneMenu styleClass="cent" id="eventsDT2" value="#{SolicitudAfiliacion.semestrePonderado}" style="width:175px">
+                    <p:selectOneMenu class="ui-selectOneMenu" id="eventsDT2" value="#{SolicitudAfiliacion.semestrePonderado}" style="width:175px">
                         <f:selectItem itemLabel="Selecione uno" itemValue="" />
                         <f:selectItems value="#{SolicitudAfiliacion.semestres}" />
                     </p:selectOneMenu>
 
-                </p:panelGrid>
+                </h:panelGrid>
 
                 <p:commandLink oncomplete="window.open('http://www.aeci.org.co/#!politicas-de-tratamiento-de-datos')">Acepto los Términos y Condiciones </p:commandLink>
                 <p:selectBooleanCheckbox styleClass="cent" value="#{SolicitudAfiliacion.acepta}" />
