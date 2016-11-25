@@ -88,8 +88,8 @@ CREATE TABLE Persona_Servicios (
 CREATE TABLE Rol_Persona (
     DocumentoID int NOT NULL,
     Roles_rol int NOT NULL,
-    Clave varchar(100) NOT NULL,
-    CONSTRAINT Rol_Persona_pk PRIMARY KEY (DocumentoID,Roles_rol)
+    Clave varchar(150) NOT NULL,
+    CONSTRAINT Rol_Persona_pk PRIMARY KEY (DocumentoID)
 ) 
 ;
 

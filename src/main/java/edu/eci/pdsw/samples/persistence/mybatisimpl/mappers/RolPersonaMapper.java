@@ -11,8 +11,8 @@ import org.apache.ibatis.annotations.Param;
  *
  * @author Martin
  */
-public interface RolMapper {
-    public void insertarContra( @Param("docuID") int documentoID,@Param("c") String contra,@Param("tipo") int tipo);  
+public interface RolPersonaMapper {
+    public void insertarRolPersona( @Param("ID") int documentoID,@Param("t") int tipo,@Param("c") String contra);  
 }
 
 

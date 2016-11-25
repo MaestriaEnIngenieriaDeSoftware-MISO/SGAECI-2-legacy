@@ -9,35 +9,31 @@ package Security;
  *
  * @author vivi-
  */
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
+import org.apache.shiro.authc.credential.DefaultPasswordService;
+import org.apache.shiro.crypto.hash.DefaultHashService;
+import org.apache.shiro.crypto.hash.Sha256Hash;
+import org.apache.shiro.util.SimpleByteSource;
 
 public class SHA1 {
 
-    private MessageDigest md;
-    private byte[] buffer, digest;
-    private String hash = "";
-   
-// Encripta la contraseña asignada 
-    public String getHash(String message) throws NoSuchAlgorithmException {
-        buffer = message.getBytes();
-        md = MessageDigest.getInstance("SHA1");
-        md.update(buffer);
-        digest = md.digest();
+    public static String generateHash(String password) {
+        DefaultHashService hashService = new DefaultHashService();
+        hashService.setHashIterations(500000); // 500000
+        hashService.setHashAlgorithmName(Sha256Hash.ALGORITHM_NAME);
 
-        for (byte aux : digest) {
-            int b = aux & 0xff;
-            if (Integer.toHexString(b).length() == 1) {
-                hash += "0";
-            }
-            hash += Integer.toHexString(b);
-        }
-        return hash;
-    }
-    
-    
-    }
-    
+        // Same salt as in shiro.ini, but NOT base64-encoded!!
+        hashService.setPrivateSalt(new SimpleByteSource("myprivatesalt"));
+        hashService.setGeneratePublicSalt(true);
 
+        DefaultPasswordService passwordService = new DefaultPasswordService();
+        passwordService.setHashService(hashService);
+        String encryptedPassword = passwordService.encryptPassword(password);
+
+        return encryptedPassword;
+
+    }
+
+}

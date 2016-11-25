@@ -97,25 +97,37 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
             solicitudSelection.setEstadoSolicitud("ACEPTADA");
             solicitudSelection.setComentario(Comentario);
             SAGECI.actualizarSolicitudAfliliacion(solicitudSelection);
+            System.out.println("actualizo solicitud con exito");
             String shacontrasena;
-            if (e1.getSemestreGrado()==null){
-                shacontrasena = sh.getHash(Integer.toString(e2.getDocumentoID()));
-                email = new SimpleEmail(from, toEstudiante, subjectAprobado+", Su Usuario es su correo, y la contraseña es su Documento de identidad" , messageAprobado);
-                SAGECI.agregarContra(e2.getDocumentoID(),shacontrasena,3);
-            }else{
-                shacontrasena = sh.getHash(Integer.toString(e1.getDocumentoID()));
-                email = new SimpleEmail(from, toEgresado, subjectAprobado+", Su Usuario es su correo, y la contraseña es su Documento de identidad" , messageAprobado);
-                SAGECI.agregarContra(e1.getDocumentoID(),shacontrasena,2);
-            }
-            
-            try {
+            if (e1==null){
+                System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                System.out.println("antes del hash");
+                shacontrasena = sh.generateHash(Integer.toString(e2.getDocumentoID()));
+                System.out.println("despues del hash");
+                System.out.println(shacontrasena);
+                email = new SimpleEmail(from, toEstudiante, subjectAprobado+", Su Usuario y la contraseña es su Documento de identidad" , messageAprobado);
+                System.out.println("despues del crear el email");
+                System.out.println(e2.getDocumentoID());
+                SAGECI.agregarRolPersona(e2.getDocumentoID(),3,shacontrasena);
+                System.out.println("antes de enviar email");
                 sender.send(email);
-            } catch (MessagingException e) {
-                e.printStackTrace();
+                System.out.println("despues de enviar email");
+            }else{
+                System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+                System.out.println("antes del hash");
+                shacontrasena = sh.generateHash(Integer.toString(e1.getDocumentoID()));
+                System.out.println("despues del hash");
+                System.out.println(shacontrasena);
+                email = new SimpleEmail(from, toEgresado, subjectAprobado+", Su Usuario y la contraseña es su Documento de identidad" , messageAprobado);
+                System.out.println("despues del crear el email");
+                System.out.println(e1.getDocumentoID());
+                SAGECI.agregarRolPersona(e1.getDocumentoID(),2,shacontrasena);
+                System.out.println("antes de enviar email");
+                sender.send(email);
+                System.out.println("despues de enviar email");
             }
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }      
+        }catch(MessagingException e){System.out.println("email mal");}
+        catch(Exception e){System.out.println("otro error");}
     }
     
     public void rechazarSolicitudAfiliacion(ActionEvent actionEvent) throws ExcepcionServiciosSAGECI{
@@ -129,15 +141,12 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
             solicitudSelection.setEstadoSolicitud("RECHAZADA");
             solicitudSelection.setComentario(Comentario);
             SAGECI.actualizarSolicitudAfliliacion(solicitudSelection);
-            if (e1.getSemestreGrado()==null){
+            if (e1==null){
                 email = new SimpleEmail(from, toEstudiante, subjectRechazado, messageAprobado);
+                sender.send(email);
             }else{
                 email = new SimpleEmail(from, toEgresado, subjectRechazado, messageAprobado);
-            }
-            try {
                 sender.send(email);
-            } catch (MessagingException e) {
-                e.printStackTrace();
             }
         }catch(Exception e){
             System.out.println(e.getMessage());

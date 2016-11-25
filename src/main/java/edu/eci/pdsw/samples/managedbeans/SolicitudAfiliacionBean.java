@@ -85,12 +85,10 @@ public class SolicitudAfiliacionBean implements Serializable {
         RequestContext.getCurrentInstance().showMessageInDialog(message);
     }
 
-    public void agregarSolicitudAfiliacion() throws ExcepcionServiciosSAGECI {
-
+    public void agregarSolicitudAfiliacion() throws ExcepcionServiciosSAGECI{
         if (Nombre != null) {
             Egresado e1 = new Egresado(documentoID, Telefono, telefono2, tipoDocumentoID, Nombre, Apellido, direccionVivienda, correo, genero, rol, semestreGrado, correoPersonal, Cargo, labora, egresadoEmpresa, fechaGraduacion);
             Estudiante e2 = new Estudiante(documentoID, Telefono, telefono2, tipoDocumentoID, Nombre, Apellido, direccionVivienda, correo, genero, rol, codigoEstudiante, semestrePonderado, carrera);
-
             if (semestreGrado == null) {
                 e1 = null;
             } else {
@@ -99,14 +97,14 @@ public class SolicitudAfiliacionBean implements Serializable {
                 }        
                 e2 = null;
             }
-
+            boolean b=true;
             SolicitudAfiliacion temp = new SolicitudAfiliacion(solicitudID += 1, new Date(new java.util.Date().getTime()), estadoSolicitud, comentario, e1, e2);
             try {
                 SAGECI.registrarNuevaSolicitud(temp);
-                showMessage(true);
-            } catch (ExcepcionServiciosSAGECI e) {
-                showMessage(false);
+            } catch (Exception e) {
+                showMessage(false);b=false;
             }
+            if(b){showMessage(true);}
         }
         resetearValores();
     }
@@ -129,10 +127,6 @@ public class SolicitudAfiliacionBean implements Serializable {
         }
     }
 
-    public void showMessage() {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Su solicitud fue rechazada", "Datos previamente registrados!!");
-        RequestContext.getCurrentInstance().showMessageInDialog(message);
-    }
 
     public void resetearValores() {
         telefono2 = null;

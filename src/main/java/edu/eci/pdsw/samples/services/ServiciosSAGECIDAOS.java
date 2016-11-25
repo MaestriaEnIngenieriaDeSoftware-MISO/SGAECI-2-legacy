@@ -175,10 +175,10 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
     }
 
     @Override
-    public void agregarContra(int documentoID, String contra,int tipo) throws ExcepcionServiciosSAGECI {
+    public void agregarRolPersona(int documentoID,int tipo,String contra) throws ExcepcionServiciosSAGECI {
         try {
             daof.beginSession();
-            daof.getDaoRol().save(documentoID, contra,tipo);
+            daof.getDaoRolPersona().save(documentoID, tipo, contra);
             daof.commitTransaction();
             daof.endSession();
         } catch (PersistenceException ex) {

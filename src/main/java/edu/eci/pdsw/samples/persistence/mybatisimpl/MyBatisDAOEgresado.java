@@ -22,13 +22,11 @@ public class MyBatisDAOEgresado implements DaoEgresado{
     private SqlSession currentSession=null;
 
     public MyBatisDAOEgresado(SqlSession session) {
-        
         Egmap=session.getMapper(EgresadoMapper.class);
     }
     
      @Override
     public Egresado load(int DocumentoID) throws PersistenceException {
-       
         return Egmap.getEgresado(DocumentoID);
     }
 
@@ -39,7 +37,6 @@ public class MyBatisDAOEgresado implements DaoEgresado{
     
     @Override
     public void save(Egresado e) throws PersistenceException {
-      
       Egmap.insertarEgresado(e.getDocumentoID(), e.getSemestreGrado(), e.getCorreo_Personal().toLowerCase(), e.getLabora(), e.getCargo().toUpperCase(),e.getEmp().getNombreempre(),e.getFechaGraduacion());
     }
 }

@@ -55,7 +55,7 @@ public abstract class DaoFactory {
     
     public abstract DaoEgresado getDaoEgresado();
     
-    public abstract DaoRol getDaoRol();
+    public abstract DaoRolPersona getDaoRolPersona();
     
     public abstract DaoPersona getDaoPersona();
     

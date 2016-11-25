@@ -59,7 +59,6 @@ public class MyBatisDAOEstudiante implements DaoEstudiante{
     
     @Override
     public void save(Estudiante e) throws PersistenceException {
-        
         Esmap.insertarEstudiante(e.getCodigoEstudiante(), e.getDocumentoID(), e.getSemestrePonderado(),e.getCarrera().toUpperCase());
     }
     
