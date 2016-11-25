@@ -20,6 +20,7 @@ package edu.eci.pdsw.samples.managedbeans;
 import Security.SHA1;
 import edu.eci.pdsw.samples.entities.Egresado;
 import edu.eci.pdsw.samples.entities.Estudiante;
+import edu.eci.pdsw.samples.entities.Persona;
 import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosSAGECI;
 import edu.eci.pdsw.samples.services.ServiciosSAGECI;
@@ -46,6 +47,7 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
     String Comentario;
     EmailSender sender = new SimpleEmailSender(new EmailConfiguration());
     Email email = null;
+    Persona e;
     private SHA1 sh;
     final String from = "5d8dd682c0-c92f3e@inbox.mailtrap.io";
     final String subjectAprobado = "Solicitud de Ingreso AECI: Aprobada";
@@ -60,12 +62,24 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
         for(SolicitudAfiliacion s :temp){
             if(s.getE1().getSemestreGrado()==null){
                 s.setTipoSol("Estudiante");
+                s.setE1(null);
             }else{
                 s.setTipoSol("Egresado");
+                s.setE2(null);
             }
         }
         return temp;
     }
+
+    public Persona getE() {
+        return e;
+    }
+
+    public void setE(Persona e) {
+        this.e = e;
+    }
+    
+    
     
     public ServiciosSAGECI getServicios() {
         return SAGECI;
@@ -81,6 +95,13 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
 
     public void setSolicitudSelection(SolicitudAfiliacion solicitudSelection) {
         this.solicitudSelection = solicitudSelection;
+        if(solicitudSelection.getE1()==null){
+            this.solicitudSelection.setE1(null);
+            this.e= (Persona) solicitudSelection.getE2();
+        }else{
+            this.solicitudSelection.setE2(null);
+            this.e= (Persona) solicitudSelection.getE1();
+        }
     }
     
     
@@ -91,43 +112,29 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
         try{
             Egresado e1 = solicitudSelection.getE1();
             Estudiante e2 =solicitudSelection.getE2();
-            String messageAprobado = "Su solicitud ha sido Aprobada: "+Comentario;
-            String toEgresado = e1.getCorreo_Personal();
-            String toEstudiante = e2.getCorreo_Personal();            
+            System.out.println("este es egresado: "+e1);
+            System.out.println("este es estudiante: "+e2);
+            String messageAprobado = "Su solicitud ha sido Aprobada: "+Comentario;            
             solicitudSelection.setEstadoSolicitud("ACEPTADA");
             solicitudSelection.setComentario(Comentario);
             SAGECI.actualizarSolicitudAfliliacion(solicitudSelection);
-            System.out.println("actualizo solicitud con exito");
             String shacontrasena;
             if (e1==null){
-                System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-                System.out.println("antes del hash");
+                String toEstudiante = e2.getCorreo_Personal();
                 shacontrasena = sh.generateHash(Integer.toString(e2.getDocumentoID()));
-                System.out.println("despues del hash");
-                System.out.println(shacontrasena);
-                email = new SimpleEmail(from, toEstudiante, subjectAprobado+", Su Usuario y la contraseña es su Documento de identidad" , messageAprobado);
-                System.out.println("despues del crear el email");
-                System.out.println(e2.getDocumentoID());
+                email = new SimpleEmail(from, toEstudiante, subjectAprobado, messageAprobado+", Su Usuario y la contraseña es su Documento de identidad");
                 SAGECI.agregarRolPersona(e2.getDocumentoID(),3,shacontrasena);
-                System.out.println("antes de enviar email");
                 sender.send(email);
-                System.out.println("despues de enviar email");
             }else{
-                System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
-                System.out.println("antes del hash");
+                String toEgresado = e1.getCorreo_Personal();
                 shacontrasena = sh.generateHash(Integer.toString(e1.getDocumentoID()));
-                System.out.println("despues del hash");
-                System.out.println(shacontrasena);
-                email = new SimpleEmail(from, toEgresado, subjectAprobado+", Su Usuario y la contraseña es su Documento de identidad" , messageAprobado);
-                System.out.println("despues del crear el email");
-                System.out.println(e1.getDocumentoID());
+                email = new SimpleEmail(from, toEgresado, subjectAprobado , messageAprobado+", Su Usuario y la contraseña es su Documento de identidad");
                 SAGECI.agregarRolPersona(e1.getDocumentoID(),2,shacontrasena);
-                System.out.println("antes de enviar email");
                 sender.send(email);
-                System.out.println("despues de enviar email");
             }
-        }catch(MessagingException e){System.out.println("email mal");}
-        catch(Exception e){System.out.println("otro error");}
+        }catch(MessagingException e){
+            //¡¡¡¡falta anexar ecepcion de error!!!!
+        }
     }
     
     public void rechazarSolicitudAfiliacion(ActionEvent actionEvent) throws ExcepcionServiciosSAGECI{
@@ -135,16 +142,16 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
             Egresado e1 = solicitudSelection.getE1();
             Estudiante e2 =solicitudSelection.getE2();
             String messageAprobado = "Su solicitud ha sido Rechazada: "+Comentario;
-            String toEgresado = e1.getCorreo_Personal();
-            String toEstudiante = e2.getCorreo_Personal();
             String subjectRechazado = "Solicitud de Ingreso AECI: Rechazada";
             solicitudSelection.setEstadoSolicitud("RECHAZADA");
             solicitudSelection.setComentario(Comentario);
             SAGECI.actualizarSolicitudAfliliacion(solicitudSelection);
             if (e1==null){
+                String toEstudiante = e2.getCorreo_Personal();
                 email = new SimpleEmail(from, toEstudiante, subjectRechazado, messageAprobado);
                 sender.send(email);
             }else{
+                String toEgresado = e1.getCorreo_Personal();
                 email = new SimpleEmail(from, toEgresado, subjectRechazado, messageAprobado);
                 sender.send(email);
             }

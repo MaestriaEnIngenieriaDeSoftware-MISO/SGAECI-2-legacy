@@ -87,6 +87,9 @@ public class SolicitudAfiliacionBean implements Serializable {
 
     public void agregarSolicitudAfiliacion() throws ExcepcionServiciosSAGECI{
         if (Nombre != null) {
+            this.egresadoEmpresa.setNombreempre(Empresa);
+            this.egresadoEmpresa.setDirempre(direccionEmpresa);
+            this.egresadoEmpresa.setTelempre(telefonoOficina);
             Egresado e1 = new Egresado(documentoID, Telefono, telefono2, tipoDocumentoID, Nombre, Apellido, direccionVivienda, correo, genero, rol, semestreGrado, correoPersonal, Cargo, labora, egresadoEmpresa, fechaGraduacion);
             Estudiante e2 = new Estudiante(documentoID, Telefono, telefono2, tipoDocumentoID, Nombre, Apellido, direccionVivienda, correo, genero, rol, codigoEstudiante, semestrePonderado, carrera);
             if (semestreGrado == null) {
@@ -149,7 +152,7 @@ public class SolicitudAfiliacionBean implements Serializable {
         direccionEmpresa = null;
         Cargo = null;
         correoPersonal = null;
-        carrera = null;
+        marca=false;
     }
 
     public String getTipotra() {
@@ -417,7 +420,4 @@ public class SolicitudAfiliacionBean implements Serializable {
         this.labora = labora;
     }
 
-    public void asigna(String labora) {
-        this.labora = labora;
-    }
 }

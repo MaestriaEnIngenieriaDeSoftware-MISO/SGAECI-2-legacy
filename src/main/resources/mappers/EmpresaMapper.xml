@@ -19,6 +19,12 @@
         WHERE Nombre = #{nombre}
     </select>
     
+    <select id='getEmpresas' parameterType='map' resultMap="EmpresaResult">
+        SELECT Nombre, Direccion, Telefono
+        FROM Egresado_Empresa
+    </select>
+    
+    
      <insert id='insertarEmpresa' >
         INSERT INTO Egresado_Empresa(Nombre,Direccion,Telefono) values (#{nombre},#{direccion},#{telefono})
     </insert>

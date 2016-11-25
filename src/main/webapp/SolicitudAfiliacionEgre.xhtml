@@ -63,7 +63,7 @@
 
                             <p:outputLabel for="elab" value="Estado Laboral:" />
                             <p:selectOneMenu class="ui-selectOneMenu" required="True" id="elab" value="#{SolicitudAfiliacion.tipotra}">
-                                <p:ajax event="change" listener="#{SolicitudAfiliacion.asigna()}" update=":form:Todo"/>
+                                <p:ajax event="change" listener="#{SolicitudAfiliacion.asigna()}" update=":form:empresa"/>
                                 <f:selectItem class="asd" itemLabel="Independiente" itemValue="Independiente" />
                                 <f:selectItem class="asd" itemLabel="Empresa" itemValue="Empresa" />
                                 <f:selectItem class="asd" itemLabel="Desempleado" itemValue="Desempleado" />
@@ -90,7 +90,7 @@
                         <p:commandLink oncomplete="window.open('http://www.aeci.org.co/#!politicas-de-tratamiento-de-datos')">Acepta los Terminos y Condiciones </p:commandLink>
                         <p:selectBooleanCheckbox required="true" value="#{SolicitudAfiliacion.acepta}" />
                         <br></br>
-                        <p:commandButton action="Registro" value="Enviar Solicitud De Afiliación" update="form" actionListener="#{SolicitudAfiliacion.agregarSolicitudAfiliacion()}"/>
+                        <p:commandButton  value="Enviar Solicitud De Afiliación"  actionListener="#{SolicitudAfiliacion.agregarSolicitudAfiliacion()}" update="form"/>
                     </div>
                 </h:form>
             </p:layoutUnit>

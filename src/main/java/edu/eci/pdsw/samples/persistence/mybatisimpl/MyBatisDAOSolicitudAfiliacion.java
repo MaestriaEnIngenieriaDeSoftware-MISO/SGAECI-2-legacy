@@ -68,15 +68,16 @@ import org.apache.ibatis.session.SqlSession;
            pedmp2.insertarEstudiante(e.getCodigoEstudiante(), e.getDocumentoID(), e.getSemestrePonderado(),e.getCarrera().toUpperCase());
            pedmp.insertarSolicitudAfiliacion(Sa.getE2().getDocumentoID(),Sa.getFechaSolicitud(),Sa.getEstadoSolicitud(),Sa.getComentario().toUpperCase());
        }else{       
-           pedmp4.insertarPersona(Sa.getE1().getDocumentoID(), Sa.getE1().getTipoDocumentoID(), Sa.getE1().getNombre(), Sa.getE1().getApellido(),Sa.getE1().getDireccion(), Sa.getE1().getCorreo_Personal(), Sa.getE1().getGenero(), Sa.getE1().getTelefono1(), Sa.getE1().getTelefono2());
-           Egresado e = Sa.getE1();
-           EgresadoMapper pedmp2=currentSession.getMapper(EgresadoMapper.class);
-           EmpresaMapper pedmp3=currentSession.getMapper(EmpresaMapper.class);
-           if(e.getLabora().equals("si") ){
+            pedmp4.insertarPersona(Sa.getE1().getDocumentoID(), Sa.getE1().getTipoDocumentoID(), Sa.getE1().getNombre(), Sa.getE1().getApellido(),Sa.getE1().getDireccion(), Sa.getE1().getCorreo_Personal(), Sa.getE1().getGenero(), Sa.getE1().getTelefono1(), Sa.getE1().getTelefono2());
+            Egresado e = Sa.getE1();
+            EgresadoMapper pedmp2=currentSession.getMapper(EgresadoMapper.class);
+           
+            if(e.getLabora().equals("si") && (!e.getCargo().equals("Independiente") && !(e.getCargo()==null))){
+                EmpresaMapper pedmp3=currentSession.getMapper(EmpresaMapper.class);
                 if(pedmp3.getEmpresa(e.getEmp().getNombreempre())==null){
-                   pedmp3.insertarEmpresa( e.getEmp().getNombreempre().toUpperCase(), e.getEmp().getDirempre().toUpperCase(), e.getEmp().getTelempre());
+                    pedmp3.insertarEmpresa(e.getEmp().getNombreempre(), e.getEmp().getDirempre(), e.getEmp().getTelempre());
                 }
-           }
+            }
            pedmp2.insertarEgresado(e.getDocumentoID(),e.getSemestreGrado(),e.getCorreoEstudiantil(),e.getLabora(),e.getCargo(),e.getEmp().getNombreempre(),e.getFechaGraduacion());
            pedmp.insertarSolicitudAfiliacion(e.getDocumentoID(),Sa.getFechaSolicitud(),Sa.getEstadoSolicitud(),Sa.getComentario().toUpperCase());
        }

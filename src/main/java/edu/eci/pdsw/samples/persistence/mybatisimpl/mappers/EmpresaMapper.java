@@ -43,4 +43,12 @@ public interface EmpresaMapper {
      */
     public Egresado_Empresa getEmpresa(@Param("nombre") String nombre);
     
+    
+    /**
+     * consulta todas las empresas de la base de datos
+     * @return empresas de la base de datos
+     */
+    public List<Egresado_Empresa> getEmpresas();
+    
+    
 }
