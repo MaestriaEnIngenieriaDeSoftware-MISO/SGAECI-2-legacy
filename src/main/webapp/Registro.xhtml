@@ -10,9 +10,8 @@
     </h:head>
     <h:body >
         <p:layout class="contenedor">
-            
-            <p:layoutUnit position="north" id="cabecera" >
-                <img src="../resource/aecimagen.png" align="left" height="250" width="250"></img>
+            <p:layoutUnit position="north" resizable="false">
+                <img src="aecimagen.png" align="left" height="250" width="250"></img>
                 <div align="right" draggable="false" >
                     <h:panelGrid  columns="2" class="center" style="max-height: 10px" >
                         <p:outputLabel style="size: A4" for="nombre" value="Usuario: " styleClass="sheet.css" />
@@ -25,11 +24,11 @@
                     </h:panelGrid>
                 </div>
             </p:layoutUnit>
-            
-            <p:layoutUnit position="center" id="contenido" class="westUnit">
+
+            <p:layoutUnit position="center" resizable="false">
                 <p style="color: black">SAGECI es una aplicación que permite ingresar a los servicios deAECI que es una asociación sin ánimo de lucro, conformada por Egresados de Programas de Pregrado y Posgrado de la Escuela Colombiana de Ingeniería Julio Garavito"
-                ¿No te encuentras registrado?"
-                Envianos una solicitud para unirte y recibir todos nuestros beneficios."
+                    ¿No te encuentras registrado?"
+                    Envianos una solicitud para unirte y recibir todos nuestros beneficios."
                 </p>
                 <h:form id="formu">
                     <div align="center" draggable="false" style="border-width: 10px">
@@ -38,7 +37,6 @@
                     </div>
                 </h:form>
             </p:layoutUnit>
-
         </p:layout>
 
     </h:body>

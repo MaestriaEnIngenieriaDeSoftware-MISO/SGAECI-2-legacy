@@ -65,9 +65,9 @@ public class UsuarioBean {
             PdfWriter writer = PdfWriter.getInstance(doc, out);
             doc.open();
           //  LogginBean bean = (LogginBean) getManagedBean("Loggin");
-           // documentoID=Integer.parseInt(bean.getUsername());
+            documentoID = 102214455;
             // Falta anexar el codigo del documento
-            doc.add(new Paragraph("Bog7ytvrsgtdotá DC"));
+            doc.add(new Paragraph("Bogotá DC"));
             doc.addCreationDate();
            // Image imagen = Image.getInstance("aecimagen.png");
           //  imagen.setAbsolutePosition(450f, 10f);
@@ -75,9 +75,14 @@ public class UsuarioBean {
             doc.addTitle("EL SUSCRITO SECRETARIO DE LA ASOCIACIÓN DE EGRESADOS DE LA ESCUELA COLOMBIANA DE INGENIERÍA HACE CONSTAR:");
             plantillaEst="Que el estudiante $1, identificado con $2  No. $3, estudiante de $5 semestre del programa de $4,  se encuentra afiliado en la asociación de egresados de la escuela colombiana de ingeniería Julio Garavito desde $6 hasta $7, que cuenta con una afiliación gratuita de 6 meses dada su condición de estudiante activo. \n Que la presente constancia se expide a solicitud del interesado.";
             //egresado=SAGECI.consultarEgresado(documentoID);
+            /**/
+            //if(true){
+            System.out.println("error antes consultar el del estudiante");
+                estudiante=SAGECI.consultarEstudiante(documentoID);
+            System.out.println("error despues de consultar del estudiante");
+                System.out.println(estudiante);
+
             /*
-            if(true){
-              //  estudiante=SAGECI.consultarEstudiante(documentoID);
                 plantillaEst="Que el estudiante $1, identificado con $2  No. $3, estudiante de $5 semestre del programa de $4,  se encuentra afiliado en la asociación de egresados de la escuela colombiana de ingeniería Julio Garavito desde $6 hasta $7, que cuenta con una afiliación gratuita de 6 meses dada su condición de estudiante activo.\n" +
 "\n" +
 "Que la presente constancia se expide a solicitud del interesado.";
@@ -107,6 +112,7 @@ public class UsuarioBean {
             streamedContent = new DefaultStreamedContent(new ByteArrayInputStream(b), "application/pdf", "Certificado.pdf");
         }            
         } catch (Exception e) {
+            System.out.println("entro por un error "+e.getMessage() );
         }
 
     }
