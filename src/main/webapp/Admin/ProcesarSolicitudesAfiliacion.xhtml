@@ -12,9 +12,23 @@
     </h:head>
 
     <h:body style="stylesheet">
+
+        <center><p:graphicImage value="bienvenida.png"/></center>
+        <h1>RESTRICTED PAGE!</h1>
+        <h:outputLink value="/logout">logout</h:outputLink>
+        <pre>     
+            subject = <p:outputLabel value="#{loginBean.subject}"/>
+            principal = <p:outputLabel value="#{loginBean.subject.principal}"/>
+            session = <p:outputLabel value="#{loginBean.subject.session}"/>
+            role Administrador = <p:outputLabel value="#{loginBean.subject.hasRole('Administrador')}"/>
+        </pre>
+            vista Administrador 
+
+
+
         <h:form id="form">
             <h:outputLink value="/logout">logout</h:outputLink>
-            <img src="AECI.PNG" alt="AECI"></img>
+            <img src="../resource/AECI.PNG" alt="AECI"></img>
             <p:dataTable rowIndexVar="row" id="ListaSolicitudes" var="Solicitud"  value="#{ProcesarSolicitudAfiliacion.solicitudes}" selectionMode="single" selection="#{ProcesarSolicitudAfiliacion.solicitudSelection}" rowKey="#{Solicitud.solicitudID}" style="margin-bottom:0">
                 <p:column style="width: 2px" headerText="Solicitud ID">
                     <h:outputText value="#{Solicitud.solicitudID}" />
@@ -36,8 +50,8 @@
                     <h:outputText id="nombre" value="#{ProcesarSolicitudAfiliacion.e.nombre}" />
                     <p:outputLabel  for="apellido" value="Apellidos: "/>
                     <h:outputText id="apellido" value="#{ProcesarSolicitudAfiliacion.e.apellido}" />
-                     <p:outputLabel  for="tid" value="Tipo Documento: "/>
-                     <h:outputText id="tid" value="#{ProcesarSolicitudAfiliacion.e.tipoDocumentoID}" />
+                    <p:outputLabel  for="tid" value="Tipo Documento: "/>
+                    <h:outputText id="tid" value="#{ProcesarSolicitudAfiliacion.e.tipoDocumentoID}" />
                     <p:outputLabel  for="Docu" value="Documento: "/>
                     <h:outputText id="Docu" value="#{ProcesarSolicitudAfiliacion.e.documentoID}" />
                     <p:outputLabel  for="tel1" value="Telefono Principal: "/>

@@ -31,7 +31,7 @@ public class SHA1 {
         DefaultPasswordService passwordService = new DefaultPasswordService();
         passwordService.setHashService(hashService);
         String encryptedPassword = passwordService.encryptPassword(password);
-
+        System.out.println(encryptedPassword);
         return encryptedPassword;
 
     }
