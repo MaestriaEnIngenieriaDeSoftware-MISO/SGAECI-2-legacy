@@ -16,7 +16,6 @@
  */
 package edu.eci.pdsw.samples.persistence.mybatisimpl;
 
-
 import edu.eci.pdsw.samples.entities.Egresado;
 import edu.eci.pdsw.samples.entities.Estudiante;
 import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
@@ -34,60 +33,58 @@ import org.apache.ibatis.session.SqlSession;
  *
  * @author hcadavid
  */
- public class MyBatisDAOSolicitudAfiliacion implements DaoSolicitudAfiliacion{
+public class MyBatisDAOSolicitudAfiliacion implements DaoSolicitudAfiliacion {
 
-    private SqlSession currentSession=null;
+    private SqlSession currentSession = null;
 
     public MyBatisDAOSolicitudAfiliacion(SqlSession session) {
-        this.currentSession=session;
+        this.currentSession = session;
     }
-        
+
     @Override
     public SolicitudAfiliacion load(int id) throws PersistenceException {
-        SolicitudAfMapper pedmp=currentSession.getMapper(SolicitudAfMapper.class);
+        SolicitudAfMapper pedmp = currentSession.getMapper(SolicitudAfMapper.class);
         return pedmp.getSolicitudAf(id);
 
     }
 
     @Override
     public List<SolicitudAfiliacion> loadAll() throws PersistenceException {
-        SolicitudAfMapper pedmp=currentSession.getMapper(SolicitudAfMapper.class);
+        SolicitudAfMapper pedmp = currentSession.getMapper(SolicitudAfMapper.class);
         List<SolicitudAfiliacion> temp;
-        temp=pedmp.getSolicitudesAfiliacion();
+        temp = pedmp.getSolicitudesAfiliacion();
         return temp;
     }
 
     @Override
     public void save(SolicitudAfiliacion Sa) throws PersistenceException {
-       SolicitudAfMapper pedmp=currentSession.getMapper(SolicitudAfMapper.class);
-       PersonaMapper pedmp4 = currentSession.getMapper(PersonaMapper.class);
-       if(Sa.getE1()==null){
-           pedmp4.insertarPersona(Sa.getE2().getDocumentoID(), Sa.getE2().getTipoDocumentoID(), Sa.getE2().getNombre(), Sa.getE2().getApellido(),Sa.getE2().getDireccion(), Sa.getE2().getCorreo_Personal(), Sa.getE2().getGenero(), Sa.getE2().getTelefono1(), Sa.getE2().getTelefono2());
-           Estudiante e = Sa.getE2();
-           EstudianteMapper pedmp2=currentSession.getMapper(EstudianteMapper.class);
-           pedmp2.insertarEstudiante(e.getCodigoEstudiante(), e.getDocumentoID(), e.getSemestrePonderado(),e.getCarrera().toUpperCase());
-           pedmp.insertarSolicitudAfiliacion(Sa.getE2().getDocumentoID(),Sa.getFechaSolicitud(),Sa.getEstadoSolicitud(),Sa.getComentario().toUpperCase());
-       }else{       
-            pedmp4.insertarPersona(Sa.getE1().getDocumentoID(), Sa.getE1().getTipoDocumentoID(), Sa.getE1().getNombre(), Sa.getE1().getApellido(),Sa.getE1().getDireccion(), Sa.getE1().getCorreo_Personal(), Sa.getE1().getGenero(), Sa.getE1().getTelefono1(), Sa.getE1().getTelefono2());
+        SolicitudAfMapper pedmp = currentSession.getMapper(SolicitudAfMapper.class);
+        PersonaMapper pedmp4 = currentSession.getMapper(PersonaMapper.class);
+        if (Sa.getE1() == null) {
+            pedmp4.insertarPersona(Sa.getE2().getDocumentoID(), Sa.getE2().getTipoDocumentoID(), Sa.getE2().getNombre(), Sa.getE2().getApellido(), Sa.getE2().getDireccion(), Sa.getE2().getCorreo_Personal(), Sa.getE2().getGenero(), Sa.getE2().getTelefono1(), Sa.getE2().getTelefono2());
+            Estudiante e = Sa.getE2();
+            EstudianteMapper pedmp2 = currentSession.getMapper(EstudianteMapper.class);
+            pedmp2.insertarEstudiante(e.getCodigoEstudiante(), e.getDocumentoID(), e.getSemestrePonderado(), e.getCarrera().toUpperCase());
+            pedmp.insertarSolicitudAfiliacion(Sa.getE2().getDocumentoID(), Sa.getFechaSolicitud(), Sa.getEstadoSolicitud(), Sa.getComentario().toUpperCase());
+        } else {
+            pedmp4.insertarPersona(Sa.getE1().getDocumentoID(), Sa.getE1().getTipoDocumentoID(), Sa.getE1().getNombre(), Sa.getE1().getApellido(), Sa.getE1().getDireccion(), Sa.getE1().getCorreo_Personal(), Sa.getE1().getGenero(), Sa.getE1().getTelefono1(), Sa.getE1().getTelefono2());
             Egresado e = Sa.getE1();
-            EgresadoMapper pedmp2=currentSession.getMapper(EgresadoMapper.class);
-           
-            if(e.getLabora().equals("si") && (!e.getCargo().equals("Independiente") && !(e.getCargo()==null))){
-                EmpresaMapper pedmp3=currentSession.getMapper(EmpresaMapper.class);
-                if(pedmp3.getEmpresa(e.getEmp().getNombreempre())==null){
+            EgresadoMapper pedmp2 = currentSession.getMapper(EgresadoMapper.class);
+            if (e.getLabora().equals("si") && (!e.getCargo().equals("Independiente") && (e.getCargo() != null))) {
+                EmpresaMapper pedmp3 = currentSession.getMapper(EmpresaMapper.class);
+                if (pedmp3.getEmpresa(e.getEmp().getNombreempre()) == null) {
                     pedmp3.insertarEmpresa(e.getEmp().getNombreempre(), e.getEmp().getDirempre(), e.getEmp().getTelempre());
                 }
             }
-           pedmp2.insertarEgresado(e.getDocumentoID(),e.getSemestreGrado(),e.getCorreoEstudiantil(),e.getLabora(),e.getCargo(),e.getEmp().getNombreempre(),e.getFechaGraduacion());
-           pedmp.insertarSolicitudAfiliacion(e.getDocumentoID(),Sa.getFechaSolicitud(),Sa.getEstadoSolicitud(),Sa.getComentario().toUpperCase());
-       }
-       
-        
+            pedmp2.insertarEgresado(e.getDocumentoID(), e.getSemestreGrado(), e.getCorreoEstudiantil(), e.getLabora(), e.getCargo(), e.getEmp().getNombreempre(), e.getFechaGraduacion());
+            pedmp.insertarSolicitudAfiliacion(e.getDocumentoID(), Sa.getFechaSolicitud(), Sa.getEstadoSolicitud(), Sa.getComentario().toUpperCase());
+        }
+
     }
 
     @Override
     public void update(SolicitudAfiliacion Sa) throws PersistenceException {
-        SolicitudAfMapper pedmp=currentSession.getMapper(SolicitudAfMapper.class);
+        SolicitudAfMapper pedmp = currentSession.getMapper(SolicitudAfMapper.class);
         pedmp.actualizarSolicitud(Sa.getEstadoSolicitud(), Sa.getComentario(), Sa.getSolicitudID());
     }
 

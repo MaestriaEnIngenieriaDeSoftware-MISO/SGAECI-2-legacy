@@ -5,6 +5,8 @@
  */
 package edu.eci.pdsw.samples.managedbeans;
 
+import static com.google.common.collect.Iterables.skip;
+import static com.itextpdf.text.Utilities.skip;
 import com.mysql.jdbc.exceptions.*;
 import edu.eci.pdsw.samples.entities.Egresado;
 import edu.eci.pdsw.samples.entities.Egresado_Empresa;
@@ -31,6 +33,7 @@ import org.primefaces.model.UploadedFile;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.FlowEvent;
 
 /**
  *
@@ -51,8 +54,9 @@ public class SolicitudAfiliacionBean implements Serializable {
     private ArrayList<Integer> semestres;
     private ArrayList<String> carreras;
     private Egresado_Empresa egresadoEmpresa;
-    private String tipotra;
+    private String tipotra = "Independiente";
     private Rol rol;
+    private boolean skip;
 
     public SolicitudAfiliacionBean() {
         this.semestres = new ArrayList<>();
@@ -97,21 +101,26 @@ public class SolicitudAfiliacionBean implements Serializable {
             } else {
                 if (tipotra.equals("Independiente")) {
                     Cargo = "Independiente";
+                    System.out.println(labora);
                 }        
                 e2 = null;
             }
             boolean b=true;
-            SolicitudAfiliacion temp = new SolicitudAfiliacion(solicitudID += 1, new Date(new java.util.Date().getTime()), estadoSolicitud, comentario, e1, e2);
+            SolicitudAfiliacion temp = new SolicitudAfiliacion(solicitudID +=1, new Date(new java.util.Date().getTime()), estadoSolicitud, comentario, e1, e2);
             try {
                 SAGECI.registrarNuevaSolicitud(temp);
+                resetearValores();
             } catch (Exception e) {
                 showMessage(false);b=false;
+                resetearValores();
             }
             if(b){showMessage(true);}
         }
         resetearValores();
     }
 
+    
+    
     public void asigna() {
         if (tipotra.equals("Desempleado")) {
             labora = "no";
@@ -130,7 +139,6 @@ public class SolicitudAfiliacionBean implements Serializable {
         }
     }
 
-
     public void resetearValores() {
         telefono2 = null;
         documentoID = 0;
@@ -139,7 +147,7 @@ public class SolicitudAfiliacionBean implements Serializable {
         codigoEstudiante = 0;
         semestrePonderado = 0;
         correo = null;
-        labora = null;
+        labora = "no";
         semestreGrado = null;
         tipoDocumentoID = null;
         genero = null;
@@ -153,8 +161,28 @@ public class SolicitudAfiliacionBean implements Serializable {
         Cargo = null;
         correoPersonal = null;
         marca=false;
+        tipotra="Independiente";
     }
 
+    
+    public boolean isSkip() {
+        return skip;
+    }
+ 
+    public void setSkip(boolean skip) {
+        this.skip = skip;
+    }
+    
+    public String onFlowProcess(FlowEvent event) {
+        if(skip) {
+            skip = false;   //reset in case user goes back
+            return "confirm";
+        }
+        else {
+            return event.getNewStep();
+        }
+    }
+    
     public String getTipotra() {
         return tipotra;
     }

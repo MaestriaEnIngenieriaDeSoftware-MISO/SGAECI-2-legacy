@@ -10,90 +10,151 @@
         </link>
     </h:head>
     <h:body  styleClass="Bimage">
-        <p:layout class="norte" >
-            <p:layoutUnit position="north"  >
+        <div>
+            <div class="adentro" style="background-color: white">
                 <img src="../resource/aecimagen.png" align="left" height="250" width="250"></img>
-            </p:layoutUnit>
-            <p:layoutUnit position="center" class="westUnit" >
-                <h:form id="form">
-                    <div align="center" draggable="false" >
-                        <h:panelGrid  columns="2">
-                            <p:outputLabel for="nombre" value="Nombres " />
-                            <p:inputText styleClass="cent" id="nombre" required="true" value="#{SolicitudAfiliacion.nombre}"/>
+            </div>
 
-                            <p:outputLabel for="apellido" value="Apellidos" />
-                            <p:inputText styleClass="cent" id="apellido" required="true" value="#{SolicitudAfiliacion.apellido}"/>
+            <br></br>
+            <br></br>
+            <div class="westUnit" style="background-color: white">
 
+                <h:form id="form" >
+                    <p:growl id="growl" sticky="true" showDetail="true"/>
+                    <p:wizard flowListener="#{SolicitudAfiliacion.onFlowProcess}">
+                        <p:tab id="personal" title="Personal">
+                            <p:panel header="Datos personales">
+                                <h:panelGrid columns="2" columnClasses="label, value">
+                                    <p:outputLabel style="font-weight:bold" for="nombre" value="Nombres " />
+                                    <p:inputText styleClass="cent" id="nombre" required="true" value="#{SolicitudAfiliacion.nombre}"/>
 
-                            <p:outputLabel for="tid" value="Tipo Documento Identidad: " />
-                            <p:selectOneMenu class="ui-selectOneMenu" id="tid" value="#{SolicitudAfiliacion.tipoDocumentoID}" style="width:175px">
-                                <f:selectItem itemLabel="CC" itemValue="CC" />
-                                <f:selectItem itemLabel="CE" itemValue="CE" />
-                            </p:selectOneMenu>
-
-                            <p:outputLabel for="id" value="Documento Identidad: " />
-                            <p:inputText styleClass="cent" id="id" required="true" value="#{SolicitudAfiliacion.documentoID}"/>
-
-                            <p:outputLabel for="gen" value="Género: " />
-                            <p:selectOneMenu class="ui-selectOneMenu" id="gen" value="#{SolicitudAfiliacion.genero}" style="width:175px">
-                                <f:selectItem itemLabel="MASCULINO" itemValue="MASCULINO" />
-                                <f:selectItem itemLabel="FEMENINO" itemValue="FEMENINO"  />
-                            </p:selectOneMenu>
+                                    <p:outputLabel style="font-weight:bold" for="apellido" value="Apellidos" />
+                                    <p:inputText styleClass="cent" id="apellido" required="true" value="#{SolicitudAfiliacion.apellido}"/>
 
 
-                            <p:outputLabel for="telcasa" value="Teléfono Casa: " />
-                            <p:inputText styleClass="cent" id="telcasa"  value="#{SolicitudAfiliacion.telefono}"/>
+                                    <p:outputLabel style="font-weight:bold" for="tid" value="Tipo Documento Identidad: " />
+                                    <p:selectOneMenu class="ui-selectOneMenu" id="tid" value="#{SolicitudAfiliacion.tipoDocumentoID}" style="width:175px">
+                                        <f:selectItem class="asd" itemLabel="Seleccione uno" itemValue="" />
+                                        <f:selectItem itemLabel="CC" itemValue="CC" />
+                                        <f:selectItem itemLabel="CE" itemValue="CE" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel style="font-weight:bold" for="id" value="Documento Identidad: " />
+                                    <p:inputText styleClass="cent" id="id" required="true" value="#{SolicitudAfiliacion.documentoID}"/>
+
+                                    <p:outputLabel style="font-weight:bold" for="gen" value="Género: " />
+                                    <p:selectOneMenu class="ui-selectOneMenu" id="gen" value="#{SolicitudAfiliacion.genero}" style="width:175px">
+                                        <f:selectItem class="asd" itemLabel="Seleccione uno" itemValue="" />
+                                        <f:selectItem itemLabel="MASCULINO" itemValue="MASCULINO" />
+                                        <f:selectItem itemLabel="FEMENINO" itemValue="FEMENINO"  />
+                                    </p:selectOneMenu>
+                                </h:panelGrid>
+                            </p:panel>
+                        </p:tab> 
+                        <p:tab id="vivienda" title="Vivienda">
+                            <p:panel header="Datos de vivienda">
+                                <p:messages />
+                                <h:panelGrid columns="2" columnClasses="label, value">
+                                    <p:outputLabel style="font-weight:bold" for="telcasa" value="Teléfono Casa: " />
+                                    <p:inputText styleClass="cent" id="telcasa"  value="#{SolicitudAfiliacion.telefono}"/>
 
 
-                            <p:outputLabel for="Celular" value="No. Celular: " />
-                            <p:inputText styleClass="cent" required="true" id="Celular" value="#{SolicitudAfiliacion.telefono2}"/>                
+                                    <p:outputLabel style="font-weight:bold" for="Celular" value="No. Celular: " />
+                                    <p:inputText styleClass="cent" required="true" id="Celular" value="#{SolicitudAfiliacion.telefono2}"/>                
 
 
-                            <p:outputLabel for="direccionVi" value="Dirección Vivienda " />
-                            <p:inputText styleClass="cent" id="direccionVi"  value="#{SolicitudAfiliacion.direccionVivienda}"/>
+                                    <p:outputLabel style="font-weight:bold" for="direccionVi" value="Dirección Vivienda " />
+                                    <p:inputText styleClass="cent" id="direccionVi"  value="#{SolicitudAfiliacion.direccionVivienda}"/>
+
+                                </h:panelGrid>
+                            </p:panel>
+
+                        </p:tab>
+                        <p:tab id="universidad" title="Universidad">
+                            <p:panel header="Datos universitarios">
+                                <p:messages />
+                                <h:panelGrid columns="2" columnClasses="label, value">
+                                    <h:outputLabel style="font-weight:bold" for="codigoEstu" value="Carné No.: " />
+                                    <p:inputText styleClass="cent" id="codigoEstu" required="true" value="#{SolicitudAfiliacion.codigoEstudiante}" />
+
+                                    <p:outputLabel style="font-weight:bold" for="correo" value="Correo Institucional: " />
+                                    <p:inputText styleClass="cent" id="correo" required="true" value="#{SolicitudAfiliacion.correo}"/>
+
+                                    <p:outputLabel style="font-weight:bold" for="carr" value="Programa: " />
+                                    <p:selectOneMenu class="ui-selectOneMenu" id="carr" value="#{SolicitudAfiliacion.carrera}" style="width:259px">
+                                        <p:ajax event="change" update=":form:eventsDT2"/>
+                                        <f:selectItems value="#{SolicitudAfiliacion.carreras}" />
+                                    </p:selectOneMenu>
+                                    
+                                    <p:outputLabel style="font-weight:bold" for="eventsDT2" value="Semestre: " />
+                                    <p:selectOneMenu class="ui-selectOneMenu" id="eventsDT2" value="#{SolicitudAfiliacion.semestrePonderado}" style="width:175px">
+                                        <f:selectItem class="asd" itemLabel="Seleccione uno" itemValue="" />
+                                        <f:selectItems value="#{SolicitudAfiliacion.getSemestres()}" />
+                                    </p:selectOneMenu>
+                                </h:panelGrid>
+
+                            </p:panel>
+                        </p:tab>
+                        <p:tab id="confirm" title="Confirmación">
+                            <p:panel header="Confirmation">
+                                <h:panelGrid id="confirmation" columns="3" style="width: 100%" class="asdfg" columnClasses="grid,grid,grid" >
+                                    <h:panelGrid columns="2" columnClasses="label, label">
+                                        <h:outputText style="font-weight:bold" value="Nombres " />
+                                        <h:outputText styleClass="cent"  value="#{SolicitudAfiliacion.nombre}"/>
+
+                                        <h:outputText style="font-weight:bold" value="Apellidos" />
+                                        <h:outputText styleClass="cent"   value="#{SolicitudAfiliacion.apellido}"/>
 
 
+                                        <h:outputText style="font-weight:bold" value="Tipo Documento Identidad: " />
+                                        <h:outputText   value="#{SolicitudAfiliacion.tipoDocumentoID}"/>
 
-                            <h:outputLabel for="codigoEstu" value="Carné No.: " />
-                            <p:inputText styleClass="cent" id="codigoEstu" required="true" value="#{SolicitudAfiliacion.codigoEstudiante}" />
+                                        <h:outputText style="font-weight:bold" value="Documento Identidad: " />
+                                        <h:outputText styleClass="cent"   value="#{SolicitudAfiliacion.documentoID}"/>
 
+                                        <h:outputText style="font-weight:bold" value="Género: " />
+                                        <h:outputText   value="#{SolicitudAfiliacion.genero}" />
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2" columnClasses="label, label">
+                                        <h:outputText style="font-weight:bold" value="Teléfono Casa: " />
+                                        <h:outputText    value="#{SolicitudAfiliacion.telefono}"/>
 
+                                        <h:outputText style="font-weight:bold" value="No. Celular: " />
+                                        <h:outputText   value="#{SolicitudAfiliacion.telefono2}"/>                
 
-                            <p:outputLabel for="correo" value="Correo Institucional: " />
-                            <p:inputText styleClass="cent" id="correo" required="true" value="#{SolicitudAfiliacion.correo}"/>
+                                        <h:outputText style="font-weight:bold" value="Dirección Vivienda " />
+                                        <h:outputText styleClass="cent"  value="#{SolicitudAfiliacion.direccionVivienda}"/>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2" columnClasses="label, label">
+                                        <h:outputText style="font-weight:bold" value="Carné No.: " />
+                                        <h:outputText styleClass="cent" value="#{SolicitudAfiliacion.codigoEstudiante}" />
 
-                            <p:outputLabel for="carr" value="Programa: " />
-                            <p:selectOneMenu class="ui-selectOneMenu" id="carr" value="#{SolicitudAfiliacion.carrera}" style="width:259px">
-                                <p:ajax event="change" update=":form:eventsDT2" />
-                                <f:selectItem itemLabel="Selecione uno" itemValue="" />
-                                <f:selectItems value="#{SolicitudAfiliacion.carreras}" />
-                            </p:selectOneMenu>
+                                        <h:outputText style="font-weight:bold" value="Correo Institucional: " />
+                                        <h:outputText styleClass="cent" value="#{SolicitudAfiliacion.correo}"/>
 
-                            <p:outputLabel for="eventsDT2" value="Semestre: " />
-                            <p:selectOneMenu class="ui-selectOneMenu" id="eventsDT2" value="#{SolicitudAfiliacion.semestrePonderado}" style="width:175px">
-                                <f:selectItems value="#{SolicitudAfiliacion.getSemestres()}" />
-                            </p:selectOneMenu>
+                                        <h:outputText style="font-weight:bold" value="Programa: " />
+                                        <h:outputText  value="#{SolicitudAfiliacion.carrera}" />
 
-                        </h:panelGrid>
-
-                        <p:commandLink oncomplete="window.open('http://www.aeci.org.co/#!politicas-de-tratamiento-de-datos')">Acepto los Términos y Condiciones </p:commandLink>
-                        <p:selectBooleanCheckbox styleClass="cent" value="#{SolicitudAfiliacion.acepta}" />
-                        <p:commandButton value="Enviar Solicitud De Afiliación"  actionListener="#{SolicitudAfiliacion.agregarSolicitudAfiliacion()}" update="form"/>
-                    </div>
+                                        <h:outputText style="font-weight:bold" value="Semestre: " />
+                                        <h:outputText value="#{SolicitudAfiliacion.semestrePonderado}" />
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                                <div align="center" draggable="false" >
+                                    <p:commandLink oncomplete="window.open('http://www.aeci.org.co/#!politicas-de-tratamiento-de-datos')">Acepto los Términos y Condiciones </p:commandLink>
+                                    <p:selectBooleanCheckbox styleClass="cent" value="#{SolicitudAfiliacion.acepta}" />
+                                    <p:commandButton value="Enviar Solicitud De Afiliación"  actionListener="#{SolicitudAfiliacion.agregarSolicitudAfiliacion()}" update="form"/>
+                                </div>
+                            </p:panel>
+                        </p:tab>
+                    </p:wizard>
                 </h:form>
                 <h:form>
                     <div align="center" draggable="false" >
-                        <p:commandButton value="Volver" update="form" action="Registro"/> 
+                        <p:commandButton value="Volver" update="form" action="Registro" actionListener="#{SolicitudAfiliacion.resetearValores()}"/> 
                     </div>
                 </h:form>
-
-
-
-
-
-            </p:layoutUnit>
-
-        </p:layout>      
+            </div>
+        </div>
 
     </h:body>
 </html>
