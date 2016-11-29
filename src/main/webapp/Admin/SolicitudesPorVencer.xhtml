@@ -12,17 +12,14 @@
     </h:head>
 
     <h:body>
+        
+        
+        
+        
+        
              <h1>RESTRICTED PAGE!</h1>
     <h:outputLink value="/logout">logout</h:outputLink>
-    <pre>     
-    subject = <p:outputLabel value="#{loginBean.subject}"/>
-    principal = <p:outputLabel value="#{loginBean.subject.principal}"/>
-    session = <p:outputLabel value="#{loginBean.subject.session}"/>
-    role Estudiante = <p:outputLabel value="#{loginBean.subject.hasRole('Estudiante')}"/>
-    role Administrador = <p:outputLabel value="#{loginBean.subject.hasRole('Administrador')}"/>
-    role Egresado = <p:outputLabel value="#{loginBean.subject.hasRole('Egresado')}"/>
-    </pre>
-
+   
         
         
         
@@ -52,3 +49,13 @@
         </h:form>
     </h:body>
 </html>
+
+<!-- <pre>     
+    subject = <p:outputLabel value="#{loginBean.subject}"/>
+    principal = <p:outputLabel value="#{loginBean.subject.principal}"/>
+    session = <p:outputLabel value="#{loginBean.subject.session}"/>
+    role Estudiante = <p:outputLabel value="#{loginBean.subject.hasRole('Estudiante')}"/>
+    role Administrador = <p:outputLabel value="#{loginBean.subject.hasRole('Administrador')}"/>
+    role Egresado = <p:outputLabel value="#{loginBean.subject.hasRole('Egresado')}"/>
+    </pre>
+-->

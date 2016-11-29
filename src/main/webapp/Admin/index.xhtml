@@ -9,36 +9,65 @@
         </link>
     </h:head>
     <h:body >
-        
-        
-        <h1>For Admin only!</h1>
-        <h:outputLink value="logout">logout</h:outputLink>
-        <pre>     
-            subject = <p:outputLabel value="#{loginBean.subject}"/>
-            principal = <p:outputLabel value="#{loginBean.subject.principal}"/>
-            session = <p:outputLabel value="#{loginBean.subject.session}"/>
-            role Egresado = <p:outputLabel value="#{loginBean.subject.hasRole('Egresado')}"/>
-            role Administrador = <p:outputLabel value="#{loginBean.subject.hasRole('Administrador')}"/>
-            role Estudiante = <p:outputLabel value="#{loginBean.subject.hasRole('Estudiante')}"/>
-        </pre>
-
-        <p:keyboard rendered="#{loginBean.subject.hasRole('Administrador')}"></p:keyboard>
-
-   
-        
         <h:form id="form">
-            <p:layout fullPage="true">
-                <p:layoutUnit position="north" size="250"   > 
-                </p:layoutUnit>
-                <p:layoutUnit position="center" header="Center" >
-                    <p:commandButton value="Procesar Solicitudes Afiliacion" action="ProcesarSolicitudesAfiliacion"/>
-                    <p:commandButton value="Solicitudes Por Vencer" action="SolicitudesPorVencer"/>
-                </p:layoutUnit>
-                <p:layoutUnit position="west" size="200" header="Left">
-                </p:layoutUnit>
-            </p:layout>
+            <div class="container">
+                <div class="adentro" style="background-color: white">
+                    <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
+                    <div align="center">
+                        <h1 style="font-family: Lucida Sans Unicode">Bienvenido Administrador </h1>
+                    </div>
+                    <div align="right">
+                        <h:outputLink value="/logout">Logout</h:outputLink>
+                    </div>
+                    <p:keyboard rendered="#{loginBean.subject.hasRole('Administrador')}"></p:keyboard>
+                </div>
+                <br></br>
+                <br></br>
+                <nav> 
+                    <ul>
+                        <p:commandButton value="Procesar Solicitudes Afiliacion" action="ProcesarSolicitudesAfiliacion"/>
+                        <br>
+                            
+                        </br>
+                        <p:commandButton value="Solicitudes Por Vencer" action="SolicitudesPorVencer"/>
+
+                    </ul>
+                </nav>
+                <article>
+                        En construccion 
+                </article>
+            </div>
         </h:form>
+
     </h:body>
 </html>
 
 
+
+<!-- 
+<pre>     
+subject = <p:outputLabel value="#{loginBean.subject}"/>
+principal = <p:outputLabel value="#{loginBean.subject.principal}"/>
+session = <p:outputLabel value="#{loginBean.subject.session}"/>
+role Egresado = <p:outputLabel value="#{loginBean.subject.hasRole('Egresado')}"/>
+role Administrador = <p:outputLabel value="#{loginBean.subject.hasRole('Administrador')}"/>
+role Estudiante = <p:outputLabel value="#{loginBean.subject.hasRole('Estudiante')}"/>
+</pre>
+
+<h:form id="formul">
+      <p:layout fullPage="true">
+          <p:layoutUnit position="north" size="250"   > 
+          </p:layoutUnit>
+          <p:layoutUnit position="center" header="Center" >
+              <p:commandButton value="Procesar Solicitudes Afiliacion" action="ProcesarSolicitudesAfiliacion"/>
+              <p:commandButton value="Solicitudes Por Vencer" action="SolicitudesPorVencer"/>
+          </p:layoutUnit>
+          <p:layoutUnit position="west" size="200" header="Left">
+          </p:layoutUnit>
+      </p:layout>
+  </h:form>
+
+
+
+
+--> 

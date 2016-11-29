@@ -9,20 +9,34 @@
         </link>
     </h:head>
     <h:body>
-        <h1>For Egresado only!</h1>
-        <h:outputLink value="logout">logout</h:outputLink>
-        <pre>     
-            subject = <p:outputLabel value="#{loginBean.subject}"/>
-            principal = <p:outputLabel value="#{loginBean.subject.principal}"/>
-            session = <p:outputLabel value="#{loginBean.subject.session}"/>
-            role Egresado = <p:outputLabel value="#{loginBean.subject.hasRole('Egresado')}"/>
-            role Administrador = <p:outputLabel value="#{loginBean.subject.hasRole('Administrador')}"/>
-            role Estudiante = <p:outputLabel value="#{loginBean.subject.hasRole('Estudiante')}"/>
-        </pre>
+        
+            <h:form id="form">
+                <div class="container">
+                    <div class="adentro" style="background-color: white">
+                        <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
+                        <div align="center">
+                            <h1 style="font-family: Lucida Sans Unicode">Bienvenido Egresado </h1>
+                        </div>
+                        <div align="right">
+                            <h:outputLink value="/logout">Logout</h:outputLink>
+                        </div>
 
-        <p:keyboard rendered="#{loginBean.subject.hasRole('Egresado')}"></p:keyboard>
+                        <p:keyboard rendered="#{loginBean.subject.hasRole('Egresado')}"></p:keyboard>
+                    </div>
+                     <br></br>
+                    <br></br>
+                     </div>
+        </h:form>
+     </h:body>
+    </html>
 
-    </h:body>
-</html>
 
-
+<!-- <pre>     
+     subject = <p:outputLabel value="#{loginBean.subject}"/>
+    principal = <p:outputLabel value="#{loginBean.subject.principal}"/>
+    session = <p:outputLabel value="#{loginBean.subject.session}"/>
+    role Egresado = <p:outputLabel value="#{loginBean.subject.hasRole('Egresado')}"/>
+    role Administrador = <p:outputLabel value="#{loginBean.subject.hasRole('Administrador')}"/>
+    role Estudiante = <p:outputLabel value="#{loginBean.subject.hasRole('Estudiante')}"/>
+  </pre>
+                        --> 
