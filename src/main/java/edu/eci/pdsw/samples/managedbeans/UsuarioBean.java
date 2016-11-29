@@ -72,7 +72,7 @@ public class UsuarioBean {
             //  imagen.setAbsolutePosition(450f, 10f);
             //  doc.add(imagen);
             doc.addTitle("EL SUSCRITO SECRETARIO DE LA ASOCIACIÓN DE EGRESADOS DE LA ESCUELA COLOMBIANA DE INGENIERÍA HACE CONSTAR:");
-            plantillaEst = "Que el estudiante $1, identificado con $2  No. $3, estudiante de $5 semestre del programa de $4,  se encuentra afiliado en la asociación de egresados de la escuela colombiana de ingeniería Julio Garavito desde $6 hasta $7, que cuenta con una afiliación gratuita de 6 meses dada su condición de estudiante activo. \n Que la presente constancia se expide a solicitud del interesado.";
+            plantillaEst = "Que el estudiante Ricardo Pinto, identificado con C.C.  No. 1015470901, estudiante de 10 semestre del programa de INGENIERÍA DE SISTEMAS,  se encuentra afiliado en la asociación de egresados de la escuela colombiana de ingeniería Julio Garavito desde 1/1/2016 hasta 1/1/2017, que cuenta con una afiliación gratuita de 6 meses dada su condición de estudiante activo. \n Que la presente constancia se expide a solicitud del interesado.";
             plantillaEgr = "Que el estudiante $1, identificado con $2  No. $3, estudiante de $5 semestre del programa de $4,  se encuentra afiliado en la asociación de egresados de la escuela colombiana de ingeniería Julio Garavito desde $6 hasta $7, que cuenta con una afiliación gratuita de 6 meses dada su condición de estudiante activo. \n Que la presente constancia se expide a solicitud del interesado.";
             /**/
             //if(true){
