@@ -27,8 +27,7 @@ public class MyBatisDAOEstadoAfiliacion implements DaoEstadoAfiliacion{
     
     @Override
     public estadoAfiliacion load(int DocumentoID) throws PersistenceException {
-        EstadoAfMapper pedmp=currentSession.getMapper(EstadoAfMapper.class);
-        return pedmp.getEstadoAf(DocumentoID);
+        return Esmap.getEstadoAf(DocumentoID);
     }
 
     @Override

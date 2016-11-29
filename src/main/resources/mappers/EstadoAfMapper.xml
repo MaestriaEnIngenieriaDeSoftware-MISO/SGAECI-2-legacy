@@ -5,11 +5,11 @@
   
 <mapper namespace="edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.EstadoAfMapper">
     
-    <resultMap type='EstadoAfiliacion' id='EstadoResult'>
-        <id property='documentoID' column='DocumentoID'/>
-        <result property='fechainicio' column='Fecha_Inicio'/>
-        <result property='fechafin' column='Fecha_Fin'/>
-        <result property='estado' column='Estado'/>
+    <resultMap type='estadoAfiliacion' id='EstadoResult'>
+        <id property='DocumentoID' column='DocumentoID'/>
+        <result property='fechaInicio' column='Fecha_Inicio'/>
+        <result property='fechaFin' column='Fecha_Fin'/>
+        <result property='Estado' column='Estado'/>
         <association property='e1' javaType='Egresado' resultMap='EgresadoResult' columnPrefix='Egre_'></association>
         <association property='e2' javaType='Estudiante' resultMap='EstudianteResult' columnPrefix='Estu_'></association>  
     </resultMap>
@@ -50,18 +50,53 @@
         <id property='nombreempre' column='Nombre'/>
         <result property='telempre' column='Telefono'/>   
         <result property='dirempre' column='Direccion'/>
+        
     </resultMap>
+  
     
-    <select id = "getEstadoAf" parameterType="map" >
+    <select id = "getEstadoAf" resultMap="EstadoResult" parameterType="map" >
         SELECT
-        DocumentoID,
-        Fecha_Inicio,
-        Fecha_Fin,
-        Estado
-        FROM Estado_afiliacion
-        WHERE DocumentoID=#{identificador}
+        so.DocumentoID,
+        so.Fecha_Inicio,
+        so.Fecha_Fin,
+        so.Estado,
+        p1.DocumentoID as Egre_DocumentoID,
+        p1.Telefono as Egre_Telefono,
+        p1.Celular as Egre_Celuar,
+        p1.TipoDocumentoID as Egre_TipoDocumentoID,
+        p1.Nombre as Egre_Nombre,
+        p1.Apellido as Egre_Apellido,
+        p1.Direccion as Egre_Direccion,
+        p1.Correo_Personal as Egre_Correo_Personal,
+        p1.Genero as Egre_Genero,
         
-    </select>>
+        Egresado.Semestre_Graduacion as Egre_Semestre_Graduacion, 
+        Egresado.Correo_Estudiantil as Egre_Correo_Estudiantil, 
+        Egresado.Cargo as Egre_Cargo,
+        Egresado.Labora as Egre_Labora, 
         
+        Egresado_Empresa.Nombre as Egre_Epre_Nombre, 
+        Egresado_Empresa.Telefono as Egre_Epre_Telefono, 
+        Egresado_Empresa.Direccion as Egre_Epre_Direccion,
+        
+        p1.DocumentoID as Estu_DocumentoID,
+        p1.Telefono as Estu_Telefono,
+        p1.Celular as Estu_Celular,
+        p1.TipoDocumentoID as Estu_TipoDocumentoID,
+        p1.Nombre as Estu_Nombre,
+        p1.Apellido as Estu_Apellido,
+        p1.Direccion as Estu_Direccion,
+        p1.Correo_Personal as Estu_Correo_Personal,
+        p1.Genero as Estu_Genero, 
+        Estudiante.Codigo_Estudiante as Estu_Codigo_Estudiante,
+        Estudiante.Semestre_Ponderado as Estu_Semestre_Ponderado, 
+        Estudiante.Carrera as Estu_Carrera  
+         
+        FROM Persona as p1 INNER JOIN Estado_afiliacion as so ON(p1.DocumentoID = so.DocumentoID) LEFT JOIN Estudiante ON (Estudiante.DocumentoID = p1.DocumentoID) LEFT JOIN Egresado ON (Egresado.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (Egresado.Empresa = Egresado_Empresa.Nombre)
+        WHERE so.DocumentoID=#{identificador} 
+        
+    </select>
+    
+   
     
 </mapper>

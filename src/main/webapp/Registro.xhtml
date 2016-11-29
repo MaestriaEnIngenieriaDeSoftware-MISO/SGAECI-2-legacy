@@ -23,9 +23,9 @@
                         <p:outputLabel style="size: A4" for="nombre" value="Usuario: " styleClass="sheet.css" />
                         <p:inputText styleClass="cent" required="true" id="nombre" value="#{Loggin.username}"/>
                         <p:outputLabel for="passw" value="Contraseña: " />
-                        <p:inputText styleClass="cent" required="true" id="passw" value="#{Loggin.password}"/>
-                        <h:outputText value="Recuerdame:" for="rememberMe"/>
-                        <p:selectBooleanCheckbox id="rememberMe" value="#{Loggin.autenticacion}"/>
+                        <p:password styleClass="cent" required="true" id="passw" value="#{Loggin.password}"/>
+                        <p:outputLabel value="Recuerdame:" for="me"/>
+                        <p:selectBooleanCheckbox id="me" value="#{Loggin.autenticacion}"/>
 
                         <h:panelGrid  columns="1" styleClass="sheet.css">
                             <p:commandButton value="Ingresar"  actionListener="#{Loggin.doLogin()}" />
@@ -63,8 +63,8 @@
             
             <h:form id="formu">
                 <div align="center" draggable="false" style="border-width: 10px">
-                    <p:commandButton  value="Egresado"  action="SolicitudAfiliacionEgre"/>
-                    <p:commandButton value="Estudiante" action="SolicitudAfiliacionEst"/>  
+                    <p:commandButton  value="Egresado"  action="open/SolicitudAfiliacionEgre"/>
+                    <p:commandButton value="Estudiante" action="open/SolicitudAfiliacionEst"/>  
                 </div>
                 
             </h:form>

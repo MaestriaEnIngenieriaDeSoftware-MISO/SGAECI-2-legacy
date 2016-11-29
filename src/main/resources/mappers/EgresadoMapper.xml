@@ -35,46 +35,46 @@
     
      <select id="getEgresado" parameterType="map" resultMap="EgresadoResult">
          SELECT 
-          p1.DocumentoID as Egre_DocumentoID,
-          p1.Telefono as Egre_Telefono,
-          p1.Celular as Egre_Celular,
-          p1.TipoDocumentoID as Egre_TipoDocumentoID,
-          p1.Nombre as Egre_Nombre,
-          p1.Direccion as Egre_Direccion,
-          p1.Correo_Personal as Egre_Correo_Personal,
-          p1.Genero as Egre_Genero,
-          egre.Semestre_Graduacion as Egre_Semestre_Graduacion, 
-          egre.Correo_Estudiantil as Egre_Correo_Estudiantil, 
-          egre.Cargo as Egre_Cargo,
-          egre.Labora as Egre_Labora, 
+          p1.DocumentoID ,
+          p1.Telefono ,
+          p1.Celular ,
+          p1.TipoDocumentoID ,
+          p1.Nombre ,
+          p1.Direccion ,
+          p1.Correo_Personal ,
+          p1.Genero ,
+          egre.Semestre_Graduacion , 
+          egre.Correo_Estudiantil , 
+          egre.Cargo ,
+          egre.Labora , 
         
-          Egresado_Empresa.Nombre as Egre_Epre_Nombre, 
-          Egresado_Empresa.Telefono as Egre_Epre_Telefono, 
-          Egresado_Empresa.Direccion as Egre_Epre_Direccion,
+          Egresado_Empresa.Nombre as Epre_Nombre, 
+          Egresado_Empresa.Telefono as Epre_Telefono, 
+          Egresado_Empresa.Direccion as Epre_Direccion
       
-         FROM Egresado as egre JOIN Persona as p1 on (p1.DocumentoID=egre.DocumentoID) JOIN Egresado_Empresa ON (egre.Empresa = Egresado_Empresa.Nombre)
+         FROM Egresado as egre JOIN Persona as p1 ON (p1.DocumentoID=egre.DocumentoID) JOIN Egresado_Empresa ON (egre.Empresa = Egresado_Empresa.Nombre)
          WHERE egre.DocumentoID = #{idEgresado}
      </select>
      
      <select id="getEgresados" parameterType="map" resultMap="EgresadoResult">
          SELECT 
        
-          p1.DocumentoID as Egre_DocumentoID,
-          p1.Telefono1 as Egre_Telefono1,
-          p1.Telefono2 as Egre_Telefono2,
-          p1.TipoDocumentoID as Egre_TipoDocumentoID,
-          p1.Nombre as Egre_Nombre,
-          p1.Direccion as Egre_Direccion,
-          p1.Correo as Egre_Correo,
-          p1.Genero as Egre_Genero,
-          egre.Semestre_Graduacion as Egre_Semestre_Graduacion, 
-          egre.Correo_Personal as Egre_Correo_Personal, 
-          egre.Cargo as Egre_Cargo,
-          egre.Labora as Egre_Labora, 
+          p1.DocumentoID ,
+          p1.Telefono1 ,
+          p1.Telefono2 ,
+          p1.TipoDocumentoID ,
+          p1.Nombre ,
+          p1.Direccion,
+          p1.Correo ,
+          p1.Genero ,
+          egre.Semestre_Graduacion , 
+          egre.Correo_Personal , 
+          egre.Cargo ,
+          egre.Labora, 
 
-          emp.Nombre as Egre_Epre_Nombre, 
-          emp.Telefono as Egre_Epre_Telefono, 
-          emp.Direccion as Egre_Epre_Direccion,
+          emp.Nombre as Epre_Nombre, 
+          emp.Telefono as Epre_Telefono, 
+          emp.Direccion as Epre_Direccion,
         
          FROM Egresado as egre JOIN Persona as p1 on (p1.DocumentoID=egre.DocumentoID) JOIN Egresado_Empresa as emp ON (egre.Empresa = emp.Nombre)
          

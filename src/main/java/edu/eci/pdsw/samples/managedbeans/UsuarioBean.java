@@ -8,6 +8,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import edu.eci.pdsw.samples.entities.Egresado;
 import edu.eci.pdsw.samples.entities.Estudiante;
 import edu.eci.pdsw.samples.entities.Persona;
+import edu.eci.pdsw.samples.entities.estadoAfiliacion;
 import edu.eci.pdsw.samples.services.ServiciosSAGECI;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -46,6 +47,7 @@ public class UsuarioBean {
     Persona persona;
     private int documentoID;
     String plantillaEst, plantillaEgr, plantillaRG;
+    estadoAfiliacion eaf;
 
     public boolean isDocumento() {
         return documento;
@@ -65,45 +67,39 @@ public class UsuarioBean {
             doc.open();
             LogginBean bean = (LogginBean) getManagedBean("Loggin");
             documentoID = Integer.parseInt(bean.getUsername());
-            // Falta anexar el codigo del documento
             doc.add(new Paragraph("Bogotá DC"));
             doc.addCreationDate();
-            // Image imagen = Image.getInstance("aecimagen.png");
-            //  imagen.setAbsolutePosition(450f, 10f);
-            //  doc.add(imagen);
             doc.addTitle("EL SUSCRITO SECRETARIO DE LA ASOCIACIÓN DE EGRESADOS DE LA ESCUELA COLOMBIANA DE INGENIERÍA HACE CONSTAR:");
-            plantillaEst = "Que el estudiante Ricardo Pinto, identificado con C.C.  No. 1015470901, estudiante de 10 semestre del programa de INGENIERÍA DE SISTEMAS,  se encuentra afiliado en la asociación de egresados de la escuela colombiana de ingeniería Julio Garavito desde 1/1/2016 hasta 1/1/2017, que cuenta con una afiliación gratuita de 6 meses dada su condición de estudiante activo. \n Que la presente constancia se expide a solicitud del interesado.";
-            plantillaEgr = "Que el estudiante $1, identificado con $2  No. $3, estudiante de $5 semestre del programa de $4,  se encuentra afiliado en la asociación de egresados de la escuela colombiana de ingeniería Julio Garavito desde $6 hasta $7, que cuenta con una afiliación gratuita de 6 meses dada su condición de estudiante activo. \n Que la presente constancia se expide a solicitud del interesado.";
-            /**/
-            //if(true){
-            //System.out.println("error antes consultar el del estudiante");
-            try {
-                estudiante = SAGECI.consultarEstudiante(documentoID);
-                plantillaEst.replaceAll("$1", estudiante.getApellido() + " " + estudiante.getNombre());
-                plantillaEst.replaceAll("$2", estudiante.getTipoDocumentoID());
-                plantillaEst.replaceAll("$3", Integer.toString(documentoID));
-                plantillaEst.replaceAll("$4", estudiante.getCarrera());
-                plantillaEst.replaceAll("$5", Integer.toString(estudiante.getSemestrePonderado()));
+            if(bean.getTipo().equals("Estudiante")){estudiante = SAGECI.consultarEstudiante(documentoID);}
+            else{egresado=SAGECI.consultarEgresado(documentoID);}
+            plantillaEst = "Que el Estudiante $1, identificado con $2  No. $3, estudiante de $5 semestre del programa de $4,  se encuentra afiliado en la asociación de Estudiantes de la escuela colombiana de ingeniería Julio Garavito desde $6 hasta $7, que cuenta con una afiliación gratuita de 6 meses dada su condición de estudiante activo. \n Que la presente constancia se expide a solicitud del interesado.";
+            plantillaEgr = "Que el Egresado $1, identificado con $2  No. $3, Egresado del periodo $4,  se encuentra afiliado en la asociación de egresados de la escuela colombiana de ingeniería Julio Garavito desde $5 hasta $6 \n"+ "\n"+ "Que la presente constancia se expide a solicitud del interesado.";
+            if(bean.getTipo().equals("Estudiante")){
+                plantillaEst= plantillaEst.replace("$1", estudiante.getApellido() + " " + estudiante.getNombre());
+                plantillaEst = plantillaEst.replace("$2", estudiante.getTipoDocumentoID());
+                plantillaEst= plantillaEst.replace("$3", Integer.toString(documentoID));
+                plantillaEst= plantillaEst.replace("$4", estudiante.getCarrera());
+                plantillaEst= plantillaEst.replace("$5", Integer.toString(estudiante.getSemestrePonderado()));
                 DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-                Date fecha = SAGECI.consultarEstadoAfiliacion(documentoID).getFechaInicio();
-                plantillaEst.replaceAll("$6", df.format(fecha));
-                Date fechafin = SAGECI.consultarEstadoAfiliacion(documentoID).getFechaFin();
-                plantillaEst.replaceAll("$7", df.format(fechafin));
+                eaf=SAGECI.consultarEstadoAfiliacion(documentoID);
+                Date fecha = eaf.getFechaInicio();
+                plantillaEst= plantillaEst.replace("$6", df.format(fecha));
+                Date fechafin = eaf.getFechaFin();
+                plantillaEst= plantillaEst.replace("$7", df.format(fechafin));
                 doc.add(new Paragraph(plantillaEst));
-                System.out.println("completo por el estudiante");
-            } catch (Exception e) {
-                
-                egresado = SAGECI.consultarEgresado(documentoID);
-                plantillaEgr.replaceAll("$1", egresado.getApellido() + " " + egresado.getNombre());
-                plantillaEgr.replaceAll("$2", egresado.getTipoDocumentoID());
-                plantillaEgr.replaceAll("$3", Integer.toString(documentoID));
+            }
+            else{
+                plantillaEgr = plantillaEgr.replace("$1", egresado.getApellido() + " " + egresado.getNombre());
+                plantillaEgr = plantillaEgr.replace("$2", egresado.getTipoDocumentoID());
+                plantillaEgr = plantillaEgr.replace("$3", Integer.toString(documentoID));
+                plantillaEgr = plantillaEgr.replace("$4", egresado.getSemestreGrado());
                 DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-                Date fecha = SAGECI.consultarEstadoAfiliacion(documentoID).getFechaInicio();
-                plantillaEgr.replaceAll("$6", df.format(fecha));
-                Date fechafin = SAGECI.consultarEstadoAfiliacion(documentoID).getFechaFin();
-                plantillaEgr.replaceAll("$7", df.format(fechafin));
+                eaf=SAGECI.consultarEstadoAfiliacion(documentoID);
+                Date fecha = eaf.getFechaInicio();
+                plantillaEgr = plantillaEgr.replace("$5", df.format(fecha));
+                Date fechafin = eaf.getFechaFin();
+                plantillaEgr = plantillaEgr.replace("$6", df.format(fechafin));
                 doc.add(new Paragraph(plantillaEgr));
-                System.out.println("completo por el egresado");
             }
             
             doc.close();

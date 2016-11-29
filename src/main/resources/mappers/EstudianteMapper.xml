@@ -23,23 +23,23 @@
     
     <select id="getEstudiante" parameterType="map" resultMap="EstudianteResult">
          SELECT * FROM 
-         Estudiante JOIN Persona 
+         Estudiante JOIN Persona ON(Estudiante.DocumentoID=Persona.DocumentoID)
          WHERE Estudiante.DocumentoID = #{idEstudiante}
      </select>
     
     <select id="getEstudiantes" parameterType="map" resultMap="EstudianteResult">
          SELECT 
-         per.DocumentoID as DocumentoID,
-         per.Telefono as Telefono,
-         per.Celular as Celular,
-         per.TipoDocumentoID as TipoDocumentoID,
-         per.Nombre as Nombre, 
-         per.Apellido as Apellido, 
-         per.Direccion as Direccion,
-         per.Correo_Personal as Correo_Personal,
-         per.Genero as Genero,
-         est.Codigo_Estudiante as Codigo_Estudiante,
-         est.Semestre_Ponderado as Semestre_Ponderado,
+         per.DocumentoID ,
+         per.Telefono ,
+         per.Celular ,
+         per.TipoDocumentoID ,
+         per.Nombre , 
+         per.Apellido , 
+         per.Direccion ,
+         per.Correo_Personal a,
+         per.Genero ,
+         est.Codigo_Estudiante ,
+         est.Semestre_Ponderado ,
          est.Carrera
         
         FROM 

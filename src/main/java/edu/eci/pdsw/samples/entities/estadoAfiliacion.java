@@ -15,6 +15,8 @@ public class estadoAfiliacion {
     int DocumentoID;
     Date fechaInicio,fechaFin;
     String Estado;
+    Egresado e1;
+    Estudiante e2;
 
     public estadoAfiliacion(int DocumentoID, Date fechaInicio, Date fechaFin, String Estado) {
         this.DocumentoID = DocumentoID;
@@ -57,6 +59,23 @@ public class estadoAfiliacion {
     public void setEstado(String Estado) {
         this.Estado = Estado;
     }
+
+    public Egresado getE1() {
+        return e1;
+    }
+
+    public void setE1(Egresado e1) {
+        this.e1 = e1;
+    }
+
+    public Estudiante getE2() {
+        return e2;
+    }
+
+    public void setE2(Estudiante e2) {
+        this.e2 = e2;
+    }
+    
     
     
     

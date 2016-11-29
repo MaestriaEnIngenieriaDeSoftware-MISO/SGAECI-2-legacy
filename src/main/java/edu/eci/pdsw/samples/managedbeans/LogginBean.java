@@ -42,6 +42,7 @@ public class LogginBean implements Serializable {
     private String password;
     public String username;
     private boolean autenticacion=false;
+    private String tipo;
     ServiciosSAGECI SAGECI = ServiciosSAGECI.getInstance();
 
     public LogginBean() {
@@ -79,10 +80,13 @@ public class LogginBean implements Serializable {
         try {
             subject.login(token);
             if (subject.hasRole("Administrador")) {
+                this.tipo="Administrador";
                 FacesContext.getCurrentInstance().getExternalContext().redirect("Admin/index.xhtml");
             }else if (subject.hasRole("Egresado")) {
+                this.tipo="Egresado";
                 FacesContext.getCurrentInstance().getExternalContext().redirect("Egresado/index.xhtml");
             }else if (subject.hasRole("Estudiante")) {
+                this.tipo="Estudiante";
                 FacesContext.getCurrentInstance().getExternalContext().redirect("Estudiante/index.xhtml"); 
             } else {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("unauthorized.xhtml");
@@ -135,6 +139,15 @@ public class LogginBean implements Serializable {
         this.autenticacion = autenticacion;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
+    
 
   
 

@@ -12,6 +12,8 @@
         <typeAlias type='edu.eci.pdsw.samples.entities.Estudiante' alias='Estudiante'/>
         <typeAlias type='edu.eci.pdsw.samples.entities.Persona' alias='Persona'/>
         <typeAlias type='edu.eci.pdsw.samples.entities.SolicitudAfiliacion' alias='SolicitudAfiliacion'/>
+        <typeAlias type='edu.eci.pdsw.samples.entities.estadoAfiliacion' alias='estadoAfiliacion'/>
+        <typeAlias type='edu.eci.pdsw.samples.entities.Rol' alias='Rol'/>
     </typeAliases>
         
     <environments default="development">
@@ -33,6 +35,8 @@
         <mapper resource="mappers/EgresadoMapper.xml"></mapper>
         <mapper resource="mappers/EmpresaMapper.xml"></mapper>
         <mapper resource="mappers/RolPersonaMapper.xml"></mapper>
+        <mapper resource="mappers/EstadoAfMapper.xml"></mapper>
+
 
 
 
