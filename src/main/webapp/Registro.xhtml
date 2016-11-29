@@ -11,17 +11,21 @@
     <h:body >
         <p:layout class="contenedor">
             <p:layoutUnit position="north" resizable="false">
-                <img src="aecimagen.png" align="left" height="250" width="250"></img>
+                <img src="../resource/aecimagen.png" align="left" height="250" width="250"></img>
                 <div align="right" draggable="false" >
-                    <h:panelGrid  columns="2" class="center" style="max-height: 10px" >
-                        <p:outputLabel style="size: A4" for="nombre" value="Usuario: " styleClass="sheet.css" />
-                        <p:inputText styleClass="cent" required="true" id="nombre" value="#{Loggin.username}"/>
-                        <p:outputLabel for="passw" value="Contraseña: " />
-                        <p:inputText styleClass="cent" required="true" id="passw" value="#{Loggin.password}"/>
-                    </h:panelGrid>
-                    <h:panelGrid  columns="1" styleClass="sheet.css">
-                        <p:commandButton value="Ingresar"  action="#{Loggin.doLogin()}" />
-                    </h:panelGrid>
+                    <h:form id="form2">
+                        <h:panelGrid  columns="2" class="center" style="max-height: 10px" >
+                            <p:outputLabel style="size: A4" for="nombre" value="Usuario: " styleClass="sheet.css" />
+                            <p:inputText styleClass="cent" required="true" id="nombre" value="#{Loggin.username}"/>
+                            <p:outputLabel for="passw" value="Contraseña: " />
+                            <p:inputText styleClass="cent" required="true" id="passw" value="#{Loggin.password}"/>
+                            <h:outputText value="Recuerdame:" for="rememberMe"/>
+                            <p:selectBooleanCheckbox id="rememberMe" value="#{Loggin.autenticacion}"/>
+                        </h:panelGrid>
+                        <h:panelGrid  columns="1" styleClass="sheet.css">
+                            <p:commandButton value="Ingresar"  actionListener="#{Loggin.doLogin()}" />
+                        </h:panelGrid>
+                    </h:form>
                 </div>
             </p:layoutUnit>
 
@@ -32,8 +36,8 @@
                 </p>
                 <h:form id="formu">
                     <div align="center" draggable="false" style="border-width: 10px">
-                        <p:commandButton  value="Egresado"  action="SolicitudAfiliacionEgre"/>
-                        <p:commandButton value="Estudiante" action="SolicitudAfiliacionEst"/>  
+                        <p:commandButton  value="Egresado"  action="../open/SolicitudAfiliacionEgre"/>
+                        <p:commandButton value="Estudiante" action="../open/SolicitudAfiliacionEst"/>  
                     </div>
                 </h:form>
             </p:layoutUnit>

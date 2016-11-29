@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Interfaz Egresado</title>
+        <link rel="stylesheet" type="text/css" href="sheet.css"> 
+        </link>
+    </h:head>
+    <h:body>
+        <h1>For Egresado only!</h1>
+        <h:outputLink value="logout">logout</h:outputLink>
+        <pre>     
+            subject = <p:outputLabel value="#{loginBean.subject}"/>
+            principal = <p:outputLabel value="#{loginBean.subject.principal}"/>
+            session = <p:outputLabel value="#{loginBean.subject.session}"/>
+            role Egresado = <p:outputLabel value="#{loginBean.subject.hasRole('Egresado')}"/>
+            role Administrador = <p:outputLabel value="#{loginBean.subject.hasRole('Administrador')}"/>
+            role Estudiante = <p:outputLabel value="#{loginBean.subject.hasRole('Estudiante')}"/>
+        </pre>
+
+        <p:keyboard rendered="#{loginBean.subject.hasRole('Egresado')}"></p:keyboard>
+
+    </h:body>
+</html>
+
+

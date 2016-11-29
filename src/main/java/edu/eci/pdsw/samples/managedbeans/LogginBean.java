@@ -31,7 +31,7 @@ import org.apache.shiro.util.SimpleByteSource;
 
 /**
  *
- * @author 2090683
+ * @author 2106913
  */
 @ManagedBean(name = "Loggin")
 @SessionScoped
@@ -41,30 +41,51 @@ public class LogginBean implements Serializable {
 
     private String password;
     public String username;
-    private boolean autenticacion;
+    private boolean autenticacion=false;
     ServiciosSAGECI SAGECI = ServiciosSAGECI.getInstance();
 
     public LogginBean() {
 
     }
+    
+     public static String generateHash(String password) {
+        DefaultHashService hashService = new DefaultHashService();
+        hashService.setHashIterations(500000); // 500000
+        hashService.setHashAlgorithmName(Sha256Hash.ALGORITHM_NAME);
 
+        // Same salt as in shiro.ini, but NOT base64-encoded!!
+        hashService.setPrivateSalt(new SimpleByteSource("myprivatesalt"));
+        hashService.setGeneratePublicSalt(true);
+
+        DefaultPasswordService passwordService = new DefaultPasswordService();
+        passwordService.setHashService(hashService);
+        String encryptedPassword = passwordService.encryptPassword(password);
+        System.out.println(encryptedPassword);
+        return encryptedPassword;
+
+    }
+    
+    
     public Subject getSubject() {
         return SecurityUtils.getSubject();
     }
 
     public void doLogin() {
+        System.out.println("Entro");
+        System.out.println("user "+username);
+        System.out.println("pass "+password);
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(getUsername(), getPassword(), getAutenticacion());
+        UsernamePasswordToken token = new UsernamePasswordToken(getUsername(), getPassword(), isAutenticacion());
         try {
             subject.login(token);
             if (subject.hasRole("Administrador")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("Admin/ProcesarSolicitudesAfiliacion.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("Admin/index.xhtml");
             }else if (subject.hasRole("Egresado")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("Egresado/EgrUsuario.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("faces/Egresado/index.xhtml");
             }else if (subject.hasRole("Estudiante")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("Estudiante/EstUsuario.xhtml"); 
+                FacesContext.getCurrentInstance().getExternalContext().redirect("faces/Estudiante/index.xhtml"); 
             } else {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("Registro.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("unauthorized.xhtml");
             }
         }
     
@@ -90,29 +111,30 @@ public class LogginBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String login) {
-        this.username = login;
-    }
-
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String senha) {
-        this.password = senha;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public boolean getAutenticacion() {
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public boolean isAutenticacion() {
         return autenticacion;
     }
 
     public void setAutenticacion(boolean autenticacion) {
         this.autenticacion = autenticacion;
     }
+
 
   
 

@@ -9,10 +9,18 @@
         </link>
     </h:head>
     <h:body >
-        
-        Perfil, Estudiante.
-        
-        <h:outputLink value="/logout">Salir</h:outputLink>
+        <h1>For Egresado only!</h1>
+        <h:outputLink value="logout">logout</h:outputLink>
+        <pre>     
+            subject = <p:outputLabel value="#{loginBean.subject}"/>
+            principal = <p:outputLabel value="#{loginBean.subject.principal}"/>
+            session = <p:outputLabel value="#{loginBean.subject.session}"/>
+            role Egresado = <p:outputLabel value="#{loginBean.subject.hasRole('Egresado')}"/>
+            role Administrador = <p:outputLabel value="#{loginBean.subject.hasRole('Administrador')}"/>
+            role Estudiante = <p:outputLabel value="#{loginBean.subject.hasRole('Estudiante')}"/>
+        </pre>
+
+        <p:keyboard rendered="#{loginBean.subject.hasRole('Estudiante')}"></p:keyboard>
         
         <h:form id="form">
             
