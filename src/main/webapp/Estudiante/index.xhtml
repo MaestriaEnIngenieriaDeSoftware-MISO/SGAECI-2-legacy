@@ -5,45 +5,67 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Interfaz Estudiante</title>
-        <link rel="stylesheet" type="text/css" href="sheet.css"> 
+        <link rel="stylesheet" type="text/css" href="../sheet.css"> 
         </link>
     </h:head>
     <h:body >
-        <h1>For Egresado only!</h1>
-        <h:outputLink value="logout">logout</h:outputLink>
-        <pre>     
-            subject = <p:outputLabel value="#{loginBean.subject}"/>
-            principal = <p:outputLabel value="#{loginBean.subject.principal}"/>
-            session = <p:outputLabel value="#{loginBean.subject.session}"/>
-            role Egresado = <p:outputLabel value="#{loginBean.subject.hasRole('Egresado')}"/>
-            role Administrador = <p:outputLabel value="#{loginBean.subject.hasRole('Administrador')}"/>
-            role Estudiante = <p:outputLabel value="#{loginBean.subject.hasRole('Estudiante')}"/>
-        </pre>
-
-        <p:keyboard rendered="#{loginBean.subject.hasRole('Estudiante')}"></p:keyboard>
-        
         <h:form id="form">
-            
-            <p:layout fullPage="true">
-                <p:layoutUnit position="north" size="250"   >
-                    <h:outputText value="Top unit content." />
-                </p:layoutUnit>
-                <p:layoutUnit position="center" header="Center" >
-                    <h:outputText value="Center Content" />
-                </p:layoutUnit>
-                <p:layoutUnit position="west" size="200" header="Left">
+            <div class="container">
+                <div class="adentro" style="background-color: white">
+                    <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
+                    <div align="left">
+                        <h1 style="font-family: sans-serif">Bienvenido Egresado</h1>
+                    </div>
+                    <div align="right">
+                        <h:outputLink value="/logout">logout</h:outputLink>
+                    </div>
+
+                    <p:keyboard rendered="#{loginBean.subject.hasRole('Estudiante')}"></p:keyboard>
+                </div>
+                <br></br>
+                <br></br>
+                <nav>
+                    <ul>
                         <p:commandButton value="Generar Certificado"  onclick="PF('dlg1').show()">
                         </p:commandButton> 
                         <p:dialog header="Certificado de  Afiliación." id="Certificado" widgetVar="dlg1" height="850" width="1000" styleClass="sheet.css" resizable="false" >
                             <p:media cache="false" value="#{Usuario.streamedContent}" player="pdf" height="800" width="900" styleClass="sheet.css" />
                             <p:commandButton value="Cerrar" onclick="PF('dlg').hide()"/>
                         </p:dialog>
-                </p:layoutUnit>
-                
-
-            </p:layout>
+                    </ul>
+                    <ul>
+                        <p:commandButton value="Generar Certificado"  onclick="PF('dlg1').show()">
+                        </p:commandButton> 
+                        <p:dialog header="Certificado de  Afiliación." id="asd" widgetVar="dlg1" height="850" width="1000" styleClass="sheet.css" resizable="false" >
+                            <p:media cache="false" value="#{Usuario.streamedContent}" player="pdf" height="800" width="900" styleClass="sheet.css" />
+                            <p:commandButton value="Cerrar" onclick="PF('dlg').hide()"/>
+                        </p:dialog>
+                    </ul>
+                    <ul>
+                        <p:commandButton value="Generar Certificado"  onclick="PF('dlg1').show()">
+                        </p:commandButton> 
+                        <p:dialog header="Certificado de  Afiliación." id="fds" widgetVar="dlg1" height="850" width="1000" styleClass="sheet.css" resizable="false" >
+                            <p:media cache="false" value="#{Usuario.streamedContent}" player="pdf" height="800" width="900" styleClass="sheet.css" />
+                            <p:commandButton value="Cerrar" onclick="PF('dlg').hide()"/>
+                        </p:dialog>
+                    </ul>
+                </nav>
+                <article>
+                    
+                </article>
+            </div>
         </h:form>
     </h:body>
 </html>
 
 
+<!---
+<pre>     
+subject = <p:outputLabel value="#{loginBean.subject}"/>
+principal = <p:outputLabel value="#{loginBean.subject.principal}"/>
+session = <p:outputLabel value="#{loginBean.subject.session}"/>
+role Egresado = <p:outputLabel value="#{loginBean.subject.hasRole('Egresado')}"/>
+role Administrador = <p:outputLabel value="#{loginBean.subject.hasRole('Administrador')}"/>
+role Estudiante = <p:outputLabel value="#{loginBean.subject.hasRole('Estudiante')}"/>
+</pre>
+-->

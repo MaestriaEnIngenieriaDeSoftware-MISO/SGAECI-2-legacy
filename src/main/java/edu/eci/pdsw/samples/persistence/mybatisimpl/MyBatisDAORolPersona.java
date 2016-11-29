@@ -26,4 +26,5 @@ public class MyBatisDAORolPersona implements DaoRolPersona {
       Rolmap.insertarRolPersona(DocumentoID, tipo, contra);
     }
     
+    
 }
