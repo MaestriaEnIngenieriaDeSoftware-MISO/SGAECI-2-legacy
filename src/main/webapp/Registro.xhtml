@@ -25,6 +25,7 @@
                         <h:outputText value="Recuerdame:" for="rememberMe"/>
                         <p:selectBooleanCheckbox id="rememberMe" value="#{Loggin.autenticacion}"/>
 
+<<<<<<< HEAD
                         <h:panelGrid  columns="1" styleClass="sheet.css">
                             <p:commandButton value="Ingresar"  actionListener="#{Loggin.doLogin()}" />
                         </h:panelGrid>
@@ -46,6 +47,35 @@
                 </div>
             </h:form>
         </div>
+=======
+            <p:layoutUnit position="center" resizable="false">
+                <p style="color: black">SAGECI es una aplicación que permite ingresar a los servicios deAECI que es una asociación sin ánimo de lucro, conformada por Egresados de Programas de Pregrado y Posgrado de la Escuela Colombiana de Ingeniería Julio Garavito"
+                    ¿No te encuentras registrado?"
+                    Envianos una solicitud para unirte y recibir todos nuestros beneficios."
+                </p>
+                <h:form id="formu">
+                    <div align="center" draggable="false" style="border-width: 10px">
+                        <p:commandButton  value="Egresado"  action="SolicitudAfiliacionEgre"/>
+                        <p:commandButton value="Estudiante" action="SolicitudAfiliacionEst"/>  
+                    </div>
+                   
+                </h:form>
+                
+                    
+            </p:layoutUnit>
+           
+        </p:layout>
+        <h:panelGrid  columns="1" styleClass="sheet.css">
+                        <aside>
+                        <script src="http://platform.twitter.com/widgets.js" ></script>
+                         <a href="https://twitter.com/egresados_eci" class="twitter-follow-button" data-lang="es" data-dnt="true" data-show-count="false">Follow @egresados_eci</a>
+                    </aside>
+                    <aside>
+                        <script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        <a class="twitter-timeline" data-width="250" data-height="500" data-theme="light" href="https://twitter.com/egresados_eci">Tweets by egresados_eci</a>
+                    </aside>  
+                    </h:panelGrid>
+>>>>>>> twitter
     </h:body>
 </html>
 

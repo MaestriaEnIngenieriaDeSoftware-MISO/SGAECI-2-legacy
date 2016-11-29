@@ -147,8 +147,25 @@ img {
 }
 
 
+
 .asdfg {
      width: 40%;
      vertical-align: top;
      
 }
+
+#menu {
+    float: left;
+    width: 150px;
+}
+#contenido {
+}
+#pie {
+    clear: both;
+}
+
+.twitter-timeline {
+     width: 250;
+     height:300
+}
+

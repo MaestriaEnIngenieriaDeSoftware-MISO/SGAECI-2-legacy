@@ -122,7 +122,11 @@ org.apache.shiro.authc.AccountException: Null usernames are not allowed by this 
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
 	at java.lang.Thread.run(Thread.java:745)
 
+<<<<<<< HEAD
 nov 28, 2016 8:16:56 PM Security.Registro anotar
+=======
+nov 28, 2016 10:55:19 PM Security.Registro anotar
+>>>>>>> twitter
 GRAVE: org.apache.shiro.authc.AccountException: Null usernames are not allowed by this realm.
 org.apache.shiro.authc.AccountException: Null usernames are not allowed by this realm.
 	at org.apache.shiro.realm.jdbc.JdbcRealm.doGetAuthenticationInfo(JdbcRealm.java:209)
@@ -184,6 +188,7 @@ org.apache.shiro.authc.AccountException: Null usernames are not allowed by this 
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
 	at java.lang.Thread.run(Thread.java:745)
 
+<<<<<<< HEAD
 nov 28, 2016 8:17:01 PM Security.Registro anotar
 GRAVE: org.apache.shiro.authc.AccountException: Null usernames are not allowed by this realm.
 org.apache.shiro.authc.AccountException: Null usernames are not allowed by this realm.
@@ -2311,3 +2316,5 @@ org.apache.shiro.authc.AccountException: Null usernames are not allowed by this 
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
 	at java.lang.Thread.run(Thread.java:745)
 
+=======
+>>>>>>> twitter
