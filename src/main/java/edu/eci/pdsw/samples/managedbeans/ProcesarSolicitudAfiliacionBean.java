@@ -17,7 +17,7 @@
 package edu.eci.pdsw.samples.managedbeans;
 
 
-import Security.SHA1;
+import edu.eci.pdsw.samples.Security.SHA1;
 import edu.eci.pdsw.samples.entities.Egresado;
 import edu.eci.pdsw.samples.entities.Estudiante;
 import edu.eci.pdsw.samples.entities.Persona;

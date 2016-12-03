@@ -6,7 +6,7 @@
 package edu.eci.pdsw.samples.managedbeans;
 
 
-import Security.Registro;
+import edu.eci.pdsw.samples.Security.Registro;
 import edu.eci.pdsw.samples.services.ServiciosSAGECI;
 import java.io.File;
 import org.apache.shiro.SecurityUtils;
