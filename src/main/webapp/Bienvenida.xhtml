@@ -27,7 +27,7 @@
                     <p:tab title="¿Quienes Somos?">
 
                         <h:panelGrid columns="2" cellpadding="50">
-                            <p:graphicImage name="resource/EscIng_2.jpg" />
+                            <img src="/resource/EscIng_2.jpg" align="left" height="250" width="250"></img>
                             <h:outputText
                                 value="Somos una asociación sin ánimo de lucro, conformada por Egresados de Programas de Pregrado y Posgrado de la Escuela Colombiana de Ingeniería Julio Garavito,con el fin de mejorar la calidad de vida generando  múltiples beneficios para nuestros egresados  en aspectos  académicos ,comerciales y del sector salud . Trabajamos por ofrecer una amplia oferta de opciones  laborales con empresas que confían en  la calidad  de nuestro Capital Humano. Los miembros elegidos  de la Junta Directiva de  la AECI,  trabajan en favor de los intereses gremiales, sirviendo como un canal de comunicación entre el sector real y la Academia,  potenciando  un profesional íntegro y ético comprometido  con el desarrollo social, económico y humano de Nuestro País . " />
                         </h:panelGrid>
@@ -35,7 +35,7 @@
                     </p:tab>
                     <p:tab title="Nuestra Junta Directiva">
                         <h:panelGrid columns="2" cellpadding="80">
-                            <p:graphicImage name="resource/junta.PNG" />
+                            <img src="/resource/junta.PNG" align="left" height="250" width="550"></img>
                             <h:outputText value="Los miembros de la Junta Directiva de AECI trabajan a favor de todos, y en equipo con los egresados de nuestra institución para lograr fomentar la integración entre cada uno de sus miembros con el gran propósito enmarcada dentro de la misión de AECI, como es brindar apoyo técnico, profesional, docente e investigativo." />
                         </h:panelGrid>
                     </p:tab>
@@ -43,34 +43,21 @@
                         <h:panelGrid columns="2" cellpadding="15">
                             <h:form id="formu">
                                 <div align="center" draggable="false" style="border-width: 10px">
-                                    <p:commandButton  value="Ingresa"  action="Registro"/>
-                                    <p:commandButton value="Registrate" action="Registro"/>  
+                                    <p:commandButton  value="Ingreso/Registro"  action="Registro"/>
                                 </div>
-
                             </h:form>
                             <h:outputText value="Apreciado(a) Egresado(a) y Estudiante de 8,9 y 10 semestre de la Escuela Colombiana de Ingeniería Julio Garavito :
                                           Queremos que haga parte de la Asociación de Egresados de la Escuela.
                                           ¡Anímese y se parte de esta gran familia con muchos beneficios especiales!" />
                         </h:panelGrid>
                     </p:tab>
-                    <p:tab title="Nuestros Convenios">
-                        <h:panelGrid columns="2" cellpadding="15">
-                            <p:graphicImage name="demo/images/godfather/godfather3.jpg" />
-                            <h:outputText value="
-                                          -Descuento del 2% en todas Maestrias y posgrados con la Escuela Colombiana de Ingeniería Julio Garavito 
-                                          -Medicina Prepagada y Plan Ondontológico con COLSANITAS
-                                          -Pólizas de hospitalizaciòn y cirugía con COLPATRIA
-                                          -Emermédica con COLPATRIA
-                                          -Compra de vehículos con DINISSAN Y AUTONIZA
-                                          -Academia de Ingles con PASSPORT
-                                          -Maestrías y post grados On line y semi presencial con EUDE( Escuela de Administración y Dirección de Empresas) Con becas que van desde un 50 a 80 % dependiendo del programa
-                                          -Arrendamiento de Oficina para empresarios Jóvenes con e-VOCS (excelente tarifas en el mejor sector de Bogotá
-                                          -Diseño e implementación de soluciones informaticas con TECH-MOVIL
-                                          -Publicaciones con descuentos especiales sen el ramo de construcción e ingeniería
-                                          con LEGIS 
-                                          -Publicaciones EL TIEMPO Descuentos especiales.
-                                          -Próximamente mas convenios :)" />
-                        </h:panelGrid>
+                    <p:tab title="Nuestros Convenios" >
+                        <h:form>
+                            <p:galleria value="#{Bienvenida.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
+                                <p:graphicImage name="resource/#{image}"/>
+                            </p:galleria>
+                        </h:form>
+
                     </p:tab>
                     <p:tab title="Contactenos">
                         <h:panelGrid columns="2" cellpadding="15">

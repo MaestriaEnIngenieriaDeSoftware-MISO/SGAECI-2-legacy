@@ -23,10 +23,10 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/Registro.xhtml</welcome-file>
+        <welcome-file>faces/Bienvenida.xhtml</welcome-file>
     </welcome-file-list>
     <welcome-file-list>
-        <welcome-file>Registro.xhtml</welcome-file>
+        <welcome-file>Bienvenida.xhtml</welcome-file>
     </welcome-file-list>        
 
     <!-- Apache Shiro -->

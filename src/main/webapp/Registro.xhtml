@@ -10,9 +10,9 @@
         </link>
     </h:head>
     <h:body >
-        
+
         <div class="westUnit" style="background-color: white">
-          
+
             <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
             <div align="right" draggable="false" >
                 <h:form>
@@ -33,42 +33,43 @@
                     </h:panelGrid>
                 </h:form>
             </div>
-            
-        
+
+
         </div>
         <br></br>
-        
+
         <br></br>
         <div class="westUnit" style="background-color: white">
-            <h:panelGrid  columns="2" styleClass="sheet.css">
-                
-            
-            <h:panelGrid  columns="1" styleClass="sheet.css">
-            <p style="color: black ;font-family:verdana ; align:justify" >  "SAGECI es una aplicación que permite ingresar a los servicios deAECI que es una asociación sin ánimo de lucro, conformada por Egresados de Programas de Pregrado y Posgrado de la Escuela Colombiana de Ingeniería Julio Garavito.
-                
-                ¿No te encuentras registrado?
-                Envianos una solicitud para unirte y recibir todos nuestros beneficios."
-            </p>
-              </h:panelGrid>
-                
-            </h:panelGrid>
-            
             <h:form id="formu">
-                <div align="center" draggable="false" style="border-width: 10px">
-                    <p:commandButton  value="Egresado"  action="open/SolicitudAfiliacionEgre"/>
-                    <p:commandButton value="Estudiante" action="open/SolicitudAfiliacionEst"/>  
+                <div>
+                    <h:panelGrid  columns="2" styleClass="sheet.css" columnClasses="img, label">
+
+                        <img src="/resource/Registro.jpg" align="left" height="250" width="700"></img>
+
+                        <h:panelGrid   columns="1" styleClass="sheet.css">
+                            <div>
+                                <p:outputLabel style="font-weight:bold" value="¿No te encuentras registrado?
+                                               Envianos una solicitud para unirte y recibir todos nuestros beneficios." />
+                            </div>
+                            <h:panelGrid   columns="2" styleClass="sheet.css" rowClasses="sheet.css">
+                                <p:commandButton  value="Egresado"  action="open/SolicitudAfiliacionEgre"/>
+                                <p:commandButton value="Estudiante" action="open/SolicitudAfiliacionEst"/>
+                            </h:panelGrid>
+                        </h:panelGrid>
+
+
+                    </h:panelGrid>
+
                 </div>
-                
+
+                <div align="center" draggable="false" style="border-width: 10px">
+
+                </div>
+
             </h:form>
         </div>
-       
-
-
-
-
-
 
     </h:body>
-      
-           
+
+
 </html>
