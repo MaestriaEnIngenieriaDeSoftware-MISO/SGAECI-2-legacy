@@ -54,6 +54,7 @@
                     <p:tab title="Nuestros Convenios" >
                         <h:form>
                             <p:galleria value="#{Bienvenida.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
+
                                 <p:graphicImage name="resource/#{image}"/>
                             </p:galleria>
                         </h:form>
@@ -70,10 +71,15 @@
                                     <script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                                     <a class="twitter-timeline" data-width="350" data-height="250" data-theme="light" href="https://twitter.com/egresados_eci">Tweets by egresados_eci</a>
                                 </aside> 
+                                <aside>
+                                    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp&key;=AIzaSyC2YLZ8F87QxTcRfILNTOsjavPrvF2M1-0'></script>
+                                    <div style='overflow:hidden;height:327px;width:360px;'> </div><div id='gmap_canvas' style='height:327px;width:360px;'></div>
+                                </aside>
+
                             </h:panelGrid>
                             <h:outputText value="Pbx: 6683600 Ext.:232 Movil- 312 457 0612 - Web: www.aeci.org co.
                                           Síganos en Facebook y Twitter 
-
+                                         
                                           Dirección Oficina: Sede Escuela Colombiana de Ingeneiría Julio Garavito 
                                           AK 45 N° 205-59 Bloque A Segundo Piso " />
                         </h:panelGrid>
@@ -97,3 +103,6 @@
 
 
 </html>
+
+
+<!--<script src='https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyC2YLZ8F87QxTcRfILNTOsjavPrvF2M1-0'></script><div style='overflow:hidden;height:327px;width:360px;'><div id='gmap_canvas' style='height:327px;width:360px;'></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div> <a href='https://add-map.org/'>Add-Map.org</a> <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=6f14ba8cac8ec67d64ca56226f2c39220bbb2445'></script><script type='text/javascript'>function init_map(){var myOptions = {zoom:17,center:new google.maps.LatLng(4.7829001,-74.04157700000002),mapTypeId: google.maps.MapTypeId.HYBRID};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(4.7829001,-74.04157700000002)});infowindow = new google.maps.InfoWindow({content:'<strong>AECI</strong><br>Ak 45 # 205-59<br> Bogotá<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script> -->
