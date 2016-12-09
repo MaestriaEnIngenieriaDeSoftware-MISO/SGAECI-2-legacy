@@ -10,7 +10,7 @@ Carlos Alberto Ramírez Otero
 
 Martín Jose Hernández Medina
 
-Ricardo Ándres Pinto rico
+Ricardo Andrés Pinto Rico
 
 Tiffany Viviana Estupian Londoño
 
