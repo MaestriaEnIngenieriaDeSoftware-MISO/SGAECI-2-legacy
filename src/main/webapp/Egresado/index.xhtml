@@ -9,31 +9,34 @@
         </link>
     </h:head>
     <h:body>
-        
-            <h:form id="form">
-                <div class="container">
-                    <div class="adentro" style="background-color: white">
-                        <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
-                        <div align="center">
-                            <h1 style="font-family: Lucida Sans Unicode">Bienvenido Egresado </h1>
-                        </div>
-                        <div align="right">
-                            <h:outputLink value="/logout">Logout</h:outputLink>
-                        </div>
 
-                        <p:keyboard rendered="#{loginBean.subject.hasRole('Egresado')}"></p:keyboard>
+        <h:form id="form">
+            <div class="container">
+                <div class="adentro" style="background-color: white">
+                    <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
+                    <div align="center">
+                        <h1 style="font-family:  Lucida Sans Unicode">Bienvenido a SGAECI</h1>
+                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 100%;" >Es un gusto saber que este de vuelta</h1>
+                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 100%;">#{Usuario.persona.nombre} #{Usuario.persona.apellido}</h1>
+                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 100%;" >Su estado de afiliacion es #{Usuario.eaf.estado}</h1>
                     </div>
-                     <br></br>
-                    <br></br>
-                     </div>
+                    <div align="right">
+                        <h:outputLink value="/logout">Cerrar Sección</h:outputLink>
+                    </div>
+
+                    <p:keyboard rendered="#{loginBean.subject.hasRole('Egresado')}"></p:keyboard>
+                </div>
+                <br></br>
+                <br></br>
+            </div>
         </h:form>
         <h:form id="form3">
-                            <div align="center" draggable="false" style="border-width: 10px">
-                                <p:commandButton  value="Volver"  action="Egresado/index"/>
-                            </div>
-                        </h:form>
-     </h:body>
-    </html>
+            <div align="center" draggable="false" style="border-width: 10px">
+                <p:commandButton  value="Volver"  action="Egresado/index"/>
+            </div>
+        </h:form>
+    </h:body>
+</html>
 
 
 <!-- <pre>     
@@ -44,4 +47,4 @@
     role Administrador = <p:outputLabel value="#{loginBean.subject.hasRole('Administrador')}"/>
     role Estudiante = <p:outputLabel value="#{loginBean.subject.hasRole('Estudiante')}"/>
   </pre>
-                        --> 
+--> 
