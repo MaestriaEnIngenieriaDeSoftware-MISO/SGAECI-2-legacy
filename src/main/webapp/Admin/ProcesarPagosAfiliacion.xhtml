@@ -173,7 +173,8 @@
                                                 <p:commandButton process="ListaPagos4" update=":form:form2:pagoSeleccionado4" icon="ui-icon-search" value="Ver Pago" oncomplete="PF('dlg1').show()" />
                                             </f:facet>
                                         </p:dataTable>
-
+                                        <p:inputTextarea rows="1" cols="20"  value="#{ProcesarPagosAfiliacion.docid}" />
+                                        <p:commandButton update=":form:form2:ListaPagos4" icon="ui-icon-search" value="Cargar Pagos"/>
                                         <p:dialog header="Comprobante Pago afiliación." id="pagoSeleccionado4" widgetVar="dlg1" height="575" draggable="false" resizable="false">
                                             <p:panelGrid columns="2" id="test">
                                                 <p:outputLabel  for="comprobante4" value="Comprobante : "/>

@@ -50,6 +50,7 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
     EmailSender sender = new SimpleEmailSender(new EmailConfiguration());
     Email email = null;
     Egresado e;
+    private int docid=0;
     private boolean b=true;
     private String codigobanco;
     final String from = "5d8dd682c0-c92f3e@inbox.mailtrap.io";
@@ -75,6 +76,11 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
     
     public List<PagoAfiliacion> getPagosAfiliacionNoTramitados() throws ExcepcionServiciosSAGECI{
         List<PagoAfiliacion> temp =SAGECI.consultarPagosAfiliacionesNoTramitados();
+        return temp;
+    }
+    
+     public List<PagoAfiliacion> getPagosAfiliacionEspecifico() throws ExcepcionServiciosSAGECI{
+        List<PagoAfiliacion> temp =SAGECI.consultarPagosAfiliacionesEspecifico(docid);
         return temp;
     }
 
@@ -155,5 +161,14 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
         this.codigobanco = codigobanco;
     }
 
+    public int getDocid() {
+        return docid;
+    }
+
+    public void setDocid(int docid) {
+        this.docid = docid;
+    }
+    
+    
     
 }
