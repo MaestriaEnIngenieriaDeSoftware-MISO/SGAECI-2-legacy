@@ -17,7 +17,6 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <apache-shiro.version>1.2.4</apache-shiro.version>
         <slf4j.version>1.7.2</slf4j.version>
-        <logback.version>1.0.7</logback.version>
     </properties>
     <dependencies>
  
@@ -35,6 +34,12 @@
             <groupId>org.glassfish</groupId>
             <artifactId>javax.faces</artifactId>
             <version>2.2.7</version>
+        </dependency>
+        
+         <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>apache-log4j-extras</artifactId>
+            <version>1.2.17</version>
         </dependency>
         
            <dependency>
@@ -77,6 +82,15 @@
             <version>1.1.1</version>
             <scope>provided</scope>
         </dependency>
+        
+        
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+            <type>zip</type>
+        </dependency>
+        
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -203,6 +217,11 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
             <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>apache-log4j-extras</artifactId>
+            <version>1.2.17</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
