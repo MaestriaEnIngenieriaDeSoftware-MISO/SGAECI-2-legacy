@@ -1,0 +1,222 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Solicitudes pendientes</title>
+        <link rel="stylesheet" type="text/css" href="../sheet.css"/> 
+
+    </h:head>
+
+    <h:body style="stylesheet">
+        <div class="westUnit" style="background-color: white">
+            <img src="/resource/aecimagen.png" align="Center" height="250" width="250"></img>
+        </div>
+        <h:form id="form">
+            <div class="container">
+                <div class="adentro" style="background-color: white">
+                    <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
+                    <div align="center">
+                        <h1 style="font-family: Lucida Sans Unicode">Bienvenido Administrador </h1>
+                    </div>
+                    <div align="right">
+                        <h:outputLink value="/logout">Logout</h:outputLink>
+                    </div>
+                    <p:keyboard rendered="#{loginBean.subject.hasRole('Administrador')}"></p:keyboard>
+                </div>
+                <br></br>
+                <br></br>
+                <div class="adentro" style="background-color: white">
+                    <article>
+                        <h:form id="form2">
+                            <h:panelGrid   styleClass="sheet.css"> 
+                                <p:tabView dynamic="true"  >
+                                    <p:tab title="Pagos Registrados">
+                                        <p:dataTable rowIndexVar="row" id="ListaPagos" var="Pago"  value="#{ProcesarPagosAfiliacion.getPagosAfiliacionRegsitrados()}" selectionMode="single" selection="#{ProcesarSolicitudAfiliacion.pagoSelection}" rowKey="#{Pago.pagoid}" style="margin-bottom:0">
+                                            <p:column style="width: 2px" headerText="Fecha de Registro">
+                                                <h:outputText value="#{Pago.pagoid}" />
+                                            </p:column>
+                                            <p:column style="width: 2px" headerText="Tipo de tramite">
+                                                <h:outputText value="#{Pago.tipo}" />
+                                            </p:column>
+                                            <p:column style="width: 2px" headerText="Nombre afiliado">
+                                                <h:outputText value="#{Pago.e1.nombre}" />
+                                            </p:column>
+                                            <p:column style="width: 2px" headerText="Apellido afiliado">
+                                                <h:outputText value="#{Pago.e1.apellido}" />
+                                            </p:column>
+                                            <p:column style="width: 2px" headerText="Documento de identidad">
+                                                <h:outputText value="#{Pago.e1.DocumentoID}" />
+                                            </p:column>
+                                            <p:column style="width: 2px" headerText="Estado">
+                                                <h:outputText value="#{Pago.estado}" />
+                                            </p:column>
+                                            <f:facet name="footer">
+                                                <p:commandButton process="ListaPagos" update=":form:form2:pagoSeleccionado" icon="ui-icon-search" value="Ver Pago" oncomplete="PF('dlg1').show()" />
+                                            </f:facet>
+                                        </p:dataTable>
+
+                                        <p:dialog header="Comprobante Pago afiliación." id="pagoSeleccionado" widgetVar="dlg1" height="575" draggable="false" resizable="false">
+                                            <p:panelGrid columns="2" id="test">
+                                                <p:outputLabel  for="comprobante" value="Comprobante : "/>
+                                                <h:outputText id="comprobante" value="#{ProcesarPagosAfiliacion.pagoSelection.comprobante}" />
+                                            </p:panelGrid>
+                                            <p:commandButton value="Volver" id="Cancel" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
+                                        </p:dialog> 
+                                    </p:tab>
+                                    
+                                    
+                                    
+                                    <p:tab title="Pagos No tramitados">
+                                        <p:dataTable rowIndexVar="row" id="ListaPagos2" var="Pago"  value="#{ProcesarPagosAfiliacion.getPagosAfiliacionNoTramitados()}" selectionMode="single" selection="#{ProcesarSolicitudAfiliacion.pagoSelection}" rowKey="#{Pago.pagoid}" style="margin-bottom:0">
+                                            <p:column style="width: 2px" headerText="Fecha de Registro">
+                                                <h:outputText value="#{Pago.pagoID}" />
+                                            </p:column>
+                                            <p:column style="width: 2px" headerText="Tipo de tramite">
+                                                <h:outputText value="#{Pago.tipo}" />
+                                            </p:column>
+                                            <p:column style="width: 2px" headerText="Nombre afiliado">
+                                                <h:outputText value="#{Pago.e1.nombre}" />
+                                            </p:column>
+                                            <p:column style="width: 2px" headerText="Apellido afiliado">
+                                                <h:outputText value="#{Pago.e1.apellido}" />
+                                            </p:column>
+                                            <p:column style="width: 2px" headerText="Documento de identidad">
+                                                <h:outputText value="#{Pago.e1.DocumentoID}" />
+                                            </p:column>
+                                            <p:column style="width: 2px" headerText="Estado">
+                                                <h:outputText value="#{Pago.estado}" />
+                                            </p:column>
+                                            <f:facet name="footer">
+                                                <p:commandButton process="ListaPagos2" update=":form:form2:pagoSeleccionado2" icon="ui-icon-search" value="Ver solicitud" oncomplete="PF('dlg1').show()" />
+                                            </f:facet>
+                                        </p:dataTable>
+
+                                        <p:dialog header="Comprobante Pago afiliación." id="pagoSeleccionado2" widgetVar="dlg1" height="575" draggable="false" resizable="false">
+                                            <p:panelGrid columns="2" id="test">
+                                                <p:outputLabel  for="comprobante2" value="Comprobante: "/>
+                                                <h:outputText id="comprobante2" value="#{ProcesarPagosAfiliacion.pagoSelection.comprobante}" />
+                                            </p:panelGrid>
+                                            <h3>Ingrese codigo de transaccion: </h3>
+                                            <p:inputTextarea rows="6" cols="45" required="true" value="#{ProcesarPagosAfiliacion.codigobanco}" />
+                                            <br/>
+                                            <p:commandButton update="ListaPagos2" value="Aceptar" id="Acept" actionListener="#{ProcesarPagosAfiliacion.aceptarPagoAfiliacion}" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
+                                            <p:commandButton update="ListaPagos2" value="Rechazar" id="Reject" actionListener="#{ProcesarPagosAfiliacion.rechazarPagoAfiliacion}" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
+                                            <p:commandButton value="Cancelar" id="Cancel2" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
+                                        </p:dialog> 
+                                    </p:tab>
+                                    
+                                    
+                                    
+                                    
+                                    <p:tab title="Todos los Pagos">
+                                        <p:dataTable rowIndexVar="row" id="ListaPagos3" var="Pago"  value="#{ProcesarPagosAfiliacion.getPagosAfiliacion()}" selectionMode="single" selection="#{ProcesarSolicitudAfiliacion.pagoSelection}" rowKey="#{Pago.pagoID}" style="margin-bottom:0">
+                                            <p:column style="width: 2px" headerText="Fecha de Registro">
+                                                <h:outputText value="#{Pago.pagoID}" />
+                                            </p:column>
+                                            <p:column style="width: 2px" headerText="Tipo de tramite">
+                                                <h:outputText value="#{Pago.tipo}" />
+                                            </p:column>
+                                            <p:column style="width: 2px" headerText="Nombre afiliado">
+                                                <h:outputText value="#{Pago.e1.nombre}" />
+                                            </p:column>
+                                            <p:column style="width: 2px" headerText="Apellido afiliado">
+                                                <h:outputText value="#{Pago.e1.apellido}" />
+                                            </p:column>
+                                            <p:column style="width: 2px" headerText="Documento de identidad">
+                                                <h:outputText value="#{Pago.e1.DocumentoID}" />
+                                            </p:column>
+                                            <f:facet name="footer">
+                                                <p:commandButton process="ListaPagos3" update=":form:form2:pagoSeleccionado3" icon="ui-icon-search" value="Ver solicitud" oncomplete="PF('dlg1').show()" />
+                                            </f:facet>
+                                        </p:dataTable>
+
+                                        <p:dialog header="Comprobante Pago afiliación." id="pagoSeleccionado3" widgetVar="dlg1" height="575" draggable="false" resizable="false">
+                                            <p:panelGrid columns="2" id="test">
+                                                <p:outputLabel  for="comprobante3" value="Comprobante :"/>
+                                                <h:outputText id="comprobante3" value="#{ProcesarPagosAfiliacion.pagoSelection.comprobante}" />
+                                            </p:panelGrid>
+                                            <h3>Ingrese codigo de transaccion: </h3>
+                                            <p:inputTextarea rows="6" cols="45" required="true" value="#{ProcesarPagosAfiliacion.codigobanco}" />
+                                            <br/>
+                                            <p:commandButton update="ListaPagos3" value="Aceptar" id="Acept2" actionListener="#{ProcesarPagosAfiliacion.aceptarPagoAfiliacion}" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
+                                            <p:commandButton update="ListaPagos3" value="Rechazar" id="Reject2" actionListener="#{ProcesarPagosAfiliacion.rechazarPagoAfiliacion}" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
+                                            <p:commandButton value="Cancelar" id="Cancel3" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
+                                        </p:dialog> 
+                                    </p:tab>
+                                    
+                                    
+                                    <p:tab title="Pagos de un Egresado">
+                                        <p:dataTable rowIndexVar="row" id="ListaPagos4" var="Pago"  value="#{ProcesarPagosAfiliacion.getPagosAfiliacionEspecifico()}" selectionMode="single" selection="#{ProcesarSolicitudAfiliacion.pagoSelection}" rowKey="#{Pago.pagoid}" style="margin-bottom:0">
+                                            <p:column style="width: 2px" headerText="Fecha de Registro">
+                                                <h:outputText value="#{Pago.pagoid}" />
+                                            </p:column>
+                                            <p:column style="width: 2px" headerText="Tipo de tramite">
+                                                <h:outputText value="#{Pago.tipo}" />
+                                            </p:column>
+                                            <p:column style="width: 2px" headerText="Nombre afiliado">
+                                                <h:outputText value="#{Pago.e1.nombre}" />
+                                            </p:column>
+                                            <p:column style="width: 2px" headerText="Apellido afiliado">
+                                                <h:outputText value="#{Pago.e1.apellido}" />
+                                            </p:column>
+                                            <p:column style="width: 2px" headerText="Documento de identidad">
+                                                <h:outputText value="#{Pago.e1.DocumentoID}" />
+                                            </p:column>
+                                            <p:column style="width: 2px" headerText="Estado">
+                                                <h:outputText value="#{Pago.estado}" />
+                                            </p:column>
+                                            <f:facet name="footer">
+                                                <p:commandButton process="ListaPagos4" update=":form:form2:pagoSeleccionado4" icon="ui-icon-search" value="Ver Pago" oncomplete="PF('dlg1').show()" />
+                                            </f:facet>
+                                        </p:dataTable>
+
+                                        <p:dialog header="Comprobante Pago afiliación." id="pagoSeleccionado4" widgetVar="dlg1" height="575" draggable="false" resizable="false">
+                                            <p:panelGrid columns="2" id="test">
+                                                <p:outputLabel  for="comprobante4" value="Comprobante : "/>
+                                                <h:outputText id="comprobante4" value="#{ProcesarPagosAfiliacion.pagoSelection.comprobante}" />
+                                            </p:panelGrid>
+                                            <h3>Ingrese codigo de transaccion: </h3>
+                                            <p:inputTextarea rows="6" cols="45" required="true" value="#{ProcesarPagosAfiliacion.codigobanco}" />
+                                            <br/>
+                                            <p:commandButton update="ListaPagos3" value="Aceptar" id="Acept4" actionListener="#{ProcesarPagosAfiliacion.aceptarPagoAfiliacion}" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
+                                            <p:commandButton update="ListaPagos3" value="Rechazar" id="Reject4" actionListener="#{ProcesarPagosAfiliacion.rechazarPagoAfiliacion}" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
+                                            <p:commandButton value="Cancelar" id="Cancel4" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
+                                            
+                                        </p:dialog> 
+                                    </p:tab>
+                                    
+                                    
+                                </p:tabView>
+
+                            </h:panelGrid>    
+                        </h:form>  
+                    </article>
+                </div>
+            </div>
+        </h:form>
+        <h:form id="form3">
+            <div align="center" draggable="false" style="border-width: 10px">
+                <p:commandButton  value="Volver"  action="index"/>
+            </div>
+        </h:form>
+
+    </h:body>
+</html>
+
+
+
+
+<!--
+        <pre>     
+            subject = <p:outputLabel value="#{loginBean.subject}"/>
+            principal = <p:outputLabel value="#{loginBean.subject.principal}"/>
+            session = <p:outputLabel value="#{loginBean.subject.session}"/>
+            role Estudiante = <p:outputLabel value="#{loginBean.subject.hasRole('Estudiante')}"/>
+            role Administrador = <p:outputLabel value="#{loginBean.subject.hasRole('Administrador')}"/>
+            role Egresado = <p:outputLabel value="#{loginBean.subject.hasRole('Egresado')}"/>
+        </pre>
+-->

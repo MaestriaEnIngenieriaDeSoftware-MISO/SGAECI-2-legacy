@@ -62,6 +62,8 @@ public abstract class DaoFactory {
     public abstract DaoEgresadoEmpresa getDaoEgresadoEmpresa();
     
     public abstract DaoEstadoAfiliacion getDaoEstadoAfiliacion();
+    
+    public abstract DaoPagoAfiliacion getDaoPagoAfiliacion();
 
     public abstract void commitTransaction() throws PersistenceException;
 

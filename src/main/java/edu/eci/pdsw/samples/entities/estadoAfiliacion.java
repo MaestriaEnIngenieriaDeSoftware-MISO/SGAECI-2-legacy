@@ -12,11 +12,11 @@ import java.util.Date;
  * @author 2106796
  */
 public class estadoAfiliacion {
-    int DocumentoID;
-    Date fechaInicio,fechaFin;
-    String Estado;
-    Egresado e1;
-    Estudiante e2;
+    private int DocumentoID;
+    private Date fechaInicio,fechaFin;
+    private String Estado;
+    private Egresado e1;
+    private Estudiante e2;
 
     public estadoAfiliacion(int DocumentoID, Date fechaInicio, Date fechaFin, String Estado) {
         this.DocumentoID = DocumentoID;

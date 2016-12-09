@@ -20,6 +20,7 @@ import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import edu.eci.pdsw.samples.entities.Egresado;
 import edu.eci.pdsw.samples.entities.Egresado_Empresa;
 import edu.eci.pdsw.samples.entities.Estudiante;
+import edu.eci.pdsw.samples.entities.PagoAfiliacion;
 import edu.eci.pdsw.samples.entities.Persona;
 import edu.eci.pdsw.samples.entities.Rol;
 import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
@@ -90,6 +91,15 @@ public abstract class ServiciosSAGECI {
 
     public abstract void agregarEgresado(int documentoID, int telefono1, BigInteger telefono2,String tipoDocumentoID, String nombre, String apellido, String direccion, String correo, String genero, Rol rol,String semestreGrado, String correoPersonal,String cargo , String labora,Egresado_Empresa egresadoEmpresa,Date fechaGraduacion) throws ExcepcionServiciosSAGECI;
     
+    
+    
+    /**
+     * Registra un Rol en la base de datos 
+     * @param documentoID documento de identidad de la persona 
+     * @param tipo tipo de privilegio
+     * @param contra contraseña de la persona
+     * @throws ExcepcionServiciosSAGECI 
+     */
     public abstract void agregarRolPersona(int documentoID,int tipo,String contra) throws ExcepcionServiciosSAGECI;
 
     
@@ -146,15 +156,68 @@ public abstract class ServiciosSAGECI {
     /**
      * actualizar una solicitud de Afiliacion en la base de datos 
      * @param s solicitud de afiliacion para actualizar 
-     * @throws ExcepcionServiciosSAGECI 
+     * @throws ExcepcionServiciosSAGECI si no hay un documento asociado o si hay algun problema de persistenciaados
      */
     public abstract void actualizarSolicitudAfliliacion(SolicitudAfiliacion s) throws ExcepcionServiciosSAGECI;
     /**
      * Consulta las solicitudes de afiliacion a vencerce
      * @return
-     * @throws ExcepcionServiciosSAGECI 
+     * @throws ExcepcionServiciosSAGECI si hay algun problema de persistenciaados
      */
     public abstract List<Persona> consultarSolicitudAfiliacionesVencidas() throws ExcepcionServiciosSAGECI;
     
+    
+    /**
+     * Consulta el estado de afiliacion de una Persona registrada o afiliada
+     * @param DocumentoID el documento con el cual la persona se registro
+     * @return el estado de la afilaicon
+     * @throws ExcepcionServiciosSAGECI si no hay una persona asociados al documento
+     */
     public abstract estadoAfiliacion consultarEstadoAfiliacion(int DocumentoID) throws ExcepcionServiciosSAGECI;
+
+    
+   
+    /**
+     * Consulta los pagos de afiliacion no tramitados 
+     * @return  Lista con los pagos no tramitados 
+     * @throws ExcepcionServiciosSAGECI si hay algun problema de persistenciaados
+     */
+    public abstract List<PagoAfiliacion> consultarPagosAfiliacionesNoTramitados() throws ExcepcionServiciosSAGECI;
+    
+     /**
+     * Consulta los pagos de afiliacion Regsitrados
+     * @return  Lista con los pagos de afiliacion registrados
+     * @throws ExcepcionServiciosSAGECI si hay algun problema de persistenciaados
+     */
+    public abstract List<PagoAfiliacion> consultarPagosAfiliacionesRegistrados() throws ExcepcionServiciosSAGECI;
+    
+    
+     /**
+     * Consulta todos los pagos de afiliacion 
+     * @return  Lista con los pagos de afiliacion 
+     * @throws ExcepcionServiciosSAGECI si hay algun problema de persistenciaados
+     */
+    public abstract List<PagoAfiliacion> consultarPagosAfiliaciones() throws ExcepcionServiciosSAGECI;
+    
+     /**
+     * Consulta todos los pagos de afiliacion de un egresado en especifico
+     * @return  Lista con los pagos de afiliacion 
+     * @throws ExcepcionServiciosSAGECI si hay algun problema de persistenciaados
+     */
+    public abstract List<PagoAfiliacion> consultarPagosAfiliacionesEspecifico(int id) throws ExcepcionServiciosSAGECI;
+    
+    /**
+     * actualizar una solicitud de Afiliacion en la base de datos 
+     * @param s solicitud de afiliacion para actualizar 
+     * @throws ExcepcionServiciosSAGECI si no hay un id asociado o si hay algun problema de persistenciaados
+     */
+    public abstract void actualizarPagoAfliliacion(PagoAfiliacion s) throws ExcepcionServiciosSAGECI;
+    
+    /**
+     * Borra un pago Afiliacion rechazado por el administrador en la base de datos 
+     * @param s pago afiliacion para actualizar 
+     * @throws ExcepcionServiciosSAGECI si no hay un id asociado o si hay algun problema de persistenciaados
+     */
+    public abstract void BorrarPagoAfliliacion(PagoAfiliacion s) throws ExcepcionServiciosSAGECI;
+    
 }

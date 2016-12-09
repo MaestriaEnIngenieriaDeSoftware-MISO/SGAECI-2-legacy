@@ -17,7 +17,7 @@ import javax.faces.bean.SessionScoped;
  *
  * @author 2107713
  */
-@ManagedBean (name= "Bienvenida")
+@ManagedBean (name="Bienvenida")
 @SessionScoped
 public class BienvenidaBean implements Serializable {
      
@@ -31,9 +31,6 @@ public class BienvenidaBean implements Serializable {
             }
             else if(i>8 && i<=14){
                 images.add("nature" + i + ".png");
-            }
-            else{
-                images.add("nature" + i + ".svg");
             }
         }
     }

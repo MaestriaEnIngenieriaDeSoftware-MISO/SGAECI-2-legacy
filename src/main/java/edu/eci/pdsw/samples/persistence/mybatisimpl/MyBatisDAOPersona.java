@@ -30,5 +30,13 @@ public class MyBatisDAOPersona implements DaoPersona{
     public List<Persona> loadLosing() throws PersistenceException {
         return Pemap.getAfiliacionesVencerse();
     }
+
+    @Override
+    public Persona load(int documentoid) throws PersistenceException {
+        Persona p=Pemap.getPersona(documentoid);
+        return p;
+    }
+
+    
     
 }

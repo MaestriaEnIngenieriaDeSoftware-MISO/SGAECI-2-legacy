@@ -20,4 +20,12 @@ public interface DaoPersona {
      * @throws PersistenceException 
      */
     public List<Persona> loadLosing() throws PersistenceException;
+    
+    /**
+     * consulta una  persona dado un documento
+     * @param documentoid
+     * @return persona con el documento asociado
+     * @throws PersistenceException 
+     */
+    public Persona load(int documentoid) throws PersistenceException;
 }

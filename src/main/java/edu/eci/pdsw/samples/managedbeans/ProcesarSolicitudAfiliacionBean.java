@@ -29,10 +29,13 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 import javax.mail.MessagingException;
+import org.primefaces.context.RequestContext;
+import java.lang.Exception;
 
 /**
  *
@@ -48,6 +51,7 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
     EmailSender sender = new SimpleEmailSender(new EmailConfiguration());
     Email email = null;
     Persona e;
+    private boolean b=true;
     private SHA1 sh;
     final String from = "5d8dd682c0-c92f3e@inbox.mailtrap.io";
     final String subjectAprobado = "Solicitud de Ingreso AECI: Aprobada";
@@ -55,6 +59,16 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
 
     public ProcesarSolicitudAfiliacionBean() {
         
+    }
+    
+     public void showMessage(boolean m) {
+        FacesMessage message;
+        if (m) {
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "La Solicitud fue aceptada correctamente.");
+        } else {
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Incorrecto", "Hubo un error y no se realizo ningun cambio.");
+        }
+        RequestContext.getCurrentInstance().showMessageInDialog(message);
     }
     
     public List<SolicitudAfiliacion> getSolicitudes() throws ExcepcionServiciosSAGECI{
@@ -112,8 +126,6 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
         try{
             Egresado e1 = solicitudSelection.getE1();
             Estudiante e2 =solicitudSelection.getE2();
-            System.out.println("este es egresado: "+e1);
-            System.out.println("este es estudiante: "+e2);
             String messageAprobado = "Su solicitud ha sido Aprobada: "+Comentario;            
             solicitudSelection.setEstadoSolicitud("ACEPTADA");
             solicitudSelection.setComentario(Comentario);
@@ -132,10 +144,12 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
                 SAGECI.agregarRolPersona(e1.getDocumentoID(),2,shacontrasena);
                 sender.send(email);
             }
-        }catch(MessagingException e){
-            //¡¡¡¡falta anexar ecepcion de error!!!!
+        }catch(Exception e ){
+            showMessage(false);b=false;
         }
+        if(b){showMessage(true);}
     }
+    
     
     public void rechazarSolicitudAfiliacion(ActionEvent actionEvent) throws ExcepcionServiciosSAGECI{
         try{
@@ -156,8 +170,9 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
                 sender.send(email);
             }
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            showMessage(false);b=false;
         }
+        if(b){showMessage(true);}
     }
     
     public String getComentario() {

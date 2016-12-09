@@ -19,7 +19,6 @@ package edu.eci.pdsw.samples.persistence.mybatisimpl.mappers;
 import edu.eci.pdsw.samples.entities.Persona;
 import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
 import java.math.BigInteger;
-import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -52,5 +51,13 @@ public interface PersonaMapper {
      * @param documentoID 
      */
     public void eliminarPersona(@Param("documentoID") int documentoID);
+    
+    
+    /**
+     * Obtiene una persona con un documento de identidad especifico
+     * @param documentoID 
+     * @return  
+     */
+    public Persona getPersona(@Param("id") int documentoID);
     
     }

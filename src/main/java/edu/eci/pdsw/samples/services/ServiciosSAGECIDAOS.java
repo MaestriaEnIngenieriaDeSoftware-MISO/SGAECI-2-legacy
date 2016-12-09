@@ -20,6 +20,7 @@ import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import edu.eci.pdsw.samples.entities.Egresado;
 import edu.eci.pdsw.samples.entities.Egresado_Empresa;
 import edu.eci.pdsw.samples.entities.Estudiante;
+import edu.eci.pdsw.samples.entities.PagoAfiliacion;
 import edu.eci.pdsw.samples.entities.Persona;
 import edu.eci.pdsw.samples.entities.Rol;
 import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
@@ -215,6 +216,92 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
             throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
         }
         return estadoAfiliacion;
+    }
+
+    @Override
+    public List<PagoAfiliacion> consultarPagosAfiliacionesNoTramitados() throws ExcepcionServiciosSAGECI {
+        List<PagoAfiliacion> pagosnotramitados= null;
+        try {
+            daof.beginSession();
+            pagosnotramitados = daof.getDaoPagoAfiliacion().loadAll3();
+            daof.commitTransaction();
+            daof.endSession();
+        } catch (PersistenceException ex) {
+            Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
+        }
+        return pagosnotramitados;
+    }
+
+    @Override
+    public List<PagoAfiliacion> consultarPagosAfiliacionesRegistrados() throws ExcepcionServiciosSAGECI {
+        List<PagoAfiliacion> pagosregistrados= null;
+        try {
+            daof.beginSession();
+            pagosregistrados = daof.getDaoPagoAfiliacion().loadAll2();
+            daof.commitTransaction();
+            daof.endSession();
+        } catch (PersistenceException ex) {
+            Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
+        }
+        return pagosregistrados;
+    }
+
+    @Override
+    public List<PagoAfiliacion> consultarPagosAfiliaciones() throws ExcepcionServiciosSAGECI {
+        List<PagoAfiliacion> pagosAfiliaciones= null;
+        try {
+            daof.beginSession();
+            pagosAfiliaciones = daof.getDaoPagoAfiliacion().loadAll();
+            daof.commitTransaction();
+            daof.endSession();
+        } catch (PersistenceException ex) {
+            Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
+        }
+        return pagosAfiliaciones;
+    }
+
+    @Override
+    public void actualizarPagoAfliliacion(PagoAfiliacion Pa) throws ExcepcionServiciosSAGECI {
+         try {
+            daof.beginSession();
+            daof.getDaoPagoAfiliacion().update(Pa);
+            daof.commitTransaction();
+            daof.endSession();
+        } catch (PersistenceException ex) {
+            Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
+        }
+    }
+
+    @Override
+    public void BorrarPagoAfliliacion(PagoAfiliacion s) throws ExcepcionServiciosSAGECI {
+          try {
+            daof.beginSession();
+            daof.getDaoPagoAfiliacion().delete(s);
+            daof.commitTransaction();
+            daof.endSession();
+        } catch (PersistenceException ex) {
+            Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
+        }
+    }
+
+    @Override
+    public List<PagoAfiliacion> consultarPagosAfiliacionesEspecifico(int id) throws ExcepcionServiciosSAGECI {
+        List<PagoAfiliacion> pagosAfiliacionesegre= null;
+        try {
+            daof.beginSession();
+            pagosAfiliacionesegre = daof.getDaoPagoAfiliacion().load(id);
+            daof.commitTransaction();
+            daof.endSession();
+        } catch (PersistenceException ex) {
+            Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
+        }
+        return pagosAfiliacionesegre;
     }
 
         

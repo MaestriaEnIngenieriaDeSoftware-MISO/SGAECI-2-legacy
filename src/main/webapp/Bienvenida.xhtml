@@ -22,7 +22,7 @@
 
         <div class="westUnit" style="background-color: white">
             <h:panelGrid   styleClass="sheet.css">               
-                <p:tabView dynamic="true" cache="true" >
+                <p:tabView dynamic="true"  >
 
                     <p:tab title="¿Quienes Somos?">
 
@@ -34,7 +34,7 @@
 
                     </p:tab>
                     <p:tab title="Nuestra Junta Directiva">
-                        <h:panelGrid columns="2" cellpadding="80">
+                        <h:panelGrid columns="1" cellpadding="80">
                             <img src="/resource/junta.PNG" align="left" height="250" width="550"></img>
                             <h:outputText value="Los miembros de la Junta Directiva de AECI trabajan a favor de todos, y en equipo con los egresados de nuestra institución para lograr fomentar la integración entre cada uno de sus miembros con el gran propósito enmarcada dentro de la misión de AECI, como es brindar apoyo técnico, profesional, docente e investigativo." />
                         </h:panelGrid>
@@ -52,13 +52,9 @@
                         </h:panelGrid>
                     </p:tab>
                     <p:tab title="Nuestros Convenios" >
-                        <h:form>
-                            <p:galleria value="#{Bienvenida.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
-
-                                <p:graphicImage name="resource/#{image}"/>
-                            </p:galleria>
-                        </h:form>
-
+                        <p:galleria value="#{Bienvenida.images}" var="image" panelWidth="500" panelHeight="500" showCaption="true">
+                            <p:graphicImage value="/resources/#{image}" alt="Image Description for #{image}" title="#{image}" />
+                        </p:galleria>
                     </p:tab>
                     <p:tab title="Contactenos">
                         <h:panelGrid columns="2" cellpadding="15">
