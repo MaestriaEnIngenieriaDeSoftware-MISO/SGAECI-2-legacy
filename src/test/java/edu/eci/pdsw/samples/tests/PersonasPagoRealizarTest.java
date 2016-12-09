@@ -5,15 +5,19 @@
  */
 package edu.eci.pdsw.samples.tests;
 
-import edu.eci.pdsw.samples.services.ServiciosSAGECI;
 import edu.eci.pdsw.samples.persistence.DaoFactory;
+import edu.eci.pdsw.samples.services.ServiciosSAGECI;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
-import org.junit.*;
-import static org.junit.Assert.*;
+import org.junit.After;
+import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  *
@@ -21,24 +25,17 @@ import static org.junit.Assert.*;
  * 
  * CLASES DE EQUIVALENCIA
  * 
- *   CONDICION DE ENTRADA     |     TIPO      |     CLASE DE EQUIVALENCIA VALIDA     |     CLASE DE EQUIVALENCIA NO VALIDA
- *                            |               |                                      |
- *  El atributo de estado     |               |                                      |
- *  de afiliacion llamado     | Debe estar en |                                      |
- *  Fecha_Fin el cual es      | en el rango   |  DATEDIFF(SYSDATE(),Fecha_Fin)>30    |   DATEDIFF(SYSDATE(),Fecha_Fin)>=30
- *  el termino de su          | entre la      |                                      |
-- *  afiliacion debe ser       | diferencia de|                                      |
- *  mayor 30 dias.            | fecha actual. |                                      |
- *                            |               |                                      |
- *  La persona debe ser       | Valor=Egresado|  La consulta debe retornar solo las  |   La consulta retorne las personas incluyan a los estudiantes ya que son
- *  egresado y su estado de   |               |  personas que sean egreados  y su    |   afiliaciones gratuitas hasta ser egresados y su estado no sea activo.
- *  solicitud debe ser activo.|               |  estado sea activo                   |   
+ *   CONDICION DE ENTRADA       |     TIPO      |     CLASE DE EQUIVALENCIA VALIDA     |     CLASE DE EQUIVALENCIA NO VALIDA
+ *                              |               |                                      |
+ *  La fecha actual debe ser    |               |                                      |
+ *  menor a la Fecha de Cobro   |    Rango      |   DATEDIFF(SYSDATE(),Fecha_Fin)>=0   | La fecha de cobro ha superado la fecha actual
+ *  del pago de la cuota        |               |                                      | por lo que la persona esta desvinculado de la
+ *  correspondiente al asociado |               |                                      |                 asociacion.
  * 
  */
-public class ReportePorVencerTest{
-   
+public class PersonasPagoRealizarTest {
     public static ServiciosSAGECI SAGECI = ServiciosSAGECI.getInstance();
-
+    
     private DaoFactory getFactoryTest() throws IOException{
         InputStream input;
         input = ClassLoader.getSystemResourceAsStream("applicationconfig_test.properties");
@@ -46,15 +43,16 @@ public class ReportePorVencerTest{
         properties.load(input);
         return DaoFactory.getInstance(properties);
     }
-    
+    /*
     private Connection getConnection() throws SQLException{
         return DriverManager.getConnection("jdbc:h2:file:./target/db/testdb2;DB_CLOSE_DELAY=-1;MODE=MYSQL", "anonymous", "");        
     }
     
     @Before
     public void setUp() throws SQLException{
-        Connection conn=getConnection();
+        Connection conn = getConnection();
         Statement stmt=conn.createStatement();  
+        
         stmt.execute("INSERT INTO `Persona` (`DocumentoID`, `TipoDocumentoID`, `Nombre`, `Apellido`,`Direccion`,`Correo_Personal`,`Genero`,`Telefono`,`Celular`) VALUES (1013567876,'CE','Marcos','Perez','Cll 27 sur','marcos@mail.com','MASCULINO',2879878,3167898786)");
         stmt.execute("INSERT INTO `Persona` (`DocumentoID`, `TipoDocumentoID`, `Nombre`, `Apellido`,`Direccion`,`Correo_Personal`,`Genero`,`Telefono`,`Celular`) VALUES (1014567877,'CC','Cristian','Rodriguez','Cll 145 Norte','cristian@mail.com','MASCULINO',2987653,3016578987)");
         stmt.execute("INSERT INTO `Persona` (`DocumentoID`, `TipoDocumentoID`, `Nombre`, `Apellido`,`Direccion`,`Correo_Personal`,`Genero`,`Telefono`,`Celular`) VALUES (1015567878,'CE','Pedro','Ortiz','Av 39 No. 45','Pedro@mail.com','MASCULINO',3456789,3209898076)");
@@ -68,13 +66,13 @@ public class ReportePorVencerTest{
         stmt.execute("INSERT INTO `Egresado` (`DocumentoID`,`Semestre_Graduacion`,`Correo_Estudiantil`,`Empresa`,`Labora`,`Cargo`,`Fecha_Graduacion`) VALUES (1016567879,'2011-2','Monica@mail.escuelaing.edu.co','Microsoft','Si','Gerente','2011-09-13')");
         stmt.execute("INSERT INTO `Estudiante` (`Codigo_Estudiante`,`DocumentoID`,`Semestre_Ponderado`,`Carrera`) VALUES (2105678,1017567880,8,'INGENIERIA CIVIL')");
         stmt.execute("INSERT INTO `Estudiante` (`Codigo_Estudiante`,`DocumentoID`,`Semestre_Ponderado`,`Carrera`) VALUES (2094567,1018567881,7,'ECONOMIA')");
+        
         conn.commit();
         conn.close();
     }
 
     @After
     public void clearDB() throws SQLException {
-        
         Connection conn = DriverManager.getConnection("jdbc:h2:file:./target/db/testdb2;MODE=MYSQL", "anonymous", "");
         Statement stmt = conn.createStatement();
         stmt.execute("ALTER TABLE Egresado DROP FOREIGN KEY Egresado_Persona;");
@@ -105,7 +103,7 @@ public class ReportePorVencerTest{
     }
     
     @Test
-    public void DeberianExisitirDosPersonascon30DiasParaVencersesuAfiliacion()throws SQLException{
+    public void DeberianExisitirTresPersonasconplazoparaPagarSuAfiliacion()throws SQLException, IOException{
         Connection conn=getConnection();
         Statement stmt=conn.createStatement();
         stmt.execute("INSERT INTO Estado_Afiliacion (`DocumentoID`,`Fecha_Inicio`,`Fecha_Fin`,`Estado`) VALUES (1013567876,'2015-12-12','2016-01-01','AFILIADO ACTIVO')");
@@ -114,13 +112,21 @@ public class ReportePorVencerTest{
         stmt.execute("INSERT INTO Estado_Afiliacion (`DocumentoID`,`Fecha_Inicio`,`Fecha_Fin`,`Estado`) VALUES (1016567879,'2015-12-12','2017-04-14','AFILIADO ACTIVO')");
         stmt.execute("INSERT INTO Estado_Afiliacion (`DocumentoID`,`Fecha_Inicio`,`Fecha_Fin`,`Estado`) VALUES (1017567880,'2015-12-12','2016-05-15','AFILIADO ACTIVO')");
         stmt.execute("INSERT INTO Estado_Afiliacion (`DocumentoID`,`Fecha_Inicio`,`Fecha_Fin`,`Estado`) VALUES (1018567881,'2015-12-12','2017-06-16','AFILIADO ACTIVO')");
+        stmt.execute("INSERT INTO Pago_Cuota (`PagoID`,`Fecha_Cobro`,`Valor_Pago`,`DocumentoID`,`Estado`,`Fecha_Pago`,`Comprobante_Pago`)");
+        stmt.execute("INSERT INTO Pago_Cuota (`PagoID`,`Fecha_Cobro`,`Valor_Pago`,`DocumentoID`,`Estado`,`Fecha_Pago`,`Comprobante_Pago`)");
+        stmt.execute("INSERT INTO Pago_Cuota (`PagoID`,`Fecha_Cobro`,`Valor_Pago`,`DocumentoID`,`Estado`,`Fecha_Pago`,`Comprobante_Pago`)");
+        stmt.execute("INSERT INTO Pago_Cuota (`PagoID`,`Fecha_Cobro`,`Valor_Pago`,`DocumentoID`,`Estado`,`Fecha_Pago`,`Comprobante_Pago`)");
+        stmt.execute("INSERT INTO Pago_Cuota (`PagoID`,`Fecha_Cobro`,`Valor_Pago`,`DocumentoID`,`Estado`,`Fecha_Pago`,`Comprobante_Pago`)");
+        stmt.execute("INSERT INTO Pago_Cuota (`PagoID`,`Fecha_Cobro`,`Valor_Pago`,`DocumentoID`,`Estado`,`Fecha_Pago`,`Comprobante_Pago`)");
+        
         /*
         ResultSet rs = SAGECI.consultarAfiliacionesPorVencer();
         */
+    /*
         conn.commit();
         conn.close();
-        assertEquals("Deben hacer 2 persnas egresados",true,true);
+        assertEquals("Deben haber 3 persnas egresados ya que los estudiantes no pagan cuota de afiliacion. ",true,true);
         
     }
-
+    */
 }
