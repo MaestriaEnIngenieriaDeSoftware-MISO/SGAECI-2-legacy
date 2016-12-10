@@ -14,12 +14,18 @@
             <div class="container">
                 <div class="adentro" style="background-color: white">
                     <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
-                    <div align="center">
-                        <h1 style="font-family: Lucida Sans Unicode">Bienvenido Egresado </h1>
+                     <div align="Center">
+                        <h1 style="font-family:  Lucida Sans Unicode;">Bienvenido a SGAECI</h1>
+                    </div>  
+                    <div align="left">
+                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 100%;" >Es un gusto tenerle de vuelta</h1>
+                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 90%;">#{Usuario.persona.nombre} #{Usuario.persona.apellido}</h1>
+                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 90%;" >Su estado de afiliacion es #{Usuario.eaf.estado}</h1>
                     </div>
                     <div align="right">
-                        <h:outputLink value="/logout">Logout</h:outputLink>
+                        <h:outputLink value="/logout">Cerrar Sesión</h:outputLink>
                     </div>
+                    
 
                     <p:keyboard rendered="#{loginBean.subject.hasRole('Egresado')}"></p:keyboard>
                 </div>

@@ -4,10 +4,13 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.PageSize;
 
 import com.itextpdf.text.pdf.PdfWriter;
 import edu.eci.pdsw.samples.entities.Egresado;
 import edu.eci.pdsw.samples.entities.Estudiante;
+import edu.eci.pdsw.samples.entities.PagoAfiliacion;
 import edu.eci.pdsw.samples.entities.Persona;
 import edu.eci.pdsw.samples.entities.estadoAfiliacion;
 import edu.eci.pdsw.samples.services.ServiciosSAGECI;
@@ -49,6 +52,15 @@ public class UsuarioBean {
     private int documentoID;
     String plantillaEst, plantillaEgr, plantillaRG;
     estadoAfiliacion eaf;
+    PagoAfiliacion paf;
+
+    public PagoAfiliacion getPaf() {
+        return paf;
+    }
+
+    public void setPaf(PagoAfiliacion paf) {
+        this.paf = paf;
+    }
 
     public boolean isDocumento() {
         return documento;
@@ -80,19 +92,20 @@ public class UsuarioBean {
         try {
             //----------------------------------
             Document doc = new Document();
+            Rectangle rect=new Rectangle(PageSize.A4);
+            doc.setPageSize(rect);
             OutputStream out = new ByteArrayOutputStream();
             PdfWriter writer = PdfWriter.getInstance(doc, out);
             doc.open();
             LogginBean bean = (LogginBean) getManagedBean("Loggin");
             documentoID = Integer.parseInt(bean.getUsername());
             /**
-             * doc.add(new Paragraph("image example")); //Add image Image
-             * image1=Image.getInstance("aecimagen.png"); //Fixed position
-             * image1.setAbsolutePosition(20f, 30f); //scale to new height...
-             * image1.scaleAbsolute(20,20); //add to document doc.add(image1);
-             *
-             *
-             */
+             doc.add(new Paragraph("image example")); //Add image 
+             Image image1=Image.getInstance("aecimagen.png"); //Fixed position
+             image1.setAbsolutePosition(100f, 100f); //scale to new height...
+             image1.scaleAbsolute(200,200); //add to document 
+             doc.add(image1);
+             **/
             doc.add(new Paragraph("CERTIFICADO DE AFILIACION AECI"));
             doc.addCreationDate();
             doc.addTitle("La Asociación de Egresados de la Escuela Colombiana de Ingeniería Julio Garavito AECI,con Nit. 830.031.137-4,certifica que");
@@ -103,7 +116,9 @@ public class UsuarioBean {
                 egresado = SAGECI.consultarEgresado(documentoID);
                 setPersona(egresado);
             }
-            plantillaEst = "Que el Estudiante $1, identificado con $2  No. $3, cursando actualmente $5 semestre del programa de $4, está afiliado en la asociación de Estudiantes de la escuela colombiana de ingeniería Julio Garavito desde $6 hasta $7, que cuenta con una afiliación gratuita de 6 meses dada su condición de estudiante activo. \n Es de anotar que para disfrutar de los convenios a los cuales  tiene derecho es necesario que su afiliación permanezca vigente realizando  el correspondiente pago anual./n El presente certificado se expide con destino a los convenios de asociados a la  AECI en Bogotá el día $8.";
+            plantillaEst = "Que el Estudiante $1, identificado con $2  No. $3, cursando actualmente $5 semestre del programa de $4, está afiliado en la asociación de Estudiantes de la escuela colombiana de ingeniería Julio Garavito desde $6 hasta $7, que cuenta con una afiliación gratuita de 6 meses dada su condición de estudiante activo. "
+                    +" "
+                    + ""+ " Es de anotar que para disfrutar de los convenios a los cuales  tiene derecho es necesario que su afiliación permanezca vigente realizando  el correspondiente pago anual./n El presente certificado se expide con destino a los convenios de asociados a la  AECI en Bogotá el día $8.";
             plantillaEgr = "Que el Egresado $1, identificado con $2  No. $3, Egresado del periodo $4,  se encuentra afiliado en la asociación de egresados de la escuela colombiana de ingeniería Julio Garavito desde $5 hasta $6 \n" + "\n" + "Que la presente constancia se expide a solicitud del interesado.";
             setEaf(SAGECI.consultarEstadoAfiliacion(documentoID));
             if (bean.getTipo().equals("Estudiante")) {

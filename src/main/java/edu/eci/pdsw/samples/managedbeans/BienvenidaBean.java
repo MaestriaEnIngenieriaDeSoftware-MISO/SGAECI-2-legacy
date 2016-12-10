@@ -28,11 +28,11 @@ public class BienvenidaBean implements Serializable {
         for (int i = 1; i <= 15; i++) {
             if(i<=8){
                 images.add("nature" + i + ".jpg");
-            }
-            else if(i>8 && i<=14){
+            }}
+       /*     else if(i>8 && i<=14){
                 images.add("nature" + i + ".png");
             }
-        }
+        }*/
     }
  
     public List<String> getImages() {

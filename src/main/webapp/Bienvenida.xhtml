@@ -53,7 +53,9 @@
                     </p:tab>
                     <p:tab title="Nuestros Convenios" >
                         <p:galleria value="#{Bienvenida.images}" var="image" panelWidth="500" panelHeight="500" showCaption="true">
-                            <p:graphicImage value="/resources/#{image}" alt="Image Description for #{image}" title="#{image}" />
+                             <img value="/resources/#{image}" alt="Image Description for #{image}" title="#{image}"></img>
+                              <h name="/resourses/#{image}" id="image"/>
+                            <h:graphicImage value="/resources/#{image}" alt="Image Description for #{image}" title="#{image}" />
                         </p:galleria>
                     </p:tab>
                     <p:tab title="Contactenos">

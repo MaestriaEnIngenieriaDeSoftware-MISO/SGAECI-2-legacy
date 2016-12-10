@@ -13,33 +13,45 @@
             <div class="container">
                 <div class="adentro" style="background-color: white">
                     <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
-                    <div align="left">
+                    <div align="Center">
                         <h1 style="font-family:  Lucida Sans Unicode;">Bienvenido a SGAECI</h1>
-                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 100%;" >Es un gusto saber que este de vuelta</h1>
-                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 100%;">#{Usuario.persona.nombre} #{Usuario.persona.apellido}</h1>
-                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 100%;" >Su estado de afiliacion es #{Usuario.eaf.estado}</h1>
+                    </div>  
+                    <div align="left">
+                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 100%;" >Es un gusto tenerle de vuelta</h1>
+                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 90%;">#{Usuario.persona.nombre} #{Usuario.persona.apellido}</h1>
+                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 90%;" >Su estado de afiliacion es #{Usuario.eaf.estado}</h1>
                     </div>
                     <div align="right">
-                        <h:outputLink value="/logout">Cerrar Sección</h:outputLink>
+                        <h:outputLink value="/logout">Cerrar Sesión</h:outputLink>
                     </div>
 
                     <p:keyboard rendered="#{loginBean.subject.hasRole('Estudiante')}"></p:keyboard>
                 </div>
                 <br></br>
+                <p:tabView orientation="left">
+                    <p:tab title="Generar Certificado">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <img src="/resource/certificado.png" align="left" height="100" width="100"></img>
+
+                            <h:outputText
+                                value="Haga click  para obtener el Certificado de Afiliación a  AECI" />
+                            <ul>
+                                <p:commandButton value="Generar Certificado"  onclick="PF('dlg1').show()"/>
+                                <p:dialog header="Certificado de  Afiliación." id="Certificado" widgetVar="dlg1" height="850" width="1000" styleClass="sheet.css" resizable="false" >
+                                    <p:media cache="false" value="#{Usuario.streamedContent}" player="pdf" height="800" width="900" styleClass="sheet.css" />
+                                    <p:commandButton value="Cerrar" onclick="PF('dlg').hide()"/>
+                                </p:dialog>
+                            </ul>
+
+                        </h:panelGrid>
+                    </p:tab>
+
+                </p:tabView>
                 <br></br>
-                <nav>
-                    <ul>
-                        <p:commandButton value="Generar Certificado"  onclick="PF('dlg1').show()"/>
-                        <p:dialog header="Certificado de  Afiliación." id="Certificado" widgetVar="dlg1" height="850" width="1000" styleClass="sheet.css" resizable="false" >
-                            <p:media cache="false" value="#{Usuario.streamedContent}" player="pdf" height="800" width="900" styleClass="sheet.css" />
-                            <p:commandButton value="Cerrar" onclick="PF('dlg').hide()"/>
-                        </p:dialog>
-                    </ul>
-                </nav>
-              
+
             </div>
         </h:form>
-        
+
     </h:body>
 </html>
 
