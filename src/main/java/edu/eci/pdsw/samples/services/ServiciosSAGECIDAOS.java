@@ -72,7 +72,19 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
             daof.endSession();
         } catch (PersistenceException ex) {
             Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                daof.rollbackTransaction();
+            } catch (PersistenceException ex1) {
+                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex1);
+            }
             throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
+            
+        }finally{
+            try {
+                daof.endSession();
+            } catch (PersistenceException ex) {
+                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }
@@ -89,7 +101,19 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
             daof.endSession();
         } catch (PersistenceException ex) {
             Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                daof.rollbackTransaction();
+            } catch (PersistenceException ex1) {
+                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex1);
+            }
             throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
+            
+        }finally{
+            try {
+                daof.endSession();
+            } catch (PersistenceException ex) {
+                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
@@ -120,9 +144,21 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
             daof.getDaoSolicitudAfiliacion().save(s);
             daof.commitTransaction();
             daof.endSession();
-        }catch (PersistenceException ex) {
+        } catch (PersistenceException ex) {
             Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                daof.rollbackTransaction();
+            } catch (PersistenceException ex1) {
+                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex1);
+            }
             throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
+            
+        }finally{
+            try {
+                daof.endSession();
+            } catch (PersistenceException ex) {
+                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }        
 
@@ -171,7 +207,19 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
             daof.endSession();
         } catch (PersistenceException ex) {
             Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                daof.rollbackTransaction();
+            } catch (PersistenceException ex1) {
+                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex1);
+            }
             throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
+            
+        }finally{
+            try {
+                daof.endSession();
+            } catch (PersistenceException ex) {
+                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -184,7 +232,19 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
             daof.endSession();
         } catch (PersistenceException ex) {
             Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                daof.rollbackTransaction();
+            } catch (PersistenceException ex1) {
+                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex1);
+            }
             throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
+            
+        }finally{
+            try {
+                daof.endSession();
+            } catch (PersistenceException ex) {
+                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
@@ -272,7 +332,19 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
             daof.endSession();
         } catch (PersistenceException ex) {
             Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                daof.rollbackTransaction();
+            } catch (PersistenceException ex1) {
+                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex1);
+            }
             throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
+            
+        }finally{
+            try {
+                daof.endSession();
+            } catch (PersistenceException ex) {
+                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -285,7 +357,19 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
             daof.endSession();
         } catch (PersistenceException ex) {
             Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                daof.rollbackTransaction();
+            } catch (PersistenceException ex1) {
+                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex1);
+            }
             throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
+            
+        }finally{
+            try {
+                daof.endSession();
+            } catch (PersistenceException ex) {
+                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -313,7 +397,69 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
             daof.endSession();
         } catch (PersistenceException ex) {
             Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                daof.rollbackTransaction();
+            } catch (PersistenceException ex1) {
+                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex1);
+            }
             throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
+            
+        }finally{
+            try {
+                daof.endSession();
+            } catch (PersistenceException ex) {
+                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    @Override
+    public void actualizarUsuario(int documentoid, String direccionVivienda, String correo, int telefono, int telefono2) throws ExcepcionServiciosSAGECI {
+       try {
+            daof.beginSession();
+            daof.getDaoPersona().update(documentoid, direccionVivienda, correo, telefono, telefono2);
+            daof.commitTransaction();
+            daof.endSession();
+        } catch (PersistenceException ex) {
+            Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                daof.rollbackTransaction();
+            } catch (PersistenceException ex1) {
+                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
+            
+        }finally{
+            try {
+                daof.endSession();
+            } catch (PersistenceException ex) {
+                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    @Override
+    public void actualizarContra(int documentoid, String contra) throws ExcepcionServiciosSAGECI {
+        try {
+            daof.beginSession();
+            daof.getDaoRolPersona().update(documentoid, contra);
+            daof.commitTransaction();
+            daof.endSession();
+        } catch (PersistenceException ex) {
+            Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                daof.rollbackTransaction();
+            } catch (PersistenceException ex1) {
+                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
+            
+        }finally{
+            try {
+                daof.endSession();
+            } catch (PersistenceException ex) {
+                Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

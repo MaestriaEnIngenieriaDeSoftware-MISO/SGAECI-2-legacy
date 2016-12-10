@@ -9,43 +9,50 @@
         </link>
     </h:head>
     <h:body >
-        <h:form id="form5">
-            <p:panelMenu style="width:300px">
+        <h:form id="form">
+            <p:panelMenu style="width:300px" >
                 <p:submenu label="Mi Cuenta">
                     <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
                     <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
-                    <p:menuitem Value="Salir" >
+                    <p:menuitem Value="Salir">
                         <h:outputLink value="/logout">Cerrar Sesión</h:outputLink>
                     </p:menuitem>
                 </p:submenu>
             </p:panelMenu>
         </h:form>
-        
-        
-        <h:form id="form">
+        <h:form id="form2">
             <div class="container">
                 <div class="adentro" style="background-color: white">
                     <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
-                    <div align="center">
-                        <h1 style="font-family: Lucida Sans Unicode">Bienvenido Administrador </h1>
-                    </div>
-                    
+                    <div align="Center">
+                        <h1 style="font-family:  Lucida Sans Unicode;">Administracion de Cuenta</h1>
+                    </div>  
                     <p:keyboard rendered="#{loginBean.subject.hasRole('Administrador')}"></p:keyboard>
                 </div>
                 <br></br>
+
+                <h:form id="form3">
+
+                    <h1 style="font-family:  Lucida Sans Unicode;">Cambiar Contraseña</h1>
+                    <h:panelGrid columns="2" columnClasses="label, value">
+                        <p:outputLabel style="font-weight:bold" for="telcasa2" value="Contraseña Actual" />
+                        <p:inputText styleClass="cent" required="true" id="telcasa2"  value="#{Usuario.contraactual}"/>
+
+
+                        <p:outputLabel style="font-weight:bold" for="Celular2" value="Nueva Contraseña" />
+                        <p:inputText styleClass="cent" required="true" id="Celular2" value="#{Usuario.contranueva1}"/>                
+
+
+                        <p:outputLabel style="font-weight:bold" for="direccionVi2" value="Repita la contraseña Nueva " />
+                        <p:inputText styleClass="cent" required="true" id="direccionVi2"  value="#{Usuario.contranueva2}"/>
+
+                    </h:panelGrid>
+
+                </h:form>
+                <h:form id="form4">
+                    <p:commandButton value="Aceptar" id="ajax2"  actionListener="#{Usuario.UpdateContra()}" styleClass="ui-priority-primary" />
+                </h:form>
                 <br></br>
-                <nav> 
-                    <ul>
-                        <p:commandButton value="Procesar Solicitudes Afiliacion" action="ProcesarSolicitudesAfiliacion"/>
-                        <br>
-                            
-                        </br>
-                        <p:commandButton value="Solicitudes Por Vencer" action="SolicitudesPorVencer"/>
-                        
-                        <p:commandButton value="Procesar Pagos Afiliacion" action="ProcesarPagosAfiliacion"/>
-                        
-                    </ul>
-                </nav>
 
             </div>
         </h:form>
@@ -54,8 +61,7 @@
 </html>
 
 
-
-<!-- 
+<!---
 <pre>     
 subject = <p:outputLabel value="#{loginBean.subject}"/>
 principal = <p:outputLabel value="#{loginBean.subject.principal}"/>
@@ -64,21 +70,4 @@ role Egresado = <p:outputLabel value="#{loginBean.subject.hasRole('Egresado')}"/
 role Administrador = <p:outputLabel value="#{loginBean.subject.hasRole('Administrador')}"/>
 role Estudiante = <p:outputLabel value="#{loginBean.subject.hasRole('Estudiante')}"/>
 </pre>
-
-<h:form id="formul">
-      <p:layout fullPage="true">
-          <p:layoutUnit position="north" size="250"   > 
-          </p:layoutUnit>
-          <p:layoutUnit position="center" header="Center" >
-              <p:commandButton value="Procesar Solicitudes Afiliacion" action="ProcesarSolicitudesAfiliacion"/>
-              <p:commandButton value="Solicitudes Por Vencer" action="SolicitudesPorVencer"/>
-          </p:layoutUnit>
-          <p:layoutUnit position="west" size="200" header="Left">
-          </p:layoutUnit>
-      </p:layout>
-  </h:form>
-
-
-
-
---> 
+-->

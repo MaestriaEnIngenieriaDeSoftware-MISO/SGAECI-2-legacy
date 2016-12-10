@@ -8,27 +8,34 @@ import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.PageSize;
 
 import com.itextpdf.text.pdf.PdfWriter;
+import edu.eci.pdsw.samples.Security.SHA1;
 import edu.eci.pdsw.samples.entities.Egresado;
 import edu.eci.pdsw.samples.entities.Estudiante;
 import edu.eci.pdsw.samples.entities.PagoAfiliacion;
 import edu.eci.pdsw.samples.entities.Persona;
 import edu.eci.pdsw.samples.entities.estadoAfiliacion;
+import edu.eci.pdsw.samples.services.ExcepcionServiciosSAGECI;
 import edu.eci.pdsw.samples.services.ServiciosSAGECI;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URL;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.el.ELContext;
 import javax.faces.FacesException;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
@@ -38,14 +45,15 @@ import org.primefaces.model.StreamedContent;
  * @author Cristian
  */
 @ManagedBean(name = "Usuario")
-@RequestScoped
+@SessionScoped
 public class UsuarioBean {
 
     ServiciosSAGECI SAGECI = ServiciosSAGECI.getInstance();
     private static final long serialVersionUID = 1L;
-
+    private int telefono = 0, telefono2 = 0;
+    private String direccionVivienda = "", correo = "", contraactual = "", contranueva1 = "", contranueva2 = "";
     private StreamedContent streamedContent;
-    private boolean documento = false;
+    private boolean documento = false, b = true;
     Estudiante estudiante;
     Egresado egresado;
     Persona persona;
@@ -53,6 +61,18 @@ public class UsuarioBean {
     String plantillaEst, plantillaEgr, plantillaRG;
     estadoAfiliacion eaf;
     PagoAfiliacion paf;
+
+    public void showMessage(boolean m, String tipo) {
+        FacesMessage message;
+        if (tipo.equals("c")) {
+            if (m) {message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "El Certificado se genero sin ningun problema.");}
+            else {message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Incorrecto", "El Certificado no se pudo generar hubo un error inesperado.");}
+        } else {
+            if (m) {message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Se actualizaron los datos correctamente");} 
+            else {message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Incorrecto", "Hubo un error al momento de actualziar los datos.");}
+        }
+        RequestContext.getCurrentInstance().showMessageInDialog(message);
+    }
 
     public PagoAfiliacion getPaf() {
         return paf;
@@ -92,7 +112,7 @@ public class UsuarioBean {
         try {
             //----------------------------------
             Document doc = new Document();
-            Rectangle rect=new Rectangle(PageSize.A4);
+            Rectangle rect = new Rectangle(PageSize.A4);
             doc.setPageSize(rect);
             OutputStream out = new ByteArrayOutputStream();
             PdfWriter writer = PdfWriter.getInstance(doc, out);
@@ -100,12 +120,12 @@ public class UsuarioBean {
             LogginBean bean = (LogginBean) getManagedBean("Loggin");
             documentoID = Integer.parseInt(bean.getUsername());
             /**
-             doc.add(new Paragraph("image example")); //Add image 
-             Image image1=Image.getInstance("aecimagen.png"); //Fixed position
-             image1.setAbsolutePosition(100f, 100f); //scale to new height...
-             image1.scaleAbsolute(200,200); //add to document 
-             doc.add(image1);
-             **/
+             * doc.add(new Paragraph("image example")); //Add image Image
+             * image1=Image.getInstance("aecimagen.png"); //Fixed position
+             * image1.setAbsolutePosition(100f, 100f); //scale to new height...
+             * image1.scaleAbsolute(200,200); //add to document doc.add(image1);
+             *
+             */
             doc.add(new Paragraph("CERTIFICADO DE AFILIACION AECI"));
             doc.addCreationDate();
             doc.addTitle("La Asociación de Egresados de la Escuela Colombiana de Ingeniería Julio Garavito AECI,con Nit. 830.031.137-4,certifica que");
@@ -117,8 +137,8 @@ public class UsuarioBean {
                 setPersona(egresado);
             }
             plantillaEst = "Que el Estudiante $1, identificado con $2  No. $3, cursando actualmente $5 semestre del programa de $4, está afiliado en la asociación de Estudiantes de la escuela colombiana de ingeniería Julio Garavito desde $6 hasta $7, que cuenta con una afiliación gratuita de 6 meses dada su condición de estudiante activo. "
-                    +" "
-                    + ""+ " Es de anotar que para disfrutar de los convenios a los cuales  tiene derecho es necesario que su afiliación permanezca vigente realizando  el correspondiente pago anual./n El presente certificado se expide con destino a los convenios de asociados a la  AECI en Bogotá el día $8.";
+                    + " "
+                    + "" + " Es de anotar que para disfrutar de los convenios a los cuales  tiene derecho es necesario que su afiliación permanezca vigente realizando  el correspondiente pago anual./n El presente certificado se expide con destino a los convenios de asociados a la  AECI en Bogotá el día $8.";
             plantillaEgr = "Que el Egresado $1, identificado con $2  No. $3, Egresado del periodo $4,  se encuentra afiliado en la asociación de egresados de la escuela colombiana de ingeniería Julio Garavito desde $5 hasta $6 \n" + "\n" + "Que la presente constancia se expide a solicitud del interesado.";
             setEaf(SAGECI.consultarEstadoAfiliacion(documentoID));
             if (bean.getTipo().equals("Estudiante")) {
@@ -161,10 +181,9 @@ public class UsuarioBean {
             if (b != null) {
                 streamedContent = new DefaultStreamedContent(new ByteArrayInputStream(b), "application/pdf", "Certificado.pdf");
             }
-        } catch (Exception e) {
-            System.out.println("entro por un error " + e.getMessage());
-        }
-
+        } catch (Exception e) {showMessage(false, "c");b = false;}
+        if (b) {showMessage(true, "c");}
+        b=true;
     }
 
     //==================================================================
@@ -194,6 +213,97 @@ public class UsuarioBean {
 
         }
         return bean;
+    }
+
+    public void UpdateInfo() {
+        if (!direccionVivienda.equals("") && !correo.equals("") && telefono != 0 && telefono2 != 0) {
+            try {
+                LogginBean bean = (LogginBean) getManagedBean("Loggin");
+                documentoID = Integer.parseInt(bean.getUsername());
+                SAGECI.actualizarUsuario(documentoID, direccionVivienda, correo, telefono, telefono2);
+            } catch (ExcepcionServiciosSAGECI ex) {
+                Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
+                showMessage(false, "u");b = false;
+            }
+            if (b) {showMessage(true, "u");}
+        }
+        b=true;
+    }
+
+    public void UpdateContra() {
+        if (!contraactual.equals("") && !contranueva1.equals("") && !contranueva2.equals("")) {
+                try {
+                    LogginBean bean = (LogginBean) getManagedBean("Loggin");
+                    documentoID = Integer.parseInt(bean.getUsername());
+                    String contra=bean.getPassword();
+                    if(contraactual.equals(contra) && contranueva1.equals(contranueva2) ){
+                        String nueva;
+                        nueva = SHA1.generateHash(contranueva1);
+                        SAGECI.actualizarContra(documentoID, contra);
+                    } 
+                } catch (ExcepcionServiciosSAGECI ex) {
+                    Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
+                    showMessage(false, "u");b = false;
+                }
+                if (b) {showMessage(true, "u");}
+        }
+        b=true;
+    }
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
+
+    public int getTelefono2() {
+        return telefono2;
+    }
+
+    public void setTelefono2(int telefono2) {
+        this.telefono2 = telefono2;
+    }
+
+    public String getDireccionVivienda() {
+        return direccionVivienda;
+    }
+
+    public void setDireccionVivienda(String direccionVivienda) {
+        this.direccionVivienda = direccionVivienda;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getContraactual() {
+        return contraactual;
+    }
+
+    public void setContraactual(String contraactual) {
+        this.contraactual = contraactual;
+    }
+
+    public String getContranueva1() {
+        return contranueva1;
+    }
+
+    public void setContranueva1(String contranueva1) {
+        this.contranueva1 = contranueva1;
+    }
+
+    public String getContranueva2() {
+        return contranueva2;
+    }
+
+    public void setContranueva2(String contranueva2) {
+        this.contranueva2 = contranueva2;
     }
 
 }

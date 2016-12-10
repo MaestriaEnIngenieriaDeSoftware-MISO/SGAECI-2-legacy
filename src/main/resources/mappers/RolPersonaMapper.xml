@@ -8,5 +8,8 @@
      <insert id='insertarRolPersona' >
         INSERT INTO Rol_Persona(DocumentoID,Roles_rol,Clave) values (#{ID},#{t},#{c})
     </insert>
-         	
+     
+    <update id="updateRolPersona" parameterType="map">
+        UPDATE Rol_Persona SET Clave={#c} WHERE DocumentoID={#id}
+    </update>
 </mapper>

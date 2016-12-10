@@ -60,4 +60,12 @@ public interface PersonaMapper {
      */
     public Persona getPersona(@Param("id") int documentoID);
     
+    
+      /**
+     * Obtiene una persona con un documento de identidad especifico
+     * @param documentoID 
+     * @return  
+     */
+    public void updatePersona(@Param("id")int documentoid,@Param("dir") String direccionVivienda,@Param("correo") String correo,@Param("tel1") int telefono, @Param("tel2")int telefono2);
+    
     }

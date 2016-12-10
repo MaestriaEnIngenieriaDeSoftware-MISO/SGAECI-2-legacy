@@ -58,5 +58,9 @@
         DELETE FROM Persona WHERE(DocumentoID=#{documentoID})
     </delete>
     
+    <update id="updatePersona" parameterType="map">
+        UPDATE Persona SET Direccion={#dir},Correo_Personal={#correo},Telefono={#tel1},Celular={#tel2} WHERE DocumentoID={#id}
+    </update>
+    
     
 </mapper>

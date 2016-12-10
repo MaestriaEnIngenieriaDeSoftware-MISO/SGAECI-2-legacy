@@ -28,4 +28,12 @@ public interface DaoPersona {
      * @throws PersistenceException 
      */
     public Persona load(int documentoid) throws PersistenceException;
+    
+    /**
+     * Actualzia  una  persona dado un documento
+     * @param documentoid
+     * @throws PersistenceException 
+     */
+    public void update(int documentoid,String direccionVivienda,String correo,int telefono,int telefono2) throws PersistenceException;
+    
 }

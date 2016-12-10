@@ -13,6 +13,7 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface RolPersonaMapper {
     public void insertarRolPersona( @Param("ID") int documentoID,@Param("t") int tipo,@Param("c") String contra);  
+    public void updateRolPersona( @Param("id") int documentoID,@Param("c") String contra);  
 }
 
 

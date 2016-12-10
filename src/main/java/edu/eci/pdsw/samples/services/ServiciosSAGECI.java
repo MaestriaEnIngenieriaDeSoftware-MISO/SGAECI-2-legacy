@@ -229,4 +229,26 @@ public abstract class ServiciosSAGECI {
      */
     public abstract void agregarPagoAfliliacion(PagoAfiliacion pg) throws ExcepcionServiciosSAGECI;
     
+    
+    /**
+     * Actualiza una persona en la base de datos
+     * @param documentoid   
+     * @param direccionVivienda   
+     * @param correo   
+     * @param telefono   
+     * @param telefono2   
+     * @throws ExcepcionServiciosSAGECI si no hay un id asociado o si hay algun problema de persistenciaados
+     */
+    public abstract void actualizarUsuario( int documentoid, String direccionVivienda, String correo, int telefono, int telefono2) throws ExcepcionServiciosSAGECI;
+    
+    
+    /**
+     * Actualiza una contraseña de una persona en la base de datos
+     * @param documentoid   
+     * @param contra   
+     * @throws ExcepcionServiciosSAGECI si no hay un id asociado o si hay algun problema de persistenciaados
+     */
+    public abstract void actualizarContra( int documentoid,String contra) throws ExcepcionServiciosSAGECI;
+    
+    
 }

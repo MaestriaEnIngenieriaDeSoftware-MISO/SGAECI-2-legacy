@@ -25,6 +25,11 @@ public class MyBatisDAORolPersona implements DaoRolPersona {
     public void save(int DocumentoID,int tipo,String contra) throws PersistenceException {
       Rolmap.insertarRolPersona(DocumentoID, tipo, contra);
     }
+
+    @Override
+    public void update(int DocumentoID, String contra) throws PersistenceException {
+        Rolmap.updateRolPersona(DocumentoID, contra);
+    }
     
     
 }

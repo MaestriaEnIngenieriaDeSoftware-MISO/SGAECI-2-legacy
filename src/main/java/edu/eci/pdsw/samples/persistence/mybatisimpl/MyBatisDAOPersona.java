@@ -37,6 +37,11 @@ public class MyBatisDAOPersona implements DaoPersona{
         return p;
     }
 
+    @Override
+    public void update(int documentoid, String direccionVivienda, String correo, int telefono, int telefono2) throws PersistenceException {
+        Pemap.updatePersona(documentoid, direccionVivienda, correo, telefono, telefono2);
+    }
+
     
     
 }

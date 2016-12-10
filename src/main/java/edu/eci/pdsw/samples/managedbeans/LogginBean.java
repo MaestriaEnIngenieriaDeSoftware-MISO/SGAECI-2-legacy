@@ -23,6 +23,7 @@ import java.io.Serializable;
 import java.util.logging.Level;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.servlet.http.HttpSession;
 import org.apache.shiro.authc.credential.DefaultPasswordService;
 import org.apache.shiro.crypto.hash.DefaultHashService;
 import org.apache.shiro.crypto.hash.Sha256Hash;
@@ -110,6 +111,8 @@ public class LogginBean implements Serializable {
         token.clear();
         }
     }
+  
+    
     
     private void facesError(String message) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));

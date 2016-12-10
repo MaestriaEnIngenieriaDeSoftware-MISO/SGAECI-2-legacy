@@ -9,7 +9,21 @@
         </link>
     </h:head>
     <h:body >
+         <h:form id="form5">
+            <p:panelMenu style="width:300px">
+                <p:submenu label="Mi Cuenta">
+                    <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
+                    <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
+                    <p:menuitem Value="Salir">
+                        <h:outputLink value="/logout">Cerrar Sesión</h:outputLink>
+                    </p:menuitem>
+                </p:submenu>
+            </p:panelMenu>
+        </h:form>
+        
+        
         <h:form id="form">
+
             <div class="container">
                 <div class="adentro" style="background-color: white">
                     <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
@@ -21,9 +35,7 @@
                         <h1 style="font-family:  Lucida Sans Unicode;font-size: 90%;">#{Usuario.persona.nombre} #{Usuario.persona.apellido}</h1>
                         <h1 style="font-family:  Lucida Sans Unicode;font-size: 90%;" >Su estado de afiliacion es #{Usuario.eaf.estado}</h1>
                     </div>
-                    <div align="right">
-                        <h:outputLink value="/logout">Cerrar Sesión</h:outputLink>
-                    </div>
+                  
 
                     <p:keyboard rendered="#{loginBean.subject.hasRole('Estudiante')}"></p:keyboard>
                 </div>
