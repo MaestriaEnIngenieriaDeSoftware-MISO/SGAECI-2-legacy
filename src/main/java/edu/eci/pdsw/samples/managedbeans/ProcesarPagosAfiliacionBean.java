@@ -53,6 +53,7 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
     EmailSender sender = new SimpleEmailSender(new EmailConfiguration());
     Email email = null;
     Egresado e;
+    private List<PagoAfiliacion> pagosafiliado;
     private int docid=0;
     private boolean b=true;
     private String codigobanco;
@@ -65,6 +66,18 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
         
     }
     
+    public void getpagosAfiliadoEspecifico() throws ExcepcionServiciosSAGECI{
+        pagosafiliado = getPagosAfiliacionEspecifico();
+    }
+
+    public List<PagoAfiliacion> getPagosafiliado() {
+        return pagosafiliado;
+    }
+
+    public void setPagosafiliado(List<PagoAfiliacion> pagosafiliado) {
+        this.pagosafiliado = pagosafiliado;
+    }
+    
     public List<PagoAfiliacion> getPagosAfiliacionRegsitrados() throws ExcepcionServiciosSAGECI{
         List<PagoAfiliacion> temp =SAGECI.consultarPagosAfiliacionesRegistrados();
         return temp;
@@ -72,7 +85,7 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
     
     
      public List<PagoAfiliacion> getPagosAfiliacion() throws ExcepcionServiciosSAGECI{
-        List<PagoAfiliacion> temp =SAGECI.consultarPagosAfiliacionesRegistrados();
+        List<PagoAfiliacion> temp =SAGECI.consultarPagosAfiliaciones();
         return temp;
     }
     
@@ -95,9 +108,6 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
         this.pagoSelection = pagoSelection;
     }
 
-  
-    
-    
     
     public Egresado getE() {
         return e;

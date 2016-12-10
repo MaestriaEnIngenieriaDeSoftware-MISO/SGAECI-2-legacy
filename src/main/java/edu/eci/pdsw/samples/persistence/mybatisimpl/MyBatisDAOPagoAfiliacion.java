@@ -57,21 +57,20 @@ public class MyBatisDAOPagoAfiliacion implements DaoPagoAfiliacion {
         PagoAfMapper pedmp = currentSession.getMapper(PagoAfMapper.class);
         return temp=pedmp.getPagosAfiliacion();
     }
-
     
 
     @Override
     public List<PagoAfiliacion> loadAll2() throws PersistenceException {
         List<PagoAfiliacion> temp=null;
         PagoAfMapper pedmp = currentSession.getMapper(PagoAfMapper.class);
-        return temp=pedmp.getPagosAfiliacionNoTramitados();
+        return temp=pedmp.getPagosAfiliacionRegistrados();
     }
 
     @Override
     public List<PagoAfiliacion> loadAll3() throws PersistenceException {
         List<PagoAfiliacion> temp=null;
         PagoAfMapper pedmp = currentSession.getMapper(PagoAfMapper.class);
-        return temp=pedmp.getPagosAfiliacionRegistrados();
+        return temp=pedmp.getPagosAfiliacionNoTramitados();
     }
     
     @Override
@@ -94,5 +93,4 @@ public class MyBatisDAOPagoAfiliacion implements DaoPagoAfiliacion {
 
   
     
-
 }

@@ -47,8 +47,9 @@
         pg.Fecha_Registro,
         pg.Fecha_Pago,
         pg.Estado,
-        pg.Tipo,
         pg.Comprobante,
+        pg.Tipo,
+        
         
         p1.DocumentoID as Egre_DocumentoID,
         p1.Telefono as Egre_Telefono,
