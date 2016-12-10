@@ -304,6 +304,19 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
         return pagosAfiliacionesegre;
     }
 
+    @Override
+    public void agregarPagoAfliliacion(PagoAfiliacion pg) throws ExcepcionServiciosSAGECI {
+        try {
+            daof.beginSession();
+            daof.getDaoPagoAfiliacion().save(pg);
+            daof.commitTransaction();
+            daof.endSession();
+        } catch (PersistenceException ex) {
+            Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
+        }
+    }
+
         
     }
 class PropertiesLoader {

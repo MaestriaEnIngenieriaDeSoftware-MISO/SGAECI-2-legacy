@@ -26,6 +26,8 @@ import edu.eci.pdsw.samples.entities.SolicitudAfiliacion;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosSAGECI;
 import edu.eci.pdsw.samples.services.ServiciosSAGECI;
 import edu.eci.pdsw.samples.javamail.core.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
@@ -36,6 +38,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 import javax.mail.MessagingException;
 import org.primefaces.context.RequestContext;
+import org.primefaces.model.DefaultStreamedContent;
 
 /**
  *
@@ -91,6 +94,8 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
     public void setPagoSelection(PagoAfiliacion pagoSelection) {
         this.pagoSelection = pagoSelection;
     }
+
+  
     
     
     
@@ -115,7 +120,7 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
     
     public void aceptarPagoAfiliacion(ActionEvent actionEvent) throws ExcepcionServiciosSAGECI{
         try{
-            if(pagoSelection.getEstado().equals("No tramitado")){
+            if(pagoSelection.getEstado().equals("No Tramitado")){
                 e = pagoSelection.getE1();         
                 pagoSelection.setEstado("Registrado");
                 SAGECI.actualizarPagoAfliliacion(pagoSelection);
@@ -169,6 +174,8 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
         this.docid = docid;
     }
     
-    
-    
+    public DefaultStreamedContent byteToImage() throws IOException {
+        return new DefaultStreamedContent(new ByteArrayInputStream(pagoSelection.getImg()));
+    }
+
 }

@@ -91,6 +91,6 @@ public interface PagoAfMapper {
      * @param estado 
      * @param comprobante 
      */
-    public void insertarPagoAfiliacion(@Param("fecharegistro")Date fr ,@Param("documentoid")int documentoID ,@Param("valor")int v , @Param("fechapago")Date fp, @Param("estado")String estado,@Param("comprobante") Blob comprobante);
+    public void insertarPagoAfiliacion(@Param("fecharegistro")Date fr ,@Param("documentoid")int documentoID ,@Param("valor")int v , @Param("fechapago")Date fp, @Param("estado")String estado,@Param("img") byte[] img,@Param("tipo") String tipo);
     
 }

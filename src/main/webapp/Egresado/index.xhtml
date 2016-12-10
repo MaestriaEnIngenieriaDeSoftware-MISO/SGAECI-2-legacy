@@ -15,13 +15,10 @@
                 <div class="adentro" style="background-color: white">
                     <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
                     <div align="center">
-                        <h1 style="font-family:  Lucida Sans Unicode">Bienvenido a SGAECI</h1>
-                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 100%;" >Es un gusto saber que este de vuelta</h1>
-                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 100%;">#{Usuario.persona.nombre} #{Usuario.persona.apellido}</h1>
-                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 100%;" >Su estado de afiliacion es #{Usuario.eaf.estado}</h1>
+                        <h1 style="font-family: Lucida Sans Unicode">Bienvenido Egresado </h1>
                     </div>
                     <div align="right">
-                        <h:outputLink value="/logout">Cerrar Sección</h:outputLink>
+                        <h:outputLink value="/logout">Logout</h:outputLink>
                     </div>
 
                     <p:keyboard rendered="#{loginBean.subject.hasRole('Egresado')}"></p:keyboard>
@@ -35,6 +32,28 @@
                 <p:commandButton  value="Volver"  action="Egresado/index"/>
             </div>
         </h:form>
+        <nav> 
+            <ul>
+                <h:form>
+                    <p:commandButton value="Recibo de Pago" onclick="PF('dlg1').show()"/>
+
+                    <h:form>
+                        <p:dialog header="Generar Recibo" id="Recibo" widgetVar="dlg1" height="550" width="550" styleClass="sheet.css" resizable="false">
+                            <h:outputLabel for="adjuntar" value="Adjunte su recibo de pago para validarlo con el Administrador" />
+                            <h:form>
+                                <h:form enctype="multipart/form-data">
+                                    <p:fileUpload fileUploadListener="#{GenerarPago.handleFileUpload}" />
+                                    <p:growl id="messages" showDetail="true"/>
+                                </h:form>
+                                <p:calendar class="calen" id="fecha" value="#{GenerarPago.fechaConsignacion}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
+                            </h:form>
+                            <p:commandButton value="Enviar" actionListener="#{GenerarPago.aceptarEnvio()}" oncomplete="PF('dlg1').hide()"/>
+                            <p:commandButton value="Cerrar" onclick="PF('dlg1').hide()"/>
+                        </p:dialog>
+                    </h:form>
+                </h:form>
+            </ul>
+        </nav>
     </h:body>
 </html>
 
@@ -47,4 +66,4 @@
     role Administrador = <p:outputLabel value="#{loginBean.subject.hasRole('Administrador')}"/>
     role Estudiante = <p:outputLabel value="#{loginBean.subject.hasRole('Estudiante')}"/>
   </pre>
---> 
+-->

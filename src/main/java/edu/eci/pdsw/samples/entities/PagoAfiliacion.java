@@ -22,16 +22,19 @@ public class PagoAfiliacion {
     private Date fechapago;
     private Egresado e1;
     private String estado;
-    private Blob comprobante;
+    private byte[] img;
+    private String tipo;
 
-    public PagoAfiliacion(int pagoid, int valor, int documentoid, Date fecharegistro, Date fechapago, String estado, Blob comprobante) {
+    public PagoAfiliacion(int pagoid, int valor, int documentoid, Date fecharegistro, Date fechapago, String estado, byte[] img,String tipo) {
         this.pagoid = pagoid;
         this.valor = valor;
         this.documentoid = documentoid;
         this.fecharegistro = fecharegistro;
         this.fechapago = fechapago;
         this.estado = estado;
-        this.comprobante = comprobante;
+        this.img=img;
+        this.tipo=tipo;
+        
     }
 
     
@@ -95,21 +98,22 @@ public class PagoAfiliacion {
         this.estado = estado;
     }
 
-    public Blob getComprobante() {
-        return comprobante;
+    public byte[] getImg() {
+        return img;
     }
 
-    public void setComprobante(Blob comprobante) {
-        this.comprobante = comprobante;
+    public void setImg(byte[] img) {
+        this.img = img;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     
-
-    
-
-    
-    
-    
-
     
 }

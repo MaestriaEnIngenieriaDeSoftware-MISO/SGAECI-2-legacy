@@ -220,4 +220,13 @@ public abstract class ServiciosSAGECI {
      */
     public abstract void BorrarPagoAfliliacion(PagoAfiliacion s) throws ExcepcionServiciosSAGECI;
     
+    
+    
+    /**
+     * Agrega un pago Afiliacion a la base de datos 
+     * @param pg pago afiliacion para actualizar 
+     * @throws ExcepcionServiciosSAGECI si no hay un id asociado o si hay algun problema de persistenciaados
+     */
+    public abstract void agregarPagoAfliliacion(PagoAfiliacion pg) throws ExcepcionServiciosSAGECI;
+    
 }

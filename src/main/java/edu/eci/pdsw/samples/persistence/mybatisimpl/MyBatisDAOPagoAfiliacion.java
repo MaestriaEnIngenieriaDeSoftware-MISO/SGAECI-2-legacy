@@ -77,7 +77,7 @@ public class MyBatisDAOPagoAfiliacion implements DaoPagoAfiliacion {
     @Override
     public void save(PagoAfiliacion Pa) throws PersistenceException {
         PagoAfMapper pedmp = currentSession.getMapper(PagoAfMapper.class);
-        pedmp.insertarPagoAfiliacion(Pa.getFecharegistro(), Pa.getDocumentoid(), Pa.getValor(), Pa.getFechapago(), Pa.getEstado(), Pa.getComprobante());
+        pedmp.insertarPagoAfiliacion(Pa.getFecharegistro(), Pa.getDocumentoid(), Pa.getValor(), Pa.getFechapago(), Pa.getEstado(), Pa.getImg(),Pa.getTipo());
     }
 
     @Override
