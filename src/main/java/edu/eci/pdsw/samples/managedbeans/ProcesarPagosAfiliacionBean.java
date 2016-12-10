@@ -53,6 +53,7 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
     EmailSender sender = new SimpleEmailSender(new EmailConfiguration());
     Email email = null;
     Egresado e;
+    private DefaultStreamedContent i;
     private List<PagoAfiliacion> pagosafiliado;
     private int docid=0;
     private boolean b=true;
@@ -184,8 +185,17 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
         this.docid = docid;
     }
     
-    public DefaultStreamedContent byteToImage() throws IOException {
-        return new DefaultStreamedContent(new ByteArrayInputStream(pagoSelection.getImg()));
+    public void byteToImage() throws IOException {
+        this.i= new DefaultStreamedContent(new ByteArrayInputStream(pagoSelection.getImg()));
     }
 
+    public DefaultStreamedContent getI() {
+        return i;
+    }
+
+    public void setI(DefaultStreamedContent i) {
+        this.i = i;
+    }
+
+    
 }
