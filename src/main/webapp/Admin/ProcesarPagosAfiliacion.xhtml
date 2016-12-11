@@ -63,14 +63,15 @@
                                         <h:outputText value="#{Pago.estado}" />
                                     </p:column>
                                     <f:facet name="footer">
-                                        <p:commandButton process="ListaPagos"  icon="ui-icon-search" value="Ver solicitud" onclick="PF('dlg1').show()" actionListener="#{ProcesarPagosAfiliacion.byteToImage()}" />
+                                        <p:commandButton process="ListaPagos"  icon="ui-icon-search" value="Ver solicitud" onclick="PF('dlg1').show()" actionListener="#{ProcesarPagosAfiliacion.byteToImage()}"  />
                                     </f:facet>
 
                                 </p:dataTable>
-                                <p:dialog header="Comprobante Pago afiliación." id="pagoSeleccionado" widgetVar="dlg1" height="575" weight="300" draggable="true" resizable="false">
-                                    <p:panelGrid columns="2" id="test1">
+                                <p:dialog header="Comprobante Pago afiliación." id="pagoSeleccionado" widgetVar="dlg1" height="575" weight="300" draggable="true" resizable="false"  >
+                                    <p:panelGrid columns="1" id="test1">
                                         <p:outputLabel  for="comprobante" value="Comprobante : "/>
-                                        <p:graphicImage id="comprobante" value="#{ProcesarPagosAfiliacion.i}"/> 
+                                        <p:commandButton value="Obtener imagen" update="comprobante"/>
+                                        <p:graphicImage  height="250" weight="250" id="comprobante" value="#{ProcesarPagosAfiliacion.i}"/> 
                                     </p:panelGrid>
                                 </p:dialog>
 
@@ -105,12 +106,13 @@
 
                                 </p:dataTable>
                                 <p:dialog header="Comprobante Pago afiliación." id="pagoSeleccionado2" widgetVar="dlg2" height="575"  weight="300" draggable="true" resizable="false">
-                                    <p:panelGrid columns="2" id="test2">
+                                    <p:panelGrid columns="1" id="test2">
                                         <p:outputLabel  for="comprobante2" value="Comprobante : "/>
-                                        <p:graphicImage id="comprobante2" value="#{ProcesarPagosAfiliacion.i}"/> 
+                                        <p:commandButton value="Obtener imagen" update="comprobante2"/>
+                                        <p:graphicImage  height="250" weight="250" id="comprobante2" value="#{ProcesarPagosAfiliacion.i}"/> 
                                     </p:panelGrid>
                                     <h3>Ingrese codigo de transaccion: </h3>
-                                    <p:inputTextarea rows="6" cols="45" required="true" value="#{ProcesarPagosAfiliacion.codigobanco}" />
+                                    <p:inputTextarea rows="1" cols="40" required="true" value="#{ProcesarPagosAfiliacion.codigobanco}" />
                                     <br/>
                                     <p:commandButton update="ListaPagos2" value="Aceptar" id="Acept" actionListener="#{ProcesarPagosAfiliacion.aceptarPagoAfiliacion}" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
                                     <p:commandButton update="ListaPagos2" value="Rechazar" id="Reject" actionListener="#{ProcesarPagosAfiliacion.rechazarPagoAfiliacion}" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
@@ -144,12 +146,13 @@
                                 </p:dataTable>
 
                                 <p:dialog header="Comprobante Pago afiliación." id="pagoSeleccionado3" widgetVar="dlg3" height="575" draggable="true" resizable="false">
-                                    <p:panelGrid columns="2" id="test3">
+                                    <p:panelGrid columns="1" id="test3">
                                         <p:outputLabel  for="comprobante3" value="Comprobante : "/>
-                                        <p:graphicImage id="comprobante3" value="#{ProcesarPagosAfiliacion.i}"/> 
+                                        <p:commandButton value="Obtener imagen" update="comprobante3"/>
+                                        <p:graphicImage  height="250" weight="250" id="comprobante3" value="#{ProcesarPagosAfiliacion.i}"/> 
                                     </p:panelGrid>
                                     <h3>Ingrese codigo de transaccion: </h3>
-                                    <p:inputTextarea rows="6" cols="45" required="true" value="#{ProcesarPagosAfiliacion.codigobanco}" />
+                                    <p:inputTextarea rows="1" cols="40" required="true" value="#{ProcesarPagosAfiliacion.codigobanco}" />
                                     <br/>
                                     <p:commandButton update="ListaPagos3" value="Aceptar" id="Acept2" actionListener="#{ProcesarPagosAfiliacion.aceptarPagoAfiliacion}" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
                                     <p:commandButton update="ListaPagos3" value="Rechazar" id="Reject2" actionListener="#{ProcesarPagosAfiliacion.rechazarPagoAfiliacion}" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
@@ -183,12 +186,13 @@
                                     
                                 </p:dataTable>
                                 <p:dialog header="Comprobante Pago afiliación." id="pagoSeleccionado4" widgetVar="dlg4" height="575" draggable="false" resizable="false">
-                                    <p:panelGrid columns="2" id="test4">
+                                    <p:panelGrid columns="1" id="test4">
                                         <p:outputLabel  for="comprobante4" value="Comprobante : "/>
-                                        <p:graphicImage id="comprobante4" value="#{ProcesarPagosAfiliacion.i}"/> 
+                                        <p:commandButton value="Obtener imagen" update="comprobante4"/>
+                                        <p:graphicImage  height="250" weight="250" id="comprobante4" value="#{ProcesarPagosAfiliacion.i}"/> 
                                     </p:panelGrid>
                                     <h3>Ingrese codigo de transaccion: </h3>
-                                    <p:inputTextarea rows="6" cols="45" required="true" value="#{ProcesarPagosAfiliacion.codigobanco}" />
+                                    <p:inputTextarea rows="1" cols="40" required="true" value="#{ProcesarPagosAfiliacion.codigobanco}" />
                                     <br/>
                                     <p:commandButton update="ListaPagos4" value="Aceptar" id="Acept4" actionListener="#{ProcesarPagosAfiliacion.aceptarPagoAfiliacion}" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
                                     <p:commandButton update="ListaPagos4" value="Rechazar" id="Reject4" actionListener="#{ProcesarPagosAfiliacion.rechazarPagoAfiliacion}" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>

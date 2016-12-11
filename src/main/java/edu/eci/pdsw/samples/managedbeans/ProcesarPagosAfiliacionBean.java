@@ -39,6 +39,7 @@ import javax.faces.event.ActionEvent;
 import javax.mail.MessagingException;
 import org.primefaces.context.RequestContext;
 import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -53,7 +54,7 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
     EmailSender sender = new SimpleEmailSender(new EmailConfiguration());
     Email email = null;
     Egresado e;
-    private DefaultStreamedContent i;
+    private StreamedContent i;
     private List<PagoAfiliacion> pagosafiliado;
     private int docid=0;
     private boolean b=true;
@@ -189,11 +190,11 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
         this.i= new DefaultStreamedContent(new ByteArrayInputStream(pagoSelection.getImg()));
     }
 
-    public DefaultStreamedContent getI() {
+    public StreamedContent getI() {
         return i;
     }
 
-    public void setI(DefaultStreamedContent i) {
+    public void setI(StreamedContent i) {
         this.i = i;
     }
 
