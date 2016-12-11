@@ -16,6 +16,7 @@ import edu.eci.pdsw.samples.entities.Persona;
 import edu.eci.pdsw.samples.entities.estadoAfiliacion;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosSAGECI;
 import edu.eci.pdsw.samples.services.ServiciosSAGECI;
+import java.awt.Color;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -65,11 +66,17 @@ public class UsuarioBean {
     public void showMessage(boolean m, String tipo) {
         FacesMessage message;
         if (tipo.equals("c")) {
-            if (m) {message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "El Certificado se genero sin ningun problema.");}
-            else {message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Incorrecto", "El Certificado no se pudo generar hubo un error inesperado.");}
+            if (m) {
+                message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "El Certificado se genero sin ningun problema.");
+            } else {
+                message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Incorrecto", "El Certificado no se pudo generar hubo un error inesperado.");
+            }
         } else {
-            if (m) {message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Se actualizaron los datos correctamente");} 
-            else {message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Incorrecto", "Hubo un error al momento de actualziar los datos.");}
+            if (m) {
+                message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Se actualizaron los datos correctamente");
+            } else {
+                message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Incorrecto", "Hubo un error al momento de actualziar los datos.");
+            }
         }
         RequestContext.getCurrentInstance().showMessageInDialog(message);
     }
@@ -119,15 +126,31 @@ public class UsuarioBean {
             LogginBean bean = (LogginBean) getManagedBean("Loggin");
             documentoID = Integer.parseInt(bean.getUsername());
             /**
-             * doc.add(new Paragraph("image example")); //Add image Image
-             * image1=Image.getInstance("aecimagen.png"); //Fixed position
-             * image1.setAbsolutePosition(100f, 100f); //scale to new height...
-             * image1.scaleAbsolute(200,200); //add to document doc.add(image1);
+             * AGREGA LA IMAGEN DE LA ASOCIACION Paragraph image; image=new
+             * Paragraph("LOGO ASOCIACION "); Image
+             * image1=Image.getInstance("aecimagen.png");
+             * image1.setAlignment(70); image1.setIndentationLeft(70);
+             * image1.setSpacingAfter(30); image1.setSpacingBefore(20);
+             * doc.add(image1);
+             *
              *
              */
-            doc.add(new Paragraph("CERTIFICADO DE AFILIACION AECI"));
+
+            Paragraph titulo;
+            titulo = new Paragraph("CERTIFICADO DE AFILIACION AECI");
+            titulo.setIndentationLeft(150);
+            titulo.setAlignment(70);
+            titulo.setSpacingAfter(70);
+            titulo.setSpacingBefore(150);
+            doc.add(titulo);
+
             doc.addCreationDate();
-            doc.addTitle("La Asociación de Egresados de la Escuela Colombiana de Ingeniería Julio Garavito AECI,con Nit. 830.031.137-4,certifica que");
+            Paragraph frase;
+            frase = new Paragraph("La Asociación de Egresados de la Escuela Colombiana de Ingeniería Julio Garavito AECI,con Nit. 830.031.137-4, certifica :");
+            frase.setAlignment(70);
+            frase.setSpacingAfter(20);
+            doc.add(frase);
+
             if (bean.getTipo().equals("Estudiante")) {
                 estudiante = SAGECI.consultarEstudiante(documentoID);
                 setPersona(estudiante);
@@ -135,10 +158,9 @@ public class UsuarioBean {
                 egresado = SAGECI.consultarEgresado(documentoID);
                 setPersona(egresado);
             }
-            plantillaEst = "Que el Estudiante $1, identificado con $2  No. $3, cursando actualmente $5 semestre del programa de $4, está afiliado en la asociación de Estudiantes de la escuela colombiana de ingeniería Julio Garavito desde $6 hasta $7, que cuenta con una afiliación gratuita de 6 meses dada su condición de estudiante activo. "
-                    + " "
-                    + "" + " Es de anotar que para disfrutar de los convenios a los cuales  tiene derecho es necesario que su afiliación permanezca vigente realizando  el correspondiente pago anual./n El presente certificado se expide con destino a los convenios de asociados a la  AECI en Bogotá el día $8.";
-            plantillaEgr = "Que el Egresado $1, identificado con $2  No. $3, Egresado del periodo $4,  se encuentra afiliado en la asociación de egresados de la escuela colombiana de ingeniería Julio Garavito desde $5 hasta $6 \n" + "\n" + "Que la presente constancia se expide a solicitud del interesado.";
+
+            plantillaEst = "Que el Estudiante $1, identificado con $2  No. $3, cursando actualmente $5 semestre del programa de $4, está afiliado en la asociación de Estudiantes de la Escuela Colombiana de Ingeniería Julio Garavito desde $6 hasta $7, que cuenta con una afiliación gratuita de 6 meses dada su condición de estudiante activo.\n Es de anotar que para disfrutar de los convenios a los cuales  tiene derecho es necesario que su afiliación permanezca vigente realizando  el correspondiente pago anual. El presente certificado se expide con destino a los convenios de asociados a la  AECI en Bogotá.";
+            plantillaEgr = "Que el Egresado $1, identificado con $2  No. $3, Egresado del periodo $4,  se encuentra afiliado en la asociación de egresados de la Escuela Colombiana de Ingeniería Julio Garavito desde $5 hasta $6 .La presente constancia se expide a solicitud del interesado.";
             setEaf(SAGECI.consultarEstadoAfiliacion(documentoID));
             if (bean.getTipo().equals("Estudiante")) {
                 plantillaEst = plantillaEst.replace("$1", estudiante.getApellido() + " " + estudiante.getNombre());
@@ -151,9 +173,18 @@ public class UsuarioBean {
                 plantillaEst = plantillaEst.replace("$6", df.format(fecha));
                 Date fechafin = eaf.getFechaFin();
                 plantillaEst = plantillaEst.replace("$7", df.format(fechafin));
-                boolean fechaExp = doc.addCreationDate();
-                //plantillaEst=plantillaEst.replace("$8",toString(fechaExp));
-                doc.add(new Paragraph(plantillaEst));
+                doc.addCreationDate();
+                //plantillaEst=plantillaEst.replace("$8",doc.addCreationDate());
+
+                Paragraph plantilla;
+                plantilla = new Paragraph(plantillaEst);
+                plantilla.setSpacingAfter(80);
+                plantilla.setAlignment(70);
+                doc.add(plantilla);
+
+                
+               
+
             } else {
                 plantillaEgr = plantillaEgr.replace("$1", egresado.getApellido() + " " + egresado.getNombre());
                 plantillaEgr = plantillaEgr.replace("$2", egresado.getTipoDocumentoID());
@@ -167,7 +198,19 @@ public class UsuarioBean {
                 doc.add(new Paragraph(plantillaEgr));
 
             }
-
+            Paragraph fin;
+            fin = new Paragraph("Cordialmente\n\n JUAN CARLOS ROMERO ORDÓNEZ\n Director\n\n Asociación de Egresados Escuela Colombiana de Ingenieria Julio Garavito");
+            fin.setAlignment(70);
+            titulo.setSpacingAfter(150);
+            titulo.setSpacingBefore(80);
+            doc.add(fin);
+            
+            Paragraph info;
+            info=new Paragraph("AK 45 No. 205 Bloque A - Piso 2 * Télefonos 6683600 ext 232 - Móvil 3124570612 * Correo Electrónico eaci@escuelaing.edu.co * Bogotá, Colombia");
+            info.setSpacingBefore(150);
+            
+            doc.add(info);
+            
             doc.close();
             out.close();
 
@@ -180,9 +223,14 @@ public class UsuarioBean {
             if (b != null) {
                 streamedContent = new DefaultStreamedContent(new ByteArrayInputStream(b), "application/pdf", "Certificado.pdf");
             }
-        } catch (Exception e) {showMessage(false, "c");b = false;}
-        if (b) {showMessage(true, "c");}
-        b=true;
+        } catch (Exception e) {
+            showMessage(false, "c");
+            b = false;
+        }
+        if (b) {
+            showMessage(true, "c");
+        }
+        b = true;
     }
 
     //==================================================================
@@ -222,31 +270,37 @@ public class UsuarioBean {
                 SAGECI.actualizarUsuario(documentoID, direccionVivienda, correo, telefono, telefono2);
             } catch (ExcepcionServiciosSAGECI ex) {
                 Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
-                showMessage(false, "u");b = false;
+                showMessage(false, "u");
+                b = false;
             }
-            if (b) {showMessage(true, "u");}
+            if (b) {
+                showMessage(true, "u");
+            }
         }
-        b=true;
+        b = true;
     }
 
     public void UpdateContra() {
         if (!contraactual.equals("") && !contranueva1.equals("") && !contranueva2.equals("")) {
-                try {
-                    LogginBean bean = (LogginBean) getManagedBean("Loggin");
-                    documentoID = Integer.parseInt(bean.getUsername());
-                    String contra=bean.getPassword();
-                    if(contraactual.equals(contra) && contranueva1.equals(contranueva2) ){
-                        String nueva;
-                        nueva = SHA1.generateHash(contranueva1);
-                        SAGECI.actualizarContra(documentoID, contra);
-                    } 
-                } catch (ExcepcionServiciosSAGECI ex) {
-                    Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
-                    showMessage(false, "u");b = false;
+            try {
+                LogginBean bean = (LogginBean) getManagedBean("Loggin");
+                documentoID = Integer.parseInt(bean.getUsername());
+                String contra = bean.getPassword();
+                if (contraactual.equals(contra) && contranueva1.equals(contranueva2)) {
+                    String nueva;
+                    nueva = SHA1.generateHash(contranueva1);
+                    SAGECI.actualizarContra(documentoID, contra);
                 }
-                if (b) {showMessage(true, "u");}
+            } catch (ExcepcionServiciosSAGECI ex) {
+                Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
+                showMessage(false, "u");
+                b = false;
+            }
+            if (b) {
+                showMessage(true, "u");
+            }
         }
-        b=true;
+        b = true;
     }
 
     public int getTelefono() {
