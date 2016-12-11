@@ -37,6 +37,6 @@ public class MyBatisDAOEgresado implements DaoEgresado{
     
     @Override
     public void save(Egresado e) throws PersistenceException {
-      Egmap.insertarEgresado(e.getDocumentoID(), e.getSemestreGrado(), e.getCorreo_Personal().toLowerCase(), e.getLabora(), e.getCargo().toUpperCase(),e.getEmp().getNombreempre(),e.getFechaGraduacion());
+      Egmap.insertarEgresado(e.getDocumentoID(), e.getSemestreGrado(), e.getCorreo_Personal().toLowerCase(), e.getLabora(), e.getCargo().toUpperCase(),e.getEmp().getNombreempre(),e.getFechaGraduacion(),e.getCarrera());
     }
 }

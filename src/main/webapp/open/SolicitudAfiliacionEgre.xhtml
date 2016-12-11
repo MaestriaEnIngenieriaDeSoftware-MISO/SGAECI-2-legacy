@@ -78,6 +78,11 @@
                                     <p:outputLabel style="font-weight:bold" for="correo" value="Correo Institucional: " />
                                     <p:inputText styleClass="cent" id="correo" value="#{SolicitudAfiliacion.correo}"/>
 
+                                    <p:outputLabel style="font-weight:bold" for="carr" value="Programa: " />
+                                    <p:selectOneMenu class="ui-selectOneMenu" id="carr" value="#{SolicitudAfiliacion.carrera}" style="width:259px">
+                                        <f:selectItems class="asd" value="#{SolicitudAfiliacion.carreras}" />
+                                    </p:selectOneMenu>
+                                    
                                     <p:outputLabel style="font-weight:bold" for="semestre" value="Semestre Grado: " />
                                     <p:inputMask styleClass="cent" required="true" id="semestre" value="#{SolicitudAfiliacion.semestreGrado}" mask="2099-9"/>
 
@@ -92,7 +97,7 @@
                                 <h:panelGrid columns="2" columnClasses="label, value">
                                     <p:outputLabel style="font-weight:bold" for="elab" value="Estado Laboral:" />
                                     <p:selectOneMenu class="ui-selectOneMenu" required="True" id="elab" value="#{SolicitudAfiliacion.tipotra}">
-                                        <p:ajax event="change" listener="#{SolicitudAfiliacion.asigna()}" update=":form:empresa"/>
+                                        <p:ajax event="change" listener="#{SolicitudAfiliacion.asigna()}" update=":form:empresa1"/>
                                         <f:selectItem class="asd" itemLabel="Seleccione uno" itemValue="" />
                                         <f:selectItem class="asd" itemLabel="Independiente" itemValue="Independiente" />
                                         <f:selectItem class="asd" itemLabel="Empresa" itemValue="Empresa" />

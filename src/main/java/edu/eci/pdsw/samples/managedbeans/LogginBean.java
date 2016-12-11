@@ -7,6 +7,9 @@ package edu.eci.pdsw.samples.managedbeans;
 
 
 import edu.eci.pdsw.samples.Security.Registro;
+import edu.eci.pdsw.samples.entities.Persona;
+import edu.eci.pdsw.samples.entities.estadoAfiliacion;
+import edu.eci.pdsw.samples.services.ExcepcionServiciosSAGECI;
 import edu.eci.pdsw.samples.services.ServiciosSAGECI;
 import java.io.File;
 import org.apache.shiro.SecurityUtils;
@@ -28,6 +31,7 @@ import org.apache.shiro.authc.credential.DefaultPasswordService;
 import org.apache.shiro.crypto.hash.DefaultHashService;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.util.SimpleByteSource;
+import org.primefaces.context.RequestContext;
 
 
 /**
@@ -62,7 +66,6 @@ public class LogginBean implements Serializable {
         DefaultPasswordService passwordService = new DefaultPasswordService();
         passwordService.setHashService(hashService);
         String encryptedPassword = passwordService.encryptPassword(password);
-        System.out.println(encryptedPassword);
         return encryptedPassword;
 
     }
@@ -72,10 +75,7 @@ public class LogginBean implements Serializable {
         return SecurityUtils.getSubject();
     }
 
-    public void doLogin() {
-        System.out.println("Entro");
-        System.out.println("user "+username);
-        System.out.println("pass "+password);
+    public void doLogin() throws ExcepcionServiciosSAGECI {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(getUsername(), getPassword(), isAutenticacion());
         try {
@@ -86,9 +86,22 @@ public class LogginBean implements Serializable {
             }else if (subject.hasRole("Egresado")) {
                 this.tipo="Egresado";
                 FacesContext.getCurrentInstance().getExternalContext().redirect("Egresado/index.xhtml");
+                estadoAfiliacion e = SAGECI.consultarEstadoAfiliacion(Integer.parseInt(username));
+                if(e.getEstado().equals("INACTIVO")){
+                    System.out.println(e.getEstado());
+                    RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_INFO, "RECORDATORIO", "Por favor realice el pago de afiliación para seguir disfrutando de nuestros servicios."
+                            + " Gracias."));
+                }
+                
             }else if (subject.hasRole("Estudiante")) {
                 this.tipo="Estudiante";
                 FacesContext.getCurrentInstance().getExternalContext().redirect("Estudiante/index.xhtml"); 
+                estadoAfiliacion e = SAGECI.consultarEstadoAfiliacion(Integer.parseInt(username));
+                if(e.getEstado().equals("INACTIVO")){
+                    System.out.println(e.getEstado());
+                    RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_INFO, "RECORDATORIO", "Por favor realice el pago de afiliación para seguir disfrutando de nuestros servicios."
+                            + " Gracias."));
+                }
             } else {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("unauthorized.xhtml");
             }

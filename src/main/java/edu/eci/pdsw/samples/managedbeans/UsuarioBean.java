@@ -99,7 +99,6 @@ public class UsuarioBean {
     }
 
     public estadoAfiliacion getEaf() {
-        System.out.println(eaf.getEstado());
         return eaf;
     }
 

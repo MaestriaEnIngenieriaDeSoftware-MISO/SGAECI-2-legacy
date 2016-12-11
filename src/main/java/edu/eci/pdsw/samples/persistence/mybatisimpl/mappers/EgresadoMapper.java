@@ -43,8 +43,9 @@ public interface EgresadoMapper {
      * @param cargo
      * @param nombreempre
      * @param graduacion 
+     * @param carrera 
      */
-    public void insertarEgresado( @Param("documentoID") int documentoID,@Param("semestreGraduacion") String semestreGraduacion,@Param("correoPersonal") String correoPersonal,@Param("labora") String labora,@Param("cargo") String cargo,@Param("empresaID") String nombreempre,@Param("fechaGraduacion")Date graduacion);                                    
+    public void insertarEgresado( @Param("documentoID") int documentoID,@Param("semestreGraduacion") String semestreGraduacion,@Param("correoPersonal") String correoPersonal,@Param("labora") String labora,@Param("cargo") String cargo,@Param("empresaID") String nombreempre,@Param("fechaGraduacion")Date graduacion,@Param("carrera")String carrera);                                    
     
     /**
      * obtener un egresado con un documento de identidad especifico

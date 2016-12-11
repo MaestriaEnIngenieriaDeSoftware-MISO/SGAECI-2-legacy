@@ -89,7 +89,7 @@ public abstract class ServiciosSAGECI {
      * @throws ExcepcionServiciosSAGECI 
      */
 
-    public abstract void agregarEgresado(int documentoID, int telefono1, BigInteger telefono2,String tipoDocumentoID, String nombre, String apellido, String direccion, String correo, String genero, Rol rol,String semestreGrado, String correoPersonal,String cargo , String labora,Egresado_Empresa egresadoEmpresa,Date fechaGraduacion) throws ExcepcionServiciosSAGECI;
+    public abstract void agregarEgresado(int documentoID, int telefono1, BigInteger telefono2,String tipoDocumentoID, String nombre, String apellido, String direccion, String correo, String genero, Rol rol,String semestreGrado, String correoPersonal,String cargo , String labora,Egresado_Empresa egresadoEmpresa,Date fechaGraduacion,String carrera) throws ExcepcionServiciosSAGECI;
     
     
     

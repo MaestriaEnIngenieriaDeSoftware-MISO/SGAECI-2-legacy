@@ -6,11 +6,12 @@
 CREATE TABLE Egresado (
     DocumentoID int NOT NULL,
     Semestre_Graduacion varchar(6) NOT NULL,
-    Correo_Estudiantil varchar(50) NOT NULL,
+    Correo_Estudiantil varchar(50) NULL,
     Empresa varchar(100) NULL,
     Labora varchar(20) NULL,
     Cargo varchar(20) NULL,
     Fecha_Graduacion date NULL,
+	Carrera varchar(50) NOT NULL,
     UNIQUE INDEX Correo_Estudiantil (Correo_Estudiantil),
     CONSTRAINT Egresado_pk PRIMARY KEY (DocumentoID)
 );

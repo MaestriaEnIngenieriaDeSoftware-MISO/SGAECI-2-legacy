@@ -14,11 +14,11 @@ import java.util.List;
  * @author 2106796
  */
 public class Egresado extends Persona{
-    private String semestreGrado,correoEstudiantil,labora,cargo;
+    private String semestreGrado,correoEstudiantil,labora,cargo,carrera;
     private Egresado_Empresa emp;
     private Date fechaGraduacion;
     
-    public Egresado(int documentoID, long telefono1, BigInteger telefono2,String tipoDocumentoID, String nombre,String apellido, String direccion, String correo, String genero,Rol rol, String semestreGrado, String correoPersonal, String cargo, String labora,Egresado_Empresa egresadoEmpresa, Date graduacion) {
+    public Egresado(int documentoID, long telefono1, BigInteger telefono2,String tipoDocumentoID, String nombre,String apellido, String direccion, String correo, String genero,Rol rol, String semestreGrado, String correoPersonal, String cargo, String labora,Egresado_Empresa egresadoEmpresa, Date graduacion,String carrera) {
         super(documentoID,telefono1,telefono2,tipoDocumentoID,nombre, apellido, direccion,correoPersonal,genero,rol);
 
         this.semestreGrado = semestreGrado;
@@ -27,6 +27,7 @@ public class Egresado extends Persona{
         this.emp=egresadoEmpresa;
         this.labora=labora;
         this.fechaGraduacion=graduacion;
+        this.carrera=carrera;
     }
 
     public Egresado() {
@@ -48,7 +49,16 @@ public class Egresado extends Persona{
         this.correoEstudiantil = correoEstudiantil;
     }
 
-   
+    public String getCarrera() {
+        return carrera;
+    }
+
+    public void setCarrera(String carrera) {
+        this.carrera = carrera;
+    }
+
+    
+    
     public String getLabora() {
         return labora;
     }

@@ -18,7 +18,8 @@
         <result property='semestreGrado' column='Semestre_Graduacion'/> 
         <result property='correoEstudiantil' column='Correo_Estudiantil'/> 
         <result property='cargo' column='Cargo'/> 
-        <result property='labora' column='Labora'/> 
+        <result property='labora' column='Labora'/>
+        <result property='carrera' column='Carrera'/> 
         <association property='emp' javaType='Egresado_Empresa' resultMap='EmpresaResult' columnPrefix='Epre_'></association>
     </resultMap>
     
@@ -30,7 +31,7 @@
   
     
      <insert id='insertarEgresado'>
-        INSERT INTO Egresado(DocumentoID,Semestre_Graduacion,Correo_Estudiantil,Empresa,Labora,Cargo,Fecha_Graduacion) values (#{documentoID},#{semestreGraduacion},#{correoPersonal},#{empresaID},#{labora},#{cargo},#{fechaGraduacion})
+        INSERT INTO Egresado(DocumentoID,Semestre_Graduacion,Correo_Estudiantil,Empresa,Labora,Cargo,Fecha_Graduacion,Carrera) values (#{documentoID},#{semestreGraduacion},#{correoPersonal},#{empresaID},#{labora},#{cargo},#{fechaGraduacion},#{carrera})
     </insert>
     
      <select id="getEgresado" parameterType="map" resultMap="EgresadoResult">
@@ -46,7 +47,8 @@
           egre.Semestre_Graduacion , 
           egre.Correo_Estudiantil , 
           egre.Cargo ,
-          egre.Labora , 
+          egre.Labora ,
+          egre.Carrera,
         
           Egresado_Empresa.Nombre as Epre_Nombre, 
           Egresado_Empresa.Telefono as Epre_Telefono, 
@@ -70,7 +72,8 @@
           egre.Semestre_Graduacion , 
           egre.Correo_Personal , 
           egre.Cargo ,
-          egre.Labora, 
+          egre.Labora,
+          egre.Carrera 
 
           emp.Nombre as Epre_Nombre, 
           emp.Telefono as Epre_Telefono, 

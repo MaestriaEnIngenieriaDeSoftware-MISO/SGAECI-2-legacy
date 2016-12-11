@@ -16,9 +16,7 @@ public class SendEmail {
         EmailSender sender = new SimpleEmailSender(new EmailConfiguration());
         try {
             sender.send(email);
-            System.out.println("Sent message successfully!");
         } catch (MessagingException e) {
-            System.err.println("Message not sent!");
             e.printStackTrace();
         }
     }

@@ -67,7 +67,6 @@ public class reporteVencerseBean implements Serializable{
             email = new SimpleEmail(from, toPersona, subjectAprobado, messageAprobado);
             try {
                 sender.send(email);
-                System.out.println("Mensaje enviado con exito!");
             } catch (MessagingException e) {
                 e.printStackTrace();
             }

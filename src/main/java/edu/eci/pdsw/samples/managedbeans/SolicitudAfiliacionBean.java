@@ -94,14 +94,13 @@ public class SolicitudAfiliacionBean implements Serializable {
             this.egresadoEmpresa.setNombreempre(Empresa);
             this.egresadoEmpresa.setDirempre(direccionEmpresa);
             this.egresadoEmpresa.setTelempre(telefonoOficina);
-            Egresado e1 = new Egresado(documentoID, Telefono, telefono2, tipoDocumentoID, Nombre, Apellido, direccionVivienda, correo, genero, rol, semestreGrado, correoPersonal, Cargo, labora, egresadoEmpresa, fechaGraduacion);
+            Egresado e1 = new Egresado(documentoID, Telefono, telefono2, tipoDocumentoID, Nombre, Apellido, direccionVivienda, correo, genero, rol, semestreGrado, correoPersonal, Cargo, labora, egresadoEmpresa, fechaGraduacion,carrera);
             Estudiante e2 = new Estudiante(documentoID, Telefono, telefono2, tipoDocumentoID, Nombre, Apellido, direccionVivienda, correo, genero, rol, codigoEstudiante, semestrePonderado, carrera);
             if (semestreGrado == null) {
                 e1 = null;
             } else {
                 if (tipotra.equals("Independiente")) {
                     Cargo = "Independiente";
-                    System.out.println(labora);
                 }        
                 e2 = null;
             }
@@ -112,7 +111,6 @@ public class SolicitudAfiliacionBean implements Serializable {
                 resetearValores();
             } catch (Exception e) {
                 showMessage(false);b=false;
-                resetearValores();
             }
             if(b){showMessage(true);}
         }
