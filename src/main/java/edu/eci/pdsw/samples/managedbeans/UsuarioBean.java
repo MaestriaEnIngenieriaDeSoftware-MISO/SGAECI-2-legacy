@@ -49,7 +49,7 @@ import org.primefaces.model.StreamedContent;
  */
 @ManagedBean(name = "Usuario")
 @SessionScoped
-public class UsuarioBean {
+public final class UsuarioBean {
 
     ServiciosSAGECI SAGECI = ServiciosSAGECI.getInstance();
     private static final long serialVersionUID = 1L;
@@ -73,6 +73,8 @@ public class UsuarioBean {
             if (bean.getTipo().equals("Estudiante")) {estudiante = SAGECI.consultarEstudiante(documentoID);p=(Persona)estudiante;} 
             else if(bean.getTipo().equals("Egresado")){egresado = SAGECI.consultarEgresado(documentoID);p=(Persona)egresado;}
             else{p=SAGECI.consultarPersona(documentoID);}
+            eaf=SAGECI.consultarEstadoAfiliacion(documentoID);
+            if(!eaf.getEstado().equals("ACTIVO")){showMessage(true,"Ac");}
             init();
         } catch (Exception e) {
         }
@@ -87,7 +89,9 @@ public class UsuarioBean {
             } else {
                 message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Incorrecto", "El Certificado no se pudo generar hubo un error inesperado.");
             }
-        } else {
+        } else if(tipo.equals("Ac")) {
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "RECORDATORIO", "Recuerde realizar el pago de su Afiliación para seguir disfrutando de nuestros servicios gracias.");
+        }else{
             if (m) {
                 message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Se actualizaron los datos correctamente");
             } else {
@@ -128,7 +132,6 @@ public class UsuarioBean {
 
             plantillaEst = "Que el Estudiante $1, identificado con $2  No. $3, cursando actualmente $5 semestre del programa de $4, está afiliado en la asociación de Estudiantes de la Escuela Colombiana de Ingeniería Julio Garavito desde $6 hasta $7, que cuenta con una afiliación gratuita de 6 meses dada su condición de estudiante activo.";
             plantillaEgr = "Que el Egresado $1, identificado con $2  No. $3, Egresado del periodo $4,  se encuentra afiliado en la asociación de egresados de la Escuela Colombiana de Ingeniería Julio Garavito desde $5 hasta $6 .La presente constancia se expide a solicitud del interesado.";
-            setEaf(SAGECI.consultarEstadoAfiliacion(documentoID));
             if (bean.getTipo().equals("Estudiante")) {
                 plantillaEst = plantillaEst.replace("$1", estudiante.getApellido() + " " + estudiante.getNombre());
                 plantillaEst = plantillaEst.replace("$2", estudiante.getTipoDocumentoID());
