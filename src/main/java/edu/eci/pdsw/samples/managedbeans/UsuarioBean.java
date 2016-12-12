@@ -6,6 +6,7 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Phrase;
 
 import com.itextpdf.text.pdf.PdfWriter;
 import edu.eci.pdsw.samples.Security.SHA1;
@@ -39,6 +40,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
+
 
 /**
  *
@@ -114,7 +116,7 @@ public class UsuarioBean {
             titulo = new Paragraph("CERTIFICADO DE AFILIACION AECI");
             titulo.setIndentationLeft(150);
             titulo.setAlignment(70);
-            titulo.setSpacingAfter(70);
+            titulo.setSpacingAfter(50);
             titulo.setSpacingBefore(150);
             doc.add(titulo);
 
@@ -125,7 +127,7 @@ public class UsuarioBean {
             frase.setSpacingAfter(20);
             doc.add(frase);
 
-            plantillaEst = "Que el Estudiante $1, identificado con $2  No. $3, cursando actualmente $5 semestre del programa de $4, está afiliado en la asociación de Estudiantes de la Escuela Colombiana de Ingeniería Julio Garavito desde $6 hasta $7, que cuenta con una afiliación gratuita de 6 meses dada su condición de estudiante activo.\n Es de anotar que para disfrutar de los convenios a los cuales  tiene derecho es necesario que su afiliación permanezca vigente realizando  el correspondiente pago anual. El presente certificado se expide con destino a los convenios de asociados a la  AECI en Bogotá.";
+            plantillaEst = "Que el Estudiante $1, identificado con $2  No. $3, cursando actualmente $5 semestre del programa de $4, está afiliado en la asociación de Estudiantes de la Escuela Colombiana de Ingeniería Julio Garavito desde $6 hasta $7, que cuenta con una afiliación gratuita de 6 meses dada su condición de estudiante activo.";
             plantillaEgr = "Que el Egresado $1, identificado con $2  No. $3, Egresado del periodo $4,  se encuentra afiliado en la asociación de egresados de la Escuela Colombiana de Ingeniería Julio Garavito desde $5 hasta $6 .La presente constancia se expide a solicitud del interesado.";
             setEaf(SAGECI.consultarEstadoAfiliacion(documentoID));
             if (bean.getTipo().equals("Estudiante")) {
@@ -143,9 +145,10 @@ public class UsuarioBean {
 
                 Paragraph plantilla;
                 plantilla = new Paragraph(plantillaEst);
-                plantilla.setSpacingAfter(80);
+                plantilla.setSpacingAfter(30);
                 plantilla.setAlignment(70);
                 doc.add(plantilla);
+                
 
             } else {
                 plantillaEgr = plantillaEgr.replace("$1", egresado.getApellido() + " " + egresado.getNombre());
@@ -157,21 +160,64 @@ public class UsuarioBean {
                 plantillaEgr = plantillaEgr.replace("$5", df.format(fecha));
                 Date fechafin = eaf.getFechaFin();
                 plantillaEgr = plantillaEgr.replace("$6", df.format(fechafin));
-                doc.add(new Paragraph(plantillaEgr));
+                Paragraph plantilla2;
+                plantilla2 = new Paragraph(plantillaEgr);
+                plantilla2.setSpacingAfter(30);
+                plantilla2.setAlignment(70);
+                doc.add(plantilla2);
 
             }
-            Paragraph fin;
-            fin = new Paragraph("Cordialmente\n\n JUAN CARLOS ROMERO ORDÓNEZ\n Director\n\n Asociación de Egresados Escuela Colombiana de Ingenieria Julio Garavito");
-            fin.setAlignment(70);
-            titulo.setSpacingAfter(100);
-            titulo.setSpacingBefore(80);
-            doc.add(fin);
-
+            String condicion="Es de anotar que para disfrutar de los convenios a los cuales tiene derecho es necesario que su afiliación permanezca vigente realizando el correspondiente pago anual,El presente certificado se expide con destino a los convenios de asociados a la  AECI en Bogotá Colombia.";
             Paragraph info;
-            info = new Paragraph("AK 45 No. 205 Bloque A - Piso 2 * Télefonos 6683600 ext 232 - Móvil 3124570612 * Correo Electrónico eaci@escuelaing.edu.co * Bogotá, Colombia");
-            info.setSpacingBefore(100);
-
+            info = new Paragraph(condicion);
+            info.setSpacingAfter(10);
+            info.setAlignment(10);
             doc.add(info);
+                
+            Paragraph fin;
+            fin = new Paragraph("Cordialmente");
+            fin.setAlignment(70);
+            fin.setSpacingAfter(70);
+            fin.setSpacingBefore(5);
+            fin.setIndentationLeft(220);
+            doc.add(fin);
+            Image imagen2 = Image.getInstance("http://s.pictub.club/2016/12/12/sAA3hH.jpg");
+            imagen2.scalePercent(32);
+            imagen2.setAbsolutePosition(250f, 245f);
+            doc.add(imagen2);
+            
+            Paragraph fin2;
+            fin2 = new Paragraph("JUAN CARLOS ROMERO ORDÓNEZ");
+            fin2.setAlignment(70);
+            fin2.setSpacingAfter(5);
+            fin2.setSpacingBefore(5);
+            fin2.setIndentationLeft(150);
+            doc.add(fin2);
+            
+            
+            Paragraph fin3;
+            fin3 = new Paragraph("Director");
+            fin3.setAlignment(70);
+            fin3.setSpacingAfter(5);
+            fin3.setSpacingBefore(5);
+            fin3.setIndentationLeft(230);
+            doc.add(fin3);
+            
+            Paragraph fin4;
+            fin4 = new Paragraph("Asociación de Egresados Escuela Colombiana de Ingenieria Julio Garavito");
+            fin4.setAlignment(70);
+            fin4.setSpacingAfter(50);
+            fin4.setSpacingBefore(5);
+            fin4.setIndentationLeft(75);
+            doc.add(fin4);
+            
+            
+           
+            Paragraph info3;
+            info3 = new Paragraph("AK 45 No. 205 Bloque A - Piso 2 * Télefonos 6683600 ext 232 - Móvil 3124570612\n       * Correo Electrónico eaci@escuelaing.edu.co * Bogotá, Colombia");
+            info3.setSpacingBefore(5);
+            info3.setIndentationLeft(30);
+            doc.add(info3);
 
             doc.close();
             out.close();
