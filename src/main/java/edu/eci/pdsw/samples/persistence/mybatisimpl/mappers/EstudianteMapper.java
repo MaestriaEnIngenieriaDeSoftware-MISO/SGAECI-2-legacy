@@ -35,13 +35,7 @@ public interface EstudianteMapper {
          * @param documentoID
          * @return estudiante con documento de indentidad
          */
-        public Estudiante getEstudiante(@Param("idEstudiante") int documentoID );
+        public Estudiante getEstudiante(@Param("id") int documentoID );
         
-        /**
-         * actualiza una persona en la base de  datos 
-         * @param anterior
-         * @param p 
-         */
-        public void update(Persona anterior, Persona p);
-    
+     
 }

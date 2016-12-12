@@ -31,27 +31,22 @@ import edu.eci.pdsw.samples.persistence.DaoEstudiante;
  */
 public class MyBatisDAOEstudiante implements DaoEstudiante{
 
-    EstudianteMapper Esmap=null;
     private SqlSession currentSession=null;
 
     public MyBatisDAOEstudiante(SqlSession session) {
-         Esmap=session.getMapper(EstudianteMapper.class);
+         this.currentSession=session;
     }
 
-    @Override
-    
-    public void update(Estudiante p) throws PersistenceException {
-        
-    }
 
     @Override
     public Estudiante load(int DocumentoID) throws PersistenceException {
-       
+        EstudianteMapper Esmap=currentSession.getMapper(EstudianteMapper.class);
         return Esmap.getEstudiante(DocumentoID);
-            }
+    }
 
     @Override
     public List<Estudiante> loadAll() throws PersistenceException {
+        EstudianteMapper Esmap=currentSession.getMapper(EstudianteMapper.class);
         return Esmap.getEstudiantes();
         
     }
@@ -59,6 +54,7 @@ public class MyBatisDAOEstudiante implements DaoEstudiante{
     
     @Override
     public void save(Estudiante e) throws PersistenceException {
+        EstudianteMapper Esmap=currentSession.getMapper(EstudianteMapper.class);
         Esmap.insertarEstudiante(e.getCodigoEstudiante(), e.getDocumentoID(), e.getSemestrePonderado(),e.getCarrera().toUpperCase());
     }
     

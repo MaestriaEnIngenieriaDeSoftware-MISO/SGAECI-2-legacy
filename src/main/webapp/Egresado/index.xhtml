@@ -29,10 +29,9 @@
                     </div>  
                     <div align="left">
                         <h1 style="font-family:  Lucida Sans Unicode;font-size: 100%;" >Es un gusto tenerle de vuelta</h1>
-                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 90%;">#{Usuario.persona.nombre} #{Usuario.persona.apellido}</h1>
+                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 90%;">#{Usuario.p.nombre} #{Usuario.p.apellido}</h1>
                         <h1 style="font-family:  Lucida Sans Unicode;font-size: 90%;" >Su estado de afiliacion es #{Usuario.eaf.estado}</h1>
                     </div>
-                   
 
                     <p:keyboard rendered="#{loginBean.subject.hasRole('Egresado')}"></p:keyboard>
                 </div>
@@ -42,7 +41,7 @@
         </h:form>
         <h:form id="form3">
             <div align="center" draggable="false" style="border-width: 10px">
-                <p:commandButton  value="Volver"  action="Egresado/index"/>
+                <p:commandButton  value="Volver"  action="index"/>
             </div>
         </h:form>
         <nav> 

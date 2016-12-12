@@ -32,7 +32,7 @@
                     </div>  
                     <div align="left">
                         <h1 style="font-family:  Lucida Sans Unicode;font-size: 100%;" >Es un gusto tenerle de vuelta</h1>
-                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 90%;">#{Usuario.persona.nombre} #{Usuario.persona.apellido}</h1>
+                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 90%;">#{Usuario.p.nombre} #{Usuario.p.apellido}</h1>
                         <h1 style="font-family:  Lucida Sans Unicode;font-size: 90%;" >Su estado de afiliacion es #{Usuario.eaf.estado}</h1>
                     </div>
                   
@@ -48,7 +48,7 @@
                             <h:outputText
                                 value="Haga click  para obtener el Certificado de Afiliación a  AECI" />
                             <ul>
-                                <p:commandButton value="Generar Certificado"  onclick="PF('dlg1').show()"/>
+                                <p:commandButton value="Generar Certificado"  onclick="PF('dlg1').show()"  />
                                 <p:dialog header="Certificado de  Afiliación." id="Certificado" widgetVar="dlg1" height="850" width="1000" styleClass="sheet.css" resizable="false" >
                                     <p:media cache="false" value="#{Usuario.streamedContent}" player="pdf" height="800" width="900" styleClass="sheet.css" />
                                     <p:commandButton value="Cerrar" onclick="PF('dlg').hide()"/>

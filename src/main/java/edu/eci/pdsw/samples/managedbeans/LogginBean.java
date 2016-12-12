@@ -85,23 +85,10 @@ public class LogginBean implements Serializable {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("Admin/index.xhtml");
             }else if (subject.hasRole("Egresado")) {
                 this.tipo="Egresado";
-                FacesContext.getCurrentInstance().getExternalContext().redirect("Egresado/index.xhtml");
-                estadoAfiliacion e = SAGECI.consultarEstadoAfiliacion(Integer.parseInt(username));
-                if(e.getEstado().equals("INACTIVO")){
-                    System.out.println(e.getEstado());
-                    RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_INFO, "RECORDATORIO", "Por favor realice el pago de afiliación para seguir disfrutando de nuestros servicios."
-                            + " Gracias."));
-                }
-                
+                FacesContext.getCurrentInstance().getExternalContext().redirect("Egresado/index.xhtml"); 
             }else if (subject.hasRole("Estudiante")) {
                 this.tipo="Estudiante";
-                FacesContext.getCurrentInstance().getExternalContext().redirect("Estudiante/index.xhtml"); 
-                estadoAfiliacion e = SAGECI.consultarEstadoAfiliacion(Integer.parseInt(username));
-                if(e.getEstado().equals("INACTIVO")){
-                    System.out.println(e.getEstado());
-                    RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_INFO, "RECORDATORIO", "Por favor realice el pago de afiliación para seguir disfrutando de nuestros servicios."
-                            + " Gracias."));
-                }
+                FacesContext.getCurrentInstance().getExternalContext().redirect("Estudiante/index.xhtml");
             } else {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("unauthorized.xhtml");
             }

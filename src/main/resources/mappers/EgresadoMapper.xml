@@ -13,13 +13,14 @@
         <result property='nombre' column='Nombre'/> 
         <result property='apellido' column='Apellido'/> 
         <result property='direccion' column='Direccion'/> 
-        <result property='correo' column='Correo_Personal'/> 
+        <result property='correo_Personal' column='Correo_Personal'/> 
         <result property='genero' column='Genero'/> 
         <result property='semestreGrado' column='Semestre_Graduacion'/> 
         <result property='correoEstudiantil' column='Correo_Estudiantil'/> 
         <result property='cargo' column='Cargo'/> 
         <result property='labora' column='Labora'/>
         <result property='carrera' column='Carrera'/> 
+        <result property='fechaGraduacion' column='Fecha_Graduacion'/> 
         <association property='emp' javaType='Egresado_Empresa' resultMap='EmpresaResult' columnPrefix='Epre_'></association>
     </resultMap>
     
@@ -36,48 +37,51 @@
     
      <select id="getEgresado" parameterType="map" resultMap="EgresadoResult">
          SELECT 
-          p1.DocumentoID ,
-          p1.Telefono ,
-          p1.Celular ,
-          p1.TipoDocumentoID ,
-          p1.Nombre ,
-          p1.Direccion ,
-          p1.Correo_Personal ,
-          p1.Genero ,
-          egre.Semestre_Graduacion , 
-          egre.Correo_Estudiantil , 
-          egre.Cargo ,
-          egre.Labora ,
+          p1.DocumentoID,
+          p1.Telefono,
+          p1.Celular,
+          p1.TipoDocumentoID,
+          p1.Nombre,
+          p1.Apellido,
+          p1.Direccion,
+          p1.Correo_Personal,
+          p1.Genero,
+          egre.Semestre_Graduacion, 
+          egre.Correo_Estudiantil, 
+          egre.Cargo,
+          egre.Labora,
           egre.Carrera,
+          egre.Fecha_Graduacion,
         
           Egresado_Empresa.Nombre as Epre_Nombre, 
           Egresado_Empresa.Telefono as Epre_Telefono, 
           Egresado_Empresa.Direccion as Epre_Direccion
       
          FROM Egresado as egre JOIN Persona as p1 ON (p1.DocumentoID=egre.DocumentoID) JOIN Egresado_Empresa ON (egre.Empresa = Egresado_Empresa.Nombre)
-         WHERE egre.DocumentoID = #{idEgresado}
+         WHERE egre.DocumentoID = #{id}
      </select>
      
      <select id="getEgresados" parameterType="map" resultMap="EgresadoResult">
          SELECT 
-       
           p1.DocumentoID ,
           p1.Telefono1 ,
           p1.Telefono2 ,
           p1.TipoDocumentoID ,
           p1.Nombre ,
+          p1.Apellido ,
           p1.Direccion,
           p1.Correo ,
           p1.Genero ,
-          egre.Semestre_Graduacion , 
-          egre.Correo_Personal , 
+          egre.Semestre_Graduacion, 
+          egre.Correo_Personal, 
           egre.Cargo ,
           egre.Labora,
-          egre.Carrera 
+          egre.Carrera,
+          egre.Fecha_Graduacion,
 
           emp.Nombre as Epre_Nombre, 
           emp.Telefono as Epre_Telefono, 
-          emp.Direccion as Epre_Direccion,
+          emp.Direccion as Epre_Direccion
         
          FROM Egresado as egre JOIN Persona as p1 on (p1.DocumentoID=egre.DocumentoID) JOIN Egresado_Empresa as emp ON (egre.Empresa = emp.Nombre)
          

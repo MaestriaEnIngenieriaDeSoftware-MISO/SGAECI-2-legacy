@@ -20,12 +20,7 @@
         <result property='carrera' column='Carrera'/> 
     </resultMap>
 
-    
-    <select id="getEstudiante" parameterType="map" resultMap="EstudianteResult">
-         SELECT * FROM 
-         Estudiante JOIN Persona ON(Estudiante.DocumentoID=Persona.DocumentoID)
-         WHERE Estudiante.DocumentoID = #{idEstudiante}
-     </select>
+   
     
     <select id="getEstudiantes" parameterType="map" resultMap="EstudianteResult">
          SELECT 
@@ -33,19 +28,41 @@
          per.Telefono ,
          per.Celular ,
          per.TipoDocumentoID ,
-         per.Nombre , 
-         per.Apellido , 
-         per.Direccion ,
-         per.Correo_Personal a,
-         per.Genero ,
-         est.Codigo_Estudiante ,
-         est.Semestre_Ponderado ,
+         per.Nombre, 
+         per.Apellido, 
+         per.Direccion,
+         per.Correo_Personal,
+         per.Genero,
+         est.Codigo_Estudiante,
+         est.Semestre_Ponderado,
          est.Carrera
         
         FROM 
          Estudiante as est JOIN Persona as per
      </select>
-
+     
+     <select id="getEstudiante" parameterType="map" resultMap="EstudianteResult">
+         SELECT 
+         per.DocumentoID ,
+         per.Telefono ,
+         per.Celular ,
+         per.TipoDocumentoID ,
+         per.Nombre, 
+         per.Apellido, 
+         per.Direccion,
+         per.Correo_Personal,
+         per.Genero,
+         est.Codigo_Estudiante,
+         est.Semestre_Ponderado,
+         est.Carrera
+        
+        FROM 
+         Estudiante as est JOIN Persona as per ON (est.DocumentoID=per.DocumentoID)
+        WHERE
+         est.DocumentoID=#{id}
+     </select>
+     
+     
      <insert id='insertarEstudiante'>
          INSERT INTO Estudiante(Codigo_Estudiante,DocumentoID,Semestre_Ponderado,Carrera) values (#{codigoEstudiante},#{documentoID},#{semestrePonderado},#{carrera})
      </insert>

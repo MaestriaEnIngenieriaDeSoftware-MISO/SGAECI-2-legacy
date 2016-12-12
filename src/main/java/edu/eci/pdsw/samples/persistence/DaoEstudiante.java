@@ -50,12 +50,6 @@ public interface DaoEstudiante {
      */
     public List<Estudiante> loadAll() throws PersistenceException;
     
-    /**
-     * actualizar un estudiante en la base de datos
-     * @param p
-     * @throws PersistenceException 
-     */
-    public void update(Estudiante p) throws PersistenceException;
     
     
 }

@@ -463,6 +463,21 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
         }
     }
 
+    @Override
+    public Persona consultarPersona(int DocumentoID) throws ExcepcionServiciosSAGECI {
+        Persona p= null;
+        try {
+            daof.beginSession();
+            p = daof.getDaoPersona().load(DocumentoID);
+            daof.commitTransaction();
+            daof.endSession();
+        } catch (PersistenceException ex) {
+            Logger.getLogger(ServiciosSAGECIDAOS.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ExcepcionServiciosSAGECI(ex.getLocalizedMessage(),ex);
+        }
+        return p;
+    }
+
         
     }
 class PropertiesLoader {

@@ -49,16 +49,6 @@ public class Egresado extends Persona{
         this.correoEstudiantil = correoEstudiantil;
     }
 
-    public String getCarrera() {
-        return carrera;
-    }
-
-    public void setCarrera(String carrera) {
-        this.carrera = carrera;
-    }
-
-    
-    
     public String getLabora() {
         return labora;
     }
@@ -73,6 +63,14 @@ public class Egresado extends Persona{
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
+    }
+
+    public String getCarrera() {
+        return carrera;
+    }
+
+    public void setCarrera(String carrera) {
+        this.carrera = carrera;
     }
 
     public Egresado_Empresa getEmp() {
@@ -90,4 +88,6 @@ public class Egresado extends Persona{
     public void setFechaGraduacion(Date fechaGraduacion) {
         this.fechaGraduacion = fechaGraduacion;
     }
+
+    
 }

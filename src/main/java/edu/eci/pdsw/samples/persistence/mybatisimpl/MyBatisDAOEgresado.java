@@ -18,25 +18,28 @@ import edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.EgresadoMapper;
  */
 public class MyBatisDAOEgresado implements DaoEgresado{
     
-    EgresadoMapper Egmap=null;
+   
     private SqlSession currentSession=null;
 
     public MyBatisDAOEgresado(SqlSession session) {
-        Egmap=session.getMapper(EgresadoMapper.class);
+         this.currentSession = session;
     }
     
      @Override
     public Egresado load(int DocumentoID) throws PersistenceException {
+        EgresadoMapper Egmap =currentSession.getMapper(EgresadoMapper.class);
         return Egmap.getEgresado(DocumentoID);
     }
 
     @Override
     public List<Egresado> loadAll() throws PersistenceException {
+        EgresadoMapper Egmap =currentSession.getMapper(EgresadoMapper.class);
         return Egmap.getEgresados();
     }
     
     @Override
     public void save(Egresado e) throws PersistenceException {
+      EgresadoMapper Egmap =currentSession.getMapper(EgresadoMapper.class);
       Egmap.insertarEgresado(e.getDocumentoID(), e.getSemestreGrado(), e.getCorreo_Personal().toLowerCase(), e.getLabora(), e.getCargo().toUpperCase(),e.getEmp().getNombreempre(),e.getFechaGraduacion(),e.getCarrera());
     }
 }

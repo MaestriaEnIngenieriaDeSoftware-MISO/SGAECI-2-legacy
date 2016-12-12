@@ -52,6 +52,6 @@ public interface EgresadoMapper {
      * @param documentoID
      * @return egresado relacionado con dicho documento de identidad
      */
-    public Egresado getEgresado(@Param("idEgresado") int documentoID );
+    public Egresado getEgresado(@Param("id") int documentoID );
     
 }
