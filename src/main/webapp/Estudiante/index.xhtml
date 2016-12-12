@@ -40,8 +40,10 @@
                     <p:keyboard rendered="#{loginBean.subject.hasRole('Estudiante')}"></p:keyboard>
                 </div>
                 <br></br>
+            
                 <p:tabView orientation="left">
                     <p:tab title="Generar Certificado">
+                        <h:form id="form1">
                         <h:panelGrid columns="2" cellpadding="10">
                             <img src="/resource/certificado.png" align="left" height="100" width="100"></img>
 
@@ -56,12 +58,30 @@
                             </ul>
 
                         </h:panelGrid>
+                           </h:form>
                     </p:tab>
+<<<<<<< HEAD
+=======
+                  
+>>>>>>> interfaz egresado
 
                 </p:tabView>
                 <br></br>
 
             </div>
+        </h:form>
+        
+       
+         <h:form id="form5">
+            <p:panelMenu style="width:300px">
+                <p:submenu label="Mi Cuenta">
+                    <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
+                    <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
+                    <p:menuitem Value="Salir">
+                        <h:outputLink value="/logout">Cerrar Sesión</h:outputLink>
+                    </p:menuitem>
+                </p:submenu>
+            </p:panelMenu>
         </h:form>
 
     </h:body>
