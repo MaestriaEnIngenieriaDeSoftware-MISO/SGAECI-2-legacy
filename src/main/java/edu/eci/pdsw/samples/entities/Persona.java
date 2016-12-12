@@ -47,7 +47,6 @@ public class Persona {
         this.direccion = direccion;
         this.correo_Personal = correo;
         this.genero = genero;
-        this.apellido=apellido;
         this.rol=rol;
         
         

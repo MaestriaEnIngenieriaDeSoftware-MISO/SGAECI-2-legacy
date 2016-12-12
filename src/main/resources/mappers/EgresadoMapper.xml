@@ -57,8 +57,10 @@
           Egresado_Empresa.Telefono as Epre_Telefono, 
           Egresado_Empresa.Direccion as Epre_Direccion
       
-         FROM Egresado as egre JOIN Persona as p1 ON (p1.DocumentoID=egre.DocumentoID) JOIN Egresado_Empresa ON (egre.Empresa = Egresado_Empresa.Nombre)
-         WHERE egre.DocumentoID = #{id}
+         FROM 
+          Egresado as egre JOIN Persona as p1 ON (egre.DocumentoID=p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (egre.Empresa = Egresado_Empresa.Nombre)
+         WHERE
+          egre.DocumentoID=#{id}
      </select>
      
      <select id="getEgresados" parameterType="map" resultMap="EgresadoResult">

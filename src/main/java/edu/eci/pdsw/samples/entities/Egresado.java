@@ -89,5 +89,7 @@ public class Egresado extends Persona{
         this.fechaGraduacion = fechaGraduacion;
     }
 
+   
+
     
 }
