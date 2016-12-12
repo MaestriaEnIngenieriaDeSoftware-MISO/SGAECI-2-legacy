@@ -9,19 +9,17 @@
         </link>
     </h:head>
     <h:body>
-        <h:form id="form5">
-            <p:panelMenu style="width:300px">
-                <p:submenu label="Mi Cuenta">
-                    <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
-                    <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
-                    <p:menuitem Value="Salir">
-                        <h:outputLink value="/logout">Cerrar Sesión</h:outputLink>
-                    </p:menuitem>
-                </p:submenu>
-            </p:panelMenu>
-        </h:form>
         <h:form id="form">
             <div class="container">
+                <p:panelMenu style="width:300px">
+                    <p:submenu label="Mi Cuenta">
+                        <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
+                        <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
+                        <p:menuitem Value="Salir">
+                            <h:outputLink value="/logout">Cerrar Sesión</h:outputLink>
+                        </p:menuitem>
+                    </p:submenu>
+                </p:panelMenu>
                 <div class="adentro" style="background-color: white">
                     <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
                     <div align="Center">

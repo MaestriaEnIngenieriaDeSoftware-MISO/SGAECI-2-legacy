@@ -9,29 +9,21 @@
         </link>
     </h:head>
     <h:body >
-        <div class="container">
-            <div style="float: right">
-                <h:form id="form5">
-                    <p:panelMenu style="width:300px">
-                        <p:submenu label="Mi Cuenta" >
-                            <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
-                            <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
-                            <p:menuitem value="Logout" action="#{Loggin.logout}"/>
-                        </p:submenu>
-                    </p:panelMenu>
-                </h:form> 
-            </div>
-        </div>
-
-
-
-
         <h:form id="form">
             <br></br>
             <br></br>
             <br></br>
             <div class="container">
-                <div class="adentro2" style="background-color: white">
+                    <p:panelMenu style="width:300px">
+                        <p:submenu label="Mi Cuenta">
+                            <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
+                            <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
+                            <p:menuitem Value="Salir" >
+                                <h:outputLink value="/logout">Cerrar Sesión</h:outputLink>
+                            </p:menuitem>
+                        </p:submenu>
+                    </p:panelMenu>
+                <div class="adentro" style="background-color: white">
                     <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
                     <div align="center">
                         <h1 style="font-family: Lucida Sans Unicode">Bienvenido Administrador </h1>
@@ -41,23 +33,51 @@
                 </div>
                 <br></br>
                 <br></br>
-            </div>
-            <div class="container2">
-                <nav> 
-                    <ul>
-                        <p:commandButton value="Procesar Solicitudes Afiliacion" action="ProcesarSolicitudesAfiliacion"/>
-                        <br>
+                <p:tabView orientation="left">
+                    <!--GENERA CERTIFICADO -->
+                    <p:tab title="Procesar Solicitudes Afiliacion">
+                        <h:form id="form1">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <img src="/resource/procesarsolicitud.png" align="left" height="100" width="100"></img>
 
-                        </br>
-                        <p:commandButton value="Solicitudes Por Vencer" action="SolicitudesPorVencer"/>
-                        <br>
+                                <h:outputText
+                                    value="Haga click  para procesar las solicitudes de afiliación enviadas a AECI" />
+                                <ul>
+                                    <p:commandButton value="Procesar Solicitudes Afiliación"  action="ProcesarSolicitudesAfiliacion"/>
+                                </ul>
 
-                        </br>
-                        <p:commandButton value="Procesar Pagos Afiliacion" action="ProcesarPagosAfiliacion"/>
+                            </h:panelGrid>
+                        </h:form>
+                    </p:tab>
+                    <p:tab title="Procesar Solicitudes Afiliacion">
+                        <h:form id="form2">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <img src="/resource/solicitudpendiente.png" align="left" height="100" width="100"></img>
 
-                    </ul>
-                </nav>
+                                <h:outputText
+                                    value="Haga click  para ver las solicitudes de afiliación por vencer de los usuarios" />
+                                <ul>
+                                    <p:commandButton value="Solicitudes Por Vencer" action="SolicitudesPorVencer"/>
+                                </ul>
 
+                            </h:panelGrid>
+                        </h:form>
+                    </p:tab>
+                    <p:tab title="Procesar Solicitudes Afiliacion">
+                        <h:form id="form3">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <img src="/resource/pago.jpg" align="left" height="100" width="100"></img>
+
+                                <h:outputText
+                                    value="Haga click  para procesar los pagos de afiliación enviadas por los usuarios pendientes" />
+                                <ul>
+                                    <p:commandButton value="Procesar Pagos Afiliacion" action="ProcesarPagosAfiliacion"/>
+                                </ul>
+
+                            </h:panelGrid>
+                        </h:form>
+                    </p:tab>
+                </p:tabView>
             </div>
         </h:form>
 
