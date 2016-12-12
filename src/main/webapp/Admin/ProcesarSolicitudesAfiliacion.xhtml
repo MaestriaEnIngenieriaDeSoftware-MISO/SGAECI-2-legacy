@@ -12,88 +12,90 @@
     </h:head>
 
     <h:body style="stylesheet">
-
-
-        <h:form id="form6">
-            <p:panelMenu style="width:300px">
-                <p:submenu label="Mi Cuenta">
-                    <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
-                    <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
-                    <p:menuitem Value="Salir">
-                        <h:outputLink value="/logout">Cerrar Sesión</h:outputLink>
-                    </p:menuitem>
-                </p:submenu>
-            </p:panelMenu>
-        </h:form>
+<div class="container">
+            <div style="float: right">
+                <h:form id="form5">
+                    <p:panelMenu style="width:300px">
+                        <p:submenu label="Mi Cuenta">
+                            <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
+                            <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
+                            <p:menuitem value="Logout" action="#{Loggin.logout}" />
+                        </p:submenu>
+                    </p:panelMenu>
+                </h:form> 
+            </div>
+        </div>
         <h:form id="form">
             <div class="container">
-                <div class="adentro" style="background-color: white">
+                <div class="adentro2" style="background-color: white">
                     <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
                     <div align="center">
                         <h1 style="font-family: Lucida Sans Unicode">Bienvenido Administrador </h1>
                     </div>
-                   
+
                     <p:keyboard rendered="#{loginBean.subject.hasRole('Administrador')}"></p:keyboard>
                 </div>
                 <br></br>
                 <br></br>
+            </div>
+            <div class="container">
                 <div class="adentro" style="background-color: white">
-                    <article>
-                        <h:form id="form2">
-                            <p:dataTable rowIndexVar="row" id="ListaSolicitudes" var="Solicitud"  value="#{ProcesarSolicitudAfiliacion.solicitudes}" selectionMode="single" selection="#{ProcesarSolicitudAfiliacion.solicitudSelection}" rowKey="#{Solicitud.solicitudID}" style="margin-bottom:0">
-                                <p:column style="width: 2px" headerText="Solicitud ID">
-                                    <h:outputText value="#{Solicitud.solicitudID}" />
-                                </p:column>
-                                <p:column style="width: 2px" headerText="Fecha">
-                                    <h:outputText value="#{Solicitud.fechaSolicitud}" />
-                                </p:column>
-                                <p:column style="width: 2px" headerText="Tipo de solicitante">
-                                    <h:outputText value="#{Solicitud.tipoSol}" />
-                                </p:column>
-                                <f:facet name="footer">
-                                    <p:commandButton process="ListaSolicitudes" update=":form:form2:SolicitudSeleccionada" icon="ui-icon-search" value="Ver solicitud" oncomplete="PF('dlg1').show()" />
-                                </f:facet>
-                            </p:dataTable>
 
-                            <p:dialog header="Datos principales del solicitante de afiliación." id="SolicitudSeleccionada" widgetVar="dlg1" height="575" draggable="false" resizable="false">
-                                <p:panelGrid columns="2" id="test">
-                                    <p:outputLabel  for="nombre" value="Nombres: "/>
-                                    <h:outputText id="nombre" value="#{ProcesarSolicitudAfiliacion.e.nombre}" />
-                                    <p:outputLabel  for="apellido" value="Apellidos: "/>
-                                    <h:outputText id="apellido" value="#{ProcesarSolicitudAfiliacion.e.apellido}" />
-                                    <p:outputLabel  for="tid" value="Tipo Documento: "/>
-                                    <h:outputText id="tid" value="#{ProcesarSolicitudAfiliacion.e.tipoDocumentoID}" />
-                                    <p:outputLabel  for="Docu" value="Documento: "/>
-                                    <h:outputText id="Docu" value="#{ProcesarSolicitudAfiliacion.e.documentoID}" />
-                                    <p:outputLabel  for="tel1" value="Telefono Principal: "/>
-                                    <h:outputText id="tel1" value="#{ProcesarSolicitudAfiliacion.e.telefono1}" />
-                                    <p:outputLabel  for="tel2" value="Telefono Secundario: "/>
-                                    <h:outputText id="tel2" value="#{ProcesarSolicitudAfiliacion.e.telefono2}" />
-                                    <p:outputLabel  for="dir" value="Dirección: "/>
-                                    <h:outputText id="dir" value="#{ProcesarSolicitudAfiliacion.e.direccion}" />
-                                    <p:outputLabel  for="cor" value="Correo electronico: "/>
-                                    <h:outputText id="cor" value="#{ProcesarSolicitudAfiliacion.e.correo_Personal}" />
-                                    <p:outputLabel  for="gen" value="Genero: "/>
-                                    <h:outputText id="gen" value="#{ProcesarSolicitudAfiliacion.e.genero}" />
-                                </p:panelGrid>
-                                <h3>Ingrese su Comentario de respuesta: </h3>
-                                <p:inputTextarea rows="6" cols="45" required="true" value="#{ProcesarSolicitudAfiliacion.comentario}" />
-                                <br/>
-                                <p:commandButton update="ListaSolicitudes" value="Aceptar" id="Acept" actionListener="#{ProcesarSolicitudAfiliacion.aceptarSolicitudAfiliacion}" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
-                                <p:commandButton update="ListaSolicitudes" value="Rechazar" id="Reject" actionListener="#{ProcesarSolicitudAfiliacion.rechazarSolicitudAfiliacion}" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
-                                <p:commandButton value="Cancelar" id="Cancel" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
-                            </p:dialog> 
-                        </h:form>  
-                        
-                    </article>
+                    <h:form id="form2">
+                        <p:dataTable rowIndexVar="row" id="ListaSolicitudes" var="Solicitud"  value="#{ProcesarSolicitudAfiliacion.solicitudes}" selectionMode="single" selection="#{ProcesarSolicitudAfiliacion.solicitudSelection}" rowKey="#{Solicitud.solicitudID}" style="margin-bottom:0">
+                            <p:column style="width: 2px" headerText="Solicitud ID">
+                                <h:outputText value="#{Solicitud.solicitudID}" />
+                            </p:column>
+                            <p:column style="width: 2px" headerText="Fecha">
+                                <h:outputText value="#{Solicitud.fechaSolicitud}" />
+                            </p:column>
+                            <p:column style="width: 2px" headerText="Tipo de solicitante">
+                                <h:outputText value="#{Solicitud.tipoSol}" />
+                            </p:column>
+                            <f:facet name="footer">
+                                <p:commandButton process="ListaSolicitudes" update=":form:form2:SolicitudSeleccionada" icon="ui-icon-search" value="Ver solicitud" oncomplete="PF('dlg1').show()" />
+                            </f:facet>
+                        </p:dataTable>
+
+                        <p:dialog header="Datos principales del solicitante de afiliación." id="SolicitudSeleccionada" widgetVar="dlg1" height="575" draggable="false" resizable="false">
+                            <p:panelGrid columns="2" id="test">
+                                <p:outputLabel  for="nombre" value="Nombres: "/>
+                                <h:outputText id="nombre" value="#{ProcesarSolicitudAfiliacion.e.nombre}" />
+                                <p:outputLabel  for="apellido" value="Apellidos: "/>
+                                <h:outputText id="apellido" value="#{ProcesarSolicitudAfiliacion.e.apellido}" />
+                                <p:outputLabel  for="tid" value="Tipo Documento: "/>
+                                <h:outputText id="tid" value="#{ProcesarSolicitudAfiliacion.e.tipoDocumentoID}" />
+                                <p:outputLabel  for="Docu" value="Documento: "/>
+                                <h:outputText id="Docu" value="#{ProcesarSolicitudAfiliacion.e.documentoID}" />
+                                <p:outputLabel  for="tel1" value="Telefono Principal: "/>
+                                <h:outputText id="tel1" value="#{ProcesarSolicitudAfiliacion.e.telefono1}" />
+                                <p:outputLabel  for="tel2" value="Telefono Secundario: "/>
+                                <h:outputText id="tel2" value="#{ProcesarSolicitudAfiliacion.e.telefono2}" />
+                                <p:outputLabel  for="dir" value="Dirección: "/>
+                                <h:outputText id="dir" value="#{ProcesarSolicitudAfiliacion.e.direccion}" />
+                                <p:outputLabel  for="cor" value="Correo electronico: "/>
+                                <h:outputText id="cor" value="#{ProcesarSolicitudAfiliacion.e.correo_Personal}" />
+                                <p:outputLabel  for="gen" value="Genero: "/>
+                                <h:outputText id="gen" value="#{ProcesarSolicitudAfiliacion.e.genero}" />
+                            </p:panelGrid>
+                            <h3>Ingrese su Comentario de respuesta: </h3>
+                            <p:inputTextarea rows="6" cols="45" required="true" value="#{ProcesarSolicitudAfiliacion.comentario}" />
+                            <br/>
+                            <p:commandButton update="ListaSolicitudes" value="Aceptar" id="Acept" actionListener="#{ProcesarSolicitudAfiliacion.aceptarSolicitudAfiliacion}" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
+                            <p:commandButton update="ListaSolicitudes" value="Rechazar" id="Reject" actionListener="#{ProcesarSolicitudAfiliacion.rechazarSolicitudAfiliacion}" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
+                            <p:commandButton value="Cancelar" id="Cancel" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
+                        </p:dialog> 
+                    </h:form>  
+
+
                 </div>
             </div>
         </h:form>
         <h:form id="form3">
-                            <div align="center" draggable="false" style="border-width: 10px">
-                                <p:commandButton  value="Volver"  action="index"/>
-                            </div>
-                        </h:form>
+            <div align="center" draggable="false" style="border-width: 10px">
+                <p:commandButton  value="Volver"  action="index"/>
+            </div>
+        </h:form>
 
     </h:body>
 </html>

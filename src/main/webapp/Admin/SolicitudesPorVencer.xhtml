@@ -12,66 +12,69 @@
     </h:head>
 
     <h:body>
-        <h:form id="form6">
-            <p:panelMenu style="width:300px">
-                <p:submenu label="Mi Cuenta">
-                    <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
-                    <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
-                    <p:menuitem Value="Salir">
-                        <h:outputLink value="/logout">Cerrar Sesión</h:outputLink>
-                    </p:menuitem>
-                </p:submenu>
-            </p:panelMenu>
-        </h:form>
+        <div class="container">
+            <div style="float: right">
+                <h:form id="form5">
+                    <p:panelMenu style="width:300px">
+                        <p:submenu label="Mi Cuenta">
+                            <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
+                            <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
+                            <p:menuitem value="Logout" action="#{Loggin.logout}" />
+                        </p:submenu>
+                    </p:panelMenu>
+                </h:form> 
+            </div>
+        </div>
         <h:form id="form">
             <div class="container">
-                <div class="adentro" style="background-color: white">
+                <div class="adentro2" style="background-color: white">
                     <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
                     <div align="center">
                         <h1 style="font-family: Lucida Sans Unicode">Bienvenido Administrador </h1>
                     </div>
-                   
+
                     <p:keyboard rendered="#{loginBean.subject.hasRole('Administrador')}"></p:keyboard>
                 </div>
                 <br></br>
                 <br></br>
-                <div class="adentro" style="background-color: white">
-                    <article>
-                        <h:form id="form2">
-                           
-                                <p:dataTable id="ListaSolicitudes" var="Persona"  value="#{ReporteVencerse.solicitudesAfiliacionVencidas}" style="margin-bottom:0" styleClass="sheet.css">
-                                    <p:column style="width: 2px" headerText="Nombre">
-                                        <h:outputText value="#{Persona.nombre}" />
-                                    </p:column>
-                                    <p:column style="width: 2px" headerText="Apellido">
-                                        <h:outputText value="#{Persona.apellido}" />
-                                    </p:column>
-                                    <p:column style="width: 2px" headerText="Documento de identificación">
-                                        <h:outputText value="#{Persona.documentoID}" />
-                                    </p:column>
-                                    <p:column style="width: 2px" headerText="Dirección">
-                                        <h:outputText value="#{Persona.direccion}" />
-                                    </p:column>
-                                    <p:column style="width: 2px" headerText="Correo electrónico">
-                                        <h:outputText value="#{Persona.correo_Personal}" />
-                                    </p:column>
-                                    <f:facet name="footer">
-                                        <p:commandButton icon="ui-icon-search" value="Enviar Recordatorio" actionListener="#{ReporteVencerse.recordatorio()}" />
-                                    </f:facet>
-                                </p:dataTable>
+            </div>
 
-                        </h:form> 
-                        
-                        
-                    </article>
+
+            <div class="container">
+                <div class="adentro" style="background-color: white">
+
+                    <h:form id="form2">
+
+                        <p:dataTable id="ListaSolicitudes" var="Persona"  value="#{ReporteVencerse.solicitudesAfiliacionVencidas}" style="margin-bottom:0" styleClass="sheet.css">
+                            <p:column style="width: 2px" headerText="Nombre">
+                                <h:outputText value="#{Persona.nombre}" />
+                            </p:column>
+                            <p:column style="width: 2px" headerText="Apellido">
+                                <h:outputText value="#{Persona.apellido}" />
+                            </p:column>
+                            <p:column style="width: 2px" headerText="Documento de identificación">
+                                <h:outputText value="#{Persona.documentoID}" />
+                            </p:column>
+                            <p:column style="width: 2px" headerText="Dirección">
+                                <h:outputText value="#{Persona.direccion}" />
+                            </p:column>
+                            <p:column style="width: 2px" headerText="Correo electrónico">
+                                <h:outputText value="#{Persona.correo_Personal}" />
+                            </p:column>
+                            <f:facet name="footer">
+                                <p:commandButton icon="ui-icon-search" value="Enviar Recordatorio" actionListener="#{ReporteVencerse.recordatorio()}" />
+                            </f:facet>
+                        </p:dataTable>
+
+                    </h:form> 
                 </div>
             </div>
         </h:form>
         <h:form id="form3">
-                            <div align="center" draggable="false" style="border-width: 10px">
-                                <p:commandButton  value="Volver"  action="index"/>
-                            </div>
-                        </h:form>
+            <div align="center" draggable="false" style="border-width: 10px">
+                <p:commandButton  value="Volver"  action="index"/>
+            </div>
+        </h:form>
     </h:body>
 </html>
 

@@ -9,51 +9,56 @@
         </link>
     </h:head>
     <h:body >
-        <h:form id="form">
-            <p:panelMenu style="width:300px" >
-                <p:submenu label="Mi Cuenta">
-                    <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
-                    <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
-                    <p:menuitem Value="Salir">
-                        <h:outputLink value="/logout">Cerrar Sesión</h:outputLink>
-                    </p:menuitem>
-                </p:submenu>
-            </p:panelMenu>
-        </h:form>
+        <div class="container">
+            <div style="float: right">
+                <h:form id="form5">
+                    <p:panelMenu style="width:300px">
+                        <p:submenu label="Mi Cuenta">
+                            <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
+                            <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
+                            <p:menuitem value="Logout" action="#{Loggin.logout}" />
+                        </p:submenu>
+                    </p:panelMenu>
+                </h:form> 
+            </div>
+        </div>
         <h:form id="form2">
             <div class="container">
-                <div class="adentro" style="background-color: white">
+                <div class="adentro2" style="background-color: white">
                     <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
-                    <div align="Center">
-                        <h1 style="font-family:  Lucida Sans Unicode;">Administracion de Cuenta</h1>
-                    </div>  
+                    <div align="center">
+                        <h1 style="font-family: Lucida Sans Unicode">Bienvenido Administrador </h1>
+                    </div>
+
                     <p:keyboard rendered="#{loginBean.subject.hasRole('Administrador')}"></p:keyboard>
                 </div>
                 <br></br>
-
-                <h:form id="form3">
-
-                    <h1 style="font-family:  Lucida Sans Unicode;">Cambiar Contraseña</h1>
-                    <h:panelGrid columns="2" columnClasses="label, value">
-                        <p:outputLabel style="font-weight:bold" for="telcasa2" value="Contraseña Actual" />
-                        <p:inputText styleClass="cent" required="true" id="telcasa2"  value="#{Usuario.contraactual}"/>
-
-
-                        <p:outputLabel style="font-weight:bold" for="Celular2" value="Nueva Contraseña" />
-                        <p:inputText styleClass="cent" required="true" id="Celular2" value="#{Usuario.contranueva1}"/>                
-
-
-                        <p:outputLabel style="font-weight:bold" for="direccionVi2" value="Repita la contraseña Nueva " />
-                        <p:inputText styleClass="cent" required="true" id="direccionVi2"  value="#{Usuario.contranueva2}"/>
-
-                    </h:panelGrid>
-
-                </h:form>
-                <h:form id="form4">
-                    <p:commandButton value="Aceptar" id="ajax2"  actionListener="#{Usuario.UpdateContra()}" styleClass="ui-priority-primary" />
-                </h:form>
                 <br></br>
+            </div>
+            <div class="container">
+                <div class="adentro2" style="background-color: white">
+                    <h:form id="form3">
 
+                        <h1 style="font-family:  Lucida Sans Unicode;">Cambiar Contraseña</h1>
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <p:outputLabel style="font-weight:bold" for="telcasa2" value="Contraseña Actual" />
+                            <p:inputText styleClass="cent" required="true" id="telcasa2"  value="#{Usuario.contraactual}"/>
+
+
+                            <p:outputLabel style="font-weight:bold" for="Celular2" value="Nueva Contraseña" />
+                            <p:inputText styleClass="cent" required="true" id="Celular2" value="#{Usuario.contranueva1}"/>                
+
+
+                            <p:outputLabel style="font-weight:bold" for="direccionVi2" value="Repita la contraseña Nueva " />
+                            <p:inputText styleClass="cent" required="true" id="direccionVi2"  value="#{Usuario.contranueva2}"/>
+
+                        </h:panelGrid>
+
+                    </h:form>
+                    <h:form id="form4">
+                        <p:commandButton value="Aceptar" id="ajax2"  actionListener="#{Usuario.UpdateContra()}" styleClass="ui-priority-primary" />
+                    </h:form>
+                </div>
             </div>
         </h:form>
 

@@ -50,7 +50,20 @@ p{color: white;
     display: block;
     margin: auto;
     max-width:70% ;
+    height:auto;
+    max-height:100% ;
+    border-style: solid;
+    border-width: 30px;
+    border-color: white;
+}
+
+.adentro2{
+    align-self: center;
+    display: block;
+    margin: auto;
+    max-width:70% ;
     height:240px;
+    max-height:100% ;
     border-style: solid;
     border-width: 30px;
     border-color: white;
@@ -162,8 +175,8 @@ img {
 
 
 
-.arriba{
-    background-color: white;
+.der{
+   
     
 }
 
@@ -176,7 +189,13 @@ img {
 
 div.container {
     width: 100%;
-    border: 1px solid gray;
+    
+}
+
+div.container2 {
+    width: 30%;
+    align-self: stretch;
+    
 }
 
 header, footer {

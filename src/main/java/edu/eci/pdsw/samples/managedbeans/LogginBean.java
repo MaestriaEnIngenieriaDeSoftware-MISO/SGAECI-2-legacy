@@ -151,7 +151,14 @@ public class LogginBean implements Serializable {
     }
     
     
-
+    public String logout() {
+      HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+      if (session != null) {
+         session.invalidate();
+      }
+      boolean rendered = false;
+      return "/Bienvenida.xhtml?faces-redirect=true"; 
+   }
   
 
 

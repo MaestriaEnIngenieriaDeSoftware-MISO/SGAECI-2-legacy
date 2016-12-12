@@ -189,14 +189,15 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
     public void byteToImage() throws IOException {
         this.i= new DefaultStreamedContent(new ByteArrayInputStream(pagoSelection.getImg()));
     }
+  
 
     public StreamedContent getI() {
         return i;
     }
-
+    
     public void setI(StreamedContent i) {
         this.i = i;
-    }
+}
 
     
 }
