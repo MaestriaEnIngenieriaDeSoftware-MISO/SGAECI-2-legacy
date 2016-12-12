@@ -36,38 +36,7 @@
                     <p:keyboard rendered="#{loginBean.subject.hasRole('Egresado')}"></p:keyboard>
                 </div>
                 <br></br>
-<<<<<<< HEAD
-                <br></br>
-            </div>
-        </h:form>
-        <h:form id="form3">
-            <div align="center" draggable="false" style="border-width: 10px">
-                <p:commandButton  value="Volver"  action="index"/>
-            </div>
-        </h:form>
-        <nav> 
-            <ul>
-                <h:form>
-                    <p:commandButton value="Recibo de Pago" onclick="PF('dlg1').show()"/>
 
-                    <h:form>
-                        <p:dialog header="Generar Recibo" id="Recibo" widgetVar="dlg1" height="550" width="550" styleClass="sheet.css" resizable="false">
-                            <h:outputLabel for="adjuntar" value="Adjunte su recibo de pago para validarlo con el Administrador" />
-                            <h:form>
-                                <h:form enctype="multipart/form-data">
-                                    <p:fileUpload fileUploadListener="#{GenerarPago.handleFileUpload}" />
-                                    <p:growl id="messages" showDetail="true"/>
-                                </h:form>
-                                <p:calendar class="calen" id="fecha" value="#{GenerarPago.fechaConsignacion}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
-                            </h:form>
-                            <p:commandButton value="Enviar" actionListener="#{GenerarPago.aceptarEnvio()}" oncomplete="PF('dlg1').hide()"/>
-                            <p:commandButton value="Cerrar" onclick="PF('dlg1').hide()"/>
-                        </p:dialog>
-                    </h:form>
-                </h:form>
-            </ul>
-        </nav>
-=======
                 <p:tabView orientation="left">
                     <!--GENERA CERTIFICADO -->
                      <p:tab title="Generar Certificado">
@@ -140,7 +109,7 @@
                 </p:submenu>
             </p:panelMenu>
         </h:form>
->>>>>>> interfaz egresado
+
     </h:body>
 </html>
 

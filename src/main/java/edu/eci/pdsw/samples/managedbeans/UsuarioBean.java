@@ -107,11 +107,8 @@ public class UsuarioBean {
             OutputStream out = new ByteArrayOutputStream();
             PdfWriter writer = PdfWriter.getInstance(doc, out);
             doc.open();
-<<<<<<< HEAD
-=======
             LogginBean bean = (LogginBean) getManagedBean("Loggin");
             documentoID = Integer.parseInt(bean.getUsername());
->>>>>>> interfaz egresado
 
             Image imagen = Image.getInstance("http://static.wixstatic.com/media/926fce_4cc266e8ca394a5097cc08320dc5ff73.jpg_256");
             imagen.scalePercent(32);
@@ -132,21 +129,17 @@ public class UsuarioBean {
             frase.setSpacingAfter(20);
             doc.add(frase);
 
-<<<<<<< HEAD
-            plantillaEst = "Que el Estudiante $1, identificado con $2  No. $3, cursando actualmente $5 semestre del programa de $4, está afiliado en la asociación de Estudiantes de la Escuela Colombiana de Ingeniería Julio Garavito desde $6 hasta $7, que cuenta con una afiliación gratuita de 6 meses dada su condición de estudiante activo.";
-=======
             if (bean.getTipo().equals("Estudiante")) {
                 estudiante = SAGECI.consultarEstudiante(documentoID);
-                setPersona(estudiante);
+                setP(estudiante);
             } else {
                 if (bean.getTipo().equals("Egresado")) {
                     egresado = SAGECI.consultarEgresado(documentoID);
-                    setPersona(egresado);
+                    setP(egresado);
                 }
             }
 
             plantillaEst = "Que el Estudiante $1, identificado con $2  No. $3, cursando actualmente $5 semestre del programa de $4, está afiliado en la asociación de Estudiantes de la Escuela Colombiana de Ingeniería Julio Garavito desde $6 hasta $7, que cuenta con una afiliación gratuita de 6 meses dada su condición de estudiante activo.\n Es de anotar que para disfrutar de los convenios a los cuales  tiene derecho es necesario que su afiliación permanezca vigente realizando  el correspondiente pago anual. El presente certificado se expide con destino a los convenios de asociados a la  AECI en Bogotá.";
->>>>>>> interfaz egresado
             plantillaEgr = "Que el Egresado $1, identificado con $2  No. $3, Egresado del periodo $4,  se encuentra afiliado en la asociación de egresados de la Escuela Colombiana de Ingeniería Julio Garavito desde $5 hasta $6 .La presente constancia se expide a solicitud del interesado.";
             setEaf(SAGECI.consultarEstadoAfiliacion(documentoID));
             if (bean.getTipo().equals("Estudiante")) {
@@ -167,8 +160,6 @@ public class UsuarioBean {
                 plantilla.setSpacingAfter(30);
                 plantilla.setAlignment(70);
                 doc.add(plantilla);
-<<<<<<< HEAD
-                
 
             } else {
                 plantillaEgr = plantillaEgr.replace("$1", egresado.getApellido() + " " + egresado.getNombre());
@@ -185,23 +176,7 @@ public class UsuarioBean {
                 plantilla2.setSpacingAfter(30);
                 plantilla2.setAlignment(70);
                 doc.add(plantilla2);
-=======
-
-            } else {
-                if (bean.getTipo().equals("Egresado")) {
-                    plantillaEgr = plantillaEgr.replace("$1", egresado.getApellido() + " " + egresado.getNombre());
-                    plantillaEgr = plantillaEgr.replace("$2", egresado.getTipoDocumentoID());
-                    plantillaEgr = plantillaEgr.replace("$3", Integer.toString(documentoID));
-                    plantillaEgr = plantillaEgr.replace("$4", egresado.getSemestreGrado());
-                    DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-                    Date fecha = eaf.getFechaInicio();
-                    plantillaEgr = plantillaEgr.replace("$5", df.format(fecha));
-                    Date fechafin = eaf.getFechaFin();
-                    plantillaEgr = plantillaEgr.replace("$6", df.format(fechafin));
-                    doc.add(new Paragraph(plantillaEgr));
-                }
->>>>>>> interfaz egresado
-
+            
             }
             String condicion="Es de anotar que para disfrutar de los convenios a los cuales tiene derecho es necesario que su afiliación permanezca vigente realizando el correspondiente pago anual,El presente certificado se expide con destino a los convenios de asociados a la  AECI en Bogotá Colombia.";
             Paragraph info;
@@ -217,7 +192,7 @@ public class UsuarioBean {
             fin.setSpacingBefore(5);
             fin.setIndentationLeft(220);
             doc.add(fin);
-<<<<<<< HEAD
+
             Image imagen2 = Image.getInstance("http://s.pictub.club/2016/12/12/sAA3hH.jpg");
             imagen2.scalePercent(32);
             imagen2.setAbsolutePosition(250f, 245f);
@@ -255,14 +230,6 @@ public class UsuarioBean {
             info3.setSpacingBefore(5);
             info3.setIndentationLeft(30);
             doc.add(info3);
-=======
-
-            Paragraph info;
-            info = new Paragraph("AK 45 No. 205 Bloque A - Piso 2 * Télefonos 6683600 ext 232 - Móvil 3124570612 * Correo Electrónico eaci@escuelaing.edu.co * Bogotá, Colombia");
-            info.setSpacingBefore(110);
-
-            doc.add(info);
->>>>>>> interfaz egresado
 
             doc.close();
             out.close();
