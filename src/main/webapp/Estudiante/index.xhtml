@@ -13,11 +13,9 @@
             <div class="container">
                 <p:panelMenu style="width:300px">
                     <p:submenu label="Mi Cuenta">
-                        <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
-                        <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
-                        <p:menuitem Value="Salir">
-                            <h:outputLink value="/logout">Cerrar Sesión</h:outputLink>
-                        </p:menuitem>
+                        <p:menuitem value="Inicio" action="index" icon="ui-icon-home" />
+                        <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-wrench" />
+                        <p:menuitem value="Cerrar sesión" action="#{Loggin.logout}" icon="ui-icon-circle-close"/>
                     </p:submenu>
                 </p:panelMenu>
                 <div class="adentro" style="background-color: white">

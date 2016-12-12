@@ -13,11 +13,9 @@
             <div class="container">
                 <p:panelMenu style="width:300px">
                     <p:submenu label="Mi Cuenta">
-                        <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
-                        <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
-                        <p:menuitem Value="Salir">
-                            <h:outputLink value="/logout">Cerrar Sesión</h:outputLink>
-                        </p:menuitem>
+                        <p:menuitem value="Inicio" action="index" icon="ui-icon-home" />
+                        <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-wrench" />
+                        <p:menuitem value="Cerrar sesión" action="#{Loggin.logout}" icon="ui-icon-circle-close"/>
                     </p:submenu>
                 </p:panelMenu>
                 <div class="adentro" style="background-color: white">
@@ -36,38 +34,31 @@
                 </div>
                 <br></br>
                 <p:tabView orientation="left">
-
-
                     <!--REGISTRO DE PAGO  -->
                     <p:tab title="Registrar Pago">
-
                         <h:panelGrid columns="2" cellpadding="10" id="panel1">
-                            <img src="/resource/pago.jpg" align="left" height="100" width="100"></img>
-                            <h:outputText value="Haga click  para adjuntar su recibo de pago " />
                             <h:form id="form2">
-
-                                <nav> 
+                                <img src="/resource/pago.jpg" align="left" height="100" width="100"></img>
+                                <h:outputText value="Haga click  para adjuntar su recibo de pago " />
                                     <ul>
                                         <h:form>
                                             <p:commandButton value="Recibo de Pago" onclick="PF('dlg1').show()"/>
-
-                                            <h:form>
-                                                <p:dialog header="Generar Recibo" id="Recibo" widgetVar="dlg1" height="550" width="550" styleClass="sheet.css" resizable="false">
-                                                    <h:outputLabel for="adjuntar" value="Adjunte su recibo de pago para validarlo con el Administrador" />
-                                                    <h:form>
-                                                        <h:form enctype="multipart/form-data">
-                                                            <p:fileUpload fileUploadListener="#{GenerarPago.handleFileUpload}" />
-                                                            <p:growl id="messages" showDetail="true"/>
-                                                        </h:form>
-                                                        <p:calendar class="calen" id="fecha" value="#{GenerarPago.fechaConsignacion}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
+                                        </h:form>
+                                        <h:form>
+                                            <p:dialog header="Generar Recibo" id="Recibo" widgetVar="dlg1" height="550" width="550" styleClass="sheet.css" resizable="false">
+                                                <h:outputLabel for="adjuntar" value="Adjunte su recibo de pago para validarlo con el Administrador" />
+                                                <h:form>
+                                                    <h:form enctype="multipart/form-data">
+                                                        <p:fileUpload fileUploadListener="#{GenerarPago.handleFileUpload}" />
+                                                        <p:growl id="messages" showDetail="true"/>
                                                     </h:form>
-                                                    <p:commandButton value="Enviar" actionListener="#{GenerarPago.aceptarEnvio()}" oncomplete="PF('dlg1').hide()"/>
-                                                    <p:commandButton value="Cerrar" onclick="PF('dlg1').hide()"/>
-                                                </p:dialog>
-                                            </h:form>
+                                                    <p:calendar class="calen" id="fecha" value="#{GenerarPago.fechaConsignacion}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
+                                                </h:form>
+                                                <p:commandButton value="Enviar" actionListener="#{GenerarPago.aceptarEnvio()}" oncomplete="PF('dlg1').hide()"/>
+                                                <p:commandButton value="Cerrar" onclick="PF('dlg1').hide()"/>
+                                            </p:dialog>
                                         </h:form>
                                     </ul>
-                                </nav>
                             </h:form>
                         </h:panelGrid>
 
