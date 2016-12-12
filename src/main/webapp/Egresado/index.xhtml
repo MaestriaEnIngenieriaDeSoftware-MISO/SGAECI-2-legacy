@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Interfaz Egresado</title>
+        <link rel="stylesheet" type="text/css" href="../sheet.css"> 
+        </link>
+    </h:head>
+    <h:body>
+        <h:form id="form5">
+            <p:panelMenu style="width:300px">
+                <p:submenu label="Mi Cuenta">
+                    <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
+                    <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
+                    <p:menuitem Value="Salir">
+                        <h:outputLink value="/logout">Cerrar Sesión</h:outputLink>
+                    </p:menuitem>
+                </p:submenu>
+            </p:panelMenu>
+        </h:form>
+        <h:form id="form">
+            <div class="container">
+                <div class="adentro" style="background-color: white">
+                    <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
+                    <div align="Center">
+                        <h1 style="font-family:  Lucida Sans Unicode;">Bienvenido a SGAECI</h1>
+                    </div>  
+                    <div align="left">
+                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 100%;" >Es un gusto tenerle de vuelta</h1>
+                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 90%;">#{Usuario.p.nombre} #{Usuario.p.apellido}</h1>
+                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 90%;" >Su estado de afiliacion es:  #{Usuario.eaf.estado} </h1>
+                    </div>
+
+
+                    <p:keyboard rendered="#{loginBean.subject.hasRole('Egresado')}"></p:keyboard>
+                </div>
+                <br></br>
+                <p:tabView orientation="left">
+
+
+                    <!--REGISTRO DE PAGO  -->
+                    <p:tab title="Registrar Pago">
+
+                        <h:panelGrid columns="2" cellpadding="10" id="panel1">
+                            <img src="/resource/pago.jpg" align="left" height="100" width="100"></img>
+                            <h:outputText value="Haga click  para adjuntar su recibo de pago " />
+                            <h:form id="form2">
+
+                                <nav> 
+                                    <ul>
+                                        <h:form>
+                                            <p:commandButton value="Recibo de Pago" onclick="PF('dlg1').show()"/>
+
+                                            <h:form>
+                                                <p:dialog header="Generar Recibo" id="Recibo" widgetVar="dlg1" height="550" width="550" styleClass="sheet.css" resizable="false">
+                                                    <h:outputLabel for="adjuntar" value="Adjunte su recibo de pago para validarlo con el Administrador" />
+                                                    <h:form>
+                                                        <h:form enctype="multipart/form-data">
+                                                            <p:fileUpload fileUploadListener="#{GenerarPago.handleFileUpload}" />
+                                                            <p:growl id="messages" showDetail="true"/>
+                                                        </h:form>
+                                                        <p:calendar class="calen" id="fecha" value="#{GenerarPago.fechaConsignacion}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
+                                                    </h:form>
+                                                    <p:commandButton value="Enviar" actionListener="#{GenerarPago.aceptarEnvio()}" oncomplete="PF('dlg1').hide()"/>
+                                                    <p:commandButton value="Cerrar" onclick="PF('dlg1').hide()"/>
+                                                </p:dialog>
+                                            </h:form>
+                                        </h:form>
+                                    </ul>
+                                </nav>
+                            </h:form>
+                        </h:panelGrid>
+
+                    </p:tab>
+
+                    <!--GENERA CERTIFICADO -->
+                    <p:tab title="Generar Certificado">
+                        <h:form id="form1">
+                            <h:panelGrid columns="2" cellpadding="10" id="panel2">
+                                <img src="/resource/certificado.png" align="left" height="100" width="100"></img>
+
+                                <h:outputText value="Haga click  para obtener el Certificado de Afiliación a  AECI" />
+                                <ul>
+                                    <p:commandButton value="Generar Certificado"  onclick="PF('dlg1').show()"/>
+                                    <p:dialog header="Certificado de  Afiliación." id="Certificado" widgetVar="dlg1" height="850" width="1000" styleClass="sheet.css" resizable="false" >
+                                        <p:media cache="false" value="#{Usuario.streamedContent}" player="pdf" height="800" width="900" styleClass="sheet.css" />
+                                        <p:commandButton value="Cerrar" onclick="PF('dlg1').hide()"/>
+                                    </p:dialog>
+                                </ul>
+
+                            </h:panelGrid>
+                        </h:form>
+                    </p:tab>
+
+                </p:tabView>
+
+            </div>
+        </h:form>
+    </h:body>
+</html>
