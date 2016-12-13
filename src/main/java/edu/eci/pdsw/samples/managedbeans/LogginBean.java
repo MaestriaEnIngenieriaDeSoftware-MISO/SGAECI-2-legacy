@@ -80,9 +80,7 @@ public class LogginBean implements Serializable {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(getUsername(), getPassword(), isAutenticacion());
         try {
-            
-            subject.login(token);
-            System.out.println("4");
+            subject.login(token); 
             if (subject.hasRole("Administrador")) {
                 this.tipo="Administrador";
                 FacesContext.getCurrentInstance().getExternalContext().redirect("Admin/index.xhtml");
