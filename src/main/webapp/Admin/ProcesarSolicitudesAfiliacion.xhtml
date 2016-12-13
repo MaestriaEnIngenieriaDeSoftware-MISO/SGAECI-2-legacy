@@ -12,7 +12,7 @@
     </h:head>
 
     <h:body style="stylesheet">
-<div class="container">
+        <div class="container">
             <div style="float: right">
                 <h:form id="form5">
                     <p:panelMenu style="width:300px">
@@ -30,7 +30,9 @@
                 <div class="adentro2" style="background-color: white">
                     <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
                     <div align="center">
-                        <h1 style="font-family: Lucida Sans Unicode">Bienvenido Administrador </h1>
+                        <p class="sansserif">
+                            Bienvenido señor administrador.
+                        </p>
                     </div>
 
                     <p:keyboard rendered="#{loginBean.subject.hasRole('Administrador')}"></p:keyboard>
@@ -91,11 +93,13 @@
                 </div>
             </div>
         </h:form>
-        <h:form id="form3">
-            <div align="center" draggable="false" style="border-width: 10px">
-                <p:commandButton  value="Volver"  action="index"/>
-            </div>
-        </h:form>
+        <div class="adentro" style="background-color: white">
+            <h:form id="form3">
+                <div align="center" draggable="false" style="border-width: 10px">
+                    <p:commandButton  value="Volver"  action="index"/>
+                </div>
+            </h:form>
+        </div>
 
     </h:body>
 </html>
