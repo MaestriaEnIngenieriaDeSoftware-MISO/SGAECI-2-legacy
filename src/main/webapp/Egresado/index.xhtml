@@ -40,30 +40,32 @@
             <div class="container">
                 <div class="adentro">
                     <p:tabView>
-                        <!--REGISTRO DE PAGO  -->
-                        <p:tab title="Registrar Pago">
+
+                        <p:tab title="Adjuntar Recivo de Pago">
                             <h:form id="form2">
-                                <h:panelGrid columns="2" cellpadding="10" id="panel1">
-                                    <img src="/resource/pago.jpg" align="left" height="100" width="100"></img>
+                                <h:panelGrid columns="2" cellpadding="10" id="panel12">
+                                    <img src="/resource/certificado.png" align="left" height="100" width="100"></img>
+
                                     <h:outputText value="Haga click  para adjuntar su recibo de pago " />
                                     <ul>
-                                        <p:commandButton value="Recibo de Pago" onclick="PF('dlg1').show()"/>
-                                        <p:dialog header="Generar Recibo" id="Recibo" widgetVar="dlg1" height="550" width="550" styleClass="sheet.css" resizable="false">
-                                            <h:outputLabel for="adjuntar" value="Adjunte su recibo de pago para validarlo con el Administrador" />
-                                            <h:form enctype="multipart/form-data">
+                                        <p:commandButton value="Generar Recibo"  onclick="PF('dlg1').show()"/>
+                                        <p:dialog header="Generar Recibo" id="Recibo" widgetVar="dlg1" height="400" width="400" >
+                                            <h:outputText value="Adjunte su recibo de pago para validarlo con el Administrador " />
+                                            <h:form id="form9" enctype="multipart/form-data">
                                                 <p:fileUpload fileUploadListener="#{GenerarPago.handleFileUpload}" />
                                                 <p:growl id="messages" showDetail="true"/>
                                             </h:form>
-                                            <h:outputLabel for="fecha"  value="Ingrese la fecha de la realización del pago" />
+                                            <h:outputText value="Ingrese la fecha de la realización del pago " />
                                             <p:calendar class="calen" id="fecha" value="#{GenerarPago.fechaConsignacion}" locale="de" navigator="true" pattern="yyyy-MM-dd" />
                                             <p:commandButton value="Enviar" actionListener="#{GenerarPago.aceptarEnvio()}" oncomplete="PF('dlg1').hide()"/>
-                                            <p:commandButton value="Cerrar" onclick="PF('dlg1').hide()"/>
+                                            <p:commandButton value="Cerrar" onclick="PF('dlg1').hide()"/>                                    
                                         </p:dialog>
-                                        </h:form>
                                     </ul>
+
                                 </h:panelGrid>
-                                    
+                            </h:form>
                         </p:tab>
+
                         <!--GENERA CERTIFICADO -->
                         <p:tab title="Generar Certificado">
                             <h:form id="form1">
