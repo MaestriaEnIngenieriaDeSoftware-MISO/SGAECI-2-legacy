@@ -35,7 +35,7 @@
                     </p:tab>
                     <p:tab title="Nuestra Junta Directiva">
                         <h:panelGrid columns="1" cellpadding="80">
-                            <img src="/resource/junta.PNG" align="left" height="250" width="550"></img>
+                            <img src="/resource/junta.PNG" align="left" height="280" width="650"></img>
                             <h:outputText value="Los miembros de la Junta Directiva de AECI trabajan a favor de todos, y en equipo con los egresados de nuestra institución para lograr fomentar la integración entre cada uno de sus miembros con el gran propósito enmarcada dentro de la misión de AECI, como es brindar apoyo técnico, profesional, docente e investigativo." />
                         </h:panelGrid>
                     </p:tab>
@@ -56,47 +56,44 @@
                             <h:graphicImage value="/resource/#{image.imagen}" alt="Empresa #{image.descripcion}" title="CONVENIOS" height="500" width="500"/>
                         </p:galleria>
                     </p:tab>
-                    <p:tab title="Contactenos">
-                        <h:panelGrid columns="2" cellpadding="15">
-                            <h:panelGrid  columns="1" styleClass="sheet.css">
-                                <aside>
-                                    <script src="http://platform.twitter.com/widgets.js" ></script>
-                                    <a href="https://twitter.com/egresados_eci" class="twitter-follow-button" data-lang="es" data-dnt="true" data-show-count="false">Follow @egresados_eci</a>
-                                </aside>
+                    <p:tab title="Contactenos" class="tab">
+                        <h:panelGrid  cellpadding="30">
+                            <div style="float:left">
                                 <aside>
                                     <script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                                     <a class="twitter-timeline" data-width="350" data-height="250" data-theme="light" href="https://twitter.com/egresados_eci">Tweets by egresados_eci</a>
                                 </aside> 
+                            </div>
+
+                            <div style="float:right">
+                                <img src="/resource/contactenos.PNG" align="left" height="250" width="350"></img>
+                            </div>
+                            <div style="float:right">
                                 <aside>
-                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.9252399064258!2d-74.04352751187521!3d4.782846560177332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f85e32ae0ca4b%3A0x5edd4c74e8f7220c!2sESCUELA+COLOMBIANA+DE+INGENIER%C3%8DA+JULIO+GARAVITO!5e0!3m2!1ses-419!2sco!4v1481210645478" width="400" height="300" frameborder="0" style="border:0" allowfullscreen=""></iframe>  
+                                    <iframe width="350" height="250" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.9252399064258!2d-74.04352751187521!3d4.782846560177332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f85e32ae0ca4b%3A0x5edd4c74e8f7220c!2sESCUELA+COLOMBIANA+DE+INGENIER%C3%8DA+JULIO+GARAVITO!5e0!3m2!1ses-419!2sco!4v1481210645478"  ></iframe>  
                                 </aside>
-
+                            </div>
+                            <h:panelGrid  cellpadding="30">
+                                <h:outputLabel for="nombre" value="Tu Nombre:" />
+                                <p:inputText id="nombre" value="#{Bienvenida.nombre}" />
+                                <h:outputLabel for="email" value="Tu Email:" />
+                                <p:inputText id="email" value="#{Bienvenida.email}"  />
+                                <h:outputLabel for="asunto" value="Asunto:" />
+                                <p:inputText id="asunto" value="#{Bienvenida.asunto}" />
+                                <h:outputLabel for="mensaje" value="Mensaje:" />
+                                <p:inputTextarea id="mensaje" rows="6" cols="45" value="#{Bienvenida.mensaje}" />
+                                <h:form id="form12">
+                                    <p:commandButton value="Enviar Correo" id="enviarsol" actionListener="#{Bienvenida.enviarMensaje()}" />
+                                </h:form>
                             </h:panelGrid>
-                            <h:outputText value="Pbx: 6683600 Ext.:232 Movil- 312 457 0612 "/>
-
-
-                            <h:outputText value="Dirección Oficina: Sede Escuela Colombiana de Ingeneiría Julio Garavito 
-                                          AK 45 N° 205-59 Bloque A Segundo Piso " />
                         </h:panelGrid>
+
+
                     </p:tab>
-
                 </p:tabView>
-
-
             </h:panelGrid>
-
-
-
         </div>
-
-
-
-
-
-
     </h:body>
-
-
 </html>
 
 
