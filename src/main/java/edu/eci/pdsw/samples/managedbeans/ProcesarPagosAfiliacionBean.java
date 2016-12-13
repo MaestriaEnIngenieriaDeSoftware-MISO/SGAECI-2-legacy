@@ -106,8 +106,8 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
         return pagoSelection;
     }
 
-    public void setPagoSelection(PagoAfiliacion pagoSelection) {
-        this.pagoSelection = pagoSelection;
+    public void setPagoSelection(PagoAfiliacion pa) {
+        if(pa!=null)this.pagoSelection = pa;
     }
 
     
@@ -133,7 +133,7 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
     public void aceptarPagoAfiliacion(ActionEvent actionEvent) throws ExcepcionServiciosSAGECI{
         try{
             if(pagoSelection.getEstado().equals("No Tramitado")){
-                e = pagoSelection.getE1();         
+                e = pagoSelection.getE1();   
                 pagoSelection.setEstado("Registrado");
                 SAGECI.actualizarPagoAfliliacion(pagoSelection);
                 String toEgresado = e.getCorreo_Personal();
@@ -141,14 +141,13 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
                 sender.send(email);
             }
             else{
-                showMessage(false);
+                b=false;
             }
-           
-            
         }catch(Exception e){
-            showMessage(false);b=false;
+            b=false;
         }
-        if(b){showMessage(true);}
+        showMessage(b);
+        b=true;
     }
     
     public void rechazarPagoAfiliacion(ActionEvent actionEvent) throws ExcepcionServiciosSAGECI{ 
@@ -163,7 +162,6 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
             else{
                 showMessage(false);
             }
-            
         }catch(Exception e){
             showMessage(false);b=false;
         }

@@ -28,9 +28,11 @@
         <result property='correo_Personal' column='Correo_Personal'/> 
         <result property='genero' column='Genero'/> 
         <result property='semestreGrado' column='Semestre_Graduacion'/> 
+        <result property='fechaGraduacion' column='Fecha_Graduacion'/>
         <result property='correoEstudiantil' column='Correo_Estudiantil'/> 
         <result property='cargo' column='Cargo'/> 
         <result property='labora' column='Labora'/> 
+        <result property='carrera' column='Carrera'/> 
         <association property='emp' javaType='Egresado_Empresa' resultMap='EmpresaResult' columnPrefix='Epre_'></association>
     </resultMap>
 
@@ -60,17 +62,19 @@
         p1.Direccion as Egre_Direccion,
         p1.Correo_Personal as Egre_Correo_Personal,
         p1.Genero as Egre_Genero,
-        Egresado.Semestre_Graduacion as Egre_Semestre_Graduacion, 
-        Egresado.Correo_Estudiantil as Egre_Correo_Estudiantil, 
-        Egresado.Cargo as Egre_Cargo,
-        Egresado.Labora as Egre_Labora, 
+        egre.Semestre_Graduacion as Egre_Semestre_Graduacion, 
+        egre.Correo_Estudiantil as Egre_Correo_Estudiantil, 
+        egre.Cargo as Egre_Cargo,
+        egre.Labora as Egre_Labora,
+        egre.Carrera as Egre_Carrera,
+        egre.Fecha_Graduacion as Egre_Fecha_Graduacion, 
         
         Egresado_Empresa.Nombre as Egre_Epre_Nombre, 
         Egresado_Empresa.Telefono as Egre_Epre_Telefono, 
         Egresado_Empresa.Direccion as Egre_Epre_Direccion
      
          
-        FROM Persona as p1 INNER JOIN Pago_Cuota as pg ON(p1.DocumentoID = pg.DocumentoID) LEFT JOIN  Egresado ON (Egresado.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (Egresado.Empresa = Egresado_Empresa.Nombre)
+        FROM Persona as p1 INNER JOIN Pago_Cuota as pg ON(p1.DocumentoID = pg.DocumentoID) LEFT JOIN  Egresado as egre ON (egre.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (egre.Empresa = Egresado_Empresa.Nombre)
         ORDER BY  pg.Fecha_Registro ASC
         
     </select>
@@ -95,17 +99,19 @@
         p1.Direccion as Egre_Direccion,
         p1.Correo_Personal as Egre_Correo_Personal,
         p1.Genero as Egre_Genero,
-        Egresado.Semestre_Graduacion as Egre_Semestre_Graduacion, 
-        Egresado.Correo_Estudiantil as Egre_Correo_Estudiantil, 
-        Egresado.Cargo as Egre_Cargo,
-        Egresado.Labora as Egre_Labora, 
+        egre.Semestre_Graduacion as Egre_Semestre_Graduacion, 
+        egre.Correo_Estudiantil as Egre_Correo_Estudiantil, 
+        egre.Cargo as Egre_Cargo,
+        egre.Labora as Egre_Labora,
+        egre.Carrera as Egre_Carrera,
+        egre.Fecha_Graduacion as Egre_Fecha_Graduacion,  
         
         Egresado_Empresa.Nombre as Egre_Epre_Nombre, 
         Egresado_Empresa.Telefono as Egre_Epre_Telefono, 
         Egresado_Empresa.Direccion as Egre_Epre_Direccion
  
          
-        FROM Persona as p1 INNER JOIN Pago_Cuota as pg ON(p1.DocumentoID = pg.DocumentoID) LEFT JOIN Egresado ON (Egresado.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (Egresado.Empresa = Egresado_Empresa.Nombre)
+        FROM Persona as p1 INNER JOIN Pago_Cuota as pg ON(p1.DocumentoID = pg.DocumentoID) LEFT JOIN Egresado as egre ON (egre.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (egre.Empresa = Egresado_Empresa.Nombre)
         WHERE pg.Estado='No Tramitado'
         ORDER BY pg.Fecha_Registro  ASC
     </select>
@@ -130,17 +136,19 @@
         p1.Direccion as Egre_Direccion,
         p1.Correo_Personal as Egre_Correo_Personal,
         p1.Genero as Egre_Genero,
-        Egresado.Semestre_Graduacion as Egre_Semestre_Graduacion, 
-        Egresado.Correo_Estudiantil as Egre_Correo_Estudiantil, 
-        Egresado.Cargo as Egre_Cargo,
-        Egresado.Labora as Egre_Labora, 
+        egre.Semestre_Graduacion as Egre_Semestre_Graduacion, 
+        egre.Correo_Estudiantil as Egre_Correo_Estudiantil, 
+        egre.Cargo as Egre_Cargo,
+        egre.Labora as Egre_Labora,
+        egre.Carrera as Egre_Carrera,
+        egre.Fecha_Graduacion as Egre_Fecha_Graduacion, 
         
         Egresado_Empresa.Nombre as Egre_Epre_Nombre, 
         Egresado_Empresa.Telefono as Egre_Epre_Telefono, 
         Egresado_Empresa.Direccion as Egre_Epre_Direccion
         
          
-        FROM Persona as p1 INNER JOIN Pago_Cuota as pg ON(p1.DocumentoID = pg.DocumentoID) LEFT JOIN Egresado ON (Egresado.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (Egresado.Empresa = Egresado_Empresa.Nombre)
+        FROM Persona as p1 INNER JOIN Pago_Cuota as pg ON(p1.DocumentoID = pg.DocumentoID) LEFT JOIN Egresado as egre ON (egre.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (egre.Empresa = Egresado_Empresa.Nombre)
         WHERE pg.Estado='Registrado'
         ORDER BY  pg.Fecha_Registro ASC
     </select>
@@ -164,17 +172,19 @@
         p1.Direccion as Egre_Direccion,
         p1.Correo_Personal as Egre_Correo_Personal,
         p1.Genero as Egre_Genero,
-        Egresado.Semestre_Graduacion as Egre_Semestre_Graduacion, 
-        Egresado.Correo_Estudiantil as Egre_Correo_Estudiantil, 
-        Egresado.Cargo as Egre_Cargo,
-        Egresado.Labora as Egre_Labora, 
+        egre.Semestre_Graduacion as Egre_Semestre_Graduacion, 
+        egre.Correo_Estudiantil as Egre_Correo_Estudiantil, 
+        egre.Cargo as Egre_Cargo,
+        egre.Labora as Egre_Labora,
+        egre.Carrera as Egre_Carrera,
+        egre.Fecha_Graduacion as Egre_Fecha_Graduacion, 
         
         Egresado_Empresa.Nombre as Egre_Epre_Nombre, 
         Egresado_Empresa.Telefono as Egre_Epre_Telefono, 
         Egresado_Empresa.Direccion as Egre_Epre_Direccion
         
          
-        FROM Persona as p1 INNER JOIN Pago_Cuota as pg ON(p1.DocumentoID = pg.DocumentoID) LEFT JOIN Egresado ON (Egresado.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (Egresado.Empresa = Egresado_Empresa.Nombre)
+        FROM Persona as p1 INNER JOIN Pago_Cuota as pg ON(p1.DocumentoID = pg.DocumentoID) LEFT JOIN Egresado as egre ON (egre.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (egre.Empresa = Egresado_Empresa.Nombre)
         WHERE pg.DocumentoID=#{identificador}
         ORDER BY  pg.Fecha_Registro ASC
         
@@ -185,11 +195,11 @@
     </insert>
     
     <update id='updatePagoAfiliacion' parameterType='map' >
-        UPDATE Pago_Cuota SET Estado={#estado} WHERE PagoID={#id}
+        UPDATE Pago_Cuota SET Estado=#{estado} WHERE PagoID=#{id}
     </update>
     
     <delete id='DeletePagoAfiliacion' parameterType='map' >
-        DELETE from Pago_Cuota WHERE PagoID={#id}
+        DELETE from Pago_Cuota WHERE PagoID=#{id}
     </delete>
 
 </mapper>
