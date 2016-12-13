@@ -187,6 +187,8 @@ img {
      vertical-align: top;
 }
 
+
+
 div.container {
     width: 100%;
     
@@ -250,3 +252,8 @@ article {
      height:300
 }
 
+p.sansserif {
+    font-family: Arial, Helvetica, sans-serif;
+    color: slateblue;
+    font-size: 40px;
+}

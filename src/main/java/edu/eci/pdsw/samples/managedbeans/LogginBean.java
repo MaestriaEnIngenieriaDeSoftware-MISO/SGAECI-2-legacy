@@ -75,11 +75,17 @@ public class LogginBean implements Serializable {
         return SecurityUtils.getSubject();
     }
 
+    
     public void doLogin() throws ExcepcionServiciosSAGECI {
+        System.out.println("1");
         Subject subject = SecurityUtils.getSubject();
+        System.out.println("2");
         UsernamePasswordToken token = new UsernamePasswordToken(getUsername(), getPassword(), isAutenticacion());
+        System.out.println("3");
         try {
+            
             subject.login(token);
+            System.out.println("4");
             if (subject.hasRole("Administrador")) {
                 this.tipo="Administrador";
                 FacesContext.getCurrentInstance().getExternalContext().redirect("Admin/index.xhtml");
