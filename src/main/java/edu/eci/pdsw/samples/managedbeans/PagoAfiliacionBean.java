@@ -33,13 +33,14 @@ import org.primefaces.context.RequestContext;
 @ManagedBean(name = "GenerarPago")
 @SessionScoped
 public class PagoAfiliacionBean implements Serializable {
+
     ServiciosSAGECI SAGECI = ServiciosSAGECI.getInstance();
     private UploadedFile file;
     private byte[] img;
     private Date fechaConsignacion;
-     private boolean b=true;
-    
-     public void showMessage(boolean m) {
+    private boolean b = true;
+
+    public void showMessage(boolean m) {
         FacesMessage message;
         if (m) {
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "El pago fue enviado correctamente.");
@@ -48,7 +49,7 @@ public class PagoAfiliacionBean implements Serializable {
         }
         RequestContext.getCurrentInstance().showMessageInDialog(message);
     }
-    
+
     public UploadedFile getFile() {
         return file;
     }
@@ -60,7 +61,7 @@ public class PagoAfiliacionBean implements Serializable {
     public void setFechaConsignacion(Date fechaConsignacion) {
         this.fechaConsignacion = fechaConsignacion;
     }
-    
+
     public void handleFileUpload(FileUploadEvent event) throws IOException {
         file = event.getFile();
         img = IOUtils.toByteArray(file.getInputstream());
@@ -68,28 +69,44 @@ public class PagoAfiliacionBean implements Serializable {
 
     public void aceptarEnvio() throws IOException {
         LogginBean bean = (LogginBean) getManagedBean("Loggin");
-        PagoAfiliacion pg=null;
-        List<PagoAfiliacion> temp= null;
+        System.out.println("1");
+        PagoAfiliacion pg = null;
+        System.out.println("2");
+        List<PagoAfiliacion> temp = null;
+        System.out.println("3");
         try {
-            temp=SAGECI.consultarPagosAfiliacionesEspecifico(Integer.parseInt(bean.username));
+            temp = SAGECI.consultarPagosAfiliacionesEspecifico(Integer.parseInt(bean.username));
+            System.out.println("4");
         } catch (ExcepcionServiciosSAGECI ex) {
+            System.out.println("Error primer catch");
             Logger.getLogger(PagoAfiliacionBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(temp!=null){
-            if(temp.size()==0){pg = new PagoAfiliacion(0, 155000,Integer.parseInt(bean.username), new Date(new java.util.Date().getTime()),fechaConsignacion,"No Tramitado", img,"Afiliacion");}
-            else{pg = new PagoAfiliacion(0, 155000,Integer.parseInt(bean.username), new Date(new java.util.Date().getTime()),fechaConsignacion,"No Tramitado", img,"Renovacion");}
+        System.out.println("4");
+        if (temp!=null && temp.size()==0) {
+            System.out.println("entro por if");
+            pg = new PagoAfiliacion(0, 155000, Integer.parseInt(bean.username), new Date(new java.util.Date().getTime()), fechaConsignacion, "No Tramitado", img, "Afiliacion");
+        } else {
+            System.out.println("entro por el else");
+            pg = new PagoAfiliacion(0, 155000, Integer.parseInt(bean.username), new Date(new java.util.Date().getTime()), fechaConsignacion, "No Tramitado", img, "Renovacion");
         }
+
         try {
-            if(pg!=null){SAGECI.agregarPagoAfliliacion(pg);}
+            if (pg != null) {
+                SAGECI.agregarPagoAfliliacion(pg);
+            }
+            System.out.println("5");
         } catch (ExcepcionServiciosSAGECI ex) {
+            System.out.println("error segundo catch");
             Logger.getLogger(PagoAfiliacionBean.class.getName()).log(Level.SEVERE, null, ex);
-            showMessage(false);b=false;
+            showMessage(false);
+            b = false;
         }
-        if(b){showMessage(true);}
-        
+        if (b) {
+            showMessage(true);
+        }
 
     }
-    
+
     public static Object getManagedBean(final String beanName) {
         FacesContext fc = FacesContext.getCurrentInstance();
 
@@ -103,7 +120,5 @@ public class PagoAfiliacionBean implements Serializable {
         }
         return bean;
     }
-    
-    
 
 }

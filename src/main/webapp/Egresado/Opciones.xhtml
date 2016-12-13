@@ -8,97 +8,85 @@
         <link rel="stylesheet" type="text/css" href="../sheet.css"> 
         </link>
     </h:head>
-    <h:body >
-
-        <h:form id="form5">
-            <p:panelMenu style="width:300px">
-                <p:submenu label="Mi Cuenta">
-                    <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
-                    <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
-                    <p:menuitem Value="Salir">
-                        <h:outputLink value="/logout">Cerrar Sesión</h:outputLink>
-                    </p:menuitem>
-                </p:submenu>
-            </p:panelMenu>
-        </h:form>
+    <h:body>
         <h:form id="form">
             <div class="container">
-                <div class="adentro" style="background-color: white">
+                <div class="adentro2" style="background-color: white">
+                    <div style="float: right">
+                        <p:panelMenu style="width:160px">
+                            <p:submenu label="Mi Cuenta">
+                                <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
+                                <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
+                                <p:menuitem value="Cerrar sesión" action="#{Loggin.logout}"  icon="ui-icon-circle-close"/>
+                            </p:submenu>
+                        </p:panelMenu>
+                    </div>
                     <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
                     <div align="Center">
-                        <h1 style="font-family:  Lucida Sans Unicode;">Administracion de Cuenta</h1>
+                        <h1 style="font-family:  Lucida Sans Unicode;">Bienvenido a SGAECI</h1>
                     </div>  
+                    <div align="left">
+                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 100%;" >Es un gusto tenerte de vuelta</h1>
+                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 90%;">#{Usuario.p.nombre} #{Usuario.p.apellido}</h1>
+                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 90%;" >Su estado de afiliacion es #{Usuario.eaf.estado}</h1>
+                    </div>
+
+
                     <p:keyboard rendered="#{loginBean.subject.hasRole('Egresado')}"></p:keyboard>
                 </div>
                 <br></br>
-
-
-                <h:panelGrid columns="1" cellpadding="10">
-                    <h1 style="font-family:  Lucida Sans Unicode;">Actualizar Informacion Basica</h1>
-                    <h:form id="form2">
-                        <h:panelGrid columns="2" columnClasses="label, value">
-                            <p:outputLabel style="font-weight:bold" for="telcasa" value="Teléfono Casa: " />
-                            <p:inputText styleClass="cent" required="true" id="telcasa"  value="#{Usuario.telefono}"/>
-
-
-                            <p:outputLabel style="font-weight:bold" for="Celular" value="No. Celular: " />
-                            <p:inputText styleClass="cent" required="true" id="Celular" value="#{Usuario.telefono2}"/>                
-
-
-                            <p:outputLabel style="font-weight:bold" for="direccionVi" value="Dirección Vivienda " />
-                            <p:inputText styleClass="cent" required="true" id="direccionVi"  value="#{Usuario.direccionVivienda}"/>
-
-                            <p:outputLabel style="font-weight:bold" for="correo" value="Correo " />
-                            <p:inputText styleClass="cent" required="true" id="correo"  value="#{Usuario.correo}"/>
-
-                        </h:panelGrid>
-                    </h:form>
-
-                    <h:form id="form3">
-                        <p:commandButton value="Guardar" id="ajax"  actionListener="#{Usuario.UpdateInfo()}" styleClass="ui-priority-primary" />
-                    </h:form>
-
-                    <h1 style="font-family:  Lucida Sans Unicode;">Cambiar Contraseña</h1>
-                    <h:form id="form4">
-                        <h:panelGrid columns="2" columnClasses="label, value">
-                            <p:outputLabel style="font-weight:bold" for="telcasa2" value="Contraseña Actual" />
-                            <p:inputText styleClass="cent" required="true" id="telcasa2"  value="#{Usuario.contraactual}"/>
-
-
-                            <p:outputLabel style="font-weight:bold" for="Celular2" value="Nueva Contraseña" />
-                            <p:inputText styleClass="cent" required="true" id="Celular2" value="#{Usuario.contranueva1}"/>                
-
-
-                            <p:outputLabel style="font-weight:bold" for="direccionVi2" value="Repita la contraseña Nueva " />
-                            <p:inputText styleClass="cent" required="true" id="direccionVi2"  value="#{Usuario.contranueva2}"/>
-
-                        </h:panelGrid>
-                    </h:form>
-                    <h:form id="form6">
-                        <p:commandButton value="Aceptar" id="ajax2"  actionListener="#{Usuario.UpdateContra()}" styleClass="ui-priority-primary" />
-
-                    </h:form>
-
-                </h:panelGrid>
-
-
-
                 <br></br>
+            </div>
+            <div class="container">
+                <div class="adentro">
+                    <p:tabView>
+                        <!--REGISTRO DE PAGO  -->
+                        <p:tab title="Actualizar Información Basica">
+                            <h:panelGrid columns="2" cellpadding="10" id="panel1">
+                                <h:form id="form2">
+                                    <img src="/resource/informacion.png" align="left" height="100" width="100"></img>
+                                    <h:panelGrid columns="2" columnClasses="label, value">
+                                        <p:outputLabel style="font-weight:bold" for="telcasa" value="Teléfono Casa: " />
+                                        <p:inputText styleClass="cent"  id="telcasa"  value="#{Usuario.telefono}"/>
 
+                                        <p:outputLabel style="font-weight:bold" for="Celular" value="No. Celular: " />
+                                        <p:inputText styleClass="cent"  id="Celular" value="#{Usuario.telefono2}"/>                
+
+
+                                        <p:outputLabel style="font-weight:bold" for="direccionVi" value="Dirección Vivienda " />
+                                        <p:inputText styleClass="cent" id="direccionVi"  value="#{Usuario.direccionVivienda}"/>
+
+                                        <p:outputLabel style="font-weight:bold" for="correo" value="Correo " />
+                                        <p:inputText styleClass="cent"  id="correo"  value="#{Usuario.correo}"/>
+                                    </h:panelGrid>
+                                    <p:commandButton value="Aceptar" id="ajax2"  actionListener="#{Usuario.UpdateContra()}" />
+                                </h:form>
+                            </h:panelGrid>
+                        </p:tab>
+                        <!--GENERA CERTIFICADO -->
+                        <p:tab title="Cambiar Contraseña">
+                            <h:form id="form1">
+                                <h:panelGrid columns="2" cellpadding="10" id="panel2">
+                                    <img src="/resource/candado.png" align="left" height="100" width="100"></img>
+                                    <h:panelGrid columns="2" columnClasses="label, value">
+                                        <p:outputLabel style="font-weight:bold" for="telcasa2" value="Contraseña Actual" />
+                                        <p:inputText styleClass="cent"  id="telcasa2"  value="#{Usuario.contraactual}"/>
+
+                                        <p:outputLabel style="font-weight:bold" for="Celular2" value="Nueva Contraseña" />
+                                        <p:inputText styleClass="cent"  id="Celular2" value="#{Usuario.contranueva1}"/>                
+
+                                        <p:outputLabel style="font-weight:bold" for="direccionVi2" value="Repita la contraseña Nueva " />
+                                        <p:inputText styleClass="cent"  id="direccionVi2"  value="#{Usuario.contranueva2}"/>
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                                <p:commandButton value="Aceptar" id="ajax2"  actionListener="#{Usuario.UpdateContra()}"  />
+                            </h:form>
+                        </p:tab>
+
+                    </p:tabView>
+                    
+                </div>
             </div>
         </h:form>
-
     </h:body>
 </html>
-
-
-<!---
-<pre>     
-subject = <p:outputLabel value="#{loginBean.subject}"/>
-principal = <p:outputLabel value="#{loginBean.subject.principal}"/>
-session = <p:outputLabel value="#{loginBean.subject.session}"/>
-role Egresado = <p:outputLabel value="#{loginBean.subject.hasRole('Egresado')}"/>
-role Administrador = <p:outputLabel value="#{loginBean.subject.hasRole('Administrador')}"/>
-role Estudiante = <p:outputLabel value="#{loginBean.subject.hasRole('Estudiante')}"/>
-</pre>
--->

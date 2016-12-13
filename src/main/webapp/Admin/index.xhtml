@@ -11,68 +11,61 @@
     <h:body >
         <h:form id="form">
             <div class="container">
-                    <p:panelMenu style="width:300px">
-                        <p:submenu label="Mi Cuenta">
-                            <p:menuitem value="Inicio" action="index" icon="ui-icon-home" />
-                            <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-wrench" />
-                            <p:menuitem value="Cerrar sesión" action="#{Loggin.logout}"  icon="ui-icon-circle-close"/>
-                        </p:submenu>
-                    </p:panelMenu>
-                <div class="adentro" style="background-color: white">
-                    <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
-                    <div align="center">
-                        <h1 style="font-family: Lucida Sans Unicode">Bienvenido Administrador </h1>
+                <div class="adentro2" style="background-color: white">
+                    <div style="float: right">
+                            <p:panelMenu style="width:160px">
+                                <p:submenu label="Mi Cuenta">
+                                    <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
+                                    <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
+                                    <p:menuitem value="Cerrar sesión" action="#{Loggin.logout}"  icon="ui-icon-circle-close"/>
+                                </p:submenu>
+                            </p:panelMenu>
                     </div>
+                    <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
+                    <div align="Center">
+                        <h1 style="font-family:  Lucida Sans Unicode;">Bienvenido Administrador</h1>
+                    </div>  
 
                     <p:keyboard rendered="#{loginBean.subject.hasRole('Administrador')}"></p:keyboard>
                 </div>
                 <br></br>
                 <br></br>
-                <p:tabView orientation="left">
-                    <!--GENERA CERTIFICADO -->
-                    <p:tab title="Procesar Solicitudes Afiliacion">
-                        <h:form id="form1">
-                            <h:panelGrid columns="2" cellpadding="10">
-                                <img src="/resource/procesarsolicitud.png" align="left" height="100" width="100"></img>
-
-                                <h:outputText
-                                    value="Haga click  para procesar las solicitudes de afiliación enviadas a AECI" />
-                                <ul>
-                                    <p:commandButton value="Procesar Solicitudes Afiliación"  action="ProcesarSolicitudesAfiliacion"/>
-                                </ul>
-
-                            </h:panelGrid>
-                        </h:form>
-                    </p:tab>
-                    <p:tab title="Procesar Solicitudes Afiliacion">
-                        <h:form id="form2">
-                            <h:panelGrid columns="2" cellpadding="10">
-                                <img src="/resource/solicitudpendiente.png" align="left" height="100" width="100"></img>
-
-                                <h:outputText
-                                    value="Haga click  para ver las solicitudes de afiliación por vencer de los usuarios" />
-                                <ul>
-                                    <p:commandButton value="Solicitudes Por Vencer" action="SolicitudesPorVencer"/>
-                                </ul>
-
-                            </h:panelGrid>
-                        </h:form>
-                    </p:tab>
-                    <p:tab title="Procesar Solicitudes Afiliacion">
-                        <h:form id="form3">
-                            <h:panelGrid columns="2" cellpadding="10">
-                                <img src="/resource/pago.jpg" align="left" height="100" width="100"></img>
-
-                                <h:outputText
-                                    value="Haga click  para procesar los pagos de afiliación enviadas por los usuarios pendientes" />
-                                <ul>
-                                    <p:commandButton value="Procesar Pagos Afiliacion" action="ProcesarPagosAfiliacion"/>
-                                </ul>
-
-                            </h:panelGrid>
-                        </h:form>
-                    </p:tab>
-                </p:tabView>
+            </div>
+            <div class="container">
+                <div class="adentro">
+                    <p:tabView>
+                        <p:tab title="Procesar Solicitudes Afiliación">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <img src="/resource/procesarsolicitud.png" align="left" height="100" width="100"></img>
+                                    <h:outputText
+                                        value="Haga click  para procesar las solicitudes de afiliación enviadas a AECI" />
+                                    <ul>
+                                        <p:commandButton value="Procesar Solicitudes Afiliación"  action="ProcesarSolicitudesAfiliacion"/>
+                                    </ul>
+                                </h:panelGrid>
+                        </p:tab>
+                        <p:tab title="Procesar Solicitudes A Vencer">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <img src="/resource/solicitudpendiente.png" align="left" height="100" width="100"></img>
+                                    <h:outputText
+                                        value="Haga click  para ver las solicitudes de afiliación por vencer de los usuarios" />
+                                    <ul>
+                                        <p:commandButton value="Solicitudes Por Vencer" action="SolicitudesPorVencer"/>
+                                    </ul>
+                                </h:panelGrid>
+                        </p:tab>
+                        <p:tab title="Procesar Pagos Afiliación">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <img src="/resource/pago.jpg" align="left" height="100" width="100"></img>
+                                    <h:outputText
+                                        value="Haga click  para procesar los pagos de afiliación enviadas por los usuarios pendientes" />
+                                    <ul>
+                                        <p:commandButton value="Procesar Pagos Afiliacion" action="ProcesarPagosAfiliacion"/>
+                                    </ul>
+                                </h:panelGrid>
+                        </p:tab>
+                    </p:tabView>
+                </div>
             </div>
         </h:form>
 
