@@ -77,11 +77,8 @@ public class LogginBean implements Serializable {
 
     
     public void doLogin() throws ExcepcionServiciosSAGECI {
-        System.out.println("1");
         Subject subject = SecurityUtils.getSubject();
-        System.out.println("2");
         UsernamePasswordToken token = new UsernamePasswordToken(getUsername(), getPassword(), isAutenticacion());
-        System.out.println("3");
         try {
             
             subject.login(token);
@@ -101,16 +98,22 @@ public class LogginBean implements Serializable {
         }
     
     catch (UnknownAccountException ex){
-        facesError("El usuario no se encuentra registrado. Por favor, verifique los datos");
+        String e="El usuario no se encuentra registrado. Por favor, verifique los datos";
+        facesError(e);
+        showMessage(1,e);
         Registro.anotar(ex);
 
     }
     catch (IncorrectCredentialsException ex) {
-            facesError("Datos erróneos. Por favor, inténtelo otra vez.");
+            String e="Datos erróneos. Por favor, inténtelo otra vez.";
+            facesError(e);
+            showMessage(2,e);
         Registro.anotar(ex);
     }
     catch (AuthenticationException | IOException ex) {
-            facesError("Error inesperado: " + ex.getMessage());
+            String e="Error inesperado: " + ex.getMessage();
+            facesError(e);
+            showMessage(3,e);
             Registro.anotar(ex);
         }
     finally {
@@ -123,7 +126,15 @@ public class LogginBean implements Serializable {
     private void facesError(String message) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
     }
-
+    
+    public void showMessage(int a,String e) {
+        FacesMessage message;
+        if (a==1) {message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Incorrecto", e);}
+        else if(a==2){message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Incorrecto", e);}
+        else{message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Incorrecto", e);}
+        RequestContext.getCurrentInstance().showMessageInDialog(message);
+    }
+    
     public String getPassword() {
         return password;
     }

@@ -12,28 +12,24 @@
     </h:head>
 
     <h:body>
-        <div class="container">
-            <div style="float: right">
-                <h:form id="form5">
-                    <p:panelMenu style="width:300px">
-                        <p:submenu label="Mi Cuenta">
-                            <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
-                            <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
-                            <p:menuitem value="Logout" action="#{Loggin.logout}" />
-                        </p:submenu>
-                    </p:panelMenu>
-                </h:form> 
-            </div>
-        </div>
-        <h:form id="form">
+        <h:form>
             <div class="container">
                 <div class="adentro2" style="background-color: white">
+                    <div style="float: right">
+                        <p:panelMenu style="width:160px">
+                            <p:submenu label="Mi Cuenta">
+                                <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
+                                <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
+                                <p:menuitem value="Cerrar sesión" action="#{Loggin.logout}"  icon="ui-icon-circle-close"/>
+                            </p:submenu>
+                        </p:panelMenu>
+                    </div>
                     <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
-                    <div align="center">
+                    <div align="Center">
                         <p class="sansserif">
                             Bienvenido señor administrador.
                         </p>
-                    </div>
+                    </div>  
 
                     <p:keyboard rendered="#{loginBean.subject.hasRole('Administrador')}"></p:keyboard>
                 </div>
@@ -72,6 +68,8 @@
                 </div>
             </div>
         </h:form>
+
+
         <div class="adentro" style="background-color: white">
             <h:form id="form3">
                 <div align="center" draggable="false" style="border-width: 10px">

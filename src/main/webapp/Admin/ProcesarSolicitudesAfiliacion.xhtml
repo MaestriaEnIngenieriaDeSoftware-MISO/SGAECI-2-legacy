@@ -12,28 +12,24 @@
     </h:head>
 
     <h:body style="stylesheet">
-        <div class="container">
-            <div style="float: right">
-                <h:form id="form5">
-                    <p:panelMenu style="width:300px">
-                        <p:submenu label="Mi Cuenta">
-                            <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
-                            <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
-                            <p:menuitem value="Logout" action="#{Loggin.logout}" />
-                        </p:submenu>
-                    </p:panelMenu>
-                </h:form> 
-            </div>
-        </div>
         <h:form id="form">
             <div class="container">
                 <div class="adentro2" style="background-color: white">
+                    <div style="float: right">
+                        <p:panelMenu style="width:160px">
+                            <p:submenu label="Mi Cuenta">
+                                <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
+                                <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
+                                <p:menuitem value="Cerrar sesión" action="#{Loggin.logout}"  icon="ui-icon-circle-close"/>
+                            </p:submenu>
+                        </p:panelMenu>
+                    </div>
                     <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
-                    <div align="center">
+                    <div align="Center">
                         <p class="sansserif">
                             Bienvenido señor administrador.
                         </p>
-                    </div>
+                    </div>  
 
                     <p:keyboard rendered="#{loginBean.subject.hasRole('Administrador')}"></p:keyboard>
                 </div>
@@ -45,11 +41,11 @@
 
                     <h:form id="form2">
                         <p:dataTable rowIndexVar="row" id="ListaSolicitudes" var="Solicitud"  value="#{ProcesarSolicitudAfiliacion.solicitudes}" selectionMode="single" selection="#{ProcesarSolicitudAfiliacion.solicitudSelection}" rowKey="#{Solicitud.solicitudID}" style="margin-bottom:0">
-                            <p:column style="width: 2px" headerText="Solicitud ID">
-                                <h:outputText value="#{Solicitud.solicitudID}" />
-                            </p:column>
                             <p:column style="width: 2px" headerText="Fecha">
                                 <h:outputText value="#{Solicitud.fechaSolicitud}" />
+                            </p:column>
+                            <p:column style="width: 2px" headerText="Solicitud ID">
+                                <h:outputText value="#{Solicitud.estadoSolicitud}" />
                             </p:column>
                             <p:column style="width: 2px" headerText="Tipo de solicitante">
                                 <h:outputText value="#{Solicitud.tipoSol}" />
@@ -83,9 +79,9 @@
                             <h3>Ingrese su Comentario de respuesta: </h3>
                             <p:inputTextarea rows="6" cols="45" required="true" value="#{ProcesarSolicitudAfiliacion.comentario}" />
                             <br/>
-                            <p:commandButton update="ListaSolicitudes" value="Aceptar" id="Acept" actionListener="#{ProcesarSolicitudAfiliacion.aceptarSolicitudAfiliacion}" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
-                            <p:commandButton update="ListaSolicitudes" value="Rechazar" id="Reject" actionListener="#{ProcesarSolicitudAfiliacion.rechazarSolicitudAfiliacion}" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
-                            <p:commandButton value="Cancelar" id="Cancel" styleClass="ui-priority-primary" oncomplete="PF('dlg1').hide()"/>
+                            <p:commandButton update="ListaSolicitudes" value="Aceptar" id="Acept" actionListener="#{ProcesarSolicitudAfiliacion.aceptarSolicitudAfiliacion}"  oncomplete="PF('dlg1').hide()"/>
+                            <p:commandButton update="ListaSolicitudes" value="Rechazar" id="Reject" actionListener="#{ProcesarSolicitudAfiliacion.rechazarSolicitudAfiliacion}"  oncomplete="PF('dlg1').hide()"/>
+                            <p:commandButton value="Cancelar" id="Cancel"  oncomplete="PF('dlg1').hide()"/>
                         </p:dialog> 
                     </h:form>  
 
