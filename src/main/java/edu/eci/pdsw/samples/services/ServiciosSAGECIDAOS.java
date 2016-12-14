@@ -378,7 +378,7 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
         List<PagoAfiliacion> pagosAfiliacionesegre= null;
         try {
             daof.beginSession();
-            pagosAfiliacionesegre = daof.getDaoPagoAfiliacion().load(id);
+            pagosAfiliacionesegre = daof.getDaoPagoAfiliacion().loadAll4(id);
             daof.commitTransaction();
             daof.endSession();
         } catch (PersistenceException ex) {

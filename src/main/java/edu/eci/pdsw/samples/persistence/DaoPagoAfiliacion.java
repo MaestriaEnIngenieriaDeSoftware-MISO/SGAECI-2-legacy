@@ -32,7 +32,7 @@ public interface DaoPagoAfiliacion{
      * @return Pago afiliacion 
      * @throws PersistenceException 
      */
-    public List<PagoAfiliacion> load(int id) throws PersistenceException;
+    public PagoAfiliacion load(int id) throws PersistenceException;
     /**
      * consulta todos los pagos afiliacion de la base de datos 
      * @return lista con los pagos afiliacion 
@@ -51,6 +51,15 @@ public interface DaoPagoAfiliacion{
      * @throws PersistenceException 
      */
     public List<PagoAfiliacion> loadAll3() throws PersistenceException;
+    
+    
+    /**
+     * consulta todos los pagos afiliacion de la base de datos de un egresado
+     * @param id
+     * @return lista con los pagos afiliacion 
+     * @throws PersistenceException 
+     */
+    public List<PagoAfiliacion> loadAll4(int id) throws PersistenceException;
     
     
     

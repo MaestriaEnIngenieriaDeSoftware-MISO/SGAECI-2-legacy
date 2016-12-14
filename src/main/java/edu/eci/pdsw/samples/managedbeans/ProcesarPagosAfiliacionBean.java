@@ -98,6 +98,7 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
     }
     
      public List<PagoAfiliacion> getPagosAfiliacionEspecifico() throws ExcepcionServiciosSAGECI{
+        System.out.println("entro especifico   " + docid);
         List<PagoAfiliacion> temp =SAGECI.consultarPagosAfiliacionesEspecifico(docid);
         return temp;
     }
@@ -180,8 +181,9 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
         return docid;
     }
 
-    public void setDocid(int docid) {
-        this.docid = docid;
+    public void setDocid(int d) {
+        System.out.println("setio docid bien  "+ d);
+        if(d!=0)this.docid = d;
     }
     
     public void byteToImage() throws IOException {

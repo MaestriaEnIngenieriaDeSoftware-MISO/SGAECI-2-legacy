@@ -56,7 +56,7 @@ public interface PagoAfMapper {
      * @param id
      * @return lista de pagos no tramitados 
      */
-    public List<PagoAfiliacion> getPagosAfiliacionEspecifico(@Param("documentoid") int id);
+    public List<PagoAfiliacion> getPagosAfiliacionEspecifico(@Param("id") int id);
     
     
      /**
@@ -80,7 +80,7 @@ public interface PagoAfMapper {
      * @param id
      * @return El pago afiliacion con ese identificador 
      */
-    public List<PagoAfiliacion> getPagoAf(@Param("identificador") int id);
+    public PagoAfiliacion getPagoAf(@Param("identificador") int id);
     
     /**
      * registra en la base de datos un pago afiliacion

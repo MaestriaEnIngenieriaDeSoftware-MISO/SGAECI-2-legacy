@@ -117,6 +117,45 @@
     </select>
     
     
+    
+    
+    <select parameterType='map' id='getPagosAfiliacionEspecifico' resultMap='PagoResult'  >   
+        SELECT
+        pg.PagoID,
+        pg.Valor_Pago,
+        pg.Fecha_Registro,
+        pg.Fecha_Pago,
+        pg.Estado,
+        pg.Tipo,
+        pg.Comprobante,
+        
+        p1.DocumentoID as Egre_DocumentoID,
+        p1.Telefono as Egre_Telefono,
+        p1.Celular as Egre_Celuar,
+        p1.TipoDocumentoID as Egre_TipoDocumentoID,
+        p1.Nombre as Egre_Nombre,
+        p1.Apellido as Egre_Apellido,
+        p1.Direccion as Egre_Direccion,
+        p1.Correo_Personal as Egre_Correo_Personal,
+        p1.Genero as Egre_Genero,
+        egre.Semestre_Graduacion as Egre_Semestre_Graduacion, 
+        egre.Correo_Estudiantil as Egre_Correo_Estudiantil, 
+        egre.Cargo as Egre_Cargo,
+        egre.Labora as Egre_Labora,
+        egre.Carrera as Egre_Carrera,
+        egre.Fecha_Graduacion as Egre_Fecha_Graduacion, 
+        
+        Egresado_Empresa.Nombre as Egre_Epre_Nombre, 
+        Egresado_Empresa.Telefono as Egre_Epre_Telefono, 
+        Egresado_Empresa.Direccion as Egre_Epre_Direccion
+        
+         
+        FROM Persona as p1 INNER JOIN Pago_Cuota as pg ON(p1.DocumentoID = pg.DocumentoID) LEFT JOIN Egresado as egre ON (egre.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (egre.Empresa = Egresado_Empresa.Nombre)
+        WHERE pg.DocumentoID=#{id}
+        ORDER BY  pg.Fecha_Registro ASC
+    </select>
+    
+    
     <select parameterType='map' id='getPagosAfiliacionRegistrados' resultMap='PagoResult'  >   
         SELECT
         pg.PagoID,
@@ -185,7 +224,7 @@
         
          
         FROM Persona as p1 INNER JOIN Pago_Cuota as pg ON(p1.DocumentoID = pg.DocumentoID) LEFT JOIN Egresado as egre ON (egre.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (egre.Empresa = Egresado_Empresa.Nombre)
-        WHERE pg.DocumentoID=#{identificador}
+        WHERE pg.PagoID=#{identificador}
         ORDER BY  pg.Fecha_Registro ASC
         
     </select>
