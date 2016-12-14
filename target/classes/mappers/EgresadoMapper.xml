@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.EgresadoMapper">
+   
+    <resultMap type='Egresado' id='EgresadoResult'>
+        <id property='documentoID' column='DocumentoID'/>
+        <result property='telefono1' column='Telefono'/>
+        <result property='telefono2' column='Celular'/>  
+        <result property='tipoDocumentoID' column='TipoDocumentoID'/> 
+        <result property='nombre' column='Nombre'/> 
+        <result property='apellido' column='Apellido'/> 
+        <result property='direccion' column='Direccion'/> 
+        <result property='correo_Personal' column='Correo_Personal'/> 
+        <result property='genero' column='Genero'/> 
+        <result property='semestreGrado' column='Semestre_Graduacion'/> 
+        <result property='correoEstudiantil' column='Correo_Estudiantil'/> 
+        <result property='cargo' column='Cargo'/> 
+        <result property='labora' column='Labora'/>
+        <result property='carrera' column='Carrera'/> 
+        <result property='fechaGraduacion' column='Fecha_Graduacion'/> 
+        <association property='emp' javaType='Egresado_Empresa' resultMap='EmpresaResult' columnPrefix='Epre_'></association>
+    </resultMap>
+    
+    <resultMap type='Egresado_Empresa' id='EmpresaResult'>
+        <id property='nombreempre' column='Nombre'/>
+        <result property='telempre' column='Telefono'/>   
+        <result property='dirempre' column='Direccion'/>
+    </resultMap>
+  
+    
+     <insert id='insertarEgresado'>
+        INSERT INTO Egresado(DocumentoID,Semestre_Graduacion,Correo_Estudiantil,Empresa,Labora,Cargo,Fecha_Graduacion,Carrera) values (#{documentoID},#{semestreGraduacion},#{correoPersonal},#{empresaID},#{labora},#{cargo},#{fechaGraduacion},#{carrera})
+    </insert>
+    
+     <select id="getEgresado" parameterType="map" resultMap="EgresadoResult">
+         SELECT 
+          p1.DocumentoID,
+          p1.Telefono,
+          p1.Celular,
+          p1.TipoDocumentoID,
+          p1.Nombre,
+          p1.Apellido,
+          p1.Direccion,
+          p1.Correo_Personal,
+          p1.Genero,
+          egre.Semestre_Graduacion, 
+          egre.Correo_Estudiantil, 
+          egre.Cargo,
+          egre.Labora,
+          egre.Carrera,
+          egre.Fecha_Graduacion,
+        
+          Egresado_Empresa.Nombre as Epre_Nombre, 
+          Egresado_Empresa.Telefono as Epre_Telefono, 
+          Egresado_Empresa.Direccion as Epre_Direccion
+      
+         FROM 
+          Egresado as egre JOIN Persona as p1 ON (egre.DocumentoID=p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (egre.Empresa = Egresado_Empresa.Nombre)
+         WHERE
+          egre.DocumentoID=#{id}
+     </select>
+     
+     <select id="getEgresados" parameterType="map" resultMap="EgresadoResult">
+         SELECT 
+          p1.DocumentoID ,
+          p1.Telefono1 ,
+          p1.Telefono2 ,
+          p1.TipoDocumentoID ,
+          p1.Nombre ,
+          p1.Apellido ,
+          p1.Direccion,
+          p1.Correo ,
+          p1.Genero ,
+          egre.Semestre_Graduacion, 
+          egre.Correo_Personal, 
+          egre.Cargo ,
+          egre.Labora,
+          egre.Carrera,
+          egre.Fecha_Graduacion,
+
+          emp.Nombre as Epre_Nombre, 
+          emp.Telefono as Epre_Telefono, 
+          emp.Direccion as Epre_Direccion
+        
+         FROM Egresado as egre JOIN Persona as p1 on (p1.DocumentoID=egre.DocumentoID) JOIN Egresado_Empresa as emp ON (egre.Empresa = emp.Nombre)
+         
+     </select>
+    
+              	
+</mapper>

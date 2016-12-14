@@ -11,7 +11,7 @@
     </h:head>
     <h:body  styleClass="Bimage">
         <div>
-            <div class="adentro" style="background-color: white">
+            <div class="adentro2" style="background-color: white">
                 <img src="../resource/aecimagen.png" align="left" height="250" width="250"></img>
             </div>
 
@@ -81,9 +81,9 @@
                                     <p:inputText styleClass="cent" id="correo" required="true" value="#{SolicitudAfiliacion.correo}"/>
 
                                     <p:outputLabel style="font-weight:bold" for="carr" value="Programa: " />
-                                    <p:selectOneMenu class="ui-selectOneMenu" id="carr" value="#{SolicitudAfiliacion.carrera}" style="width:259px">
+                                    <p:selectOneMenu class="ui-selectOneMenu" id="carr" value="#{SolicitudAfiliacion.carrera}" style="width:175px">
                                         <p:ajax event="change" update=":form:eventsDT2"/>
-                                        <f:selectItems value="#{SolicitudAfiliacion.carreras}" />
+                                        <f:selectItems class="asd" value="#{SolicitudAfiliacion.carreras}" />
                                     </p:selectOneMenu>
                                     
                                     <p:outputLabel style="font-weight:bold" for="eventsDT2" value="Semestre: " />
@@ -142,6 +142,7 @@
                                 <div align="center" draggable="false" >
                                     <p:commandLink oncomplete="window.open('http://www.aeci.org.co/#!politicas-de-tratamiento-de-datos')">Acepto los Términos y Condiciones </p:commandLink>
                                     <p:selectBooleanCheckbox styleClass="cent" value="#{SolicitudAfiliacion.acepta}" />
+                                    <br></br>
                                     <p:commandButton value="Enviar Solicitud De Afiliación"  actionListener="#{SolicitudAfiliacion.agregarSolicitudAfiliacion()}" update="form"/>
                                 </div>
                             </p:panel>

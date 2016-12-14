@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.EstudianteMapper">
+  
+    <resultMap type='Estudiante' id='EstudianteResult'>
+        <id property='documentoID' column='DocumentoID'/>
+        <result property='telefono1' column='Telefono'/>
+        <result property='telefono2' column='Celular'/>  
+        <result property='tipoDocumentoID' column='TipoDocumentoID'/> 
+        <result property='nombre' column='Nombre'/> 
+        <result property='apellido' column='Apellido'/> 
+        <result property='direccion' column='Direccion'/> 
+        <result property='correo_Personal' column='Correo_Personal'/> 
+        <result property='genero' column='Genero'/> 
+        <result property='codigoEstudiante' column='Codigo_Estudiante'/> 
+        <result property='semestrePonderado' column='Semestre_Ponderado'/> 
+        <result property='carrera' column='Carrera'/> 
+    </resultMap>
+
+   
+    
+    <select id="getEstudiantes" parameterType="map" resultMap="EstudianteResult">
+         SELECT 
+         per.DocumentoID ,
+         per.Telefono ,
+         per.Celular ,
+         per.TipoDocumentoID ,
+         per.Nombre, 
+         per.Apellido, 
+         per.Direccion,
+         per.Correo_Personal,
+         per.Genero,
+         est.Codigo_Estudiante,
+         est.Semestre_Ponderado,
+         est.Carrera
+        
+        FROM 
+         Estudiante as est JOIN Persona as per
+     </select>
+     
+     <select id="getEstudiante" parameterType="map" resultMap="EstudianteResult">
+         SELECT 
+         per.DocumentoID ,
+         per.Telefono ,
+         per.Celular ,
+         per.TipoDocumentoID ,
+         per.Nombre, 
+         per.Apellido, 
+         per.Direccion,
+         per.Correo_Personal,
+         per.Genero,
+         est.Codigo_Estudiante,
+         est.Semestre_Ponderado,
+         est.Carrera
+        
+        FROM 
+         Estudiante as est JOIN Persona as per ON (est.DocumentoID=per.DocumentoID)
+        WHERE
+         est.DocumentoID=#{id}
+     </select>
+     
+     
+     <insert id='insertarEstudiante'>
+         INSERT INTO Estudiante(Codigo_Estudiante,DocumentoID,Semestre_Ponderado,Carrera) values (#{codigoEstudiante},#{documentoID},#{semestrePonderado},#{carrera})
+     </insert>
+    
+              	
+</mapper>

@@ -137,6 +137,11 @@ img {
     width: 85%;
 
 }
+.ui-selectOneMenu2{
+    display: block;
+    margin: auto;
+    max-width: 10%;
+}
 
 .ui-panelgrid{
     margin: auto;

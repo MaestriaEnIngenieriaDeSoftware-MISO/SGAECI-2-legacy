@@ -12,26 +12,22 @@
     </h:head>
 
     <h:body style="stylesheet">
-        <div class="container">
-            <div style="float: right">
-                <h:form id="form5">
-                    <p:panelMenu style="width:160px">
-                        <p:submenu label="Mi Cuenta">
-                            <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" />
-                            <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" />
-                            <p:menuitem value="Logout" action="#{Loggin.logout}" />
-                        </p:submenu>
-                    </p:panelMenu>
-                </h:form> 
-            </div>
-        </div>
         <h:form id="form">
             <div class="container">
                 <div class="adentro2" style="background-color: white">
+                    <div style="float: right">
+                        <p:panelMenu style="width:160px">
+                            <p:submenu label="Mi Cuenta">
+                                <p:menuitem value="Inicio" action="index" icon="ui-icon-disk" styleClass="ui-priority-primary" />
+                                <p:menuitem value="Administrar Cuenta" action="Opciones" icon="ui-icon-disk" styleClass="ui-priority-primary" />
+                                <p:menuitem value="Cerrar sesión" action="#{Loggin.logout}"  icon="ui-icon-circle-close" styleClass="ui-priority-primary"/>
+                            </p:submenu>
+                        </p:panelMenu>
+                    </div>
                     <img src="/resource/aecimagen.png" align="left" height="250" width="250"></img>
                     <div align="center">
                         <p class="sansserif">
-                            Bienvenido señor administrador.
+                            Bienvenido señor Juan Carlos Romero Ordóñez.
                         </p>
                     </div>
 

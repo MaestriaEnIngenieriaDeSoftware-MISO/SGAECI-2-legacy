@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>        
+    </settings>
+    
+    <typeAliases>
+        <typeAlias type='edu.eci.pdsw.samples.entities.Egresado' alias='Egresado'/>
+        <typeAlias type='edu.eci.pdsw.samples.entities.Egresado_Empresa' alias='Egresado_Empresa'/>
+        <typeAlias type='edu.eci.pdsw.samples.entities.Estudiante' alias='Estudiante'/>
+        <typeAlias type='edu.eci.pdsw.samples.entities.Persona' alias='Persona'/>
+        <typeAlias type='edu.eci.pdsw.samples.entities.SolicitudAfiliacion' alias='SolicitudAfiliacion'/>
+        <typeAlias type='edu.eci.pdsw.samples.entities.estadoAfiliacion' alias='estadoAfiliacion'/>
+        <typeAlias type='edu.eci.pdsw.samples.entities.Rol' alias='Rol'/>
+        <typeAlias type='edu.eci.pdsw.samples.entities.PagoAfiliacion' alias='PagoAfiliacion'/>
+    </typeAliases>
+    
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="org.h2.Driver" />
+                <property name="url" value="jdbc:h2:file:./target/db/testdb2;MODE=MYSQL" />
+                <property name="username" value="anonymous" />
+                <property name="password" value="" />
+            </dataSource>
+        </environment>
+    </environments>
+        
+    <mappers>
+        <mapper resource="mappers/SolicitudAfMapper.xml"></mapper>
+        <mapper resource="mappers/EstudianteMapper.xml"></mapper>
+        <mapper resource="mappers/EgresadoMapper.xml"></mapper>
+        <mapper resource="mappers/EmpresaMapper.xml"></mapper>
+        <mapper resource="mappers/PersonaMapper.xml"></mapper>
+        <mapper resource="mappers/EstadoAfMapper.xml"></mapper>
+        <mapper resource="mappers/RolPersonaMapper.xml"></mapper>
+        <mapper resource="mappers/PagoAfMapper.xml"></mapper>
+    </mappers> 
+        
+</configuration>

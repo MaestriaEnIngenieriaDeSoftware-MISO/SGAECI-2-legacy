@@ -28,7 +28,7 @@
                     <div align="left">
                         <h1 style="font-family:  Lucida Sans Unicode;font-size: 100%;" >Es un gusto tenerte de vuelta</h1>
                         <h1 style="font-family:  Lucida Sans Unicode;font-size: 90%;">#{Usuario.p.nombre} #{Usuario.p.apellido}</h1>
-                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 90%;" >Su estado de afiliacion es #{Usuario.eaf.estado}</h1>
+                        <h1 style="font-family:  Lucida Sans Unicode;font-size: 90%;" >Su estado de afiliación es #{Usuario.eaf.estado}</h1>
                     </div>
 
 
@@ -41,14 +41,14 @@
                 <div class="adentro">
                     <p:tabView>
 
-                        <p:tab title="Adjuntar Recivo de Pago">
+                        <p:tab title="Adjuntar Recibo de Pago">
                             <h:form id="form2">
                                 <h:panelGrid columns="2" cellpadding="10" id="panel12">
                                     <img src="/resource/pago.jpg" align="left" height="100" width="100"></img>
 
                                     <h:outputText value="Haga click  para adjuntar su recibo de pago " />
                                     <ul>
-                                        <p:commandButton value="Generar Recibo"  onclick="PF('dlg1').show()"/>
+                                        <p:commandButton value="Adjuntar Recibo"  onclick="PF('dlg1').show()"/>
                                         <p:dialog header="Generar Recibo" id="Recibo" widgetVar="dlg1" height="400" width="400" >
                                             <h:outputText value="Adjunte su recibo de pago para validarlo con el Administrador " />
                                             <h:form id="form9" enctype="multipart/form-data">

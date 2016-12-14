@@ -12,7 +12,7 @@
     <h:body>
 
         <div>
-            <div class="adentro" style="background-color: white">
+            <div class="adentro2" style="background-color: white">
                 <img src="../resource/aecimagen.png" align="left" height="250" width="250"></img>
             </div>
 
@@ -79,8 +79,8 @@
                                     <p:inputText styleClass="cent" id="correo" value="#{SolicitudAfiliacion.correo}"/>
 
                                     <p:outputLabel style="font-weight:bold" for="carr" value="Programa: " />
-                                    <p:selectOneMenu class="ui-selectOneMenu" id="carr" value="#{SolicitudAfiliacion.carrera}" style="width:259px">
-                                        <f:selectItems class="asd" value="#{SolicitudAfiliacion.carreras}" />
+                                    <p:selectOneMenu class="ui-selectOneMenu" id="carr" value="#{SolicitudAfiliacion.carrera}" >
+                                        <f:selectItems  class="asd" value="#{SolicitudAfiliacion.carreras}" />
                                     </p:selectOneMenu>
                                     
                                     <p:outputLabel style="font-weight:bold" for="semestre" value="Semestre Grado: " />
