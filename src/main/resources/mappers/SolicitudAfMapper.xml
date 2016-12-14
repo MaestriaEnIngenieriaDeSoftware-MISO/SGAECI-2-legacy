@@ -41,9 +41,11 @@
         <result property='correo_Personal' column='Correo_Personal'/> 
         <result property='genero' column='Genero'/> 
         <result property='semestreGrado' column='Semestre_Graduacion'/> 
+        <result property='fechaGraduacion' column='Fecha_Graduacion'/>
         <result property='correoEstudiantil' column='Correo_Estudiantil'/> 
         <result property='cargo' column='Cargo'/> 
         <result property='labora' column='Labora'/> 
+        <result property='carrera' column='Carrera'/> 
         <association property='emp' javaType='Egresado_Empresa' resultMap='EmpresaResult' columnPrefix='Epre_'></association>
     </resultMap>
 
@@ -69,10 +71,12 @@
         p1.Direccion as Egre_Direccion,
         p1.Correo_Personal as Egre_Correo_Personal,
         p1.Genero as Egre_Genero,
-        Egresado.Semestre_Graduacion as Egre_Semestre_Graduacion, 
-        Egresado.Correo_Estudiantil as Egre_Correo_Estudiantil, 
-        Egresado.Cargo as Egre_Cargo,
-        Egresado.Labora as Egre_Labora, 
+        egre.Semestre_Graduacion as Egre_Semestre_Graduacion, 
+        egre.Correo_Estudiantil as Egre_Correo_Estudiantil, 
+        egre.Cargo as Egre_Cargo,
+        egre.Labora as Egre_Labora,
+        egre.Carrera as Egre_Carrera,
+        egre.Fecha_Graduacion as Egre_Fecha_Graduacion, 
         
         Egresado_Empresa.Nombre as Egre_Epre_Nombre, 
         Egresado_Empresa.Telefono as Egre_Epre_Telefono, 
@@ -91,7 +95,7 @@
         Estudiante.Semestre_Ponderado as Estu_Semestre_Ponderado, 
         Estudiante.Carrera as Estu_Carrera  
          
-        FROM Persona as p1 INNER JOIN Solicitud_Afiliacion as so ON(p1.DocumentoID = so.DocumentoID) LEFT JOIN Estudiante ON (Estudiante.DocumentoID = p1.DocumentoID) LEFT JOIN Egresado ON (Egresado.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (Egresado.Empresa = Egresado_Empresa.Nombre)
+        FROM Persona as p1 INNER JOIN Solicitud_Afiliacion as so ON(p1.DocumentoID = so.DocumentoID) LEFT JOIN Estudiante ON (Estudiante.DocumentoID = p1.DocumentoID) LEFT JOIN Egresado as egre ON (egre.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (egre.Empresa = Egresado_Empresa.Nombre)
         WHERE so.Estado_Solicitud="NO REVISADO" 
         
     </select>
@@ -115,23 +119,26 @@
         Estudiante.Codigo_Estudiante as Estu_Codigo_Estudiante,
         
         p1.DocumentoID as Egre_DocumentoID,
-        p1.Telefono1 as Egre_Telefono1,
-        p1.Telefono2 as Egre_Telefono2,
+        p1.Telefono as Egre_Telefono,
+        p1.Celular as Egre_Celuar,
         p1.TipoDocumentoID as Egre_TipoDocumentoID,
         p1.Nombre as Egre_Nombre,
         p1.Apellido as Egre_Apellido,
-        p1.Direccion as Egre_Direccion,p1.Correo as Egre_Correo,
+        p1.Direccion as Egre_Direccion,
+        p1.Correo_Personal as Egre_Correo_Personal,
         p1.Genero as Egre_Genero,
-        Egresado.Semestre_Graduacion as Egre_Semestre_Graduacion, 
-        Egresado.Correo_Estudiantil as Egre_Correo_Estudiantil, 
-        Egresado.Labora as Egre_Labora, 
-        Egresado.Cargo as Egre_Cargo,
+        egre.Semestre_Graduacion as Egre_Semestre_Graduacion, 
+        egre.Correo_Estudiantil as Egre_Correo_Estudiantil, 
+        egre.Cargo as Egre_Cargo,
+        egre.Labora as Egre_Labora,
+        egre.Carrera as Egre_Carrera,
+        egre.Fecha_Graduacion as Egre_Fecha_Graduacion, 
         
         Egresado_Empresa.Nombre as Egre_Epre_Nombre, 
         Egresado_Empresa.Telefono as Egre_Epre_Telefono, 
-        Egresado_Empresa.Direccion as Egre_Epre_Direccion 
+        Egresado_Empresa.Direccion as Egre_Epre_Direccion
         
-        FROM Persona as p1 INNER JOIN Solicitud_Afiliacion ON(p1.DocumentoID = Solicitud_Afiliacion.DocumentoID) LEFT JOIN Estudiante ON (Estudiante.DocumentoID = p1.DocumentoID) LEFT JOIN Egresado ON (Egresado.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (Egresado.Empresa = Egresado_Empresa.Nombre)
+        FROM Persona as p1 INNER JOIN Solicitud_Afiliacion ON(p1.DocumentoID = Solicitud_Afiliacion.DocumentoID) LEFT JOIN Estudiante ON (Estudiante.DocumentoID = p1.DocumentoID) LEFT JOIN Egresado as egre ON (egre.DocumentoID= p1.DocumentoID) LEFT JOIN Egresado_Empresa ON (egre.Empresa = Egresado_Empresa.Nombre)
         WHERE Solicitud_Afiliacion.SolicitudID=#{identificador}
         
     </select>
@@ -145,7 +152,7 @@
     </delete>
     
     <update id="actualizarSolicitud" parameterType="map">
-        UPDATE Solicitud_Afiliacion SET Estado_Solicitud=#{estadoSolicitud},Comentario=#{comentario} WHERE SolicitudID=#{solicitudID};
+        UPDATE Solicitud_Afiliacion SET Estado_Solicitud=#{estadoSolicitud},Comentario=#{comentario} WHERE SolicitudID=#{solicitudID}
     </update>
     
 </mapper>

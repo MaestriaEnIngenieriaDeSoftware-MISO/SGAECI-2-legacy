@@ -98,7 +98,12 @@ public final class UsuarioBean implements Serializable {
                 message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Incorrecto", "El Certificado no se pudo generar hubo un error inesperado.");
             }
         } else if (tipo.equals("Ac")) {
-            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "RECORDATORIO", "Recuerde realizar el pago de su Afiliación para seguir disfrutando de nuestros servicios gracias.");
+            if (m) {
+                message = new FacesMessage(FacesMessage.SEVERITY_INFO, "RECORDATORIO", "Recuerde realizar el pago de su Afiliación para seguir disfrutando de nuestros servicios gracias.");
+            } else {
+                message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Incorrecto", "Para generar el Certificado debe estar al día en sus pagos.");
+            }
+            
         } else {
             if (m) {
                 message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Se actualizaron los datos correctamente");
@@ -241,11 +246,13 @@ public final class UsuarioBean implements Serializable {
 
     //==================================================================
     public StreamedContent getStreamedContent() {
-        if (FacesContext.getCurrentInstance().getRenderResponse()) {
+        if (!eaf.getEstado().equals("ACTIVO")){
+            showMessage(false, "Ac");
             return new DefaultStreamedContent();
-        } else {
+        }else{
+            init();
             return streamedContent;
-        }
+        }   
     }
 
     //==================================================================
@@ -269,9 +276,6 @@ public final class UsuarioBean implements Serializable {
     }
 
     public void ActualizarInfo() {
-        System.out.println(direccionVivienda);
-        System.out.println(correo);
-        System.out.println(telefono);
         if (!direccionVivienda.equals("") && !correo.equals("") && telefono != 0 && telefono2 != 0) {
             try {
                 SAGECI.actualizarUsuario(documentoID, direccionVivienda, correo, telefono, telefono2);

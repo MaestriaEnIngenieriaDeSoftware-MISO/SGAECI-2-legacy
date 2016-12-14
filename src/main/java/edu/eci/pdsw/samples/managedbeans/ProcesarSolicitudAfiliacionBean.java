@@ -16,7 +16,6 @@
  */
 package edu.eci.pdsw.samples.managedbeans;
 
-
 import edu.eci.pdsw.samples.Security.SHA1;
 import edu.eci.pdsw.samples.entities.Egresado;
 import edu.eci.pdsw.samples.entities.Estudiante;
@@ -41,43 +40,48 @@ import java.lang.Exception;
  *
  * @author hcadavid
  */
-@ManagedBean (name= "ProcesarSolicitudAfiliacion")
+@ManagedBean(name = "ProcesarSolicitudAfiliacion")
 @SessionScoped
-public class ProcesarSolicitudAfiliacionBean implements Serializable{
+public class ProcesarSolicitudAfiliacionBean implements Serializable {
 
     ServiciosSAGECI SAGECI = ServiciosSAGECI.getInstance();
     SolicitudAfiliacion solicitudSelection;
-    String Comentario;
+    String Comentario = "";
     EmailSender sender = new SimpleEmailSender(new EmailConfiguration());
     Email email = null;
     Persona e;
-    private boolean b=true;
+    private boolean b = true;
     private SHA1 sh;
     final String from = "5d8dd682c0-c92f3e@inbox.mailtrap.io";
     final String subjectAprobado = "Solicitud de Ingreso AECI: Aprobada";
-    final String messageRechazado = "Su solicitud ha sido Rechazada por lo siguiente: "+Comentario;
+    final String messageRechazado = "Su solicitud ha sido Rechazada por lo siguiente: " + Comentario;
 
     public ProcesarSolicitudAfiliacionBean() {
-        
+
     }
-    
-     public void showMessage(boolean m) {
+
+    public void showMessage(boolean m, String tipo) {
         FacesMessage message;
-        if (m) {
-            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "La Solicitud fue aceptada correctamente.");
-        } else {
-            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Incorrecto", "Hubo un error y no se realizo ningun cambio.");
+        if (tipo.equals("m")) {
+            if (m) {
+                message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "La Solicitud fue aceptada correctamente.");
+            } else {
+                message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Incorrecto", "Hubo un error y no se realizo ningun cambio.");
+            }
+        }else{
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Incorrecto", "Si desea recharla debe ingresar la razón.");
         }
+
         RequestContext.getCurrentInstance().showMessageInDialog(message);
     }
-    
-    public List<SolicitudAfiliacion> getSolicitudes() throws ExcepcionServiciosSAGECI{
-        List<SolicitudAfiliacion> temp =SAGECI.consultarSolicitudAfiliaciones();
-        for(SolicitudAfiliacion s :temp){
-            if(s.getE1().getSemestreGrado()==null){
+
+    public List<SolicitudAfiliacion> getSolicitudes() throws ExcepcionServiciosSAGECI {
+        List<SolicitudAfiliacion> temp = SAGECI.consultarSolicitudAfiliaciones();
+        for (SolicitudAfiliacion s : temp) {
+            if (s.getE1().getSemestreGrado() == null) {
                 s.setTipoSol("Estudiante");
                 s.setE1(null);
-            }else{
+            } else {
                 s.setTipoSol("Egresado");
                 s.setE2(null);
             }
@@ -92,9 +96,7 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
     public void setE(Persona e) {
         this.e = e;
     }
-    
-    
-    
+
     public ServiciosSAGECI getServicios() {
         return SAGECI;
     }
@@ -109,72 +111,80 @@ public class ProcesarSolicitudAfiliacionBean implements Serializable{
 
     public void setSolicitudSelection(SolicitudAfiliacion solicitudSelection) {
         this.solicitudSelection = solicitudSelection;
-        if(solicitudSelection.getE1()==null){
+        if (solicitudSelection.getE1() == null) {
             this.solicitudSelection.setE1(null);
-            this.e= (Persona) solicitudSelection.getE2();
-        }else{
+            this.e = (Persona) solicitudSelection.getE2();
+        } else {
             this.solicitudSelection.setE2(null);
-            this.e= (Persona) solicitudSelection.getE1();
+            this.e = (Persona) solicitudSelection.getE1();
         }
     }
-    
-    
-    
-    
-    public void aceptarSolicitudAfiliacion(ActionEvent actionEvent) throws ExcepcionServiciosSAGECI{
-        
-        try{
+
+    public void aceptarSolicitudAfiliacion(ActionEvent actionEvent) throws ExcepcionServiciosSAGECI {
+
+        try {
             Egresado e1 = solicitudSelection.getE1();
-            Estudiante e2 =solicitudSelection.getE2();
-            String messageAprobado = "Su solicitud ha sido Aprobada: "+Comentario;            
+            Estudiante e2 = solicitudSelection.getE2();
+            String messageAprobado = "Su solicitud ha sido Aprobada: " + Comentario;
             solicitudSelection.setEstadoSolicitud("ACEPTADA");
             solicitudSelection.setComentario(Comentario);
             SAGECI.actualizarSolicitudAfliliacion(solicitudSelection);
             String shacontrasena;
-            if (e1==null){
+            if (e1 == null) {
                 String toEstudiante = e2.getCorreo_Personal();
                 shacontrasena = sh.generateHash(Integer.toString(e2.getDocumentoID()));
-                email = new SimpleEmail(from, toEstudiante, subjectAprobado, messageAprobado+", Su Usuario y la contraseña es su Documento de identidad");
-                SAGECI.agregarRolPersona(e2.getDocumentoID(),3,shacontrasena);
+                email = new SimpleEmail(from, toEstudiante, subjectAprobado, messageAprobado + ", Su Usuario y la contraseña es su Documento de identidad");
+                SAGECI.agregarRolPersona(e2.getDocumentoID(), 3, shacontrasena);
                 sender.send(email);
-            }else{
+            } else {
                 String toEgresado = e1.getCorreo_Personal();
                 shacontrasena = sh.generateHash(Integer.toString(e1.getDocumentoID()));
-                email = new SimpleEmail(from, toEgresado, subjectAprobado , messageAprobado+", Su Usuario y la contraseña es su Documento de identidad");
-                SAGECI.agregarRolPersona(e1.getDocumentoID(),2,shacontrasena);
+                email = new SimpleEmail(from, toEgresado, subjectAprobado, messageAprobado + ", Su Usuario y la contraseña es su Documento de identidad");
+                SAGECI.agregarRolPersona(e1.getDocumentoID(), 2, shacontrasena);
                 sender.send(email);
             }
-        }catch(Exception e ){
-            showMessage(false);b=false;
+        } catch (Exception e) {
+            showMessage(false,"m");
+            b = false;
         }
-        if(b){showMessage(true);}
+        if (b) {
+            showMessage(true,"m");
+        }
+        Comentario="";
     }
-    
-    
-    public void rechazarSolicitudAfiliacion(ActionEvent actionEvent) throws ExcepcionServiciosSAGECI{
-        try{
-            Egresado e1 = solicitudSelection.getE1();
-            Estudiante e2 =solicitudSelection.getE2();
-            String messageAprobado = "Su solicitud ha sido Rechazada: "+Comentario;
-            String subjectRechazado = "Solicitud de Ingreso AECI: Rechazada";
-            solicitudSelection.setEstadoSolicitud("RECHAZADA");
-            solicitudSelection.setComentario(Comentario);
-            SAGECI.actualizarSolicitudAfliliacion(solicitudSelection);
-            if (e1==null){
-                String toEstudiante = e2.getCorreo_Personal();
-                email = new SimpleEmail(from, toEstudiante, subjectRechazado, messageAprobado);
-                sender.send(email);
-            }else{
-                String toEgresado = e1.getCorreo_Personal();
-                email = new SimpleEmail(from, toEgresado, subjectRechazado, messageAprobado);
-                sender.send(email);
+
+    public void rechazarSolicitudAfiliacion(ActionEvent actionEvent) throws ExcepcionServiciosSAGECI {
+        if (!Comentario.equals("")) {
+            try {
+                Egresado e1 = solicitudSelection.getE1();
+                Estudiante e2 = solicitudSelection.getE2();
+                String messageAprobado = "Su solicitud ha sido Rechazada: " + Comentario;
+                String subjectRechazado = "Solicitud de Ingreso AECI: Rechazada";
+                solicitudSelection.setEstadoSolicitud("RECHAZADA");
+                solicitudSelection.setComentario(Comentario);
+                SAGECI.actualizarSolicitudAfliliacion(solicitudSelection);
+                if (e1 == null) {
+                    String toEstudiante = e2.getCorreo_Personal();
+                    email = new SimpleEmail(from, toEstudiante, subjectRechazado, messageAprobado);
+                    sender.send(email);
+                } else {
+                    String toEgresado = e1.getCorreo_Personal();
+                    email = new SimpleEmail(from, toEgresado, subjectRechazado, messageAprobado);
+                    sender.send(email);
+                }
+            } catch (Exception e) {
+                showMessage(false,"m");
+                b = false;
             }
-        }catch(Exception e){
-            showMessage(false);b=false;
+            if (b) {
+                showMessage(true,"m");
+            }
+        } else {
+            showMessage(false,"c");
         }
-        if(b){showMessage(true);}
+        Comentario="";b=true;
     }
-    
+
     public String getComentario() {
         return Comentario;
     }

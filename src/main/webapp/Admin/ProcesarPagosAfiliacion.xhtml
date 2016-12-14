@@ -108,8 +108,8 @@
                                     <h3>Ingrese codigo de transaccion: </h3>
                                     <p:inputTextarea rows="1" cols="40" required="true" value="#{ProcesarPagosAfiliacion.codigobanco}" />
                                     <br/>
-                                    <p:commandButton update="ListaPagos2" value="Aceptar" id="Acept" actionListener="#{ProcesarPagosAfiliacion.aceptarPagoAfiliacion()}"  oncomplete="PF('dlg1').hide()"/>
-                                    <p:commandButton update="ListaPagos2" value="Rechazar" id="Reject" actionListener="#{ProcesarPagosAfiliacion.rechazarPagoAfiliacion()}"  oncomplete="PF('dlg1').hide()"/>
+                                    <p:commandButton update=":form" value="Aceptar" id="Acept" actionListener="#{ProcesarPagosAfiliacion.aceptarPagoAfiliacion(actionEvent)}"  oncomplete="PF('dlg1').hide()"/>
+                                    <p:commandButton update=":form" value="Rechazar" id="Reject" actionListener="#{ProcesarPagosAfiliacion.rechazarPagoAfiliacion(actionEvent)}"  oncomplete="PF('dlg1').hide()"/>
                                     <p:commandButton value="Cancelar" id="Cancel2"  oncomplete="PF('dlg2').hide()"/>
                                 </p:dialog>
                             </h:panelGrid>
@@ -147,8 +147,8 @@
                                     </p:panelGrid>
                                     <h3>Ingrese codigo de transaccion: </h3>
                                     <p:inputTextarea rows="1" cols="40"  value="#{ProcesarPagosAfiliacion.codigobanco}" />
-                                    <p:commandButton update="ListaPagos3" value="Aceptar" id="Acept2" actionListener="#{ProcesarPagosAfiliacion.aceptarPagoAfiliacion()}" oncomplete="PF('dlg1').hide()"/>
-                                    <p:commandButton update="ListaPagos3" value="Rechazar" id="Reject2" actionListener="#{ProcesarPagosAfiliacion.rechazarPagoAfiliacion()}"  oncomplete="PF('dlg1').hide()"/>
+                                    <p:commandButton update=":form" value="Aceptar" id="Acept2" actionListener="#{ProcesarPagosAfiliacion.aceptarPagoAfiliacion()}" oncomplete="PF('dlg1').hide()"/>
+                                    <p:commandButton update=":form" value="Rechazar" id="Reject2" actionListener="#{ProcesarPagosAfiliacion.rechazarPagoAfiliacion()}"  oncomplete="PF('dlg1').hide()"/>
                                     <p:commandButton value="Cancelar" id="Cancel3"  oncomplete="PF('dlg3').hide()"/>
                                 </p:dialog> 
                             </h:panelGrid>

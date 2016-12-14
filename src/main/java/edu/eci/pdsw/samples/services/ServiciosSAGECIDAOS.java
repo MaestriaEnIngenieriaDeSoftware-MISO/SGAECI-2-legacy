@@ -94,7 +94,7 @@ public class ServiciosSAGECIDAOS extends ServiciosSAGECI implements Serializable
 
     public void agregarEgresado(int documentoID, int telefono1, BigInteger telefono2,String tipoDocumentoID, String nombre, String apellido, String direccion, String correo, String genero, Rol rol,String semestreGrado, String correoPersonal,String cargo , String labora,Egresado_Empresa egresadoEmpresa,Date fechaGraduacion,String carrera)throws ExcepcionServiciosSAGECI {     
         try {
-            Egresado e = new Egresado( documentoID,  telefono1,  telefono2, tipoDocumentoID,  nombre,  apellido, direccion,  correo,  genero,rol,  cargo,  semestreGrado,  correoPersonal,  labora, egresadoEmpresa,fechaGraduacion,carrera);
+            Egresado e = new Egresado( documentoID,  telefono1,  telefono2, tipoDocumentoID,  nombre,  apellido, direccion,  correo,  genero,rol,  semestreGrado, correoPersonal,  cargo,  labora, egresadoEmpresa,fechaGraduacion,carrera);
             daof.beginSession();
             daof.getDaoEgresado().save(e);
             daof.commitTransaction();

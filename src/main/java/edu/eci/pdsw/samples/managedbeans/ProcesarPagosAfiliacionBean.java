@@ -98,7 +98,6 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
     }
     
      public List<PagoAfiliacion> getPagosAfiliacionEspecifico() throws ExcepcionServiciosSAGECI{
-        System.out.println("entro especifico   " + docid);
         List<PagoAfiliacion> temp =SAGECI.consultarPagosAfiliacionesEspecifico(docid);
         return temp;
     }
@@ -123,7 +122,7 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
       public void showMessage(boolean m) {
         FacesMessage message;
         if (m) {
-            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "El pago fue aceptado correctamente.");
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "La acción se realizo correctamente.");
         } else {
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Incorrecto", "El pago se encuentra Resgistrado o Hubo un error inesperado.");
         }
@@ -153,7 +152,7 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
     
     public void rechazarPagoAfiliacion(ActionEvent actionEvent) throws ExcepcionServiciosSAGECI{ 
         try{
-            if(pagoSelection.getEstado().equals("No tramitado")){
+            if(pagoSelection.getEstado().equals("No Tramitado")){
                 e = pagoSelection.getE1();        
                 SAGECI.BorrarPagoAfliliacion(pagoSelection);
                 String toEgresado = e.getCorreo_Personal();
@@ -161,12 +160,13 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
                 sender.send(email);
             }
             else{
-                showMessage(false);
+                showMessage(false);b=false;
             }
         }catch(Exception e){
             showMessage(false);b=false;
         }
         if(b){showMessage(true);}
+        b=true;
     }
 
     public String getCodigobanco() {
@@ -182,7 +182,6 @@ public class ProcesarPagosAfiliacionBean implements Serializable{
     }
 
     public void setDocid(int d) {
-        System.out.println("setio docid bien  "+ d);
         if(d!=0)this.docid = d;
     }
     

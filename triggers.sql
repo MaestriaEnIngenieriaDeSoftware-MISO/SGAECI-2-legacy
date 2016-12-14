@@ -18,7 +18,7 @@ BEGIN
                     (NEW.DocumentoID,SYSDATE(),DATE_ADD(SYSDATE(),INTERVAL 30 DAY),"INACTIVO - PENDIENTE PAGO CUOTA");
                 END IF;
             ELSEIF ((NEW.Estado_Solicitud="RECHAZADA")) THEN 
-                DELETE FROM PERSONA WHERE DocumentoID=tempDocumnentoID;
+                DELETE FROM Persona WHERE DocumentoID=tempDocumnentoID;
             END IF;
         ELSE 
             INSERT INTO Estado_afiliacion (DocumentoID,Fecha_Inicio,Fecha_Fin,Estado)

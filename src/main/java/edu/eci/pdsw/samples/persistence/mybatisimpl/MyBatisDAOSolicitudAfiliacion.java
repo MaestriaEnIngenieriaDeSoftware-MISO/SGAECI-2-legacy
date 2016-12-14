@@ -67,7 +67,6 @@ public class MyBatisDAOSolicitudAfiliacion implements DaoSolicitudAfiliacion {
                 EstudianteMapper pedmp2 = currentSession.getMapper(EstudianteMapper.class);
                 pedmp2.insertarEstudiante(e.getCodigoEstudiante(), e.getDocumentoID(), e.getSemestrePonderado(), e.getCarrera().toUpperCase());
             } catch (Exception e) {
-                throw new PersistenceException(e);
             } finally {
                 pedmp.insertarSolicitudAfiliacion(Sa.getE2().getDocumentoID(), Sa.getFechaSolicitud(), Sa.getEstadoSolicitud(), Sa.getComentario().toUpperCase());
             }
@@ -85,7 +84,6 @@ public class MyBatisDAOSolicitudAfiliacion implements DaoSolicitudAfiliacion {
                 pedmp2.insertarEgresado(e.getDocumentoID(), e.getSemestreGrado(), e.getCorreoEstudiantil(), e.getLabora(), e.getCargo(), e.getEmp().getNombreempre(), e.getFechaGraduacion(), e.getCarrera());
 
             } catch (Exception ex) {
-                throw new PersistenceException(ex);
             } finally {
                 pedmp.insertarSolicitudAfiliacion(e.getDocumentoID(), Sa.getFechaSolicitud(), Sa.getEstadoSolicitud(), Sa.getComentario().toUpperCase());
             }

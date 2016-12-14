@@ -112,22 +112,18 @@ public class BienvenidaBean implements Serializable {
     }
     
     public void enviarMensaje(){
-        System.out.println(nombre+"  "+email+"   "+asunto+"   "+mensaje);
         if(!nombre.equals("") && !email.equals("") && !asunto.equals("") && !mensaje.equals("")){
             emailsend = new SimpleEmail("5d8dd682c0-c92f3e@inbox.mailtrap.io", email, asunto , mensaje);
             try {
                 sender.send(emailsend);
                 nombre="";email="";asunto="";mensaje="";
-                System.out.println("enrteo");
                 showMessage(true);
             } catch (MessagingException ex) {
                 showMessage(false);
-                System.out.println("enrteo3");
                 Logger.getLogger(BienvenidaBean.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else{
             showMessage(false);
-            System.out.println("enrteo2");
         }
     }
     
