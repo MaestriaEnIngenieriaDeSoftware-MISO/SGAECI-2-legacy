@@ -172,24 +172,12 @@ La AECI también  podrá tratar los datos personales para los siguientes fines: 
                             <div style="float:right">
                                 <img src="/resource/contactenos.PNG" align="left" height="250" width="350"></img>
                             </div>
-                            <div style="float:right">
+                            <div style="float:center">
                                 <aside>
                                     <iframe width="350" height="250" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.9252399064258!2d-74.04352751187521!3d4.782846560177332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f85e32ae0ca4b%3A0x5edd4c74e8f7220c!2sESCUELA+COLOMBIANA+DE+INGENIER%C3%8DA+JULIO+GARAVITO!5e0!3m2!1ses-419!2sco!4v1481210645478"  ></iframe>  
                                 </aside>
                             </div>
-                            <h:panelGrid >
-                                <h:outputLabel for="nombre" value="Tu Nombre:" />
-                                <p:inputText id="nombre" value="#{Bienvenida.nombre}" />
-                                <h:outputLabel for="email" value="Tu Email:" />
-                                <p:inputText id="email" value="#{Bienvenida.email}"  />
-                                <h:outputLabel for="asunto" value="Asunto:" />
-                                <p:inputText id="asunto" value="#{Bienvenida.asunto}" />
-                                <h:outputLabel for="mensaje" value="Mensaje:" />
-                                <p:inputTextarea id="mensaje" rows="6" cols="45" value="#{Bienvenida.mensaje}" />
-                                <h:form id="form12">
-                                    <p:commandButton value="Enviar Correo" id="enviarsol" actionListener="#{Bienvenida.enviarMensaje()}" />
-                                </h:form>
-                            </h:panelGrid>
+                           
                         </h:panelGrid>
                     </p:tab>
                     
