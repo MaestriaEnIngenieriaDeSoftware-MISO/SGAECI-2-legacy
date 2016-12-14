@@ -10,6 +10,6 @@
     </insert>
      
     <update id="updateRolPersona" parameterType="map">
-        UPDATE Rol_Persona SET Clave={#c} WHERE DocumentoID={#id}
+        UPDATE Rol_Persona SET Clave=#{c} WHERE DocumentoID=#{id}
     </update>
 </mapper>

@@ -39,22 +39,20 @@
                 <div class="adentro">
                     <p:tabView>
                         <p:tab title="Cambiar Contraseña">
-                            <h:form id="form1">
-                                <h:panelGrid columns="2" cellpadding="10" id="panel2">
-                                    <img src="/resource/candado.png" align="left" height="100" width="100"></img>
-                                    <h:panelGrid columns="2" columnClasses="label, value">
-                                        <p:outputLabel style="font-weight:bold" for="telcasa2" value="Contraseña Actual" />
-                                        <p:inputText styleClass="cent"  id="telcasa2"  value="#{Usuario.contraactual}"/>
+                            <h:panelGrid columns="2" cellpadding="10" id="panel2">
+                                <img src="/resource/candado.png" align="left" height="100" width="100"></img>
+                                <h:panelGrid columns="2" columnClasses="label, value">
+                                    <p:outputLabel style="font-weight:bold" for="telcasa2" value="Contraseña Actual" />
+                                    <p:password styleClass="cent"  id="telcasa2"  value="#{Usuario.contraactual}"/>
 
-                                        <p:outputLabel style="font-weight:bold" for="Celular2" value="Nueva Contraseña" />
-                                        <p:inputText styleClass="cent"  id="Celular2" value="#{Usuario.contranueva1}"/>                
+                                    <p:outputLabel style="font-weight:bold" for="Celular2" value="Nueva Contraseña" />
+                                    <p:password styleClass="cent"  id="Celular2" value="#{Usuario.contranueva1}"/>                
 
-                                        <p:outputLabel style="font-weight:bold" for="direccionVi2" value="Repita la contraseña Nueva " />
-                                        <p:inputText styleClass="cent"  id="direccionVi2"  value="#{Usuario.contranueva2}"/>
-                                    </h:panelGrid>
+                                    <p:outputLabel style="font-weight:bold" for="direccionVi2" value="Repita la contraseña Nueva " />
+                                    <p:password styleClass="cent"  id="direccionVi2"  value="#{Usuario.contranueva2}"/>
                                 </h:panelGrid>
-                                <p:commandButton value="Aceptar" id="ajax2"  actionListener="#{Usuario.UpdateContra()}"  />
-                            </h:form>
+                            </h:panelGrid>
+                            <p:commandButton value="Aceptar" id="ajax"  actionListener="#{Usuario.ActualizarContra()}"  />
                         </p:tab>
 
                     </p:tabView>

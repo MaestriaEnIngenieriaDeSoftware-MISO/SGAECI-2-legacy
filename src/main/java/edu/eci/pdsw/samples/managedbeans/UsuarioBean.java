@@ -22,6 +22,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -41,7 +42,6 @@ import org.primefaces.context.RequestContext;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
-
 /**
  *
  * @author Ricardo
@@ -49,7 +49,7 @@ import org.primefaces.model.StreamedContent;
  */
 @ManagedBean(name = "Usuario")
 @SessionScoped
-public final class UsuarioBean {
+public final class UsuarioBean implements Serializable {
 
     ServiciosSAGECI SAGECI = ServiciosSAGECI.getInstance();
     private static final long serialVersionUID = 1L;
@@ -70,15 +70,23 @@ public final class UsuarioBean {
         try {
             bean = (LogginBean) getManagedBean("Loggin");
             documentoID = Integer.parseInt(bean.getUsername());
-            if (bean.getTipo().equals("Estudiante")) {estudiante = SAGECI.consultarEstudiante(documentoID);p=(Persona)estudiante;} 
-            else if(bean.getTipo().equals("Egresado")){egresado = SAGECI.consultarEgresado(documentoID);p=(Persona)egresado;}
-            else{p=SAGECI.consultarPersona(documentoID);}
-            eaf=SAGECI.consultarEstadoAfiliacion(documentoID);
-            if(!eaf.getEstado().equals("ACTIVO")){showMessage(true,"Ac");}
+            if (bean.getTipo().equals("Estudiante")) {
+                estudiante = SAGECI.consultarEstudiante(documentoID);
+                p = (Persona) estudiante;
+            } else if (bean.getTipo().equals("Egresado")) {
+                egresado = SAGECI.consultarEgresado(documentoID);
+                p = (Persona) egresado;
+            } else {
+                p = SAGECI.consultarPersona(documentoID);
+            }
+            eaf = SAGECI.consultarEstadoAfiliacion(documentoID);
+            if (!eaf.getEstado().equals("ACTIVO")) {
+                showMessage(true, "Ac");
+            }
             init();
         } catch (Exception e) {
         }
-        
+
     }
 
     public void showMessage(boolean m, String tipo) {
@@ -89,9 +97,9 @@ public final class UsuarioBean {
             } else {
                 message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Incorrecto", "El Certificado no se pudo generar hubo un error inesperado.");
             }
-        } else if(tipo.equals("Ac")) {
+        } else if (tipo.equals("Ac")) {
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "RECORDATORIO", "Recuerde realizar el pago de su Afiliación para seguir disfrutando de nuestros servicios gracias.");
-        }else{
+        } else {
             if (m) {
                 message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Se actualizaron los datos correctamente");
             } else {
@@ -101,7 +109,6 @@ public final class UsuarioBean {
         RequestContext.getCurrentInstance().showMessageInDialog(message);
     }
 
-    
     public void init() {
         try {
             Document doc = new Document();
@@ -149,7 +156,6 @@ public final class UsuarioBean {
                 plantilla.setSpacingAfter(30);
                 plantilla.setAlignment(70);
                 doc.add(plantilla);
-                
 
             } else {
                 plantillaEgr = plantillaEgr.replace("$1", egresado.getApellido() + " " + egresado.getNombre());
@@ -168,13 +174,13 @@ public final class UsuarioBean {
                 doc.add(plantilla2);
 
             }
-            String condicion="Es de anotar que para disfrutar de los convenios a los cuales tiene derecho es necesario que su afiliación permanezca vigente realizando el correspondiente pago anual,El presente certificado se expide con destino a los convenios de asociados a la  AECI en Bogotá Colombia.";
+            String condicion = "Es de anotar que para disfrutar de los convenios a los cuales tiene derecho es necesario que su afiliación permanezca vigente realizando el correspondiente pago anual,El presente certificado se expide con destino a los convenios de asociados a la  AECI en Bogotá Colombia.";
             Paragraph info;
             info = new Paragraph(condicion);
             info.setSpacingAfter(10);
             info.setAlignment(10);
             doc.add(info);
-                
+
             Paragraph fin;
             fin = new Paragraph("Cordialmente");
             fin.setAlignment(70);
@@ -186,7 +192,7 @@ public final class UsuarioBean {
             imagen2.scalePercent(32);
             imagen2.setAbsolutePosition(250f, 245f);
             doc.add(imagen2);
-            
+
             Paragraph fin2;
             fin2 = new Paragraph("JUAN CARLOS ROMERO ORDÓNEZ");
             fin2.setAlignment(70);
@@ -194,8 +200,7 @@ public final class UsuarioBean {
             fin2.setSpacingBefore(5);
             fin2.setIndentationLeft(150);
             doc.add(fin2);
-            
-            
+
             Paragraph fin3;
             fin3 = new Paragraph("Director");
             fin3.setAlignment(70);
@@ -203,7 +208,7 @@ public final class UsuarioBean {
             fin3.setSpacingBefore(5);
             fin3.setIndentationLeft(230);
             doc.add(fin3);
-            
+
             Paragraph fin4;
             fin4 = new Paragraph("Asociación de Egresados Escuela Colombiana de Ingenieria Julio Garavito");
             fin4.setAlignment(70);
@@ -211,9 +216,7 @@ public final class UsuarioBean {
             fin4.setSpacingBefore(5);
             fin4.setIndentationLeft(75);
             doc.add(fin4);
-            
-            
-           
+
             Paragraph info3;
             info3 = new Paragraph("AK 45 No. 205 Bloque A - Piso 2 * Télefonos 6683600 ext 232 - Móvil 3124570612\n       * Correo Electrónico eaci@escuelaing.edu.co * Bogotá, Colombia");
             info3.setSpacingBefore(5);
@@ -265,7 +268,10 @@ public final class UsuarioBean {
         return bean;
     }
 
-    public void UpdateInfo() {
+    public void ActualizarInfo() {
+        System.out.println(direccionVivienda);
+        System.out.println(correo);
+        System.out.println(telefono);
         if (!direccionVivienda.equals("") && !correo.equals("") && telefono != 0 && telefono2 != 0) {
             try {
                 SAGECI.actualizarUsuario(documentoID, direccionVivienda, correo, telefono, telefono2);
@@ -281,7 +287,7 @@ public final class UsuarioBean {
         b = true;
     }
 
-    public void UpdateContra() {
+    public void ActualizarContra() {
         if (!contraactual.equals("") && !contranueva1.equals("") && !contranueva2.equals("")) {
             try {
                 String contra = bean.getPassword();
@@ -429,6 +435,5 @@ public final class UsuarioBean {
     public void setBean(LogginBean bean) {
         this.bean = bean;
     }
-    
-    
+
 }
