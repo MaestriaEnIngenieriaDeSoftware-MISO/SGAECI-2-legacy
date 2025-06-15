@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  db:
+    image: mysql/mysql-server:5.7
+    platform: linux/amd64
+    container_name: sgaeci-legacy-mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: pdswgr2
+      MYSQL_USER: pdswgr2
+      MYSQL_PASSWORD: pdswg202
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./initdb:/docker-entrypoint-initdb.d
+volumes:
+  db_data:
