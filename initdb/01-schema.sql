@@ -208,7 +208,7 @@ BEGIN
                  FROM Egresado
                  WHERE NEW.DocumentoID = Egresado.DocumentoID) <= 180) THEN
                 INSERT INTO Estado_afiliacion (DocumentoID, Fecha_Inicio, Fecha_Fin, Estado)
-                VALUES (NEW.DocumentoID, SYSDATE(), DATE_ADD(SYSDATE(), INTERVAL 180 DAY), 'ACTIV0');
+                VALUES (NEW.DocumentoID, SYSDATE(), DATE_ADD(SYSDATE(), INTERVAL 180 DAY), 'ACTIVO');
             ELSE
                 INSERT INTO Estado_afiliacion (DocumentoID, Fecha_Inicio, Fecha_Fin, Estado)
                 VALUES (NEW.DocumentoID, SYSDATE(), DATE_ADD(SYSDATE(), INTERVAL 30 DAY),
