@@ -8,7 +8,7 @@ public class SendEmail {
 
     public static void main(String[] args) {
         final String from = "5d8dd682c0-c92f3e@inbox.mailtrap.io";
-        final String to = "carlos.ramirez-ot@mail.escuelaing.edu.co";
+        final String to = "pecow90325@exitbit.com";
         final String subject = "test";
         final String message = "test";
 
