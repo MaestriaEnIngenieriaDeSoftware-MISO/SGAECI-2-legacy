@@ -22,7 +22,7 @@
             <transactionManager type="JDBC" />
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver" />
-                <property name="url" value="jdbc:mysql://localhost:3306/pdswgr2" />
+                <property name="url" value="jdbc:mysql://db:3306/pdswgr2" />
                 <property name="username" value="pdswgr2" />
                 <property name="password" value="pdswg202" />
             </dataSource>

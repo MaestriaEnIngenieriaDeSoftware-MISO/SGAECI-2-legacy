@@ -51,6 +51,8 @@ import org.primefaces.model.StreamedContent;
 @SessionScoped
 public final class UsuarioBean implements Serializable {
 
+    private static final Logger logger = Logger.getLogger(UsuarioBean.class.getName());
+
     ServiciosSAGECI SAGECI = ServiciosSAGECI.getInstance();
     private static final long serialVersionUID = 1L;
     private int telefono = 0, telefono2 = 0;
@@ -241,6 +243,7 @@ public final class UsuarioBean implements Serializable {
                 streamedContent = new DefaultStreamedContent(new ByteArrayInputStream(b1), "application/pdf", "Certificado.pdf");
             }
         } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error al generar el PDF: " + e.getMessage(), e);
         }
     }
 
