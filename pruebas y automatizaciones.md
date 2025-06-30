@@ -1,0 +1,27 @@
+# Análisis de Pruebas y Automatizaciones en SGAECI-2-legacy
+
+## Pruebas existentes
+
+### Pruebas unitarias/integración
+- Existen pruebas automatizadas en `src/test/java/edu/eci/pdsw/samples/tests/` usando JUnit (`PersonasPagoRealizarTest.java`, `ReportePorVencerTest.java`).
+- Estas pruebas validan reglas de negocio y operaciones sobre la base de datos en memoria.
+- Incluyen preparación y limpieza de datos, así como validaciones de clases de equivalencia y condiciones de negocio.
+
+### Cobertura
+- No se detectan pruebas EndToEnd (E2E) ni automatización de interfaz gráfica.
+- No se observa integración con herramientas de CI/CD o reportes de cobertura en el código inspeccionado.
+
+## Tipos de pruebas recomendadas
+- **Unitarias:** Validan métodos y lógica de negocio de forma aislada.
+- **Integración:** Verifican la interacción entre componentes (por ejemplo, acceso a base de datos).
+- **EndToEnd (E2E):** Simulan el flujo completo de usuario en la aplicación.
+- **Pruebas de aceptación:** Validan requisitos funcionales desde la perspectiva del usuario final.
+
+## Recomendaciones para garantizar la calidad
+- Ampliar la cobertura con pruebas E2E y automatización de UI.
+- Integrar herramientas de CI/CD (por ejemplo, GitHub Actions, Jenkins) para ejecutar pruebas automáticamente en cada cambio.
+- Generar reportes de cobertura de código (por ejemplo, usando JaCoCo para Java).
+- Documentar los escenarios de prueba y criterios de aceptación.
+
+---
+_Análisis realizado el 30 de junio de 2025._
