@@ -105,51 +105,100 @@ graph TB
 ### 🎯 **COMPONENTES CRÍTICOS A MODERNIZAR**
 
 ```mermaid
-graph TB
-    subgraph "🔴 ALTA PRIORIDAD - Core del Negocio"
-        subgraph "F001 - Sistema de Autenticación"
-            AUTH_LEGACY[LogginBean + Shiro<br/>❌ JSF Managed Bean<br/>❌ SHA-1 Obsoleto<br/>❌ UI Legacy]
-            AUTH_MODERN[🔄 Modernizar a:<br/>✅ JWT/OAuth 2.0<br/>✅ React/Vue Components<br/>✅ Bcrypt/Argon2]
-        end
+flowchart TD
+    %% Alta Prioridad - Core del Negocio
+    subgraph CRITICAL [" "]
+        direction TB
+        CRITICAL_TITLE["🔴 ALTA PRIORIDAD - Core del Negocio"]
         
-        subgraph "F002 - Formularios de Solicitud"
-            FORMS_LEGACY[SolicitudAfiliacionBean<br/>❌ Wizard JSF Complejo<br/>❌ Validaciones Limitadas<br/>❌ UX Desactualizada]
-            FORMS_MODERN[🔄 Modernizar a:<br/>✅ Multi-step Modern Forms<br/>✅ Real-time Validation<br/>✅ Responsive Design]
-        end
+        %% F001 - Autenticación
+        AUTH_TITLE["F001 - Sistema de Autenticación"]
+        AUTH_LEGACY["LogginBean + Shiro<br/>❌ JSF Managed Bean<br/>❌ SHA-1 Obsoleto<br/>❌ UI Legacy"]
+        AUTH_MODERN["🔄 Modernizar a:<br/>✅ JWT/OAuth 2.0<br/>✅ React/Vue Components<br/>✅ Bcrypt/Argon2"]
         
-        subgraph "F003 - Dashboard Administrativo"
-            ADMIN_LEGACY[ProcesarSolicitudAfiliacionBean<br/>❌ Tablas JSF Básicas<br/>❌ Filtrado Limitado<br/>❌ UX Administrativa Pobre]
-            ADMIN_MODERN[🔄 Modernizar a:<br/>✅ Filtros Inteligentes<br/>✅ Dashboard Moderno]
-        end
+        %% F002 - Formularios
+        FORMS_TITLE["F002 - Formularios de Solicitud"]
+        FORMS_LEGACY["SolicitudAfiliacionBean<br/>❌ Wizard JSF Complejo<br/>❌ Validaciones Limitadas<br/>❌ UX Desactualizada"]
+        FORMS_MODERN["🔄 Modernizar a:<br/>✅ Multi-step Modern Forms<br/>✅ Real-time Validation<br/>✅ Responsive Design"]
         
-        subgraph "F004 - Generación de Certificados"
-            CERT_LEGACY[UsuarioBean + iText<br/>❌ PDF Básico<br/>❌ Diseño Desactualizado<br/>❌ Sin Personalización]
-            CERT_MODERN[🔄 Modernizar a:<br/>✅ Templates Modernos<br/>✅ Diseño Profesional<br/>✅ Múltiples Formatos]
-        end
+        %% F003 - Dashboard
+        ADMIN_TITLE["F003 - Dashboard Administrativo"]
+        ADMIN_LEGACY["ProcesarSolicitudAfiliacionBean<br/>❌ Tablas JSF Básicas<br/>❌ Filtrado Limitado<br/>❌ UX Administrativa Pobre"]
+        ADMIN_MODERN["🔄 Modernizar a:<br/>✅ Filtros Inteligentes<br/>✅ Dashboard Moderno"]
+        
+        %% F004 - Certificados
+        CERT_TITLE["F004 - Generación de Certificados"]
+        CERT_LEGACY["UsuarioBean + iText<br/>❌ PDF Básico<br/>❌ Diseño Desactualizado<br/>❌ Sin Personalización"]
+        CERT_MODERN["🔄 Modernizar a:<br/>✅ Templates Modernos<br/>✅ Diseño Profesional<br/>✅ Múltiples Formatos"]
     end
     
-    subgraph "🟡 MEDIA PRIORIDAD - Mejoras Operacionales"
-        subgraph "F005 - Verificación de Pagos"
-            PAY_VERIFY_LEGACY[ProcesarPagosAfiliacionBean<br/>❌ Visor Básico<br/>❌ Sin Herramientas]
-            PAY_VERIFY_MODERN[🔄 Mejorar:<br/>✅ Visor Avanzado<br/>✅ Herramientas de documentos]
-        end
+    %% Media Prioridad
+    subgraph MEDIUM [" "]
+        direction TB
+        MEDIUM_TITLE["🟡 MEDIA PRIORIDAD - Mejoras Operacionales"]
         
-        subgraph "F006 - Carga de Comprobantes"
-            UPLOAD_LEGACY[GenerarPago Bean<br/>❌ Upload Básico<br/>❌ Sin Preview]
-            UPLOAD_MODERN[🔄 Mejorar:<br/>✅ progeso de subida<br/>✅ Preview Integrado]
-        end
+        %% F005 - Verificación Pagos
+        PAY_TITLE["F005 - Verificación de Pagos"]
+        PAY_LEGACY["ProcesarPagosAfiliacionBean<br/>❌ Visor Básico<br/>❌ Sin Herramientas"]
+        PAY_MODERN["🔄 Mejorar:<br/>✅ Visor Avanzado<br/>✅ Herramientas de documentos"]
+        
+        %% F006 - Carga Comprobantes
+        UPLOAD_TITLE["F006 - Carga de Comprobantes"]
+        UPLOAD_LEGACY["GenerarPago Bean<br/>❌ Upload Básico<br/>❌ Sin Preview"]
+        UPLOAD_MODERN["🔄 Mejorar:<br/>✅ Progreso de subida<br/>✅ Preview Integrado"]
     end
     
-    subgraph "🟢 BAJA PRIORIDAD - Mantener"
-        KEEP_COMPONENTS[📊 Reportes<br/>📧 Email System<br/>🗄️ Data Layer<br/>🔒 Security Core]
+    %% Baja Prioridad
+    subgraph KEEP [" "]
+        direction TB
+        KEEP_TITLE["🟢 BAJA PRIORIDAD - Mantener"]
+        KEEP_COMPONENTS["📊 Reportes<br/>📧 Email System<br/>🗄️ Data Layer<br/>🔒 Security Core"]
     end
-
+    
+    %% Conexiones y layout
+    CRITICAL_TITLE --- AUTH_TITLE
+    AUTH_TITLE --- AUTH_LEGACY
     AUTH_LEGACY -.-> AUTH_MODERN
+    
+    AUTH_MODERN --- FORMS_TITLE
+    FORMS_TITLE --- FORMS_LEGACY
     FORMS_LEGACY -.-> FORMS_MODERN
+    
+    FORMS_MODERN --- ADMIN_TITLE
+    ADMIN_TITLE --- ADMIN_LEGACY
     ADMIN_LEGACY -.-> ADMIN_MODERN
+    
+    ADMIN_MODERN --- CERT_TITLE
+    CERT_TITLE --- CERT_LEGACY
     CERT_LEGACY -.-> CERT_MODERN
-    PAY_VERIFY_LEGACY -.-> PAY_VERIFY_MODERN
+    
+    MEDIUM_TITLE --- PAY_TITLE
+    PAY_TITLE --- PAY_LEGACY
+    PAY_LEGACY -.-> PAY_MODERN
+    
+    PAY_MODERN --- UPLOAD_TITLE
+    UPLOAD_TITLE --- UPLOAD_LEGACY
     UPLOAD_LEGACY -.-> UPLOAD_MODERN
+    
+    KEEP_TITLE --- KEEP_COMPONENTS
+    
+    %% Espaciado entre secciones
+    CERT_MODERN ~~~ MEDIUM_TITLE
+    UPLOAD_MODERN ~~~ KEEP_TITLE
+    
+    %% Estilos
+    classDef criticalBox fill:#ffebee,stroke:#d32f2f,stroke-width:2px
+    classDef mediumBox fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef keepBox fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
+    classDef legacy fill:#ffcdd2,stroke:#c62828,stroke-width:2px
+    classDef modern fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+    classDef title fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,font-weight:bold
+    
+    class CRITICAL_TITLE,MEDIUM_TITLE,KEEP_TITLE title
+    class AUTH_TITLE,FORMS_TITLE,ADMIN_TITLE,CERT_TITLE,PAY_TITLE,UPLOAD_TITLE title
+    class AUTH_LEGACY,FORMS_LEGACY,ADMIN_LEGACY,CERT_LEGACY,PAY_LEGACY,UPLOAD_LEGACY legacy
+    class AUTH_MODERN,FORMS_MODERN,ADMIN_MODERN,CERT_MODERN,PAY_MODERN,UPLOAD_MODERN modern
+    class KEEP_COMPONENTS keepBox
 ```
 
 ### 📋 **JUSTIFICACIÓN DE MODERNIZACIÓN POR COMPONENTE**
