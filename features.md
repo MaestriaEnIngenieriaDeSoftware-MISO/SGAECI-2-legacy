@@ -15,122 +15,6 @@
 
 ---
 
-## DETALLE POR ROL
-
-### 🔐 **ADMINISTRADOR**
-
-| **FUNCIONALIDAD** | **DESCRIPCIÓN** | **ARCHIVO VISTA** | **BEAN** | **CARACTERÍSTICAS** |
-|-------------------|-----------------|-------------------|----------|---------------------|
-| **Procesar solicitudes** | Aceptar/rechazar solicitudes de afiliación | `ProcesarSolicitudesAfiliacion.xhtml` | `ProcesarSolicitudAfiliacionBean` | - Lista de solicitudes pendientes<br>- Formulario de revisión<br>- Envío de correos automático |
-| **Procesar pagos** | Revisar y aprobar pagos de afiliación | `ProcesarPagosAfiliacion.xhtml` | `ProcesarPagosAfiliacionBean` | - Visualización de comprobantes<br>- Estados: registrados/no tramitados<br>- Procesamiento con notificaciones |
-| **Reportes vencimiento** | Ver afiliados próximos a vencer | `SolicitudesPorVencer.xhtml` | `reporteVencerseBean` | - Lista de afiliados (30 días)<br>- Envío masivo de recordatorios |
-| **Gestión perfil** | Administrar cuenta personal | `Opciones.xhtml` | `UsuarioBean` | - Cambio de contraseña<br>- Datos personales |
-
-### 👨‍🎓 **EGRESADO**
-
-| **FUNCIONALIDAD** | **DESCRIPCIÓN** | **ARCHIVO VISTA** | **BEAN** | **CARACTERÍSTICAS** |
-|-------------------|-----------------|-------------------|----------|---------------------|
-| **Solicitud afiliación** | Formulario de solicitud específico | `SolicitudAfiliacionEgre.xhtml` | `SolicitudAfiliacionBean` | - Wizard multi-paso<br>- Datos personales y empresariales<br>- Validaciones requeridas |
-| **Registro pagos** | Subir comprobantes de pago | `index.xhtml` (Tab "Adjuntar Recibo") | `GenerarPago` Bean | - Upload de archivos<br>- Selección de fecha<br>- Dialog modal integrado |
-| **Certificados** | Generar certificados de afiliación | `index.xhtml` (Tab "Generar Certificado") | `UsuarioBean` | - Generación PDF con iText<br>- Visualización en modal<br>- Validación estado afiliación<br>- Descarga integrada |
-| **Gestión perfil** | Administrar datos personales | `Opciones.xhtml` | `UsuarioBean` | - Actualización de datos<br>- Cambio de contraseña |
-
-### 👨‍🎓 **ESTUDIANTE**
-
-| **FUNCIONALIDAD** | **DESCRIPCIÓN** | **ARCHIVO VISTA** | **BEAN** | **CARACTERÍSTICAS** |
-|-------------------|-----------------|-------------------|----------|---------------------|
-| **Solicitud afiliación** | Formulario de solicitud específico | `SolicitudAfiliacionEst.xhtml` | `SolicitudAfiliacionBean` | - Datos académicos<br>- Código estudiantil<br>- Semestre y carrera |
-| **Registro pagos** | ❌ NO DISPONIBLE | - | - | - **Afiliación gratuita** por 6 meses<br>- No requieren pagos como estudiantes activos |
-| **Certificados** | Generar certificados de afiliación | `index.xhtml` (Tab "Generar Certificado") | `UsuarioBean` | - Generación PDF con iText<br>- Visualización en modal<br>- Validación estado afiliación<br>- Descarga integrada |
-| **Gestión perfil** | Administrar datos personales | `Opciones.xhtml` | `UsuarioBean` | - Actualización de datos<br>- Cambio de contraseña |
-
----
-
-## DETALLE TÉCNICO: VISTAS PRINCIPALES DE USUARIO
-
-### 📋 **ANÁLISIS DE ARCHIVOS `index.xhtml`**
-
-#### 🎓 **EGRESADO (`/Egresado/index.xhtml`)**
-
-| **SECCIÓN** | **FUNCIONALIDAD** | **IMPLEMENTACIÓN** |
-|-------------|-------------------|-------------------|
-| **Header** | Dashboard personal | - Saludo personalizado<br>- Estado de afiliación<br>- Menú de navegación |
-| **Tab 1** | "Adjuntar Recibo de Pago" | - `p:fileUpload` con `#{GenerarPago.handleFileUpload}`<br>- `p:calendar` para fecha<br>- Dialog modal para proceso completo |
-| **Tab 2** | "Generar Certificado" | - `p:media` para visualizar PDF<br>- `#{Usuario.streamedContent}` como fuente<br>- Dialog modal 850x1000px |
-
-#### 🎓 **ESTUDIANTE (`/Estudiante/index.xhtml`)**
-
-| **SECCIÓN** | **FUNCIONALIDAD** | **IMPLEMENTACIÓN** |
-|-------------|-------------------|-------------------|
-| **Header** | Dashboard personal | - Idéntico al egresado<br>- Saludo personalizado<br>- Estado de afiliación |
-| **Tab único** | "Generar Certificado" | - Solo tiene funcionalidad de certificados<br>- **NO tiene tab de pagos** (afiliación gratuita)<br>- Misma implementación PDF que egresado |
-
-### 🔍 **DIFERENCIAS CLAVE ENCONTRADAS:**
-
-1. **EGRESADOS:** Tienen **2 tabs** (Pagos + Certificados)
-2. **ESTUDIANTES:** Tienen **1 tab** (Solo Certificados)
-3. **Razón:** Los estudiantes tienen **afiliación gratuita por 6 meses** según el certificado generado
-
-### ⚠️ **IMPORTANTE - LÓGICA DE NEGOCIO:**
-
-**Los estudiantes NO tienen funcionalidad de registro de pagos porque:**
-- Su afiliación es **gratuita por 6 meses**
-- Solo necesitan generar certificados
-- No requieren renovaciones mientras sean estudiantes activos
-
-### 🎯 **BEANS UTILIZADOS:**
-
-| **FUNCIONALIDAD** | **BEAN** | **MÉTODO/PROPIEDAD** |
-|-------------------|----------|---------------------|
-| **Datos personales** | `Usuario` (UsuarioBean) | `#{Usuario.p.nombre}`, `#{Usuario.p.apellido}` |
-| **Estado afiliación** | `Usuario` (UsuarioBean) | `#{Usuario.eaf.estado}` |
-| **Upload pagos** | `GenerarPago` | `#{GenerarPago.handleFileUpload}`, `#{GenerarPago.fechaConsignacion}` |
-| **Certificados PDF** | `Usuario` (UsuarioBean) | `#{Usuario.streamedContent}` |
-
-### 📱 **CARACTERÍSTICAS UX/UI:**
-
-- **Diseño responsive** con CSS personalizado
-- **Dialogs modales** para todas las funcionalidades
-- **Navegación integrada** con menú contextual
-- **Validaciones en tiempo real**
-- **Feedback visual** con mensajes de estado
-
----
-
-## DETALLE TÉCNICO: GENERACIÓN DE CERTIFICADOS
-
-### 📋 **IMPLEMENTACIÓN ENCONTRADA EN `UsuarioBean`**
-
-| **ASPECTO** | **DETALLE** | **IMPLEMENTACIÓN** |
-|-------------|-------------|-------------------|
-| **Librería PDF** | iText PDF | `com.itextpdf.text.*` |
-| **Método principal** | `getStreamedContent()` | Genera y retorna el PDF como stream |
-| **Validación** | Estado de afiliación | Solo genera si estado = "ACTIVO" |
-| **Plantillas** | Diferenciadas por rol | `plantillaEst` para estudiantes, `plantillaEgr` para egresados |
-| **Personalización** | Datos dinámicos | Reemplaza variables con datos reales del usuario |
-| **Elementos incluidos** | - Logo AECI<br>- Datos personales<br>- Fechas de afiliación<br>- Firma digital del director<br>- Información de contacto |
-
-### 🔧 **CARACTERÍSTICAS TÉCNICAS**
-
-- **Formato:** PDF generado dinámicamente
-- **Tamaño:** A4 (PageSize.A4)
-- **Imágenes:** Logo y firma desde URLs externas
-- **Validación:** Verifica estado "ACTIVO" antes de generar
-- **Descarga:** Automática como "Certificado.pdf"
-- **Plantilla Estudiante:** Incluye semestre actual y carrera
-- **Plantilla Egresado:** Incluye período de graduación
-
-### 📝 **CONTENIDO DEL CERTIFICADO**
-
-1. **Encabezado:** Logo AECI + "CERTIFICADO DE AFILIACION AECI"
-2. **Introducción:** Identificación de la asociación (NIT: 830.031.137-4)
-3. **Cuerpo principal:** Plantilla personalizada según rol
-4. **Condiciones:** Información sobre vigencia y convenios
-5. **Firma:** Juan Carlos Romero Ordóñez - Director
-6. **Contacto:** Dirección, teléfonos y correo institucional
-
----
-
 ## FUNCIONALIDADES TRANSVERSALES
 
 | **COMPONENTE** | **DESCRIPCIÓN** | **ARCHIVOS** | **ESTADO** |
@@ -142,15 +26,63 @@
 | **Validaciones** | Validaciones de formularios | JSF validators, beans | ✅ PARCIAL |
 
 ---
+# FUNCIONALIDADES PRIORITARIAS PARA MODERNIZACIÓN
 
-## RESUMEN DE IMPLEMENTACIÓN
+## TABLA DE FUNCIONALIDADES A MODERNIZAR
 
-| **ESTADO** | **CANTIDAD** | **FUNCIONALIDADES** |
-|------------|--------------|---------------------|
-| ✅ **IMPLEMENTADO** | 8 | Inicio sesión, Administración perfil, Solicitudes, Procesamiento solicitudes, Registro pagos (solo egresados), Procesamiento pagos, Reportes vencimiento, Generación certificados |
-| ⚠️ **PENDIENTE** | 0 | - |
-| 📊 **TOTAL** | 8 | **100% Completitud** |
-
-**Nota:** El registro de pagos para estudiantes NO es una funcionalidad faltante, sino una **decisión de negocio correcta** ya que tienen afiliación gratuita.
+| **ID** | **FUNCIONALIDAD** | **ROL** | **PRIORIDAD** | **DESCRIPCIÓN** | **CRITERIOS DE ACEPTACIÓN** |
+|--------|-------------------|---------|---------------|-----------------|----------------------------|
+| **F001** | Inicio de sesión | Admin/Egresado/Estudiante | 🔴 **CRÍTICA** | Sistema de autenticación moderno con validaciones robustas y UX mejorada | - Login con documento<br>- Validación en tiempo real<br>- Recuperación de contraseña<br>- Autenticación segura (JWT/OAuth)<br>- Interfaz responsive<br>- Manejo de errores amigable |
+| **F002** | Solicitud de registro | Egresado/Estudiante | 🔴 **CRÍTICA** | Formulario de registro modernizado con flujo intuitivo y validaciones | - Formulario paso a paso (wizard)<br>- Validaciones en tiempo real<br>- Progreso visual del proceso<br>- Confirmación por email<br>|
+| **F003** | Aprobación de solicitudes | Administrador | 🔴 **CRÍTICA** | Dashboard administrativo para gestión eficiente de solicitudes | - Vista detallada de solicitudes<br>- Aprobación/rechazo con un clic<br>- Comentarios y razones<br>- Notificaciones automáticas<br>|
+| **F004** | Generación de certificados | Egresado/Estudiante | 🔴 **CRÍTICA** | Sistema modernizado de generación y descarga de certificados PDF | - Generación instantánea<br>- Diseño actualizado del certificado<br>- Descarga directa o envío por email<br>- Validación de estado activo<br>- Personalización por rol<br>|
+| **F005** | Verificación de comprobantes | Administrador | 🟡 **OPCIONAL** | Sistema mejorado para revisar y aprobar pagos con visualización optimizada | - Visor de documentos integrado<br>- Estados claros de proceso<br>- Comentarios de rechazo<br>- Notificaciones automáticas |
+| **F006** | Cargue de pagos | Egresado | 🟡 **OPCIONAL** | Interfaz moderna para subir comprobantes de pago con mejor UX | - Vista previa antes de envío<br>- Múltiples formatos aceptados<br>- Progreso de subida<br>- Validación de formato/tamaño<br>- Confirmación de recepción |
 
 ---
+
+## JUSTIFICACIÓN DE SELECCIÓN DE FUNCIONALIDADES
+
+### 🎯 **ALINEACIÓN CON EL CORE DEL NEGOCIO AECI**
+
+Estas funcionalidades fueron seleccionadas porque representan el **núcleo operativo** de la Asociación de Egresados de la Escuela Colombiana de Ingeniería Julio Garavito (AECI). Según la visión del producto, el software debe gestionar eficientemente los procesos críticos desde las diferentes vistas (Administrador, Egresado, Estudiante).
+
+#### **🔴 FUNCIONALIDADES CRÍTICAS (Obligatorias)**
+
+**1. F001 - Inicio de sesión (Todos los roles)**
+- **Relevancia del negocio:** Es la puerta de entrada al ecosistema AECI que garantiza la seguridad de la información
+- **Impacto en la visión:** Sin autenticación segura, no se puede garantizar que "estar seguros de su información por el sistema de seguridad"
+- **Justificación:** El sistema actual (JSF + Shiro) requiere modernización para cumplir estándares de seguridad actuales
+- **Beneficio:** Fortalece la confianza de afiliados y administradores en la plataforma
+
+**2. F002 - Solicitud de registro (Egresado/Estudiante)**
+- **Relevancia del negocio:** Proceso fundamental para **incorporar nuevos miembros** a la asociación
+- **Impacto en la visión:** Facilita que "personas que desean afiliarse conozcan el proceso necesario para pertenecer"
+- **Justificación:** Primera impresión de AECI - un proceso confuso reduce conversiones y afecta crecimiento
+- **Beneficio:** Mayor captación de afiliados, mejor experiencia inicial, datos más precisos
+
+**3. F003 - Aprobación de solicitudes (Administrador)**
+- **Relevancia del negocio:** **Proceso core administrativo** que determina quién pertenece a la asociación
+- **Impacto en la visión:** Cumple el rol crítico del administrador de "aceptar o rechazar solicitudes que ingresan al sistema"
+- **Justificación:** Eficiencia administrativa directamente impacta tiempo de respuesta a solicitantes
+- **Beneficio:** Reducción de tiempos de procesamiento, mejor control de calidad, trazabilidad completa
+
+**4. F004 - Generación de certificados (Egresado/Estudiante)**
+- **Relevancia del negocio:** **Servicio principal** que AECI ofrece a sus afiliados - evidencia su pertenencia
+- **Impacto en la visión:** Materializa el beneficio de "generar certificados de afiliación" para afiliados activos
+- **Justificación:** Certificado representa valor tangible de la membresía - debe reflejar profesionalismo de AECI
+- **Beneficio:** Fortalecimiento de imagen institucional, mayor satisfacción de afiliados
+
+#### **🟡 FUNCIONALIDADES OPCIONALES (Si tiempo permite)**
+
+**5. F005 - Verificación de comprobantes (Administrador)**
+- **Relevancia del negocio:** Garantiza **sostenibilidad financiera** de la asociación
+- **Impacto en la visión:** Apoya al administrador a "revisar los pagos que hagan los afiliados para determinar si siguen en la asociación"
+- **Justificación:** Proceso actual funcional, mejoras incrementarían eficiencia pero no son críticas
+- **Beneficio:** Mayor precisión en validación de pagos, reducción de errores manuales
+
+**6. F006 - Cargue de pagos (Egresado)**
+- **Relevancia del negocio:** Facilita **renovación de membresías** de egresados (principal fuente de ingresos)
+- **Impacto en la visión:** Permite a egresados "gestionar sus pagos o renovaciones de su estado de afiliación"
+- **Justificación:** Funcionalidad actual operativa, mejoras serían de UX/comodidad
+- **Beneficio:** Mayor comodidad para egresados, potencial incremento en renovaciones
