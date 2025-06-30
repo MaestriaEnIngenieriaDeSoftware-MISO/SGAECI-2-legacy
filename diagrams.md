@@ -129,7 +129,7 @@ flowchart TD
         %% F004 - Certificados
         CERT_TITLE["F004 - Generación de Certificados"]
         CERT_LEGACY["UsuarioBean + iText<br/>❌ PDF Básico<br/>❌ Diseño Desactualizado<br/>❌ Sin Personalización"]
-        CERT_MODERN["🔄 Modernizar a:<br/>✅ Templates Modernos<br/>✅ Diseño Profesional<br/>✅ Múltiples Formatos"]
+        CERT_MODERN["🔄 Modernizar a:<br/>✅ Templates Modernos<br/>✅ Diseño Profesional<br/>"]
     end
     
     %% Media Prioridad
@@ -148,11 +148,30 @@ flowchart TD
         UPLOAD_MODERN["🔄 Mejorar:<br/>✅ Progreso de subida<br/>✅ Preview Integrado"]
     end
     
-    %% Baja Prioridad
-    subgraph KEEP [" "]
+    %% Infraestructura y Soporte - También se moderniza
+    subgraph INFRA [" "]
         direction TB
-        KEEP_TITLE["🟢 BAJA PRIORIDAD - Mantener"]
-        KEEP_COMPONENTS["📊 Reportes<br/>📧 Email System<br/>🗄️ Data Layer<br/>🔒 Security Core"]
+        INFRA_TITLE["� INFRAESTRUCTURA - Migración Completa"]
+        
+        %% F007 - Sistema de Reportes
+        REPORT_TITLE["F007 - Sistema de Reportes"]
+        REPORT_LEGACY["reporteVencerseBean + iText<br/>❌ Reportes Básicos<br/>❌ Sin Dashboard<br/>"]
+        REPORT_MODERN["� Modernizar a:<br/>✅ Microservicio de reportes<br/>✅ Dashboard Interactivo<br/>"]
+        
+        %% F008 - Sistema de Email
+        EMAIL_TITLE["F008 - Sistema de Email"]
+        EMAIL_LEGACY["JavaMail + Mailtrap<br/>❌ Configuración Manual<br/>❌ Sin Métricas<br/>❌ Templates Básicos"]
+        EMAIL_MODERN["� Modernizar a:<br/>✅ Microservicio de Notificaciones<br/>✅ Templates Dinámicos<br/>✅ Métricas Avanzadas"]
+        
+        %% F009 - Capa de Datos
+        DATA_TITLE["F009 - Capa de Acceso a Datos"]
+        DATA_LEGACY["MyBatis + MySQL<br/>❌ ORM Legacy<br/>❌ Escalabilidad Limitada"]
+        DATA_MODERN["� Modernizar a:<br/>✅ SQLAlchemy + PostgreSQL<br/>✅ Auto-scaling"]
+        
+        %% F010 - Seguridad Core
+        SECURITY_TITLE["F010 - Infraestructura de Seguridad"]
+        SECURITY_LEGACY["Apache Shiro + SHA-1<br/>❌ Framework Legacy<br/>❌ Hash Inseguro<br/>"]
+        SECURITY_MODERN["🔄 Modernizar a:<br/>✅ JWT/OAuth 2.0<br/>"]
     end
     
     %% Conexiones y layout
@@ -180,25 +199,41 @@ flowchart TD
     UPLOAD_TITLE --- UPLOAD_LEGACY
     UPLOAD_LEGACY -.-> UPLOAD_MODERN
     
-    KEEP_TITLE --- KEEP_COMPONENTS
+    INFRA_TITLE --- REPORT_TITLE
+    REPORT_TITLE --- REPORT_LEGACY
+    REPORT_LEGACY -.-> REPORT_MODERN
+    
+    REPORT_MODERN --- EMAIL_TITLE
+    EMAIL_TITLE --- EMAIL_LEGACY
+    EMAIL_LEGACY -.-> EMAIL_MODERN
+    
+    EMAIL_MODERN --- DATA_TITLE
+    DATA_TITLE --- DATA_LEGACY
+    DATA_LEGACY -.-> DATA_MODERN
+    
+    DATA_MODERN --- SECURITY_TITLE
+    SECURITY_TITLE --- SECURITY_LEGACY
+    SECURITY_LEGACY -.-> SECURITY_MODERN
     
     %% Espaciado entre secciones
     CERT_MODERN ~~~ MEDIUM_TITLE
-    UPLOAD_MODERN ~~~ KEEP_TITLE
+    UPLOAD_MODERN ~~~ INFRA_TITLE
     
     %% Estilos
     classDef criticalBox fill:#ffebee,stroke:#d32f2f,stroke-width:2px
     classDef mediumBox fill:#fff3e0,stroke:#f57c00,stroke-width:2px
-    classDef keepBox fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
+    classDef infraBox fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
     classDef legacy fill:#ffcdd2,stroke:#c62828,stroke-width:2px
     classDef modern fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
     classDef title fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,font-weight:bold
     
-    class CRITICAL_TITLE,MEDIUM_TITLE,KEEP_TITLE title
+    class CRITICAL_TITLE,MEDIUM_TITLE,INFRA_TITLE title
     class AUTH_TITLE,FORMS_TITLE,ADMIN_TITLE,CERT_TITLE,PAY_TITLE,UPLOAD_TITLE title
+    class REPORT_TITLE,EMAIL_TITLE,DATA_TITLE,SECURITY_TITLE title
     class AUTH_LEGACY,FORMS_LEGACY,ADMIN_LEGACY,CERT_LEGACY,PAY_LEGACY,UPLOAD_LEGACY legacy
+    class REPORT_LEGACY,EMAIL_LEGACY,DATA_LEGACY,SECURITY_LEGACY legacy
     class AUTH_MODERN,FORMS_MODERN,ADMIN_MODERN,CERT_MODERN,PAY_MODERN,UPLOAD_MODERN modern
-    class KEEP_COMPONENTS keepBox
+    class REPORT_MODERN,EMAIL_MODERN,DATA_MODERN,SECURITY_MODERN modern
 ```
 
 ### 📋 **JUSTIFICACIÓN DE MODERNIZACIÓN POR COMPONENTE**
@@ -216,8 +251,17 @@ flowchart TD
 
 | **COMPONENTE** | **ESTADO ACTUAL** | **MEJORAS PROPUESTAS** | **JUSTIFICACIÓN** |
 |----------------|-------------------|------------------------|-------------------|
-| **💳 Verificación de Pagos** | ProcesarPagosAfiliacionBean | - Visor de imágenes mejorado<br>- Herramientas de zoom/rotación<br>- Procesamiento por lotes | **OPCIONAL:** Funcionalidad actual operativa. Mejoras incrementarían eficiencia administrativa pero no son críticas para el negocio. |
-| **📤 Carga de Comprobantes** | GenerarPago Bean | - Drag & drop moderno<br>- Preview antes de envío<br>- Múltiples formatos<br>- Validación automática | **OPCIONAL:** Solo afecta egresados. Funcionalidad actual suficiente. Mejoras serían de comodidad y UX, no críticas para operación. |
+| **💳 Verificación de Pagos** | ProcesarPagosAfiliacionBean | - Visor de imágenes mejorado<br>- Herramientas de zoom/rotación<br>- Procesamiento por lotes | **MEDIA:** Funcionalidad actual operativa. Mejoras incrementarían eficiencia administrativa. |
+| **📤 Carga de Comprobantes** | GenerarPago Bean | - Drag & drop moderno<br>- Preview antes de envío<br>- Múltiples formatos<br>- Validación automática | **MEDIA:** Solo afecta egresados. Mejoras de comodidad y UX. |
+
+#### 🔵 **COMPONENTES DE INFRAESTRUCTURA (F007-F010)**
+
+| **COMPONENTE** | **ESTADO ACTUAL** | **MODERNIZACIÓN REQUERIDA** | **JUSTIFICACIÓN** |
+|----------------|-------------------|------------------------------|-------------------|
+| **📊 Sistema de Reportes** | reporteVencerseBean + iText | **Microservicio de Analytics + Dashboard Interactivo** | **NECESARIO:** Migración completa requiere modernizar toda la infraestructura de reportes para arquitectura cloud |
+| **📧 Sistema de Email** | JavaMail + Mailtrap | **Microservicio de Notificaciones + Templates Dinámicos** | **NECESARIO:** Migración a microservicios requiere servicio independiente con mejor escalabilidad |
+| **🗄️ Capa de Acceso a Datos** | MyBatis + MySQL | **SQLAlchemy + PostgreSQL + Redis Cache** | **NECESARIO:** Cambio de stack tecnológico completo, incluyendo base de datos |
+| **🔒 Infraestructura de Seguridad** | Apache Shiro + SHA-1 | **JWT/OAuth 2.0 + Bcrypt/Argon2 + Auditoría** | **NECESARIO:** Migración completa a Python requiere nueva infraestructura de seguridad |
 
 ### 🎯 **CRITERIOS DE PRIORIZACIÓN BASADOS EN FEATURES.MD**
 
@@ -233,16 +277,6 @@ flowchart TD
 - **UX Pobre:** Interfaces no intuitivas, baja adopción
 - **Performance:** Tecnologías lentas, no escalables
 
-#### **ROI Esperado:**
-- **Alto:** F001, F002, F003 (impacto directo en operación y crecimiento)
-- **Medio:** F004 (imagen institucional, satisfacción)
-- **Bajo:** F005, F006 (mejoras incrementales, no críticas)
+### 🚀 **MIGRACIÓN COMPLETA - Todos los Componentes Requieren Modernización**
 
-### 🚀 **COMPONENTES A MANTENER (Sin Modernización)**
-
-| **COMPONENTE** | **RAZÓN PARA MANTENER** |
-|----------------|-------------------------|
-| **📊 Sistema de Reportes** | Funcional, uso esporádico, ROI bajo para modernización |
-| **📧 JavaMail System** | Operativo, estándar de la industria, sin problemas reportados |
-| **🗄️ Data Access Layer** | MyBatis estable, consultas optimizadas, sin problemas de performance |
-| **🔒 Apache Shiro Core** | Security framework robusto, solo modernizar la autenticación frontend |
+> **NOTA IMPORTANTE:** Dado que se realizará una **migración completa** a arquitectura moderna con **Python + Microservicios + PostgreSQL + Cloud**, NO existen componentes que se mantengan sin cambios. Todo el stack tecnológico legacy será reemplazado.
