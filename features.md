@@ -36,9 +36,9 @@
 | **F002** | Solicitud de registro | Egresado/Estudiante | 🔴 **CRÍTICA** | Formulario de registro modernizado con flujo intuitivo y validaciones | - Formulario paso a paso (wizard)<br>- Validaciones en tiempo real<br>- Progreso visual del proceso<br>- Confirmación por email<br>|
 | **F003** | Aprobación de solicitudes | Administrador | 🔴 **CRÍTICA** | Dashboard administrativo para gestión eficiente de solicitudes | - Vista detallada de solicitudes<br>- Aprobación/rechazo con un clic<br>- Comentarios y razones<br>- Notificaciones automáticas<br>|
 | **F004** | Generación de certificados | Egresado/Estudiante | 🔴 **CRÍTICA** | Sistema modernizado de generación y descarga de certificados PDF | - Generación instantánea<br>- Diseño actualizado del certificado<br>- Descarga directa o envío por email<br>- Validación de estado activo<br>- Personalización por rol<br>|
-| **F005** | Verificación de comprobantes | Administrador | 🟡 **OPCIONAL** | Sistema mejorado para revisar y aprobar pagos con visualización optimizada | - Visor de documentos integrado<br>- Estados claros de proceso<br>- Comentarios de rechazo<br>- Notificaciones automáticas |
-| **F006** | Cargue de pagos | Egresado | 🟡 **OPCIONAL** | Interfaz moderna para subir comprobantes de pago con mejor UX | - Vista previa antes de envío<br>- Múltiples formatos aceptados<br>- Progreso de subida<br>- Validación de formato/tamaño<br>- Confirmación de recepción |
-| **F007** | Procesar solicitudes de afiliación | Egresado | 🔴 **CRÍTICA** |  |
+| **F005** | Solicitud de afiliación | Egresado | 🔴 **CRÍTICA** | Formulario de registro para solicitar afiliación al sistema por parte de los egresados | Campos mandatorios deben estar diligenciados. La persona debe haber egresado o culminados sus estudios. |
+| **F006** | Verificación de comprobantes | Administrador | 🟡 **OPCIONAL** | Sistema mejorado para revisar y aprobar pagos con visualización optimizada | - Visor de documentos integrado<br>- Estados claros de proceso<br>- Comentarios de rechazo<br>- Notificaciones automáticas |
+| **F007** | Cargue de pagos | Egresado | 🟡 **OPCIONAL** | Interfaz moderna para subir comprobantes de pago con mejor UX | - Vista previa antes de envío<br>- Múltiples formatos aceptados<br>- Progreso de subida<br>- Validación de formato/tamaño<br>- Confirmación de recepción |
 ---
 
 ## JUSTIFICACIÓN DE SELECCIÓN DE FUNCIONALIDADES
