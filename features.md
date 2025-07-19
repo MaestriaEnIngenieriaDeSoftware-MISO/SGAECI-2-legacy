@@ -38,7 +38,7 @@
 | **F004** | Generación de certificados | Egresado/Estudiante | 🔴 **CRÍTICA** | Sistema modernizado de generación y descarga de certificados PDF | - Generación instantánea<br>- Diseño actualizado del certificado<br>- Descarga directa o envío por email<br>- Validación de estado activo<br>- Personalización por rol<br>|
 | **F005** | Verificación de comprobantes | Administrador | 🟡 **OPCIONAL** | Sistema mejorado para revisar y aprobar pagos con visualización optimizada | - Visor de documentos integrado<br>- Estados claros de proceso<br>- Comentarios de rechazo<br>- Notificaciones automáticas |
 | **F006** | Cargue de pagos | Egresado | 🟡 **OPCIONAL** | Interfaz moderna para subir comprobantes de pago con mejor UX | - Vista previa antes de envío<br>- Múltiples formatos aceptados<br>- Progreso de subida<br>- Validación de formato/tamaño<br>- Confirmación de recepción |
-
+| **F007** | Procesar solicitudes de afiliación | Egresado | 🔴 **CRÍTICA** |  |
 ---
 
 ## JUSTIFICACIÓN DE SELECCIÓN DE FUNCIONALIDADES
